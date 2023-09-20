@@ -8,6 +8,7 @@ public class DictionaryCommandLine {
     }
 
     public void dictionaryBasic() {
+        dictionaryManagement.loadDictionaryFromFile();
         dictionaryManagement.insertFromCommandline();
         dictionaryManagement.showAllWords();
     }
