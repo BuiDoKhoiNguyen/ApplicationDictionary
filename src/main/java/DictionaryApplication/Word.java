@@ -1,6 +1,6 @@
 package DictionaryApplication;
 
-public class Word {
+public class Word implements Comparable<Word>{
         private static String wordTarget;
         private static String wordExplain;
 
@@ -14,16 +14,20 @@ public class Word {
             this.wordExplain = wordExplain;
         }
 
+        public void setWordTarget(String wordTarget){
+            this.wordTarget = wordTarget;
+        }
+        public void setWordExplain(String wordExplain){
+            this.wordExplain = wordExplain;
+        }
         public String getWordTarget(){
             return wordTarget;
         }
-
         public String getWordExplain(){
             return wordExplain;
         }
-
         @Override
-        public String toString(){
-            return String.format("%-10s | %-20s", wordTarget, wordExplain);
+        public int compareTo(Word other) {
+            return this.wordTarget.compareToIgnoreCase(other.wordTarget);
         }
 }
