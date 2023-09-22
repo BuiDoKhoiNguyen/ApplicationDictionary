@@ -15,11 +15,14 @@
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
         <dependency>
-            <groupId>com.github.goxr3plus</groupId>
-            <artifactId>java-google-speech-api</artifactId>
-            <version>V2.0</version>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
         </dependency>
+
+
     </dependencies>
 
 
@@ -37,10 +40,4 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
-    </repositories>
 </project>

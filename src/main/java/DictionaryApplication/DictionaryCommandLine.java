@@ -16,6 +16,7 @@ public class DictionaryCommandLine extends Dictionary {
         DictionaryManagement.insertFromFile();
         //DictionaryManagement.dictionaryLookUp();
         System.out.println(showAllWords());
+
     }
 
 }

@@ -1,5 +1,7 @@
 package DictionaryApplication;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 import java.io.*;
 
@@ -10,6 +12,7 @@ public class DictionaryManagement extends Dictionary {
     }
 
     public static void insertFromCommandline() {
+
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter the number of words: ");
@@ -19,6 +22,7 @@ public class DictionaryManagement extends Dictionary {
 
         while (numWord-- > 0) {
             System.out.print("Enter English word: ");
+
             String wordTarget = sc.nextLine();
             String wordExplain = sc.nextLine();
             Word word = new Word(wordTarget,wordExplain);
@@ -55,9 +59,11 @@ public class DictionaryManagement extends Dictionary {
             System.out.println("An error occur with file: " + e);
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e);
+
         }
 
     }
+
 
     public static int isContain(String str1, String str2) {
         for (int i = 0; i < Math.min(str1.length(), str2.length()); i++) {
@@ -122,6 +128,7 @@ public class DictionaryManagement extends Dictionary {
     public static void showWordLookup(String word, int index) {
         if (index < 0) {
             //System.out.println((new Spelling.("src/main/java/big.txt")).correct(word.toLowerCase()));
+
             return;
         }
         ArrayList<Word> listWordSearching = new ArrayList<Word>();
@@ -148,6 +155,7 @@ public class DictionaryManagement extends Dictionary {
         }
         for (Word wordSearching : listWordSearching) {
             System.out.println(wordSearching.getWordTarget());
+
         }
     }
 
