@@ -59,7 +59,6 @@ public class DictionaryManagement extends Dictionary {
             System.out.println("An error occur with file: " + e);
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e);
-
         }
 
     }
@@ -114,7 +113,7 @@ public class DictionaryManagement extends Dictionary {
         if (end < start) {
             return -1;
         }
-        int mid = start + (end - start) / 2;
+        int mid = (start + end) / 2;
         int compare = isContain(word, vocab.get(mid).getWordTarget());
         if (compare == -1) {
             return binaryLookup(start, mid - 1, word);
