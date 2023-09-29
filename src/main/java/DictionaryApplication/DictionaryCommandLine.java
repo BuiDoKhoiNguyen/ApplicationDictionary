@@ -14,7 +14,7 @@ public class DictionaryCommandLine  {
         DICTIONARY = "src/main/resources/dictionaries.txt";
         OUT_PATH = "src/main/resources/dictionaries_out.txt";
         IN_PATH = "src/main/resources/dictionaries_out.txt";
-
+        DictionaryManagement.loadFromFile(dictionary,DICTIONARY);
     }
     public void dictionaryAdvanced() {
         Scanner sc = new Scanner(System.in);
@@ -54,11 +54,15 @@ public class DictionaryCommandLine  {
                 }
 
                 case 5 -> {
-                    //use 8 before look up word
-                    System.out.print("Word target: ");
-                    String wordTarget = sc.nextLine();
-                    int index = DictionaryManagement.dictionaryLookup(dictionary,wordTarget);
-
+                    System.out.print("Number of word to lookup: ");
+                    int numWord = sc.nextInt();
+                    sc.nextLine();
+                    while(numWord-- > 0){
+                        System.out.print("Word target: ");
+                        String wordTarget = sc.nextLine();
+                        int index = DictionaryManagement.dictionaryLookup(dictionary,wordTarget);
+                        System.out.println(dictionary.get(index).getWordExplain());
+                    }
                 }
 
                 case 6 -> {
@@ -71,7 +75,7 @@ public class DictionaryCommandLine  {
                 }
 
                 case 8 -> {
-                    DictionaryManagement.importFromFile(dictionary,DICTIONARY);
+
                 }
                 case 9 -> {
                     //use 1 before export to file
