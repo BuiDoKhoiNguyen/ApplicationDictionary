@@ -5,12 +5,16 @@ import java.util.*;
 public class DictionaryCommandLine  {
     private Dictionary dictionary;
     private Dictionary vocab;
+    private final String DICTIONARY;
+    private final String OUT_PATH;
     private final String IN_PATH;
     public DictionaryCommandLine(){
         dictionary = new Dictionary();
         vocab = new Dictionary();
-        IN_PATH = "src/main/resources/dictionaries.txt";
-        DictionaryManagement.loadFromFile(dictionary,IN_PATH);
+        DICTIONARY = "src/main/resources/dictionaries.txt";
+        OUT_PATH = "src/main/resources/dictionaries_out.txt";
+        IN_PATH = "src/main/resources/dictionaries_out.txt";
+
     }
     public void dictionaryAdvanced() {
         Scanner sc = new Scanner(System.in);
@@ -50,14 +54,16 @@ public class DictionaryCommandLine  {
                 }
 
                 case 5 -> {
+                    //use 8 before look up word
                     System.out.print("Word target: ");
                     String wordTarget = sc.nextLine();
                     int index = DictionaryManagement.dictionaryLookup(dictionary,wordTarget);
-                    System.out.print("Meaning: " + dictionary.get(index).getWordExplain() );
+
                 }
 
                 case 6 -> {
-//                    DictionaryManagement.dictionarySearcher();
+                    //use API
+                    TranslatorExample.googleTranslator();
                 }
 
                 case 7 -> {
@@ -65,10 +71,11 @@ public class DictionaryCommandLine  {
                 }
 
                 case 8 -> {
-                    System.out.println("The data has been imported!");
+                    DictionaryManagement.importFromFile(dictionary,DICTIONARY);
                 }
                 case 9 -> {
-//                    DictionaryManagement.dictionaryExportToFile();
+                    //use 1 before export to file
+                    DictionaryManagement.exportWordToFile(vocab,OUT_PATH);
                 }
             }
             System.out.print("Press ENTER to continue...");

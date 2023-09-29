@@ -43,7 +43,7 @@ public class DictionaryManagement{
         else System.out.println("The word isn't existed, please try again.");
     }
 
-    public static void loadFromFile(Dictionary dictionary, String IN_PATH) {
+    public static void importFromFile(Dictionary dictionary, String IN_PATH) {
         try {
             FileReader fileReader = new FileReader(IN_PATH);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -141,7 +141,6 @@ public class DictionaryManagement{
 
     public static void showWordLookup(Dictionary dictionary,String word, int index) {
         if (index < 0) {
-            //System.out.println((new Spelling.("src/main/java/big.txt")).correct(word.toLowerCase()));
             return;
         }
         ArrayList<Word> listWordSearching = new ArrayList<Word>();
@@ -179,17 +178,28 @@ public class DictionaryManagement{
         }
         return ans;
     }
-//    public static void dictionaryLookUp() throws IOException {
-//        Scanner getInput = new Scanner(System.in);
-//        String word = getInput.nextLine().toLowerCase();
-//        int index = binaryLookup(0, vocab.size(), word);
-//        if (index < 0) {
-//            Spelling corrector = new Spelling("src/resource/vocab/spelling.txt");
-//            word = corrector.correct(word);
-//            index = binaryLookup(0, oldVocab.size(), word);
-//        }
-//        showWordLookup(word, index);
-//    }
+    public static void exportWordToFile(Dictionary dictionary,String OUT_PATH) {
+        try {
+            FileWriter fileWriter = new FileWriter(new File(OUT_PATH));
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (Word word : dictionary) {
+                bufferedWriter.write("|" + word.getWordTarget() + "\n" + word.getWordExplain());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e);
+        }
+    }
+
+    public void updateWord(Dictionary dictionary, int index, String meaning, String path) {
+        try {
+            dictionary.get(index).setWordExplain(meaning);
+            exportWordToFile(dictionary, path);
+        } catch (NullPointerException e) {
+            System.out.println("Null Exception.");
+        }
+    }
 
 }
 
