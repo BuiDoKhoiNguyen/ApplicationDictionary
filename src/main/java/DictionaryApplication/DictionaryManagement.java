@@ -43,7 +43,7 @@ public class DictionaryManagement{
         else System.out.println("The word isn't existed, please try again.");
     }
 
-    public static void importFromFile(Dictionary dictionary, String IN_PATH) {
+    public static void loadFromFile(Dictionary dictionary, String IN_PATH) {
         try {
             FileReader fileReader = new FileReader(IN_PATH);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -68,6 +68,7 @@ public class DictionaryManagement{
             }
             Collections.sort(dictionary);
             bufferedReader.close();
+            System.out.println("Loaded from file successfully");
         } catch (IOException e) {
             System.out.println("An error occur with file: " + e);
         } catch (Exception e) {
@@ -123,7 +124,6 @@ public class DictionaryManagement{
 
     public static int dictionaryLookup(Dictionary dictionary, String keyWord) {
         try {
-            dictionary.sort(new SortDictionaryByWord());
             int left = 0;
             int right = dictionary.size() - 1;
             while (left <= right) {
