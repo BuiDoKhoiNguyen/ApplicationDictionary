@@ -9,8 +9,8 @@ public class DictionaryCommandLine  {
     public DictionaryCommandLine(){
         dictionary = new Dictionary();
         vocab = new Dictionary();
-        IN_PATH = "src/main/resources/dictionaries.txt";
-        DictionaryManagement.loadFromFile(dictionary,IN_PATH);
+        IN_PATH = "D:\\BTLOOP\\DictionaryApplication\\src\\main\\resources\\dictionaries.txt";
+        DictionaryManagement.loadFromFile2(dictionary,IN_PATH);
     }
     public void dictionaryAdvanced() {
         Scanner sc = new Scanner(System.in);
@@ -43,6 +43,24 @@ public class DictionaryCommandLine  {
 
                 case 3 -> {
 //                    DictionaryManagement.editFromCommandline();
+                      if(vocab.size()==0){
+                          System.out.print("try again, don't have any words to change");
+                      }
+                      else {
+                          System.out.print("write word you want to change");
+                          sc.nextLine();
+                          String changeWord = sc.nextLine();
+                          int x = DictionaryManagement.dictionaryLookup(dictionary,changeWord);
+                          if(x==-1) System.out.println("not found");
+                          else {
+                              System.out.println("found it, please change it");
+                              DictionaryManagement.removeFromCommandLine2(vocab,changeWord);
+                              DictionaryManagement.insertFromCommandline2(vocab);
+                              DictionaryManagement.showAllWords(vocab);
+                          }
+
+                      }
+
                 }
 
                 case 4 -> {
@@ -58,10 +76,15 @@ public class DictionaryCommandLine  {
 
                 case 6 -> {
 //                    DictionaryManagement.dictionarySearcher();
+                    System.out.println("write down word");
+                    String word = sc.nextLine();
+                    DictionaryManagement.searchFromFile(dictionary,word);
+
+
                 }
 
                 case 7 -> {
-
+//                    DictionaryManagement.showAllWords(dictionary);
                 }
 
                 case 8 -> {

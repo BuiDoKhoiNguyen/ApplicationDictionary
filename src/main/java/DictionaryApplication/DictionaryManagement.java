@@ -29,6 +29,16 @@ public class DictionaryManagement{
         }
     }
 
+    public static void insertFromCommandline2(Dictionary dictionary) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter English word: ");
+        String wordTarget = sc.nextLine();
+        System.out.print("Enter Vietnamese meaning: ");
+        String wordExplain = sc.nextLine();
+        Word word = new Word(wordTarget, wordExplain);
+        dictionary.add(word);
+    }
+
     public static void removeFromCommandLine(Dictionary dictionary){
         Scanner scanner = new Scanner(System.in);
 
@@ -43,6 +53,17 @@ public class DictionaryManagement{
         else System.out.println("The word isn't existed, please try again.");
     }
 
+    public static void removeFromCommandLine2(Dictionary dictionary, String xoa){
+
+        int index = -1;
+        index = Collections.binarySearch(dictionary,new Word(xoa, null));
+        if(index >= 0) {
+            dictionary.remove(index);
+        }
+        else System.out.println("The word isn't existed, please try again.");
+    }
+
+
     public static void loadFromFile(Dictionary dictionary, String IN_PATH) {
         try {
             FileReader fileReader = new FileReader(IN_PATH);
@@ -50,7 +71,7 @@ public class DictionaryManagement{
 
             String englishWord = bufferedReader.readLine();
             englishWord = englishWord.replace("|", "");
-            String line = null;
+            String line;
 
             while ((line = bufferedReader.readLine()) != null) {
                 Word word = new Word();
@@ -74,6 +95,106 @@ public class DictionaryManagement{
             System.out.println("Something went wrong: " + e);
         }
 
+    }
+
+    public static void loadFromFile2(Dictionary dictionary, String IN_PATH) {
+        try {
+            FileReader fileReader = new FileReader(IN_PATH);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line;
+            String englishWord = null;
+            StringBuilder meaning = new StringBuilder();
+
+            while ((line = bufferedReader.readLine()) != null) {
+                if (line.startsWith("|")) {
+                    // Đây là nghĩa của từ, thêm vào từ điển
+                    if (englishWord != null) {
+                        Word word = new Word();
+                        word.setWordTarget(englishWord);
+                        word.setWordExplain(meaning.toString().trim());
+                        dictionary.add(word);
+                    }
+                    // Đặt lại biến cho từ tiếp theo
+                    englishWord = line.replace("|", "").trim();
+                    meaning = new StringBuilder();
+                } else {
+                    // Đây là dòng nghĩa của từ, thêm vào nghĩa tạm thời
+                    meaning.append(line).append("\n");
+                }
+            }
+
+            // Thêm từ cuối cùng vào từ điển
+            if (englishWord != null) {
+                Word word = new Word();
+                word.setWordTarget(englishWord);
+                word.setWordExplain(meaning.toString().trim());
+                dictionary.add(word);
+            }
+
+            Collections.sort(dictionary);
+            bufferedReader.close();
+        } catch (IOException e) {
+            System.out.println("An error occur with file: " + e);
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e);
+        }
+    }
+
+
+    /*public static void loadFromFile2(Dictionary dictionary, String IN_PATH) {
+        try {
+            FileReader fileReader = new FileReader(IN_PATH);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line=null;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                // Tạo một từ mới cho mỗi dòng
+                Word word = new Word();
+
+                // Xử lý dòng tiếng Anh
+                String englishWord = line.replace("|", "").trim();
+                word.setWordTarget(englishWord);
+
+                // Đọc nghĩa của từ cho đến khi gặp dòng tiếp theo bắt đầu bằng "|"
+                StringBuilder meaningBuilder = new StringBuilder();
+                while ((line = bufferedReader.readLine()) != null) {
+                    if (line.startsWith("|")) {
+                        // Dừng khi gặp dòng tiếp theo bắt đầu bằng "|"
+                        break;
+                    }
+                    meaningBuilder.append(line).append("\n");
+                }
+
+                // Đặt nghĩa của từ và thêm vào từ điển
+                word.setWordExplain(meaningBuilder.toString().trim());
+                dictionary.add(word);
+            }
+
+            Collections.sort(dictionary);
+            bufferedReader.close();
+        } catch (IOException e) {
+            System.out.println("An error occur with file: " + e);
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e);
+        }
+    }*/
+
+
+    public static void searchFromFile(Dictionary dictionary, String word){
+        int i = 0;
+        boolean hasWord = false;
+        char c = word.charAt(0);
+        for(Word x : dictionary){
+            if(x.getWordTarget().startsWith(word)){
+                //System.out.printf("%-6s%c %-15s%c %-20s%n", "No", '|', "English", '|', "Vietnamese");
+                System.out.printf("%-6d%c %-15s%c %-15s%n", i + 1, '|', x.getWordTarget(), '|', x.getWordExplain());
+                i++;
+                hasWord = true;
+            }
+            if(x.getWordTarget().charAt(0)>c) break;
+        }
     }
 
     public static int isContain(String str1, String str2) {
