@@ -21,8 +21,8 @@ public class DictionaryManagement {
         }
     }
 
-    public static void loadFromFile(Dictionary dictionary, String FILE_PATH) {   //TODO
-//            dictionary.put(wordTarget, new Word(wordTarget, wordExplain));
+    public static void loadFromFile(Dictionary dictionary, String FILE_PATH) {
+
     }
 
     public static void removeFromCommandLine(Dictionary dictionary) {
