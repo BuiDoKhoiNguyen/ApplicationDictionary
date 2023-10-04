@@ -1,25 +1,25 @@
 package DictionaryApplication;
 
+import java.io.FileNotFoundException;
 import java.util.*;
 
-public class DictionaryCommandLine  {
+public class DictionaryCommandLine {
     private Dictionary dictionary;
     private Dictionary vocab;
-    private final String DICTIONARY;
-    private final String OUT_PATH;
-    private final String IN_PATH;
-    public DictionaryCommandLine(){
+    private static final String DICTIONARY = "src/main/resources/dictionaries.txt";
+    private static final String OUT_PATH = "src/main/resources/dictionaries_out.txt";
+    private static final String IN_PATH = "src/main/resources/dictionaries_out.txt";
+
+    public DictionaryCommandLine() {
         dictionary = new Dictionary();
         vocab = new Dictionary();
-        DICTIONARY = "src/main/resources/dictionaries.txt";
-        OUT_PATH = "src/main/resources/dictionaries_out.txt";
-        IN_PATH = "src/main/resources/dictionaries_out.txt";
-        DictionaryManagement.loadFromFile(dictionary,DICTIONARY);
+        DictionaryManagement.loadFromFile(dictionary, DICTIONARY);
     }
-    public void dictionaryAdvanced() {
-        Scanner sc = new Scanner(System.in);
 
+    public void dictionaryAdvanced() throws FileNotFoundException {
+        Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to My Application!");
+
         Loop:
         do {
             System.out.println("[0] Exit\n[1] Add\n[2] Remove\n[3] Update\n[4] Display\n[5] Lookup");
@@ -37,32 +37,24 @@ public class DictionaryCommandLine  {
 
                 case 1 -> {
                     DictionaryManagement.insertFromCommandline(vocab);
-                    DictionaryManagement.showAllWords(vocab);
+//                    DictionaryManagement.showWords(vocab.entrySet());
                 }
 
                 case 2 -> {
                     DictionaryManagement.removeFromCommandLine(vocab);
-                    DictionaryManagement.showAllWords(vocab);
+//                    DictionaryManagement.showWords(vocab.entrySet());
                 }
 
                 case 3 -> {
-//                    DictionaryManagement.editFromCommandline();
+                    DictionaryManagement.editFromCommandline(vocab);
                 }
 
                 case 4 -> {
-                    DictionaryManagement.showAllWords(vocab);
+                    DictionaryManagement.showWords(vocab.entrySet());
                 }
 
                 case 5 -> {
-                    System.out.print("Number of word to lookup: ");
-                    int numWord = sc.nextInt();
-                    sc.nextLine();
-                    while(numWord-- > 0){
-                        System.out.print("Word target: ");
-                        String wordTarget = sc.nextLine();
-                        int index = DictionaryManagement.dictionaryLookup(dictionary,wordTarget);
-                        System.out.println(dictionary.get(index).getWordExplain());
-                    }
+                    DictionaryManagement.dictionarySearcher(dictionary);
                 }
 
                 case 6 -> {
@@ -70,20 +62,19 @@ public class DictionaryCommandLine  {
                     TranslatorExample.googleTranslator();
                 }
 
-                case 7 -> {
-
-                }
+                case 7 -> {}
 
                 case 8 -> {
-
+                    DictionaryManagement.loadFromFile(dictionary, DICTIONARY);
                 }
                 case 9 -> {
-                    //use 1 before export to file
-                    DictionaryManagement.exportWordToFile(vocab,OUT_PATH);
+                    DictionaryManagement.exportWordToFile(vocab, OUT_PATH);
                 }
             }
+
             System.out.print("Press ENTER to continue...");
             sc.nextLine();
         } while (true);
     }
+
 }

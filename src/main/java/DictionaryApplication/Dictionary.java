@@ -1,6 +1,9 @@
 package DictionaryApplication;
 
-import  java.util.ArrayList;
+import java.util.TreeMap;
 
-public class Dictionary extends ArrayList<Word>{
+public class Dictionary extends TreeMap<String, Word> {
+    public void editWord(String wordTarget, String wordExplain) {
+        this.get(wordTarget).setWordExplain(wordExplain);
+    }
 }
