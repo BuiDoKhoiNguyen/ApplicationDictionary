@@ -7,3 +7,4 @@ public class Dictionary extends TreeMap<String, Word> {
         this.get(wordTarget).setWordExplain(wordExplain);
     }
 }
+
