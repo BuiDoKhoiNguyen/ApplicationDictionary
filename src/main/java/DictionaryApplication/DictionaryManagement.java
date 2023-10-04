@@ -21,8 +21,36 @@ public class DictionaryManagement {
         }
     }
 
-    public static void loadFromFile(Dictionary dictionary, String FILE_PATH) {   //TODO
-//            dictionary.put(wordTarget, new Word(wordTarget, wordExplain));
+    public static void loadFromFile(Dictionary dictionary, String IN_PATH) {
+        try {
+            FileReader fileReader = new FileReader(IN_PATH);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String englishWord = bufferedReader.readLine();
+            englishWord = englishWord.replace("|", "");
+            String line = null;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                Word word = new Word();
+                word.setWordTarget(englishWord.trim());
+                String meaning = line + "\n";
+                while ((line = bufferedReader.readLine()) != null) {
+                    if (!line.startsWith("|")) meaning += line + "\n";
+                    else {
+                        englishWord = line.replace("|", "");
+                        break;
+                    }
+                    word.setWordExplain(meaning.trim());
+                    dictionary.put(englishWord, word);
+                }
+            }
+            bufferedReader.close();
+            System.out.println("Loaded from file successfully");
+        } catch (IOException e) {
+            System.out.println("An error occur with file: " + e);
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e);
+        }
     }
 
     public static void removeFromCommandLine(Dictionary dictionary) {
