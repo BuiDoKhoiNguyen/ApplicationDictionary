@@ -65,7 +65,7 @@ public class DictionaryCommandLine {
                 case 7 -> {}
 
                 case 8 -> {
-                    DictionaryManagement.loadFromFile(dictionary, DICTIONARY);
+
                 }
                 case 9 -> {
                     DictionaryManagement.exportWordToFile(vocab, OUT_PATH);
