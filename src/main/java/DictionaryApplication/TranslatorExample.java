@@ -15,8 +15,13 @@ public class TranslatorExample {
             int numOfWord = sc.nextInt();
             while (numOfWord-- > 0){
                 System.out.print("Enter English word: ");
+<<<<<<< Updated upstream
                 String text = sc.next();
                 System.out.println(GoogleTranslate.translate("vi", text));
+=======
+                String text = sc.nextLine();
+                System.out.println("Meaning: " + GoogleTranslate.translate("vi", text));
+>>>>>>> Stashed changes
             }
 
         } catch (IOException e) {

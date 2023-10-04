@@ -17,15 +17,19 @@ public class Word implements Comparable<Word>{
         public void setWordTarget(String wordTarget){
             this.wordTarget = wordTarget;
         }
+
         public void setWordExplain(String wordExplain){
             this.wordExplain = wordExplain;
         }
+
         public String getWordTarget(){
             return wordTarget;
         }
+
         public String getWordExplain(){
             return wordExplain;
         }
+
         @Override
         public int compareTo(Word other) {
             return this.wordTarget.compareToIgnoreCase(other.wordTarget);
