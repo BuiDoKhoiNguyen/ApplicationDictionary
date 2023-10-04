@@ -31,6 +31,7 @@ public class DictionaryManagement {
             englishWord = englishWord.replace("|", "");
             String line = null;
 
+
             while ((line = bufferedReader.readLine()) != null) {
                 Word word = new Word();
                 word.setWordTarget(englishWord.trim());
