@@ -21,6 +21,7 @@ public class DictionaryManagement {
         }
     }
 
+
     public static void loadFromFile(Dictionary dictionary, String IN_PATH) {
         try {
             FileReader fileReader = new FileReader(IN_PATH);
@@ -51,6 +52,7 @@ public class DictionaryManagement {
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e);
         }
+
     }
 
     public static void removeFromCommandLine(Dictionary dictionary) {
