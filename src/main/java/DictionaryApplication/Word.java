@@ -1,8 +1,8 @@
 package DictionaryApplication;
 
 public class Word implements Comparable<Word>{
-        private static String wordTarget;
-        private static String wordExplain;
+        private String wordTarget;
+        private String wordExplain;
 
         public Word(){
             this.wordTarget = "";
