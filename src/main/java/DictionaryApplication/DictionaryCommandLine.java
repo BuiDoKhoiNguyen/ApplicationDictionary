@@ -6,14 +6,16 @@ import java.util.*;
 public class DictionaryCommandLine {
     private Dictionary dictionary;
     private Dictionary vocab;
-    private static final String DICTIONARY = "src/main/resources/dictionaries.txt";
     private static final String OUT_PATH = "src/main/resources/dictionaries_out.txt";
-    private static final String IN_PATH = "src/main/resources/dictionaries_out.txt";
+    private static final String IN_PATH = "src/main/resources/dictionaries.txt";
+
+    private static final String path = "data/E_V.txt";
 
     public DictionaryCommandLine() {
         dictionary = new Dictionary();
         vocab = new Dictionary();
-        DictionaryManagement.loadFromFile(dictionary, DICTIONARY);
+//        DictionaryManagement.loadFromFile(dictionary, IN_PATH);
+        NewDictionaryManagement.loadDataFromHTMLFile(dictionary, path);
     }
 
     public void dictionaryAdvanced() throws FileNotFoundException {
@@ -65,7 +67,7 @@ public class DictionaryCommandLine {
                 case 7 -> {}
 
                 case 8 -> {
-
+                    DictionaryManagement.importFromFile(vocab, OUT_PATH);
                 }
                 case 9 -> {
                     DictionaryManagement.exportWordToFile(vocab, OUT_PATH);
