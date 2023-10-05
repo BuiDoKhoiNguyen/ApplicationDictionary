@@ -16,8 +16,10 @@ public class DictionaryManagement {
         while (numWord-- > 0) {
             System.out.print("Enter English word: ");
             String wordTarget = sc.nextLine();
+            System.out.print("Enter meaning: ");
             String wordExplain = sc.nextLine();
             dictionary.put(wordTarget, new Word(wordTarget,wordExplain));
+
         }
     }
 
@@ -53,7 +55,6 @@ public class DictionaryManagement {
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e);
         }
-
     }
 
     public static void removeFromCommandLine(Dictionary dictionary) {
@@ -118,15 +119,34 @@ public class DictionaryManagement {
         }
     }
 
+    public static void importFromFile(Dictionary dictionary, String IN_PATH) {
+        try {
+            File inFile = new File(IN_PATH);
+            FileReader fileReader = new FileReader(inFile);
+            BufferedReader reader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                String[] wordsInLine = line.split("\t");
+                Word temp = new Word(wordsInLine[0], wordsInLine[1]);
+                dictionary.put(wordsInLine[0], temp);
+            }
+            System.out.println("Import from file sucessfully !");
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void exportWordToFile(Dictionary dictionary, String OUT_PATH) {
         try {
-            FileWriter fileWriter = new FileWriter(new File(OUT_PATH));
+            FileWriter fileWriter = new FileWriter(new File(OUT_PATH), true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for (Map.Entry<String, Word> mapElement : dictionary.entrySet()) {
-                bufferedWriter.write("|" + mapElement.getValue().getWordTarget() + "\n" +
+                bufferedWriter.write(mapElement.getValue().getWordTarget() + "\t" +
                         mapElement.getValue().getWordExplain());
                 bufferedWriter.newLine();
             }
+            System.out.println("Export to file successfully !");
             bufferedWriter.close();
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e);
