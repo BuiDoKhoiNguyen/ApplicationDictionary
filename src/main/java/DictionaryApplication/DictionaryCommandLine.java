@@ -6,16 +6,16 @@ import java.util.*;
 public class DictionaryCommandLine {
     private Dictionary dictionary;
     private Dictionary vocab;
-    private static final String OUT_PATH = "src/main/resources/dictionaries_out.txt";
-    private static final String IN_PATH = "src/main/resources/dictionaries.txt";
+    private static final String OUT_PATH = "data/dictionaries_out.txt";
+    private static final String IN_PATH = "data/dictionaries.txt";
 
     private static final String path = "data/E_V.txt";
 
     public DictionaryCommandLine() {
         dictionary = new Dictionary();
         vocab = new Dictionary();
-//        DictionaryManagement.loadFromFile(dictionary, IN_PATH);
-        NewDictionaryManagement.loadDataFromHTMLFile(dictionary, path);
+        DictionaryManagement.loadFromFile(dictionary, IN_PATH);
+//        NewDictionaryManagement.loadDataFromHTMLFile(dictionary, path);
     }
 
     public void dictionaryAdvanced() throws FileNotFoundException {
@@ -61,7 +61,21 @@ public class DictionaryCommandLine {
 
                 case 6 -> {
                     //use API
-                    TranslatorExample.googleTranslator();
+                    try{
+                        System.out.print("Enter number of word: ");
+                        int numWord = sc.nextInt();
+                        sc.nextLine();
+
+                        while(numWord-- > 0){
+                            System.out.print("Enter word: ");
+                            String wordTarget = sc.next();
+                            String wordExplain = TranslatorExample.googleTranslator(wordTarget);
+                            System.out.println(wordExplain);
+                        }
+                    } catch (Exception e){
+                        System.out.print(e);
+                    }
+
                 }
 
                 case 7 -> {}

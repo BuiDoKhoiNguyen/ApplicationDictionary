@@ -80,6 +80,14 @@ public class DictionaryManagement {
         } else System.out.println("The word isn't existed, please try again.");
     }
 
+    public static String lookupWord(Dictionary dictionary, String wordTarget) {
+        if (dictionary.containsKey(wordTarget)) {
+            return dictionary.get(wordTarget).getWordExplain();
+        } else {
+            return "Word not found in the dictionary.";
+        }
+    }
+
     public static void showWords(Set<Map.Entry<String, Word>> entrySet) {
         System.out.printf("%-6s%c %-15s%c %-20s%n", "No", '|', "English", '|', "Vietnamese");
         int no = 0;
@@ -103,20 +111,6 @@ public class DictionaryManagement {
         System.out.print("Enter target: ");
         String wordTarget = sc.nextLine();
         showWords(partialSearch(dictionary, wordTarget).entrySet());
-    }
-
-    public static void readDataFromFile(Dictionary dictionary) throws FileNotFoundException {
-        //Doc file E_V
-        Scanner sc = new Scanner(new File("data/E_V.txt"));
-        while (sc.hasNextLine()) {
-            String lineFetched = sc.nextLine();
-            String[] lineParts = lineFetched.split("<html>");
-            if (lineParts.length == 2) {
-                String wordTarget = lineParts[0];
-                String wordExplain = "<html>" + lineParts[1];
-                dictionary.put(wordTarget, new Word(wordTarget, wordExplain));
-            } else System.out.println("Error input: " + lineParts.length + " words");
-        }
     }
 
     public static void importFromFile(Dictionary dictionary, String IN_PATH) {
