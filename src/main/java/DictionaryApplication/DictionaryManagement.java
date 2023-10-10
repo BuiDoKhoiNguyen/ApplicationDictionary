@@ -80,6 +80,14 @@ public class DictionaryManagement {
         } else System.out.println("The word isn't existed, please try again.");
     }
 
+    public static String lookupWord(Dictionary dictionary, String wordTarget) {
+        if (dictionary.containsKey(wordTarget)) {
+            return dictionary.get(wordTarget).getWordExplain();
+        } else {
+            return "Word not found in the dictionary.";
+        }
+    }
+
     public static void showWords(Set<Map.Entry<String, Word>> entrySet) {
         System.out.printf("%-6s%c %-15s%c %-20s%n", "No", '|', "English", '|', "Vietnamese");
         int no = 0;
@@ -105,17 +113,21 @@ public class DictionaryManagement {
         showWords(partialSearch(dictionary, wordTarget).entrySet());
     }
 
-    public static void readDataFromFile(Dictionary dictionary) throws FileNotFoundException {
-        //Doc file E_V
-        Scanner sc = new Scanner(new File("data/E_V.txt"));
-        while (sc.hasNextLine()) {
-            String lineFetched = sc.nextLine();
-            String[] lineParts = lineFetched.split("<html>");
-            if (lineParts.length == 2) {
-                String wordTarget = lineParts[0];
-                String wordExplain = "<html>" + lineParts[1];
-                dictionary.put(wordTarget, new Word(wordTarget, wordExplain));
-            } else System.out.println("Error input: " + lineParts.length + " words");
+    public static void importFromFile(Dictionary dictionary, String IN_PATH) {
+        try {
+            File inFile = new File(IN_PATH);
+            FileReader fileReader = new FileReader(inFile);
+            BufferedReader reader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                String[] wordsInLine = line.split("\t");
+                Word temp = new Word(wordsInLine[0], wordsInLine[1]);
+                dictionary.put(wordsInLine[0], temp);
+            }
+            System.out.println("Import from file sucessfully !");
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

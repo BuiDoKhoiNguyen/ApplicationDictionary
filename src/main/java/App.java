@@ -1,5 +1,7 @@
+import Controllers.DictionaryController;
 import DictionaryApplication.DictionaryCommandLine;
 
+import DictionaryApplication.DictionaryManagement;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -16,6 +18,7 @@ public class App extends Application {
             //scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 //            String css = this.getClass().getResource("style.css").toExternalForm();
 //            scene.getStylesheets().add(css);
+            stage.setTitle("Translator");
             stage.setScene(scene);
             stage.show();
         } catch(Exception e) {
