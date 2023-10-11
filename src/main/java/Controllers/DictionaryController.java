@@ -56,24 +56,19 @@ public class DictionaryController implements Initializable {
             String keyword = wordInput.getText().toLowerCase(); // Chuyển từ khóa về chữ thường
             ObservableList<String> matchingWords = FXCollections.observableArrayList();
 
-            // Lọc danh sách từ trong TreeMap của bạn
             for (Map.Entry<String, Word> entry : dictionary.entrySet()){
                 String englishWord = entry.getKey().toLowerCase();
                 if (englishWord.startsWith(keyword)) {
                     matchingWords.add(entry.getKey());
                 }
             }
-
-            // Cập nhật ListView với danh sách từ tìm thấy
             listView.setItems(matchingWords);
 
             listView.getSelectionModel().selectedItemProperty().addListener(
                     (observable, oldValue, newValue) -> {
                         if (newValue != null) {
-                            // Lấy nghĩa tiếng Việt từ TreeMap dựa trên từ tiếng Anh được chọn
                             String vietnameseMeaning = dictionary.get(newValue).getWordExplain();
 
-                            // Hiển thị nghĩa tiếng Việt trong WebView
                             printTranslation.setText(vietnameseMeaning);
                         }
                     }

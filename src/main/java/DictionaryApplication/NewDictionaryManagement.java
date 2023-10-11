@@ -1,13 +1,9 @@
 package DictionaryApplication;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.SortedMap;
-import java.util.Iterator;
 
 public class NewDictionaryManagement {
     private static final String SPLITTING_PATTERN = "<html>";
@@ -30,14 +26,6 @@ public class NewDictionaryManagement {
         }
     }
 
-    private static SortedMap<String, Word> partialSearch(Dictionary dictionary, String wordTarget) {
-        if (!wordTarget.isEmpty()) {
-            char nextLetter = (char) (wordTarget.charAt(wordTarget.length() - 1) + 1);
-            String end = wordTarget.substring(0, wordTarget.length() - 1) + nextLetter;
-            return dictionary.subMap(wordTarget, end);
-        }
-        return dictionary;
-    }
 
     public static String lookupWord(Dictionary dictionary, String wordTarget) {
         if (dictionary.containsKey(wordTarget)) {
@@ -46,18 +34,6 @@ public class NewDictionaryManagement {
             return "Word not found in the dictionary.";
         }
     }
-    public static void dictionarySearcher(Dictionary dictionary, String wordTarget) {
-        showWords(partialSearch(dictionary, wordTarget).entrySet());
-    }
-    public static void showWords(Set<Map.Entry<String, Word>> entrySet) {
-        System.out.printf("%-6s%c %-15s%c %-20s%n", "No", '|', "English", '|', "Vietnamese");
-        int no = 0;
-        for (Map.Entry<String, Word> mapElement : entrySet) {
-            System.out.printf("%-6d%c %-15s%c %-15s%n", ++no, '|', mapElement.getKey(), '|',
-                    mapElement.getValue().getWordExplain());
-        }
-    }
-
 
     public static void loadFromFile(Dictionary dictionary, String IN_PATH) {
         try {
@@ -87,6 +63,22 @@ public class NewDictionaryManagement {
             System.out.println("Loaded from file successfully");
         } catch (IOException e) {
             System.out.println("An error occur with file: " + e);
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e);
+        }
+    }
+
+    public static void exportToHistory(Dictionary dictionary, String OUT_PATH) {
+        try {
+            FileWriter fileWriter = new FileWriter(new File(OUT_PATH), true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (Map.Entry<String, Word> mapElement : dictionary.entrySet()) {
+                bufferedWriter.write(mapElement.getValue().getWordTarget() + "\t" +
+                        mapElement.getValue().getWordExplain());
+                bufferedWriter.newLine();
+            }
+            System.out.println("Export to file successfully !");
+            bufferedWriter.close();
         } catch (Exception e) {
             System.out.println("Something went wrong: " + e);
         }
