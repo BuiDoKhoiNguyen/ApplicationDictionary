@@ -6,10 +6,10 @@ import java.util.*;
 public class DictionaryCommandLine {
     private Dictionary dictionary;
     private Dictionary vocab;
-    private static final String OUT_PATH = "data/dictionaries_out.txt";
-    private static final String IN_PATH = "data/dictionaries.txt";
+    private static final String OUT_PATH = "C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\data\\dictionaries_out.txt";
+    private static final String IN_PATH = "C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\data\\dictionaries.txt";
 
-    private static final String path = "data/E_V.txt";
+    private static final String path = "C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\data\\E_V.txt";
 
     public DictionaryCommandLine() {
         dictionary = new Dictionary();
