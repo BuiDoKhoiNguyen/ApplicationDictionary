@@ -25,6 +25,11 @@
     </repositories>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>org.openjfx</groupId>-->
+<!--            <artifactId>javafx-web</artifactId>-->
+<!--            <version>20.0.2</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -77,6 +82,11 @@
             <groupId>com.github.goxr3plus</groupId>
             <artifactId>java-google-speech-api</artifactId>
             <version>8.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>20.0.2</version>
         </dependency>
 
     </dependencies>
