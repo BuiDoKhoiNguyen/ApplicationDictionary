@@ -38,7 +38,8 @@ public class LoginController {
     }
 
     public void validateLogin() {
-        Connection connectDB = new DatabaseConnection().getConnection();
+        DatabaseConnection connectionNow = new DatabaseConnection();
+        Connection connectDB = connectionNow.getConnection();
 
         String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField.getText() + "' AND password='" + passwordField.getText() +"'";
 
