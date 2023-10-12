@@ -67,7 +67,6 @@ public class DictionaryController implements Initializable {
         try {
             String wordTarget = wordInput.getText();
             String wordExplain = dictionary.get(wordTarget).getWordExplain();
-            System.out.print(wordExplain);
 
             webView.getEngine().loadContent(wordExplain, "text/html");
         } catch (InputMismatchException error) {
