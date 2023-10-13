@@ -59,7 +59,7 @@ public class DictionaryCommandLine {
 
                 case 6 -> {
                     //use API
-                    TranslatorExample.googleTranslator();
+//                    TranslatorExample.googleTranslator();
                 }
 
                 case 7 -> {}

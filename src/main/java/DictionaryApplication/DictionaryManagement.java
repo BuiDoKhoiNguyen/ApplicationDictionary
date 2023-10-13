@@ -131,24 +131,6 @@ public class DictionaryManagement {
         }
     }
 
-    public static void importFromFile(Dictionary dictionary, String IN_PATH) {
-        try {
-            File inFile = new File(IN_PATH);
-            FileReader fileReader = new FileReader(inFile);
-            BufferedReader reader = new BufferedReader(fileReader);
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                String[] wordsInLine = line.split("\t");
-                Word temp = new Word(wordsInLine[0], wordsInLine[1]);
-                dictionary.put(wordsInLine[0], temp);
-            }
-            System.out.println("Import from file sucessfully !");
-            reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void exportWordToFile(Dictionary dictionary, String OUT_PATH) {
         try {
             FileWriter fileWriter = new FileWriter(new File(OUT_PATH), true);

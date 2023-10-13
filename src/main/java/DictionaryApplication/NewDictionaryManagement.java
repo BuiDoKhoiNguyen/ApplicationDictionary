@@ -31,7 +31,7 @@ public class NewDictionaryManagement {
         }
     }
 
-    private static SortedMap<String, Word> partialSearch(Dictionary dictionary, String wordTarget) {
+    public static SortedMap<String, Word> partialSearch(Dictionary dictionary, String wordTarget) {
         if (!wordTarget.isEmpty()) {
             char nextLetter = (char) (wordTarget.charAt(wordTarget.length() - 1) + 1);
             String end = wordTarget.substring(0, wordTarget.length() - 1) + nextLetter;
@@ -47,18 +47,10 @@ public class NewDictionaryManagement {
             return "Word not found in the dictionary.";
         }
     }
-    public static void dictionarySearcher(Dictionary dictionary, String wordTarget) {
-        showWords(partialSearch(dictionary, wordTarget).entrySet());
-    }
-    public static void showWords(Set<Map.Entry<String, Word>> entrySet) {
-        System.out.printf("%-6s%c %-15s%c %-20s%n", "No", '|', "English", '|', "Vietnamese");
-        int no = 0;
-        for (Map.Entry<String, Word> mapElement : entrySet) {
-            System.out.printf("%-6d%c %-15s%c %-15s%n", ++no, '|', mapElement.getKey(), '|',
-                    mapElement.getValue().getWordExplain());
-        }
-    }
 
+    public static void dictionarySearcher(Dictionary dictionary, String wordTarget) {
+
+    }
 
     public static void loadFromFile(Dictionary dictionary, String IN_PATH) {
         try {
