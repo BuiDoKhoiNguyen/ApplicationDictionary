@@ -13,11 +13,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("demo.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
             Scene scene = new Scene(root);
-            //scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-//            String css = this.getClass().getResource("style.css").toExternalForm();
-//            scene.getStylesheets().add(css);
             stage.setTitle("Translator");
             stage.setScene(scene);
             stage.show();
@@ -30,8 +27,4 @@ public class App extends Application {
         launch(args);
     }
 
-//    public static void main(String[] args) throws FileNotFoundException {
-//        DictionaryCommandLine dictionaryCommandLine = new DictionaryCommandLine();
-//        dictionaryCommandLine.dictionaryAdvanced();
-//    }
 }
