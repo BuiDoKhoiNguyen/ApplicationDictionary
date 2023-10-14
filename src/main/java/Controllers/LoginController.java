@@ -1,17 +1,22 @@
 package Controllers;
 
+import DatabaseConnect.DatabaseConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.concurrent.CountDownLatch;
 
 
 public class LoginController {
@@ -23,11 +28,19 @@ public class LoginController {
     private TextField usernameTextField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Button loginButton;
 
-    public void loginButtonOnAction(ActionEvent e) {
+    SceneController sceneController = new SceneController();
+    public void loginButtonOnAction(ActionEvent e) throws IOException {
         if(usernameTextField.getText().isBlank() == false && passwordField.getText().isBlank() == false) {
 //            loginMessageLabel.setText("You try to login!");
-            validateLogin();
+            if(validateLogin()) {
+                sceneController.switchToScene2(e);
+            }
+            else {
+                loginMessageLabel.setText("Invalid login. Please try again!");
+            }
         } else {
             loginMessageLabel.setText("Please enter your username and password");
         }
@@ -37,7 +50,7 @@ public class LoginController {
         stage.close();
     }
 
-    public void validateLogin() {
+    public boolean validateLogin() {
         DatabaseConnection connectionNow = new DatabaseConnection();
         Connection connectDB = connectionNow.getConnection();
 
@@ -49,13 +62,15 @@ public class LoginController {
 
             while(queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
-                    loginMessageLabel.setText("Welcome!");
+                    return true;
+//                    loginMessageLabel.setText("Welcome!");
                 } else {
-                    loginMessageLabel.setText("Invalid login. Please try again!");
+                    return false;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 }

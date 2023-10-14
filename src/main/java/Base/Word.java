@@ -1,4 +1,4 @@
-package DictionaryApplication;
+package Base;
 
 public class Word implements Comparable<Word>{
         private String wordTarget;

@@ -1,4 +1,4 @@
-package DictionaryApplication;
+package Base;
 
 import java.util.TreeMap;
 

@@ -1,8 +1,8 @@
 package Controllers;
 
-import DictionaryApplication.Dictionary;
-import DictionaryApplication.NewDictionaryManagement;
-import DictionaryApplication.Word;
+import Base.Dictionary;
+import Base.NewDictionaryManagement;
+import Base.Word;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,11 +22,7 @@ import javafx.scene.web.WebView;
 
 public class DictionaryController implements Initializable {
     @FXML
-    private TextField wordInput, textFieldParagraph;
-    @FXML
-    private TextArea printTranslation, textAreaParagraph;
-    @FXML
-    private Button translate, translateParagraph;
+    private TextField wordInput;
     @FXML
     private WebView webView;
     @FXML
@@ -63,16 +59,16 @@ public class DictionaryController implements Initializable {
             );
     }
 
-    public void enterWord2(ActionEvent e) {
+    public void translateButtonOnAction(ActionEvent e) {
         try {
             String wordTarget = wordInput.getText();
             String wordExplain = dictionary.get(wordTarget).getWordExplain();
 
             webView.getEngine().loadContent(wordExplain, "text/html");
         } catch (InputMismatchException error) {
-            printTranslation.setText("Invalid input. Please enter a string.");
+            webView.getEngine().loadContent("Invalid input. Please enter a string.");
         } catch (Exception error) {
-            printTranslation.setText("error");
+            webView.getEngine().loadContent("Word not found!");
         }
     }
 

@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DictionaryController">
     <children>
-        <Button fx:id="translate" layoutX="510.0" layoutY="44.0" mnemonicParsing="false" onAction="#enterWord2" text="Translate" />
+        <Button fx:id="translate" layoutX="510.0" layoutY="44.0" mnemonicParsing="false" onAction="#translateButtonOnAction" text="Translate" />
         <TextField fx:id="wordInput" layoutX="20.0" layoutY="41.0" onAction="#enterWord" onKeyReleased="#enterWord" prefHeight="30.0" prefWidth="480.0" promptText="Enter text...">
             <font>
                 <Font size="14.0" />
