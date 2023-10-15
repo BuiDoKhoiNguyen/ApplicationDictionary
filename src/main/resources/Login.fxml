@@ -57,9 +57,9 @@
                   </Label>
                   <TextField fx:id="usernameTextField" layoutX="122.0" layoutY="135.0" promptText="Username..." />
                   <PasswordField fx:id="passwordField" layoutX="122.0" layoutY="177.0" promptText="Password..." />
-                  <Button layoutX="124.0" layoutY="241.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: #263F73;" text="Login" textFill="#fcfafa" />
+                  <Button fx:id="loginButton" layoutX="124.0" layoutY="241.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: #263F73;" text="Login" textFill="#fcfafa" />
                   <Button fx:id="cancelButton" layoutX="124.0" layoutY="286.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="148.0" style="-fx-background-color: #263F73;" text="Exit" textFill="#fcfafa" />
-                  <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="21.0" layoutY="103.0" prefHeight="18.0" prefWidth="263.0" textFill="#df1212" />
+                  <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="55.0" layoutY="103.0" prefHeight="18.0" prefWidth="263.0" textFill="#df1212" />
                </children>
             </AnchorPane>
          </right>

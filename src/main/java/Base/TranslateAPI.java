@@ -1,4 +1,4 @@
-package DictionaryApplication;
+package Base;
 
 import java.io.BufferedReader;
 import java.io.IOException;

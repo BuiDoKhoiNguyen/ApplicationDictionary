@@ -1,7 +1,3 @@
-import Controllers.DictionaryController;
-import DictionaryApplication.DictionaryCommandLine;
-
-import DictionaryApplication.DictionaryManagement;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

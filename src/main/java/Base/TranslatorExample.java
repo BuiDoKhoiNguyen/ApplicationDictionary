@@ -1,4 +1,4 @@
-package DictionaryApplication;
+package Base;
 
 import com.darkprograms.speech.translator.GoogleTranslate;
 
