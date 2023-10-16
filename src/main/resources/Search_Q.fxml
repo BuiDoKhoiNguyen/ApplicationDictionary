@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InterfaceController">
+   <children>
+      <TextField layoutX="40.0" layoutY="84.0" prefHeight="45.0" prefWidth="720.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@css/search.css" />
+      <HBox layoutX="40.0" layoutY="161.0" prefHeight="360.0" prefWidth="720.0">
+         <children>
+            <ListView prefHeight="355.0" prefWidth="200.0" />
+            <WebView prefHeight="360.0" prefWidth="524.0" />
+         </children>
+      </HBox>
+      <HBox layoutX="40.0" layoutY="7.0" prefHeight="72.0" prefWidth="367.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" styleClass="button-search" stylesheets="@css/search.css" text="Search" />
+            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" styleClass="button-translate" stylesheets="@css/search.css" text="Translate" />
+            <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="116.0" styleClass="button-savedWord" stylesheets="@css/search.css" text="Saved Words" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
