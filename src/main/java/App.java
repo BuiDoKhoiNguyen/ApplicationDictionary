@@ -9,7 +9,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Search_Q.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("search.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle("Translator");
             stage.setScene(scene);

@@ -11,7 +11,7 @@
 
 
 <AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InterfaceController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuController">
     <children>
         <TabPane prefHeight="550.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>

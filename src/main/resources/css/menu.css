@@ -1,0 +1,56 @@
+.button-back {
+    -fx-graphic: url('../img/back.png');
+    -fx-background-color: white
+}
+
+.button-search {
+    -fx-graphic: url('../img/search.png');
+    -fx-background-color: #E8E8F9
+}
+
+.button-search:hover {
+    -fx-background-color: #9C9AA6
+}
+
+.button-search:pressed {
+    -fx-background-color: #E8E8F9
+}
+
+.button-translate {
+    -fx-graphic: url('../img/translate.png');
+    -fx-background-color: #E8E8F9
+}
+
+.button-translate:hover {
+    -fx-background-color: #9C9AA6
+}
+
+.button-translate:pressed {
+    -fx-background-color: #E8E8F9
+}
+
+.button-favourite {
+    -fx-graphic: url('../img/favourite.png');
+    -fx-background-color: #E8E8F9
+}
+
+.button-favourite:hover {
+    -fx-background-color: #9C9AA6
+}
+
+.button-favourite:pressed {
+    -fx-background-color: #E8E8F9
+}
+
+.button-editWord {
+    -fx-graphic: url('../img/edit.png');
+    -fx-background-color: #E8E8F9
+}
+
+.button-editWord:hover {
+    -fx-background-color: #9C9AA6
+}
+
+.button-editWord:pressed {
+    -fx-background-color: #E8E8F9
+}
