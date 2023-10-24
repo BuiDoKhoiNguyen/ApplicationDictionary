@@ -8,7 +8,7 @@
 }
 
 .button-search {
-    -fx-graphic: url('../img/search1.png');
+    -fx-graphic: url('../img/search.png');
     -fx-background-color: #3238a8;
 }
 

@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
@@ -19,6 +20,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SearchController implements Initializable {
+    private Dictionary dictionary = new Dictionary();
+    private ObservableList<String> favouriteWords = FXCollections.observableArrayList();
+
+    private final String EV_IN_PATH = "data/E_V.txt";
+    private final String FAVOURITE_IN_PATH = "data/favourite.txt";
+
+    private boolean isEditing = false;
+
     @FXML
     private TextField searchField;
     @FXML
@@ -28,26 +37,24 @@ public class SearchController implements Initializable {
     @FXML
     private HTMLEditor editField;
     @FXML
-    private Button favouriteButton;
+    private ToggleButton favouriteButton;
     @FXML
-    private Button editButton;
+    private ToggleButton editButton;
     @FXML
     private Button deleteButton;
 
-    private Dictionary dictionary = new Dictionary();
-    private static final String IN_PATH = "data/E_V.txt";
-
-    private boolean isEditing = false;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        NewDictionaryManagement.loadDataFromHTMLFile(dictionary,IN_PATH);
+        NewDictionaryManagement.loadDataFromHTMLFile(dictionary, EV_IN_PATH);
         this.wordList.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
-                    Word selectedWord = dictionary.get(newValue.trim());
-                    String wordExplain = selectedWord.getWordExplain();
-                    definitionView.getEngine().loadContent(wordExplain, "text/html");
-                    searchField.setText(selectedWord.getWordTarget());
+                    if (newValue != null) {
+                        Word selectedWord = dictionary.get(newValue.trim());
+                        String wordExplain = selectedWord.getWordExplain();
+                        definitionView.getEngine().loadContent(wordExplain, "text/html");
+                        searchField.setText(selectedWord.getWordTarget());
+                        favouriteButton.setSelected(selectedWord.isFavoured());
+                    }
                 }
         );
         this.wordList.getItems().addAll(dictionary.keySet());
@@ -57,6 +64,7 @@ public class SearchController implements Initializable {
     public void editWord() {
         String targetWord = searchField.getText();
         if (targetWord.isEmpty()) {
+            editButton.setSelected(false);
             return;
         }
         if (isEditing) {
@@ -75,9 +83,35 @@ public class SearchController implements Initializable {
     @FXML
     public void searchWord(KeyEvent e) {
         String keyword = searchField.getText().toLowerCase();
-        System.out.println(keyword);
         ObservableList<String> matchingWords = FXCollections.observableArrayList();
         matchingWords.addAll(NewDictionaryManagement.partialSearch(dictionary, keyword).keySet());
         wordList.setItems(matchingWords);
+    }
+
+    @FXML
+    public void favouriteWord() {
+        String targetWord = searchField.getText();
+        if (targetWord.isEmpty()) {
+            favouriteButton.setSelected(false);
+            return;
+        }
+        Word selectedWord = dictionary.get(targetWord);
+        if (selectedWord.isFavoured()) {
+            favouriteButton.setSelected(false);
+            selectedWord.setFavoured(false);
+            favouriteWords.removeAll(targetWord);
+            return;
+        }
+        favouriteButton.setSelected(true);
+        selectedWord.setFavoured(true);
+        favouriteWords.add(targetWord);
+    }
+
+    @FXML
+    public void deleteWord() {
+        String targetWord = searchField.getText();
+        favouriteWords.removeAll(targetWord);
+        dictionary.remove(targetWord);
+        wordList.getItems().remove(targetWord);
     }
 }
