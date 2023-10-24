@@ -16,7 +16,6 @@ import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
 
 import java.net.URL;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class SearchController implements Initializable {
@@ -57,6 +56,9 @@ public class SearchController implements Initializable {
     @FXML
     public void editWord() {
         String targetWord = searchField.getText();
+        if (targetWord.isEmpty()) {
+            return;
+        }
         if (isEditing) {
             dictionary.editWord(targetWord, editField.getHtmlText());
             isEditing = false;

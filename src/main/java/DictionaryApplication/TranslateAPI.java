@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class TranslateAPI {
 
     public static String googleTranslate(String langFrom, String langTo, String text) throws IOException {
-        String urlScript = "https://script.google.com/macros/s/AKfycbw1qSfs1Hvfnoi3FzGuoDWijwQW69eGcMM_iGDF7p5vu1oN_CaFqIDFmCGzBuuGCk_N/exec" +
+        String urlScript = "https://script.google.com/macros/s/AKfycbwOy2fEDwyMPzPDwKsJ3zSEbgudEB1z_bjB3LvM8O7puTZA6Whhw6wy4bCNnGWYXJcSsQ/exec" +
                 "?q=" + URLEncoder.encode(text, "UTF-8") +
                 "&target=" + langTo +
                 "&source=" + langFrom;

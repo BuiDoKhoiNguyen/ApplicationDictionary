@@ -1,0 +1,35 @@
+.button-from {
+    -fx-text-fill: black;
+}
+
+.button-from:hover {
+    -fx-background-color: #76d2fc;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+.button-from:selected {
+    -fx-background-color: #3238a8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+.button-to {
+    -fx-text-fill: black;
+}
+
+.button-to:hover {
+    -fx-background-color: #3238a8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+.button-to:selected {
+    -fx-background-color: #76d2fc;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
