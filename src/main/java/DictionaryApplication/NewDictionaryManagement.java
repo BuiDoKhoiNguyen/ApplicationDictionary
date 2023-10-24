@@ -9,7 +9,9 @@ public class NewDictionaryManagement {
     private static final String SPLITTING_PATTERN = "<html>";
 
     NewDictionaryManagement() {
+
     }
+
     public static void loadDataFromHTMLFile(Dictionary dictionary, String path) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(path));
@@ -26,6 +28,14 @@ public class NewDictionaryManagement {
         }
     }
 
+    public static SortedMap<String, Word> partialSearch(Dictionary dictionary, String wordTarget) {
+        if (!wordTarget.isEmpty()) {
+            char nextLetter = (char) (wordTarget.charAt(wordTarget.length() - 1) + 1);
+            String end = wordTarget.substring(0, wordTarget.length() - 1) + nextLetter;
+            return dictionary.subMap(wordTarget, end);
+        }
+        return dictionary;
+    }
 
     public static String lookupWord(Dictionary dictionary, String wordTarget) {
         if (dictionary.containsKey(wordTarget)) {

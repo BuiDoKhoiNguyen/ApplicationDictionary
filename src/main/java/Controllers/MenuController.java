@@ -15,20 +15,32 @@ public class MenuController implements Initializable {
     private AnchorPane mainAP;
     @FXML
     private AnchorPane searchAP;
+    @FXML
+    private AnchorPane translateAP;
 
     @FXML
     private Button searchButton;
     @FXML
-    private Button ggTranslateButton;
+    private Button translateButton;
     @FXML
     private Button editButton;
     @FXML
     private Button favouriteButton;
-    @FXML
-    protected Button menuButton;
 
     @FXML
     private SearchController searchController;
+    @FXML
+    private TranslateController translateController;
+
+    @FXML
+    public void searchFunction() {
+        mainAP.getChildren().setAll(searchAP);
+    }
+
+    @FXML
+    public void translateFunction() {
+        mainAP.getChildren().setAll(translateAP);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,6 +51,15 @@ public class MenuController implements Initializable {
             throw new RuntimeException(e);
         }
         searchController = loader.getController();
+
+        loader = new FXMLLoader(getClass().getResource("../translate.fxml"));
+        try {
+            translateAP = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        translateController = loader.getController();
+
         mainAP.getChildren().setAll(searchAP);
     }
 }

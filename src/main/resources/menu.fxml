@@ -23,7 +23,7 @@
                         <Insets bottom="30.0" top="30.0" />
                      </VBox.margin>
                   </ImageView>
-                  <Button fx:id="searchButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@css/menu.css" textFill="WHITE">
+                  <Button fx:id="searchButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#searchFunction" prefHeight="60.0" prefWidth="145.0" stylesheets="@css/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -32,7 +32,7 @@
                         <String fx:value="button" />
                      </styleClass>
                   </Button>
-                  <Button fx:id="ggTranslateButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@css/menu.css" textFill="WHITE">
+                  <Button fx:id="translateButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#translateFunction" prefHeight="60.0" prefWidth="145.0" stylesheets="@css/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -41,7 +41,7 @@
                         <String fx:value="button" />
                      </styleClass>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@css/menu.css" textFill="WHITE">
+                  <Button fx:id="editButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@css/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -50,7 +50,7 @@
                         <String fx:value="button" />
                      </styleClass>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" styleClass="button-favourite" stylesheets="@css/menu.css" textFill="WHITE">
+                  <Button fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" styleClass="button-favourite" stylesheets="@css/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>

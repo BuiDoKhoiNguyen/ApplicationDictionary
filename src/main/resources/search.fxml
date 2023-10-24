@@ -12,21 +12,21 @@
 
 <AnchorPane prefHeight="570.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SearchController">
    <children>
-      <TextField layoutX="14.0" layoutY="57.0" prefHeight="50.0" prefWidth="240.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@css/search.css" />
-      <ListView layoutX="14.0" layoutY="123.0" prefHeight="415.0" prefWidth="240.0" />
+      <TextField fx:id="searchField" layoutX="14.0" layoutY="57.0" onKeyTyped="#searchWord" prefHeight="50.0" prefWidth="240.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@css/search.css" />
+      <ListView fx:id="wordList" layoutX="14.0" layoutY="123.0" prefHeight="415.0" prefWidth="240.0" />
       <AnchorPane layoutX="260.0" layoutY="15.0" prefHeight="523.0" prefWidth="436.0" style="-fx-background-color: #ffffff;">
          <children>
-            <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="108.0" prefHeight="415.0" prefWidth="462.0" />
             <Label layoutX="13.0" layoutY="7.0" text="Nghĩa của từ">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <WebView layoutY="108.0" prefHeight="415.0" prefWidth="462.0" />
+            <WebView fx:id="definitionView" layoutY="108.0" prefHeight="415.0" prefWidth="462.0" />
+            <HTMLEditor fx:id="editField" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="108.0" prefHeight="415.0" prefWidth="462.0" visible="false" />
             <HBox layoutX="312.0" layoutY="57.0" prefHeight="50.0" prefWidth="150.0">
                <children>
                   <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-favourite" stylesheets="@css/search.css" />
-                  <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit" stylesheets="@css/search.css" />
+                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#editWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit" stylesheets="@css/search.css" />
                   <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-delete" stylesheets="@css/search.css" />
                </children>
             </HBox>
