@@ -17,7 +17,7 @@
       <ListView fx:id="wordList" layoutX="14.0" layoutY="123.0" prefHeight="415.0" prefWidth="240.0" />
       <AnchorPane layoutX="260.0" layoutY="15.0" prefHeight="523.0" prefWidth="436.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Label layoutX="13.0" layoutY="7.0" text="Nghĩa của từ">
+            <Label layoutX="13.0" layoutY="7.0" stylesheets="@css/search.css" text="Nghĩa của từ">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

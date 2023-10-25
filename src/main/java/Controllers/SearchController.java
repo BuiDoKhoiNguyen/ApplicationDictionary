@@ -6,12 +6,11 @@ import DictionaryApplication.NewDictionaryManagement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
@@ -46,6 +45,7 @@ public class SearchController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         NewDictionaryManagement.loadDataFromHTMLFile(dictionary, EV_IN_PATH);
+        this.wordList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.wordList.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue != null) {
@@ -83,6 +83,7 @@ public class SearchController implements Initializable {
     @FXML
     public void searchWord(KeyEvent e) {
         String keyword = searchField.getText().toLowerCase();
+        System.out.println(keyword);
         ObservableList<String> matchingWords = FXCollections.observableArrayList();
         matchingWords.addAll(NewDictionaryManagement.partialSearch(dictionary, keyword).keySet());
         wordList.setItems(matchingWords);
