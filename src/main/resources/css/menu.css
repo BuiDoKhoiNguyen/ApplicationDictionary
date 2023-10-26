@@ -1,0 +1,60 @@
+.vbox {
+    -fx-background-color: linear-gradient(to right top, #76d2fc, #3238a8);
+}
+
+.button-back {
+    -fx-graphic: url('../img/back.png');
+    -fx-background-color: white
+}
+
+.button-search {
+    -fx-graphic: url('../img/search.png');
+    -fx-background-color: #3238a8;
+}
+
+.button-search:hover {
+    -fx-background-color: #76d2fc;
+}
+
+.button-search:pressed {
+    -fx-background-color: #3238a8;
+}
+
+.button-translate {
+    -fx-graphic: url('../img/translate.png');
+    -fx-background-color: #3238a8;
+}
+
+.button-translate:hover {
+    -fx-background-color: #76d2fc;
+}
+
+.button-translate:pressed {
+    -fx-background-color: #3238a8;
+}
+
+.button-favourite {
+    -fx-graphic: url('../img/favourite.png');
+    -fx-background-color: #3238a8;
+}
+
+.button-favourite:hover {
+    -fx-background-color: #76d2fc;
+}
+
+.button-favourite:pressed {
+    -fx-background-color: #3238a8;
+}
+
+.button-editWord {
+    -fx-graphic: url('../img/edit.png');
+    -fx-background-color: #3238a8;
+}
+
+.button-editWord:hover {
+    -fx-background-color: #76d2fc;
+}
+
+.button-editWord:pressed {
+    -fx-background-color: #3238a8;
+}

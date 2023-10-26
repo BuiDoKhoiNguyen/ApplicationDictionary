@@ -97,7 +97,7 @@ public class DictionaryManagement {
         }
     }
 
-    private static SortedMap<String, Word> partialSearch(Dictionary dictionary, String wordTarget) {
+    public static SortedMap<String, Word> partialSearch(Dictionary dictionary, String wordTarget) {
         if (!wordTarget.isEmpty()) {
             char nextLetter = (char) (wordTarget.charAt(wordTarget.length() - 1) + 1);
             String end = wordTarget.substring(0, wordTarget.length() - 1) + nextLetter;
