@@ -31,11 +31,11 @@ public class TranslateAPI {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter the number of words: ");
-        int numOfWord = sc.nextInt();
-        while (numOfWord-- > 0){
-            String text = sc.next();
+//        int numOfWord = sc.nextInt();
+//        while (numOfWord-- > 0){
+            String text = sc.nextLine();
             System.out.println("Translated text: \n" + googleTranslate("", "vi", text));
-        }
+//        }
     }
 
 }
