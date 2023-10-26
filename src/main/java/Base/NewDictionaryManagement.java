@@ -1,9 +1,7 @@
-package DictionaryApplication;
+package Base;
 
 import java.io.*;
 import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
 
 public class NewDictionaryManagement {
     private static final String SPLITTING_PATTERN = "<html>";

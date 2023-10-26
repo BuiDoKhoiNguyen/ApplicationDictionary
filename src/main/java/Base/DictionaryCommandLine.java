@@ -1,4 +1,4 @@
-package DictionaryApplication;
+package Base;
 
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -8,7 +8,6 @@ public class DictionaryCommandLine {
     private Dictionary vocab;
     private static final String OUT_PATH = "data/dictionaries_out.txt";
     private static final String IN_PATH = "data/dictionaries.txt";
-
     private static final String path = "data/E_V.txt";
 
     public DictionaryCommandLine() {
