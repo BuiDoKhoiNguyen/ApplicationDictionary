@@ -1,50 +1,211 @@
 package Controllers;
 
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import org.controlsfx.control.Notifications;
 import DatabaseConnect.DatabaseConnection;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import javafx.scene.input.MouseEvent;
+
+import javax.management.Notification;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 
+public class LoginController implements Initializable {
+    @FXML
+    private AnchorPane layer1,layer2,layer3;
+    @FXML
+    private Button signUp,signIn;
+    @FXML
+    private Label l1,l2,l3,l4,l5,l6,b1,b2,b3,b4,b5;
+    @FXML
+    private ImageView i1,i2,i3;
+    @FXML
+    private Button buttonSignUp, buttonSignIn;
+    @FXML
+    private TextField usernameTextField2,passwordField2,confirmPassword,fname,lname;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        buttonSignUp.setVisible(true);
+        buttonSignIn.setVisible(false);
+        signIn.setVisible(true);
+        signUp.setVisible(false);
 
-public class LoginController {
+        b1.setVisible(true);
+        b2.setVisible(true);
+        b3.setVisible(false);
+        b4.setVisible(true);
+        b5.setVisible(false);
+        i1.setVisible(true);
+        i2.setVisible(true);
+        i3.setVisible(true);
+        usernameTextField1.setVisible(true);
+        passwordField1.setVisible(true);
+
+        l1.setVisible(false);
+        l2.setVisible(false);
+        l3.setVisible(false);
+        l4.setVisible(false);
+        l5.setVisible(false);
+        l6.setVisible(false);
+        usernameTextField2.setVisible(false);
+        passwordField2.setVisible(false);
+        confirmPassword.setVisible(false);
+        fname.setVisible(false);
+        lname.setVisible(false);
+    }
+
+    @FXML
+    private void buttonSignUpAction(MouseEvent event) {
+        TranslateTransition slide1 = new TranslateTransition();
+        TranslateTransition slide2 = new TranslateTransition();
+        slide1.setDuration(Duration.seconds(0.7));
+        slide2.setDuration(Duration.seconds(0.7));
+        slide1.setNode(layer2);
+        slide2.setNode(layer1);
+
+        slide1.setToX(430);
+        slide2.setToX(-370);
+        slide1.play();
+        slide2.play();
+
+        layer3.setVisible(false);
+
+        buttonSignUp.setVisible(false);
+        buttonSignIn.setVisible(true);
+        signIn.setVisible(false);
+        signUp.setVisible(true);
+
+        b1.setVisible(false);
+        b2.setVisible(false);
+        b3.setVisible(true);
+        b4.setVisible(false);
+        b5.setVisible(true);
+        i1.setVisible(false);
+        i2.setVisible(false);
+        i3.setVisible(false);
+        usernameTextField1.setVisible(false);
+        passwordField1.setVisible(false);
+
+        l1.setVisible(true);
+        l2.setVisible(true);
+        l3.setVisible(true);
+        l4.setVisible(true);
+        l5.setVisible(true);
+        l6.setVisible(true);
+        usernameTextField2.setVisible(true);
+        passwordField2.setVisible(true);
+        confirmPassword.setVisible(true);
+        fname.setVisible(true);
+        lname.setVisible(true);
+    }
+
+    @FXML
+    private void buttonSignInAction(MouseEvent event) {
+        TranslateTransition slide1 = new TranslateTransition();
+        TranslateTransition slide2 = new TranslateTransition();
+        slide1.setDuration(Duration.seconds(0.7));
+        slide2.setDuration(Duration.seconds(0.7));
+        slide1.setNode(layer2);
+        slide2.setNode(layer1);
+
+        slide1.setToX(0);
+        slide2.setToX(0);
+        slide1.play();
+        slide2.play();
+
+        layer3.setVisible(true);
+        buttonSignUp.setVisible(true);
+        buttonSignIn.setVisible(false);
+        signIn.setVisible(true);
+        signUp.setVisible(false);
+
+        b1.setVisible(true);
+        b2.setVisible(true);
+        b3.setVisible(false);
+        b4.setVisible(true);
+        b5.setVisible(false);
+        i1.setVisible(true);
+        i2.setVisible(true);
+        i3.setVisible(true);
+        usernameTextField1.setVisible(true);
+        passwordField1.setVisible(true);
+
+        l1.setVisible(false);
+        l2.setVisible(false);
+        l3.setVisible(false);
+        l4.setVisible(false);
+        l5.setVisible(false);
+        l6.setVisible(false);
+        usernameTextField2.setVisible(false);
+        passwordField2.setVisible(false);
+        confirmPassword.setVisible(false);
+        fname.setVisible(false);
+        lname.setVisible(false);
+    }
+
+    /*------------------------------------------------*/
     @FXML
     private Button cancelButton;
     @FXML
-    private Label loginMessageLabel;
+    private Label loginMessageLabel,createAccountMessageLabel;
     @FXML
-    private TextField usernameTextField;
+    private TextField usernameTextField1;
     @FXML
-    private PasswordField passwordField;
+    private PasswordField passwordField1;
     @FXML
     private Button loginButton;
 
     SceneController sceneController = new SceneController();
     public void loginButtonOnAction(ActionEvent e) throws IOException {
-        if(usernameTextField.getText().isBlank() == false && passwordField.getText().isBlank() == false) {
-//            loginMessageLabel.setText("You try to login!");
+        if(usernameTextField1.getText().isBlank() == false && passwordField1.getText().isBlank() == false) {
             if(validateLogin()) {
+                successNotification("Welcome to application!");
                 sceneController.switchToScene2(e);
             }
             else {
-                loginMessageLabel.setText("Invalid login. Please try again!");
+                errorNotification("Invalid login. Please try again!");
+//                loginMessageLabel.setText("Invalid login. Please try again!");
             }
         } else {
-            loginMessageLabel.setText("Please enter your username and password");
+            errorNotification("Please enter your username and password");
+//            loginMessageLabel.setText("Please enter your username and password");
         }
     }
+
+    public void createAccountButtonOnAction(ActionEvent e) throws IOException {
+        if(usernameTextField2.getText().isBlank() == false && passwordField2.getText().isBlank() == false
+                && fname.getText().isBlank() == false && lname.getText().isBlank() == false && confirmPassword.getText().isBlank() == false) {
+            if(validateSignUp(usernameTextField2.getText(), passwordField2.getText(), confirmPassword.getText(), fname.getText(), lname.getText())) {
+                successNotification("Account successfully created! Please login to try app");
+//                createAccountMessageLabel.setText("Account successfully created! Please login to try app");
+            }
+            else {
+                errorNotification("Unable to register account. Please try again later!");
+//                createAccountMessageLabel.setText("Unable to register account. Please try again later!");
+            }
+        } else {
+            errorNotification("Please enter your information!");
+//            loginMessageLabel.setText("Please enter your Information!");
+        }
+    }
+
     public void cancelButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
@@ -54,7 +215,7 @@ public class LoginController {
         DatabaseConnection connectionNow = new DatabaseConnection();
         Connection connectDB = connectionNow.getConnection();
 
-        String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField.getText() + "' AND password='" + passwordField.getText() +"'";
+        String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
 
         try {
             Statement statement = connectDB.createStatement();
@@ -72,5 +233,55 @@ public class LoginController {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean validateSignUp(String username, String password, String confirmPassword, String fName, String lName) {
+        DatabaseConnection connectionNow = new DatabaseConnection();
+        Connection connectDB = connectionNow.getConnection();
+
+        String verifySignUp = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(verifySignUp);
+
+            while(queryResult.next()) {
+                if (queryResult.getInt(1) == 1 && password.equals(confirmPassword)) {
+                    return false;
+                } else {
+                    if(password.equals(confirmPassword)) {
+                        String createAccount = "INSERT INTO UserAccounts (FirstName, LastName, Username, Password) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "')";
+                        statement.executeUpdate(createAccount);
+                        return true;
+                    }
+                }
+            }
+            connectDB.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void errorNotification(String text) {
+        Image image = new Image("/Image/icons8-x-48.png");
+        Notifications.create()
+                .graphic(new ImageView(image))
+                .title("Error")
+                .text(text)
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.TOP_RIGHT)
+                .show();
+    }
+
+    public void successNotification(String text) {
+        Image image = new Image("/Image/icons8-tick-48.png");
+        Notifications.create()
+                .graphic(new ImageView(image))
+                .title("Success")
+                .text(text)
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.TOP_RIGHT)
+                .show();
     }
 }
