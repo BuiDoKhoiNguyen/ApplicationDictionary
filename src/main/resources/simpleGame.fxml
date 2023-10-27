@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
@@ -10,36 +12,40 @@
 
 <AnchorPane prefHeight="532.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameController">
    <children>
-      <WebView fx:id="webView" layoutX="17.0" layoutY="105.0" prefHeight="200.0" prefWidth="718.0" />
+      <WebView fx:id="webView" layoutX="14.0" layoutY="128.0" prefHeight="200.0" prefWidth="718.0" />
       <HBox layoutY="385.0" prefHeight="134.0" prefWidth="750.0">
          <children>
-            <Button fx:id="ansA" mnemonicParsing="false" onAction="#quiz" prefHeight="134.0" prefWidth="187.5" style="-fx-background-color: pink;" text="Button">
+            <Button fx:id="ansA" mnemonicParsing="false" onAction="#quiz" prefHeight="134.0" prefWidth="187.5" stylesheets="@form.css" text="Button">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button fx:id="ansB" mnemonicParsing="false" onAction="#quiz" prefHeight="134.0" prefWidth="187.5" style="-fx-background-color: lime;" text="Button">
+            <Button fx:id="ansB" mnemonicParsing="false" onAction="#quiz" prefHeight="134.0" prefWidth="187.5" stylesheets="@form.css" text="Button">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button fx:id="ansC" mnemonicParsing="false" onAction="#quiz" prefHeight="134.0" prefWidth="187.5" style="-fx-background-color: cyan;" text="Button">
+            <Button fx:id="ansC" mnemonicParsing="false" onAction="#quiz" prefHeight="134.0" prefWidth="187.5" stylesheets="@form.css" text="Button">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Button fx:id="ansD" mnemonicParsing="false" onAction="#quiz" prefHeight="134.0" prefWidth="187.5" style="-fx-background-color: #FFFF33;" text="Button">
+            <Button fx:id="ansD" mnemonicParsing="false" onAction="#quiz" prefHeight="134.0" prefWidth="187.5" stylesheets="@form.css" text="Button">
                <font>
                   <Font size="15.0" />
                </font></Button>
          </children>
       </HBox>
-      <Label fx:id="question" alignment="CENTER" layoutX="475.0" layoutY="14.0" prefHeight="34.0" prefWidth="262.0" style="-fx-background-color: #FFCC00;" text="Label">
+      <Label fx:id="question" alignment="CENTER" layoutX="242.0" layoutY="14.0" prefHeight="34.0" prefWidth="262.0" style="-fx-background-color: #FFCC00;" stylesheets="@form.css" text="Label">
          <font>
             <Font size="20.0" />
          </font></Label>
-      <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="54.0" prefHeight="25.0" prefWidth="718.0" progress="0.0" />
-      <Label fx:id="resultTable" alignment="CENTER" layoutX="200.0" layoutY="117.0" prefHeight="222.0" prefWidth="351.0" style="-fx-background-color: #FF6600;" text="Label">
+      <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="74.0" prefHeight="25.0" prefWidth="718.0" progress="0.0" />
+      <Label fx:id="resultTable" alignment="CENTER" layoutX="200.0" layoutY="117.0" prefHeight="222.0" prefWidth="351.0" style="-fx-background-color: #FF6600;" stylesheets="@form.css" text="Label">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+      <ImageView fx:id="imageView" fitHeight="45.0" fitWidth="54.0" layoutX="26.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@sources_music_picture/Untitled-removebg-preview.png" />
+         </image></ImageView>
    </children>
 </AnchorPane>

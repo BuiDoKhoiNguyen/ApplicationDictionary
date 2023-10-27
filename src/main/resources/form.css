@@ -1,0 +1,73 @@
+
+.button1 {
+-fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5, 4, 3;
+    -fx-background-color: #FFCCFF;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+
+}
+.button1:hover {
+    -fx-background-color: #FF9999 ;
+}
+.button1:pressed{
+    -fx-background-color: #FFCCFF;
+}
+
+.button2 {
+-fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5, 4, 3;
+    -fx-background-color: #07f7f7 ;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+
+}
+.button2:hover {
+    -fx-background-color:  #239c9c ;
+}
+.button2:pressed{
+    -fx-background-color: #07f7f7;
+}
+
+.button3 {
+-fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5, 4, 3;
+    -fx-background-color: #00FF00 ;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+
+}
+.button3:hover {
+    -fx-background-color: #008800 ;
+}
+.button3:pressed{
+    -fx-background-color: #00FF00;
+}
+
+.button4 {
+-fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5, 4, 3;
+    -fx-background-color: #66CCCC ;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+
+}
+.button4:hover {
+    -fx-background-color: #00CCCC ;
+}
+.button4:pressed{
+    -fx-background-color: #66CCCC;
+}
+
+.label {
+-fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5, 4, 3;
+    -fx-border-color: black; /* Màu đen cho viền */
+    -fx-border-width: 2px; /* Độ rộng của viền */
+    -fx-border-radius: 5px; /* Độ cong của viền (tuỳ chọn) */
+
+}

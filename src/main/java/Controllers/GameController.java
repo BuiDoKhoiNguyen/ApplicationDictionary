@@ -3,6 +3,8 @@ package Controllers;
 import DictionaryApplication.Dictionary;
 import DictionaryApplication.NewDictionaryManagement;
 import DictionaryApplication.Word;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.concurrent.Task;
@@ -13,7 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
@@ -33,7 +37,13 @@ public class GameController implements Initializable {
 
     //private WebView showResult = new WebView();
 
+    ImageView imageView;
+    Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/Untitled-removebg-preview.png"));
+    Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/off_music-removebg-preview.png"));
 
+    //Image myImage = new Image(getClass().getResourceAsStream("file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/Untitled-removebg-preview.png"));
+    //Image myImage2 = new Image(getClass().getResourceAsStream("file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/off_music-removebg-preview.png"));
+    String mediaFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/sleepy-cat-118974.mp3";
     private Task<Void> task;
 
     private List<Word> listWord;
@@ -53,22 +63,12 @@ public class GameController implements Initializable {
         NewDictionaryManagement.loadFromFile(dictionary,IN_PATH);
     }
 
-    /*Timeline timer = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent event) {
-            seconds--;
-            time.setText(String.valueOf(seconds));
-
-            if (seconds <= 0) {
-                displayAnswer();
-            }
-        }
-    }));*/
 
     public void quiz(ActionEvent event){
         listWord = new ArrayList<>(dictionary.values());
         showQues();
         handle(new ActionEvent());
+        changeOnOff();
     }
 
 
@@ -77,7 +77,7 @@ public class GameController implements Initializable {
             task.cancel();
         }
 
-        progressBar.setProgress(1.0);
+        //progressBar.setProgress(1.0);
 
         Task<Void> newTask = new Task<>() {
             @Override
@@ -225,31 +225,6 @@ public class GameController implements Initializable {
         ansC.setOpacity(1.0);
         ansD.setOpacity(1.0);
 
-
-
-
-        /*if(ansA.getText()==trueAns){
-            ansA.setTextFill(Color.GREEN);
-        }
-        else ansA.setTextFill(Color.RED);
-
-        if(ansB.getText()==trueAns){
-            ansB.setTextFill(Color.GREEN);
-        }
-        else ansB.setTextFill(Color.RED);
-
-        if(ansC.getText()==trueAns){
-            ansC.setTextFill(Color.GREEN);
-        }
-        else ansC.setTextFill(Color.RED);
-
-        if(ansD.getText()==trueAns){
-            ansD.setTextFill(Color.GREEN);
-        }
-        else ansD.setTextFill(Color.RED);
-
-         */
-
         if(ansA.getText()!=trueAns){
             ansA.setVisible(false);
         }
@@ -266,12 +241,6 @@ public class GameController implements Initializable {
         Timeline pause = new Timeline(new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                /*ansA.setTextFill(Color.BLACK);
-                ansB.setTextFill(Color.BLACK);
-                ansC.setTextFill(Color.BLACK);
-                ansD.setTextFill(Color.BLACK);
-
-                 */
 
                 ansA.setVisible(true);
                 ansB.setVisible(true);
@@ -302,9 +271,11 @@ public class GameController implements Initializable {
         webView.getEngine().loadContent("");
         resultTable.setVisible(true);
         resultTable.setTextFill(Color.WHITE);
+        progressBar.setProgress(0.0);
         if(correctAnswer>=5){
             String tmp = "So cool, well done bruh";
             tmp+="\n";
+            tmp+="             ";
             tmp+="("+correctAnswer+"/"+totalQuestion+")";
             resultTable.setText(tmp);
         }
@@ -317,9 +288,30 @@ public class GameController implements Initializable {
         }
     }
 
+    public void changeOnOff(){
+        imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+            // Kiểm tra xem hình ảnh hiện tại đang được hiển thị là ảnh 1 hay ảnh 2
+            if (imageView.getImage().equals(myImage)) {
+                imageView.setImage(myImage2);
+
+            } else {
+                imageView.setImage(myImage);
+            }
+        });
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        imageView = new ImageView(myImage);
         quiz(new ActionEvent());
         resultTable.setVisible(false);
+        ansA.getStyleClass().add("button1");
+        ansB.getStyleClass().add("button2");
+        ansC.getStyleClass().add("button3");
+        ansD.getStyleClass().add("button4");
+        Media media = new Media(mediaFile);
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+
     }
 }
