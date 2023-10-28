@@ -33,13 +33,14 @@ public class LoginController implements Initializable {
     @FXML
     private Button signUp,signIn;
     @FXML
-    private Label l1,l2,l3,l4,l5,l6,b1,b2,b3,b4,b5;
+    private Label l1,b1,b2,b3,b4,b5;
     @FXML
     private ImageView i1,i2,i3;
     @FXML
     private Button buttonSignUp, buttonSignIn;
     @FXML
     private TextField usernameTextField2,passwordField2,confirmPassword,fname,lname;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buttonSignUp.setVisible(true);
@@ -59,11 +60,6 @@ public class LoginController implements Initializable {
         passwordField1.setVisible(true);
 
         l1.setVisible(false);
-        l2.setVisible(false);
-        l3.setVisible(false);
-        l4.setVisible(false);
-        l5.setVisible(false);
-        l6.setVisible(false);
         usernameTextField2.setVisible(false);
         passwordField2.setVisible(false);
         confirmPassword.setVisible(false);
@@ -104,11 +100,6 @@ public class LoginController implements Initializable {
         passwordField1.setVisible(false);
 
         l1.setVisible(true);
-        l2.setVisible(true);
-        l3.setVisible(true);
-        l4.setVisible(true);
-        l5.setVisible(true);
-        l6.setVisible(true);
         usernameTextField2.setVisible(true);
         passwordField2.setVisible(true);
         confirmPassword.setVisible(true);
@@ -148,11 +139,6 @@ public class LoginController implements Initializable {
         passwordField1.setVisible(true);
 
         l1.setVisible(false);
-        l2.setVisible(false);
-        l3.setVisible(false);
-        l4.setVisible(false);
-        l5.setVisible(false);
-        l6.setVisible(false);
         usernameTextField2.setVisible(false);
         passwordField2.setVisible(false);
         confirmPassword.setVisible(false);
@@ -163,8 +149,6 @@ public class LoginController implements Initializable {
     /*------------------------------------------------*/
     @FXML
     private Button cancelButton;
-    @FXML
-    private Label loginMessageLabel,createAccountMessageLabel;
     @FXML
     private TextField usernameTextField1;
     @FXML
@@ -177,7 +161,7 @@ public class LoginController implements Initializable {
         if(usernameTextField1.getText().isBlank() == false && passwordField1.getText().isBlank() == false) {
             if(validateLogin()) {
                 successNotification("Welcome to application!");
-                sceneController.switchToScene2(e);
+                sceneController.switchToMenu(e);
             }
             else {
                 errorNotification("Invalid login. Please try again!");

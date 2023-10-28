@@ -1,60 +1,46 @@
 .vbox {
-    -fx-background-color: linear-gradient(to right top, #76d2fc, #3238a8);
+    -fx-background-color: linear-gradient(to bottom, #76d2fc, #3238a8);
+}
+.button {
+    -fx-background-color: transparent;
 }
 
-.button-back {
-    -fx-graphic: url('../img/back.png');
-    -fx-background-color: white
+.button:hover {
+    -fx-background-color: #76d2fc;
 }
 
-.button-search {
+.button:pressed {
+    -fx-background-color: #3238a8;
+}
+
+#search {
     -fx-graphic: url('../img/search.png');
-    -fx-background-color: #3238a8;
 }
 
-.button-search:hover {
-    -fx-background-color: #76d2fc;
-}
 
-.button-search:pressed {
-    -fx-background-color: #3238a8;
-}
-
-.button-translate {
+#translate {
     -fx-graphic: url('../img/translate.png');
-    -fx-background-color: #3238a8;
 }
 
-.button-translate:hover {
-    -fx-background-color: #76d2fc;
-}
-
-.button-translate:pressed {
-    -fx-background-color: #3238a8;
-}
-
-.button-favourite {
+#favourite {
     -fx-graphic: url('../img/favourite.png');
-    -fx-background-color: #3238a8;
 }
 
-.button-favourite:hover {
-    -fx-background-color: #76d2fc;
-}
-
-.button-favourite:pressed {
-    -fx-background-color: #3238a8;
-}
-
-.button-editWord {
+#editWord {
     -fx-graphic: url('../img/edit.png');
-    -fx-background-color: #3238a8;
 }
 
-.button-editWord:hover {
-    -fx-background-color: #76d2fc;
+
+#playGame {
+    -fx-graphic: url('../img/game.png');
 }
 
-.button-editWord:pressed {
-    -fx-background-color: #3238a8;
+#logout {
+    -fx-graphic: url('../img/logout.png');
 }
+
+#logout .image-view {
+    -fx-max-width: 20px;
+    -fx-max-height: 20px;
+}
+

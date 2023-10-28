@@ -1,8 +1,8 @@
 package Controllers;
 
-import DictionaryApplication.Dictionary;
-import DictionaryApplication.Word;
-import DictionaryApplication.NewDictionaryManagement;
+import Base.Dictionary;
+import Base.Word;
+import Base.NewDictionaryManagement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

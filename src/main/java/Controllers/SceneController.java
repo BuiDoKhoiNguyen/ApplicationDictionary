@@ -9,23 +9,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class SceneController {
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
-    public void switchToScene2(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/Search2.fxml"));
+    public void switchToMenu(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/FXML/menu.fxml"));
 
 
         Node sourceNode = (Node) event.getSource();
         Scene sourceScene = sourceNode.getScene();
 
 
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), sourceScene.getRoot());
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(1000), sourceScene.getRoot());
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
         fadeOut.setOnFinished(e -> {
@@ -42,4 +43,17 @@ public class SceneController {
 
         fadeOut.play();
     }
+
+    public void switchToLogin(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/FXML/Login.fxml"));
+        Scene scene = new Scene(root);
+
+        scene.setFill(Color.TRANSPARENT);
+        stage.initStyle(StageStyle.TRANSPARENT);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
 }
