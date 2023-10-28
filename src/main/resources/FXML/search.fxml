@@ -13,11 +13,11 @@
 
 <AnchorPane prefHeight="570.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SearchController">
    <children>
-      <TextField fx:id="searchField" layoutX="14.0" layoutY="57.0" onKeyTyped="#searchWord" prefHeight="50.0" prefWidth="240.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@css/search.css" />
+      <TextField fx:id="searchField" layoutX="14.0" layoutY="57.0" onKeyTyped="#searchWord" prefHeight="50.0" prefWidth="240.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@../CSS/search.css" />
       <ListView fx:id="wordList" layoutX="14.0" layoutY="123.0" prefHeight="415.0" prefWidth="240.0" />
       <AnchorPane layoutX="260.0" layoutY="15.0" prefHeight="523.0" prefWidth="436.0" style="-fx-background-color: #ffffff;">
          <children>
-            <Label layoutX="13.0" layoutY="7.0" stylesheets="@css/search.css" text="Nghĩa của từ">
+            <Label layoutX="13.0" layoutY="7.0" stylesheets="@../CSS/search.css" text="Nghĩa của từ">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -26,13 +26,13 @@
             <HTMLEditor fx:id="editField" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="108.0" prefHeight="415.0" prefWidth="462.0" visible="false" />
             <HBox layoutX="312.0" layoutY="57.0" prefHeight="50.0" prefWidth="150.0">
                <children>
-                  <ToggleButton fx:id="favouriteButton" mnemonicParsing="false" onMouseClicked="#favouriteWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-favourite" stylesheets="@css/search.css" />
-                  <ToggleButton fx:id="editButton" mnemonicParsing="false" onMouseClicked="#editWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit" stylesheets="@css/search.css" />
-                  <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-delete" stylesheets="@css/search.css" />
+                  <ToggleButton fx:id="favouriteButton" mnemonicParsing="false" onMouseClicked="#favouriteWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-favourite" stylesheets="@../CSS/search.css" />
+                  <ToggleButton fx:id="editButton" mnemonicParsing="false" onMouseClicked="#editWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit" stylesheets="@../CSS/search.css" />
+                  <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-delete" stylesheets="@../CSS/search.css" />
                </children>
             </HBox>
-            <Button layoutX="30.0" layoutY="74.0" mnemonicParsing="false" styleClass="button-audio" stylesheets="@css/search.css" text="US" />
-            <Button layoutX="103.0" layoutY="74.0" mnemonicParsing="false" styleClass="button-audio" stylesheets="@css/search.css" text="UK" />
+            <Button layoutX="30.0" layoutY="74.0" mnemonicParsing="false" styleClass="button-audio" stylesheets="@../CSS/search.css" text="US" />
+            <Button layoutX="103.0" layoutY="74.0" mnemonicParsing="false" styleClass="button-audio" stylesheets="@../CSS/search.css" text="UK" />
          </children>
       </AnchorPane>
    </children>

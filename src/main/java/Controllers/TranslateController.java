@@ -1,6 +1,6 @@
 package Controllers;
 
-import DictionaryApplication.TranslateAPI;
+import Base.TranslateAPI;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
