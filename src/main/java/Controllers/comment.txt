@@ -1,0 +1,17 @@
+Đoạn mã trên là một ví dụ về cách sử dụng JavaFX để tạo một ứng dụng sử dụng luồng (thread) để thực hiện một số công việc bất đồng bộ trong quá trình khởi động ứng dụng. Đặc biệt, nó dùng trong việc hiển thị một thông báo tải và sau đó mở một cửa sổ chính của ứng dụng.
+
+Dưới đây là giải thích từng phần quan trọng:
+
+1. `lblLoading` và `lblLoadingg`: `lblLoading` là một `Label` được đánh dấu bằng `@FXML`, cho phép bạn kết nối nó với một `Label` trong tệp FXML của màn hình tải. `lblLoadingg` là một biến `Label` tĩnh (static) dùng để lưu trữ tham chiếu đến `Label` trong màn hình tải, để có thể cập nhật nội dung của nó từ các luồng khác.
+
+2. `initialize`: Phương thức này được gọi khi tệp FXML của màn hình tải được nạp. Nó thiết lập tham chiếu tĩnh `lblLoadingg` để trỏ đến `Label` trong màn hình tải.
+
+3. `checkFunctions`: Đây là phương thức chính của lớp `InitPreloader`. Nó chứa ba luồng (`t1`, `t2`, và `t3`) để thực hiện các nhiệm vụ khác nhau.
+
+   - `t1` và `t2` là hai luồng đơn giản để mô phỏng việc thực hiện công việc. Mỗi luồng đặt nội dung của `message[0]` thành chuỗi "First Function" hoặc "Second Function" và cập nhật nội dung của `lblLoadingg` thông qua `Platform.runLater()` để hiển thị thông báo tải.
+
+   - `t3` là một luồng phức tạp hơn. Sau khi đặt nội dung của `message[0]` thành "Open Main Stage", nó sử dụng `Platform.runLater()` để cập nhật nội dung của `lblLoadingg` để hiển thị thông báo tải.
+
+     Sau đó, nó tạo một luồng mới trong đó một cửa sổ ứng dụng chính (login) được tạo ra. Lưu ý rằng màn hình này được tạo và hiển thị sau khi thông báo tải đã kết thúc.
+
+4. Cuối cùng, trong phương thức `initialize`, một số luồng được khởi chạy và đợi chúng kết thúc bằng `join`. Điều này đảm bảo rằng các nhiệm vụ được thực hiện tuần tự. Sau khi tất cả các luồng hoàn thành, phương thức trả về nội dung của `message[0]`, mà sẽ là chuỗi "Open Main Stage" khi tất cả công việc đã hoàn thành.
