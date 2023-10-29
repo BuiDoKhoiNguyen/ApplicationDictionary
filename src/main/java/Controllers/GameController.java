@@ -1,9 +1,15 @@
 package Controllers;
 
-import DictionaryApplication.Dictionary;
-import DictionaryApplication.NewDictionaryManagement;
-import DictionaryApplication.Word;
+import Base.Dictionary;
+import Base.NewDictionaryManagement;
+import Base.Word;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -20,6 +26,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -29,21 +37,26 @@ public class GameController implements Initializable {
     @FXML
     private WebView webView,tableResult;
     @FXML
-    private Button ansA, ansB, ansC, ansD;
+    private Button ansA, ansB, ansC, ansD, playButton;
     @FXML
     private Label question,resultTable;
     @FXML
     private ProgressBar progressBar;
 
-    //private WebView showResult = new WebView();
+    @FXML
+    private ToggleButton togButton;
+    @FXML
+    private AnchorPane myAnchor;
 
-    ImageView imageView;
-    Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/Untitled-removebg-preview.png"));
-    Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/off_music-removebg-preview.png"));
+    Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/audioOn.png"));
+    Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/audioOff.png"));
 
-    //Image myImage = new Image(getClass().getResourceAsStream("file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/Untitled-removebg-preview.png"));
-    //Image myImage2 = new Image(getClass().getResourceAsStream("file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/off_music-removebg-preview.png"));
+    Image myImage3 = new Image(getClass().getResourceAsStream("/sources_music_picture/gameImage.png"));
+
     String mediaFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/sleepy-cat-118974.mp3";
+
+    Media media = new Media(mediaFile);
+    MediaPlayer mediaPlayer = new MediaPlayer(media);
     private Task<Void> task;
 
     private List<Word> listWord;
@@ -64,11 +77,12 @@ public class GameController implements Initializable {
     }
 
 
+
     public void quiz(ActionEvent event){
         listWord = new ArrayList<>(dictionary.values());
+        changeOnOff();
         showQues();
         handle(new ActionEvent());
-        changeOnOff();
     }
 
 
@@ -289,29 +303,31 @@ public class GameController implements Initializable {
     }
 
     public void changeOnOff(){
-        imageView.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-            // Kiểm tra xem hình ảnh hiện tại đang được hiển thị là ảnh 1 hay ảnh 2
-            if (imageView.getImage().equals(myImage)) {
-                imageView.setImage(myImage2);
+        /*boolean isMuted = mediaPlayer.isMute();
+        mediaPlayer.setMute(!isMuted);
+        togButton.setSelected(mediaPlayer.isMute());
 
-            } else {
-                imageView.setImage(myImage);
-            }
-        });
+         */
+        boolean isMuted = togButton.isSelected();
+
+        // Đặt trạng thái âm thanh tương ứng
+        mediaPlayer.setMute(isMuted);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        imageView = new ImageView(myImage);
-        quiz(new ActionEvent());
-        resultTable.setVisible(false);
-        ansA.getStyleClass().add("button1");
-        ansB.getStyleClass().add("button2");
-        ansC.getStyleClass().add("button3");
-        ansD.getStyleClass().add("button4");
-        Media media = new Media(mediaFile);
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+
+        ImageView imageView = new ImageView(myImage3);
+        myAnchor.getChildren().add(imageView);
+        imageView.toBack();
+            togButton.getStyleClass().add("buttonAudio");
+            quiz(new ActionEvent());
+            resultTable.setVisible(false);
+            ansA.getStyleClass().add("button1");
+            ansB.getStyleClass().add("button2");
+            ansC.getStyleClass().add("button3");
+            ansD.getStyleClass().add("button4");
+            mediaPlayer.play();
 
     }
 }
