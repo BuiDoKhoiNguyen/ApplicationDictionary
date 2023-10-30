@@ -25,6 +25,8 @@ public class SearchController implements Initializable {
     private final String EV_IN_PATH = "data/E_V.txt";
     private final String FAVOURITE_IN_PATH = "data/favourite.txt";
 
+    private  VoiceController voiceController = new VoiceController();
+
     private boolean isEditing = false;
 
     @FXML
@@ -41,6 +43,8 @@ public class SearchController implements Initializable {
     private ToggleButton editButton;
     @FXML
     private Button deleteButton;
+    @FXML
+    private Button speakUS,speakUK;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -114,5 +118,19 @@ public class SearchController implements Initializable {
         favouriteWords.removeAll(targetWord);
         dictionary.remove(targetWord);
         wordList.getItems().remove(targetWord);
+    }
+
+    public void speak(String language) {
+        VoiceController.language = language;
+        VoiceController.speakWord(searchField.getText());
+    }
+    @FXML
+    public void speakUSButtonOnAction(ActionEvent e) {
+        speak("en-us");
+    }
+
+    @FXML
+    public void speakUKButtonOnAction(ActionEvent e) {
+        speak("en-gb");
     }
 }

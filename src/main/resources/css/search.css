@@ -4,6 +4,7 @@
 
 .button-audio {
     -fx-graphic: url('../img/audio.png');
+    -fx-border-color: blue;
 }
 
 .button-favourite {
@@ -44,3 +45,4 @@
 .label {
     -fx-text-fill: linear-gradient(to right top, #76d2fc, #3238a8);
 }
+

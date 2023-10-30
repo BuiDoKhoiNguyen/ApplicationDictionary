@@ -21,7 +21,7 @@
                <children>
                   <Label fx:id="l1" alignment="CENTER" prefHeight="54.0" prefWidth="430.0" style="-fx-text-fill: linear-gradient( to right top, #76d2fc,#3238a8);" styleClass="-" text="Create account">
                      <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="System Bold" size="27.0" />
                      </font>
                   </Label>
                   <Button id="outline" fx:id="signUp" layoutX="133.0" layoutY="277.0" mnemonicParsing="false" onAction="#createAccountButtonOnAction" prefHeight="30.0" prefWidth="165.0" stylesheets="@../CSS/Login.css" text="Create your account" textFill="#fcfafa">
@@ -29,9 +29,9 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Label fx:id="b5" alignment="CENTER" layoutX="115.0" layoutY="46.0" prefHeight="18.0" prefWidth="211.0" text="Create a new account" textFill="#aeaabf">
+                  <Label fx:id="b5" alignment="CENTER" layoutX="113.0" layoutY="44.0" prefHeight="18.0" prefWidth="211.0" text="Create a new account" textFill="#aeaabf">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
                   <JFXTextField id="text-field" fx:id="fname" focusColor="#76d2fc" labelFloat="true" layoutX="38.0" layoutY="86.0" prefHeight="26.0" prefWidth="130.0" promptText="First name" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
@@ -111,33 +111,33 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Label fx:id="b4" alignment="CENTER" layoutX="123.0" layoutY="40.0" prefHeight="18.0" prefWidth="165.0" text="Sign in to continue" textFill="#aeaabf">
+                  <Label fx:id="b4" alignment="CENTER" layoutX="133.0" layoutY="52.0" prefHeight="18.0" prefWidth="165.0" text="Sign in to continue" textFill="#aeaabf">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="b1" alignment="CENTER" prefHeight="40.0" prefWidth="430.0" style="-fx-text-fill: linear-gradient( to right top, #76d2fc,#3238a8);" text="Welcome Back">
+                  <Label fx:id="b1" alignment="CENTER" prefHeight="61.0" prefWidth="430.0" style="-fx-text-fill: linear-gradient( to right top, #76d2fc,#3238a8);" text="Welcome Back">
                      <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="i1" fitHeight="30.0" fitWidth="32.0" layoutX="108.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="i1" fitHeight="30.0" fitWidth="32.0" layoutX="108.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/icons8-male-user-48.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="i2" fitHeight="30.0" fitWidth="42.0" layoutX="108.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="i2" fitHeight="30.0" fitWidth="42.0" layoutX="108.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/icons8-password-48.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="i3" fitHeight="30.0" fitWidth="30.0" layoutX="191.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="i3" fitHeight="30.0" fitWidth="30.0" layoutX="192.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Image/icons8-dictionary-64.png" />
                      </image>
                   </ImageView>
-                  <JFXTextField id="text-field" fx:id="usernameTextField1" focusColor="#76d2fc" labelFloat="true" layoutX="141.0" layoutY="119.0" prefHeight="26.0" prefWidth="172.0" promptText="Username" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
-                  <JFXPasswordField id="text-field" fx:id="passwordField1" focusColor="#76d2fc" labelFloat="true" layoutX="139.0" layoutY="165.0" prefHeight="26.0" prefWidth="172.0" promptText="Password" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
+                  <JFXTextField id="text-field" fx:id="usernameTextField1" focusColor="#76d2fc" labelFloat="true" layoutX="141.0" layoutY="134.0" prefHeight="26.0" prefWidth="172.0" promptText="Username" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
+                  <JFXPasswordField id="text-field" fx:id="passwordField1" focusColor="#76d2fc" labelFloat="true" layoutX="141.0" layoutY="180.0" prefHeight="26.0" prefWidth="172.0" promptText="Password" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
                </children>
             </AnchorPane>
          </children>
