@@ -5,12 +5,36 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
 <AnchorPane prefHeight="570.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TranslateController">
    <children>
+      <Label fx:id="searchLabel" layoutY="124.0" prefHeight="60.0" prefWidth="125.0" text="Search" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="translateLabel" layoutY="184.0" prefHeight="60.0" prefWidth="125.0" text="Translate" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="favouriteLabel" layoutY="244.0" prefHeight="60.0" prefWidth="125.0" text="Favourite" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="editLabel" layoutY="304.0" prefHeight="60.0" prefWidth="125.0" text="Edit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="gameLabel" layoutY="364.0" prefHeight="60.0" prefWidth="125.0" text="Game" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
       <TextField fx:id="inputField" alignment="TOP_LEFT" layoutX="35.0" layoutY="66.0" onAction="#translate" prefHeight="200.0" prefWidth="650.0">
          <font>
             <Font size="18.0" />
@@ -64,34 +88,5 @@
             </ToggleButton>
          </children>
       </HBox>
-      <VBox layoutY="124.0" prefHeight="330.0" prefWidth="262.0">
-         <children>
-            <Label fx:id="searchLabel" prefHeight="60.0" prefWidth="125.0" text="Search" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="translateLabel" prefHeight="60.0" prefWidth="125.0" text="Translate" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="favouriteLabel" prefHeight="60.0" prefWidth="125.0" text="Favourite" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="editLabel" prefHeight="60.0" prefWidth="125.0" text="Edit" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="gameLabel" prefHeight="60.0" prefWidth="125.0" text="Game" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
    </children>
 </AnchorPane>

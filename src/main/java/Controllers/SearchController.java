@@ -71,7 +71,6 @@ public class SearchController extends TaskControllers implements Initializable {
     @FXML
     public void searchWord(KeyEvent e) {
         String keyword = searchField.getText().toLowerCase();
-        System.out.println(keyword);
         ObservableList<String> matchingWords = FXCollections.observableArrayList();
         matchingWords.addAll(NewDictionaryManagement.partialSearch(dictionary, keyword).keySet());
         wordList.setItems(matchingWords);

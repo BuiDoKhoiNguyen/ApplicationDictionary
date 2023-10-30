@@ -21,6 +21,11 @@ public class TaskControllers extends Controllers {
     private void bindLabel(Label label, Button button) {
         label.visibleProperty().bind(button.hoverProperty());
         label.backgroundProperty().bind(button.backgroundProperty());
+        button.hoverProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    label.toFront();
+                }
+        );
     }
 
     public void load(Button searchButton, Button translateButton,
