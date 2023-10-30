@@ -32,19 +32,19 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="favourite" fx:id="editButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
+                  <Button id="editWord" fx:id="editButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="editWord" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
+                  <Button id="favourite" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="playGame" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" />
+                  <Button id="playGame" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" />
                   <Button mnemonicParsing="false" prefHeight="86.0" prefWidth="66.0" style="-fx-background-color: Transparent;" />
-                  <Button id="logout" fx:id="logoutButton" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="60.0" prefWidth="145.0" />
+                  <Button id="logout" fx:id="logoutButton" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" />
                </children>
                <opaqueInsets>
                   <Insets />

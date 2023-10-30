@@ -1,6 +1,6 @@
 package Controllers;
 
-import Base.NewDictionaryManagement;
+import DatabaseConnect.DatabaseConnection;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +14,10 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
-public class InitPreloader implements Initializable {
+public class PreloaderController implements Initializable {
 
     @FXML
     public Label lblLoading;
@@ -29,33 +30,46 @@ public class InitPreloader implements Initializable {
     }
 
     public void checkFunctions(){
-
         final String[] message = {""};
         Thread t1 = new Thread(() -> {
-            message[0] = "Loading data";
+            message[0] = "Checking menu controller";
             Platform.runLater(() -> lblLoadingg.setText(message[0]));
             try {
                 Thread.sleep(2000);
                 MenuController menuController = new MenuController();
-            } catch (  InterruptedException e) {
+                System.out.println("Connect to menu,search and translate successfully!");
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         });
 
         Thread t2 = new Thread(() -> {
-            message[0] = "Connecting to database";
+            message[0] = "Checking database connection";
             Platform.runLater(() -> lblLoadingg.setText(message[0]));
             try {
                 Thread.sleep(2000);
-
+                DatabaseConnection connectionNow = new DatabaseConnection();
+                Connection connectDB = connectionNow.getConnection();
+                System.out.println("Connect to database successfully!");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            message[0] = "Opening login stage";
-            Platform.runLater(() -> lblLoadingg.setText(message[0]));
         });
 
         Thread t3 = new Thread(() -> {
+            message[0] = "Checking data connection";
+            Platform.runLater(() -> lblLoadingg.setText(message[0]));
+            try {
+                Thread.sleep(2000);
+                DictionaryController dictionaryController = new DictionaryController();
+                System.out.println("Connect to dictionary data successfully!");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+        Thread t4 = new Thread(() -> {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
@@ -85,6 +99,8 @@ public class InitPreloader implements Initializable {
             t2.join();
             t3.start();
             t3.join();
+            t4.start();
+            t4.join();
 
         } catch (InterruptedException e) {
             e.printStackTrace();

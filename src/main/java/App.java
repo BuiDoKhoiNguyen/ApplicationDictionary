@@ -31,10 +31,9 @@
 //
 //}
 
-import Controllers.InitPreloader;
+import Controllers.PreloaderController;
 import Controllers.LauncherPreloader;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
@@ -42,7 +41,7 @@ public class App extends Application {
     public static Stage primaryStage = null;
     @Override
     public void init() {
-        InitPreloader init = new InitPreloader();
+        PreloaderController init = new PreloaderController();
         init.checkFunctions();
     }
 

@@ -17,7 +17,6 @@
     -fx-graphic: url('../img/search.png');
 }
 
-
 #translate {
     -fx-graphic: url('../img/translate.png');
 }
@@ -29,7 +28,6 @@
 #editWord {
     -fx-graphic: url('../img/edit.png');
 }
-
 
 #playGame {
     -fx-graphic: url('../img/game.png');
