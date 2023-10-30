@@ -32,7 +32,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="favourite" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../css/menu.css" textFill="WHITE">
+                  <Button id="favourite" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#favouriteFunction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../css/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>

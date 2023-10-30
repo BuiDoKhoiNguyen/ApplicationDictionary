@@ -19,11 +19,15 @@ public class MenuController extends Controllers implements Initializable {
     private AnchorPane searchAP;
     @FXML
     private AnchorPane translateAP;
+    @FXML
+    private AnchorPane favouriteAP;
 
     @FXML
     private SearchController searchController;
     @FXML
     private TranslateController translateController;
+    @FXML
+    private FavouriteController favouriteController;
     @FXML
     SceneController sceneController = new SceneController();
 
@@ -31,10 +35,13 @@ public class MenuController extends Controllers implements Initializable {
     public void searchFunction() {
         mainAP.getChildren().setAll(searchAP);
     }
-
     @FXML
     public void translateFunction() {
         mainAP.getChildren().setAll(translateAP);
+    }
+    @FXML
+    public void favouriteFunction() {
+        mainAP.getChildren().setAll(favouriteAP);
     }
 
     public void logoutButtonOnAction(ActionEvent event) throws IOException {
@@ -62,6 +69,15 @@ public class MenuController extends Controllers implements Initializable {
         }
         translateController = loader.getController();
         translateController.load(this.searchButton, this.translateButton, this.favouriteButton, this.editButton, this.gameButton, this.logoutButton);
+
+        loader = new FXMLLoader(getClass().getResource("/FXML/favourite.fxml"));
+        try {
+            favouriteAP = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        favouriteController = loader.getController();
+        favouriteController.load(this.searchButton, this.translateButton, this.favouriteButton, this.editButton, this.gameButton, this.logoutButton);
 
         mainAP.getChildren().setAll(searchAP);
     }

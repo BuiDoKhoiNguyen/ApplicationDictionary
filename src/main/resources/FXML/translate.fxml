@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
@@ -10,30 +11,45 @@
 
 <AnchorPane prefHeight="570.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TranslateController">
    <children>
-      <Label fx:id="searchLabel" layoutY="124.0" prefHeight="60.0" prefWidth="125.0" text="Search" textFill="WHITE">
+      <Label fx:id="searchLabel" contentDisplay="RIGHT" layoutY="124.0" prefHeight="60.0" prefWidth="125.0" text=" Search" textFill="#ececec">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </Label>
-      <Label fx:id="translateLabel" layoutY="184.0" prefHeight="60.0" prefWidth="125.0" text="Translate" textFill="WHITE">
+      <Label fx:id="translateLabel" alignment="CENTER" layoutY="184.0" prefHeight="60.0" prefWidth="125.0" text="Translate" textFill="#ffae42">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </Label>
-      <Label fx:id="favouriteLabel" layoutY="244.0" prefHeight="60.0" prefWidth="125.0" text="Favourite" textFill="WHITE">
+      <Label fx:id="favouriteLabel" layoutY="244.0" prefHeight="60.0" prefWidth="125.0" text=" Favourite" textFill="#ececec">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </Label>
-      <Label fx:id="editLabel" layoutY="304.0" prefHeight="60.0" prefWidth="125.0" text="Edit" textFill="WHITE">
+      <Label fx:id="editLabel" layoutY="304.0" prefHeight="60.0" prefWidth="125.0" text=" Edit" textFill="#ececec">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </Label>
-      <Label fx:id="gameLabel" layoutY="364.0" prefHeight="60.0" prefWidth="125.0" text="Game" textFill="WHITE">
+      <Label fx:id="gameLabel" layoutY="364.0" prefHeight="60.0" prefWidth="125.0" text=" Game" textFill="#ececec">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </Label>
       <TextField fx:id="inputField" alignment="TOP_LEFT" layoutX="35.0" layoutY="66.0" onAction="#translate" prefHeight="200.0" prefWidth="650.0">
          <font>
