@@ -1,4 +1,76 @@
+.yesButton{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+.yesButton: hover{
+-fx-font-veight: bold;
+    -fx-background-color: black;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-scale-x: 1.2;
+        -fx-scale-y: 1.2;
+        -fx-translate-x: -3;
+        -fx-translate-y: -1;
+}
+.yesButton: pressed{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
 
+.noButton{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+.noButton: hover{
+-fx-font-veight: bold;
+    -fx-background-color: black;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-scale-x: 1.2;
+        -fx-scale-y: 1.2;
+        -fx-translate-x: -3;
+        -fx-translate-y: -1;
+}
+.noButton: pressed{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+
+.progress-bar {
+    -fx-background-radius: 10; /* Bo góc viền của ProgressBar */
+    -fx-background-insets: 0; /* Loại bỏ viền nội bộ */
+    -fx-background-color: black;
+    -fx-padding: 5;
+
+}
+
+/* Định dạng cho tiến trình */
+.progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); /* Sử dụng màu cầu vồng cho tiến trình */
+    -fx-background-radius: 5 ; /* Bo góc cho tiến trình */
+    -fx-background-insets: 0; /* Loại bỏ viền nội bộ */
+}
+
+
+.webView {
+     -fx-border-color: black; /* Màu đen cho viền */
+        -fx-border-width: 2px; /* Độ rộng của viền */
+        -fx-background-radius: 10;
+}
 
 .buttonPlay {
     -fx-font-veight: bold;

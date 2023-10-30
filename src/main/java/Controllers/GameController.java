@@ -3,6 +3,7 @@ package Controllers;
 import Base.Dictionary;
 import Base.NewDictionaryManagement;
 import Base.Word;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -35,9 +36,9 @@ import java.util.*;
 
 public class GameController implements Initializable {
     @FXML
-    private WebView webView,tableResult;
+    private WebView webView;
     @FXML
-    private Button ansA, ansB, ansC, ansD, playButton;
+    private Button ansA, ansB, ansC, ansD, playButton, yesButton, noButton;
     @FXML
     private Label question,resultTable;
     @FXML
@@ -91,8 +92,6 @@ public class GameController implements Initializable {
             task.cancel();
         }
 
-        //progressBar.setProgress(1.0);
-
         Task<Void> newTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
@@ -101,10 +100,9 @@ public class GameController implements Initializable {
                         break;
                     }
                     updateProgress(counter, 100);
-                    Thread.sleep(50); // 50
+                    Thread.sleep(50); // 50 milliseconds
                     System.out.println(counter);
                     if (counter == 0) {
-                        // noChoice = true;
                         displayAnswer();
                     }
                 }
@@ -115,10 +113,6 @@ public class GameController implements Initializable {
         task = newTask;
 
         progressBar.progressProperty().bind(newTask.progressProperty());
-        // if(progressBar.getProgress()<=0) displayAnswer();
-
-        // task.setOnSucceeded(e -> progressBar.setProgress(1.0));
-        // task.setOnFailed(e -> progressBar.setProgress(1.0));
 
         new Thread(newTask).start();
     }
@@ -282,23 +276,144 @@ public class GameController implements Initializable {
         ansB.setText("");
         ansC.setText("");
         ansD.setText("");
+        ansA.setDisable(true);
+        ansB.setDisable(true);
+        ansC.setDisable(true);
+        ansD.setDisable(true);
         webView.getEngine().loadContent("");
+        noButton.setVisible(true);
+        yesButton.setVisible(true);
         resultTable.setVisible(true);
         resultTable.setTextFill(Color.WHITE);
         progressBar.setProgress(0.0);
         if(correctAnswer>=5){
-            String tmp = "So cool, well done bruh";
+            String tmp = "    So cool, well done bruh";
             tmp+="\n";
-            tmp+="             ";
+            tmp+="                 ";
             tmp+="("+correctAnswer+"/"+totalQuestion+")";
+            tmp+="\n";
+            tmp+="    ";
+            tmp+="continue one more time";
+            tmp+="    ";
             resultTable.setText(tmp);
+            noButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    FadeTransition fadeOut = new FadeTransition(Duration.seconds(1));
+                    fadeOut.setNode(((javafx.scene.Node) event.getSource()).getScene().getRoot()); // Scene hiện tại
+                    fadeOut.setFromValue(1.0);
+                    fadeOut.setToValue(0.0);
+
+                    // Xử lý khi hoàn thành chuyển đổi
+                    fadeOut.setOnFinished(e -> {
+                        try {
+                            // Tạo scene mới từ FXML
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
+                            mediaPlayer.stop();
+                            Parent scene2Parent = loader.load();
+                            Scene scene2 = new Scene(scene2Parent);
+
+                            // Lấy stage hiện tại và đặt scene mới
+                            Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                            window.setScene(scene2);
+
+                            // Tạo FadeTransition mới cho scene mới (nếu muốn)
+                            FadeTransition fadeIn = new FadeTransition(Duration.seconds(1));
+                            fadeIn.setNode(scene2.getRoot()); // scene2 là Scene mới
+                            fadeIn.setFromValue(0.0);
+                            fadeIn.setToValue(1.0);
+                            fadeIn.play();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+
+                    // Bắt đầu chuyển đổi
+                    fadeOut.play();
+                }
+            });
+            yesButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    correctAnswer = 0;
+                    progressBar.setProgress(1.0);
+                    trueAns="";
+                    index = 0;
+                    noButton.setVisible(false);
+                    yesButton.setVisible(false);
+                    resultTable.setVisible(false);
+                    ansA.setDisable(false);
+                    ansB.setDisable(false);
+                    ansC.setDisable(false);
+                    ansD.setDisable(false);
+                    quiz(new ActionEvent());
+
+                }
+            });
         }
         else{
-            String tmp = "Opps, try again bruh";
+            String tmp = "         Opps, try again bruh";
             tmp+="\n";
-            tmp+="             ";
+            tmp+="                 ";
             tmp+="("+correctAnswer+"/"+totalQuestion+")";
+            tmp+="\n";
+            tmp+="    ";
+            tmp+="continue one more time";
+            tmp+="    ";
             resultTable.setText(tmp);
+            noButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    FadeTransition fadeOut = new FadeTransition(Duration.seconds(1));
+                    fadeOut.setNode(((javafx.scene.Node) event.getSource()).getScene().getRoot()); // Scene hiện tại
+                    fadeOut.setFromValue(1.0);
+                    fadeOut.setToValue(0.0);
+
+                    // Xử lý khi hoàn thành chuyển đổi
+                    fadeOut.setOnFinished(e -> {
+                        try {
+                            // Tạo scene mới từ FXML
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
+                            mediaPlayer.stop();
+                            Parent scene2Parent = loader.load();
+                            Scene scene2 = new Scene(scene2Parent);
+
+                            // Lấy stage hiện tại và đặt scene mới
+                            Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                            window.setScene(scene2);
+
+                            // Tạo FadeTransition mới cho scene mới (nếu muốn)
+                            FadeTransition fadeIn = new FadeTransition(Duration.seconds(1));
+                            fadeIn.setNode(scene2.getRoot()); // scene2 là Scene mới
+                            fadeIn.setFromValue(0.0);
+                            fadeIn.setToValue(1.0);
+                            fadeIn.play();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+
+                    // Bắt đầu chuyển đổi
+                    fadeOut.play();
+                }
+            });
+            yesButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    correctAnswer = 0;
+                    progressBar.setProgress(1.0);
+                    trueAns="";
+                    index = 0;
+                    noButton.setVisible(false);
+                    yesButton.setVisible(false);
+                    resultTable.setVisible(false);
+                    ansA.setDisable(false);
+                    ansB.setDisable(false);
+                    ansC.setDisable(false);
+                    ansD.setDisable(false);
+                    quiz(new ActionEvent());
+                }
+            });
         }
     }
 
@@ -320,6 +435,8 @@ public class GameController implements Initializable {
         ImageView imageView = new ImageView(myImage3);
         myAnchor.getChildren().add(imageView);
         imageView.toBack();
+        webView.getStyleClass().add("webView");
+        progressBar.getStyleClass().add("progress-bar");
             togButton.getStyleClass().add("buttonAudio");
             quiz(new ActionEvent());
             resultTable.setVisible(false);
@@ -328,6 +445,10 @@ public class GameController implements Initializable {
             ansC.getStyleClass().add("button3");
             ansD.getStyleClass().add("button4");
             mediaPlayer.play();
+            noButton.getStyleClass().add("noButton");
+            yesButton.getStyleClass().add("yesButton");
+            noButton.setVisible(false);
+            yesButton.setVisible(false);
 
     }
 }
