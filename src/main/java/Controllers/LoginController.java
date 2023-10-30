@@ -29,17 +29,17 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
     @FXML
-    private AnchorPane layer1,layer2,layer3;
+    private AnchorPane layer1, layer2, layer3;
     @FXML
-    private Button signUp,signIn;
+    private Button signUp, signIn;
     @FXML
-    private Label l1,b1,b2,b3,b4,b5;
+    private Label l1, b1, b2, b3, b4, b5;
     @FXML
-    private ImageView i1,i2,i3;
+    private ImageView i1, i2, i3;
     @FXML
     private Button buttonSignUp, buttonSignIn;
     @FXML
-    private TextField usernameTextField2,passwordField2,confirmPassword,fname,lname;
+    private TextField usernameTextField2, passwordField2, confirmPassword, fname, lname;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -157,13 +157,13 @@ public class LoginController implements Initializable {
     private Button loginButton;
 
     SceneController sceneController = new SceneController();
+
     public void loginButtonOnAction(ActionEvent e) throws IOException {
-        if(usernameTextField1.getText().isBlank() == false && passwordField1.getText().isBlank() == false) {
-            if(validateLogin()) {
+        if (usernameTextField1.getText().isBlank() == false && passwordField1.getText().isBlank() == false) {
+            if (validateLogin()) {
                 successNotification("Welcome to application!");
                 sceneController.switchToMenu(e);
-            }
-            else {
+            } else {
                 errorNotification("Invalid login. Please try again!");
 //                loginMessageLabel.setText("Invalid login. Please try again!");
             }
@@ -174,13 +174,12 @@ public class LoginController implements Initializable {
     }
 
     public void createAccountButtonOnAction(ActionEvent e) throws IOException {
-        if(usernameTextField2.getText().isBlank() == false && passwordField2.getText().isBlank() == false
+        if (usernameTextField2.getText().isBlank() == false && passwordField2.getText().isBlank() == false
                 && fname.getText().isBlank() == false && lname.getText().isBlank() == false && confirmPassword.getText().isBlank() == false) {
-            if(validateSignUp(usernameTextField2.getText(), passwordField2.getText(), confirmPassword.getText(), fname.getText(), lname.getText())) {
+            if (validateSignUp(usernameTextField2.getText(), passwordField2.getText(), confirmPassword.getText(), fname.getText(), lname.getText())) {
                 successNotification("Account successfully created! Please login to try app");
 //                createAccountMessageLabel.setText("Account successfully created! Please login to try app");
-            }
-            else {
+            } else {
                 errorNotification("Unable to register account. Please try again later!");
 //                createAccountMessageLabel.setText("Unable to register account. Please try again later!");
             }
@@ -199,13 +198,13 @@ public class LoginController implements Initializable {
         DatabaseConnection connectionNow = new DatabaseConnection();
         Connection connectDB = connectionNow.getConnection();
 
-        String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
+        String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() + "'";
 
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
 
-            while(queryResult.next()) {
+            while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
                     return true;
 //                    loginMessageLabel.setText("Welcome!");
@@ -223,17 +222,17 @@ public class LoginController implements Initializable {
         DatabaseConnection connectionNow = new DatabaseConnection();
         Connection connectDB = connectionNow.getConnection();
 
-        String verifySignUp = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
+        String verifySignUp = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() + "'";
 
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifySignUp);
 
-            while(queryResult.next()) {
+            while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1 && password.equals(confirmPassword)) {
                     return false;
                 } else {
-                    if(password.equals(confirmPassword)) {
+                    if (password.equals(confirmPassword)) {
                         String createAccount = "INSERT INTO UserAccounts (FirstName, LastName, Username, Password) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "')";
                         statement.executeUpdate(createAccount);
                         return true;

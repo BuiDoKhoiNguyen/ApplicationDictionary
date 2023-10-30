@@ -25,10 +25,10 @@ public class InitPreloader implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lblLoadingg=lblLoading;
+        lblLoadingg = lblLoading;
     }
 
-    public void checkFunctions(){
+    public void checkFunctions() {
 
         final String[] message = {""};
         Thread t1 = new Thread(() -> {
@@ -37,7 +37,7 @@ public class InitPreloader implements Initializable {
             try {
                 Thread.sleep(2000);
                 MenuController menuController = new MenuController();
-            } catch (  InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         });

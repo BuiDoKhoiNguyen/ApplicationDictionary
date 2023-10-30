@@ -1,7 +1,3 @@
-/*.button-menu {*/
-/*    -fx-graphic: url('../img/menu.png');*/
-/*}*/
-
 .button-audio {
     -fx-graphic: url('../img/audio.png');
 }

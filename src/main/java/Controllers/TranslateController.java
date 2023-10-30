@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TranslateController implements Initializable {
+public class TranslateController extends TaskControllers implements Initializable {
     @FXML
     private TextField inputField;
     @FXML

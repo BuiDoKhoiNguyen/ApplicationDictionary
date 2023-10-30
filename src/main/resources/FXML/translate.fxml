@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
@@ -16,22 +18,22 @@
       <WebView fx:id="translationField" fontScale="1.5" layoutX="35.0" layoutY="327.0" prefHeight="200.0" prefWidth="650.0" />
       <HBox layoutX="34.0" layoutY="20.0" prefHeight="45.0" prefWidth="425.0">
          <children>
-            <ToggleButton fx:id="fromEN" mnemonicParsing="false" onMouseClicked="#setFromEN" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../CSS/translate.css" text="Anh">
+            <ToggleButton fx:id="fromEN" mnemonicParsing="false" onMouseClicked="#setFromEN" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../css/translate.css" text="Anh">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="fromVN" mnemonicParsing="false" onMouseClicked="#setFromVN" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../CSS/translate.css" text="Việt">
+            <ToggleButton fx:id="fromVN" mnemonicParsing="false" onMouseClicked="#setFromVN" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../css/translate.css" text="Việt">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="fromFR" mnemonicParsing="false" onMouseClicked="#setFromFR" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../CSS/translate.css" text="Pháp">
+            <ToggleButton fx:id="fromFR" mnemonicParsing="false" onMouseClicked="#setFromFR" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../css/translate.css" text="Pháp">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="fromAutoDetect" mnemonicParsing="false" onMouseClicked="#setFromAutoDetect" prefHeight="45.0" prefWidth="200.0" styleClass="button-from" stylesheets="@../CSS/translate.css" text="Phát hiện ngôn ngữ">
+            <ToggleButton fx:id="fromAutoDetect" mnemonicParsing="false" onMouseClicked="#setFromAutoDetect" prefHeight="45.0" prefWidth="200.0" styleClass="button-from" stylesheets="@../css/translate.css" text="Phát hiện ngôn ngữ">
                <font>
                   <Font size="18.0" />
                </font>
@@ -40,27 +42,56 @@
       </HBox>
       <HBox layoutX="34.0" layoutY="281.0" prefHeight="45.0" prefWidth="425.0">
          <children>
-            <ToggleButton fx:id="toVN" mnemonicParsing="false" onMouseClicked="#setToVN" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../CSS/translate.css" text="Việt">
+            <ToggleButton fx:id="toVN" mnemonicParsing="false" onMouseClicked="#setToVN" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Việt">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="toEN" mnemonicParsing="false" onMouseClicked="#setToEN" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../CSS/translate.css" text="Anh">
+            <ToggleButton fx:id="toEN" mnemonicParsing="false" onMouseClicked="#setToEN" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Anh">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="toFR" mnemonicParsing="false" onMouseClicked="#setToFR" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../CSS/translate.css" text="Pháp">
+            <ToggleButton fx:id="toFR" mnemonicParsing="false" onMouseClicked="#setToFR" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Pháp">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="toSimplifiedCN" mnemonicParsing="false" onMouseClicked="#setToSimplifiedCN" prefHeight="46.0" prefWidth="155.0" styleClass="button-to" stylesheets="@../CSS/translate.css" text="Trung (giản thể)">
+            <ToggleButton fx:id="toSimplifiedCN" mnemonicParsing="false" onMouseClicked="#setToSimplifiedCN" prefHeight="46.0" prefWidth="155.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Trung (giản thể)">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
          </children>
       </HBox>
+      <VBox layoutY="124.0" prefHeight="330.0" prefWidth="262.0">
+         <children>
+            <Label fx:id="searchLabel" prefHeight="60.0" prefWidth="125.0" text="Search" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="translateLabel" prefHeight="60.0" prefWidth="125.0" text="Translate" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="favouriteLabel" prefHeight="60.0" prefWidth="125.0" text="Favourite" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="editLabel" prefHeight="60.0" prefWidth="125.0" text="Edit" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="gameLabel" prefHeight="60.0" prefWidth="125.0" text="Game" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

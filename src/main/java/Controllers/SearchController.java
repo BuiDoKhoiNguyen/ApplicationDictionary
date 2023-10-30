@@ -6,19 +6,18 @@ import Base.NewDictionaryManagement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SearchController implements Initializable {
+public class SearchController extends TaskControllers implements Initializable {
     private Dictionary dictionary = new Dictionary();
     private ObservableList<String> favouriteWords = FXCollections.observableArrayList();
 
@@ -36,9 +35,9 @@ public class SearchController implements Initializable {
     @FXML
     private HTMLEditor editField;
     @FXML
-    private ToggleButton favouriteButton;
+    private ToggleButton favourButton;
     @FXML
-    private ToggleButton editButton;
+    private ToggleButton editingButton;
     @FXML
     private Button deleteButton;
 
@@ -46,17 +45,6 @@ public class SearchController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         NewDictionaryManagement.loadDataFromHTMLFile(dictionary, EV_IN_PATH);
         this.wordList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        this.wordList.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        Word selectedWord = dictionary.get(newValue.trim());
-                        String wordExplain = selectedWord.getWordExplain();
-                        definitionView.getEngine().loadContent(wordExplain, "text/html");
-                        searchField.setText(selectedWord.getWordTarget());
-                        favouriteButton.setSelected(selectedWord.isFavoured());
-                    }
-                }
-        );
         this.wordList.getItems().addAll(dictionary.keySet());
     }
 
@@ -64,7 +52,7 @@ public class SearchController implements Initializable {
     public void editWord() {
         String targetWord = searchField.getText();
         if (targetWord.isEmpty()) {
-            editButton.setSelected(false);
+            editingButton.setSelected(false);
             return;
         }
         if (isEditing) {
@@ -90,20 +78,32 @@ public class SearchController implements Initializable {
     }
 
     @FXML
+    public void selectWord(MouseEvent e) {
+        String selectedWord = this.wordList.getSelectionModel().selectedItemProperty().getValue();
+        if (selectedWord != null) {
+            Word word = dictionary.get(selectedWord.trim());
+            String wordExplain = word.getWordExplain();
+            definitionView.getEngine().loadContent(wordExplain, "text/html");
+            searchField.setText(word.getWordTarget());
+            favourButton.setSelected(word.isFavoured());
+        }
+    }
+
+    @FXML
     public void favouriteWord() {
         String targetWord = searchField.getText();
         if (targetWord.isEmpty()) {
-            favouriteButton.setSelected(false);
+            favourButton.setSelected(false);
             return;
         }
         Word selectedWord = dictionary.get(targetWord);
         if (selectedWord.isFavoured()) {
-            favouriteButton.setSelected(false);
+            favourButton.setSelected(false);
             selectedWord.setFavoured(false);
             favouriteWords.removeAll(targetWord);
             return;
         }
-        favouriteButton.setSelected(true);
+        favourButton.setSelected(true);
         selectedWord.setFavoured(true);
         favouriteWords.add(targetWord);
     }
