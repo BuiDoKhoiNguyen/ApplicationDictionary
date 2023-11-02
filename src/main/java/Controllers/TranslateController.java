@@ -85,7 +85,9 @@ public class TranslateController extends TaskControllers implements Initializabl
         refreshButtonTo();
         toEN.setSelected(true);
         languageTo = "en";
-        translate();
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
@@ -93,7 +95,9 @@ public class TranslateController extends TaskControllers implements Initializabl
         refreshButtonTo();
         toVN.setSelected(true);
         languageTo = "vi";
-        translate();
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
@@ -101,7 +105,9 @@ public class TranslateController extends TaskControllers implements Initializabl
         refreshButtonTo();
         toFR.setSelected(true);
         languageTo = "fr";
-        translate();
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
@@ -109,7 +115,9 @@ public class TranslateController extends TaskControllers implements Initializabl
         refreshButtonTo();
         toSimplifiedCN.setSelected(true);
         languageTo = "zh";
-        translate();
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
