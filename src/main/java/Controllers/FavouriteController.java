@@ -24,8 +24,8 @@ public class FavouriteController extends SearchController implements Initializab
         NewDictionaryManagement.loadOnlyWordTarget(favouriteList, Dictionary.FAVOURITE_IN_PATH);
         for (String ele : favouriteList) {
             favouriteDict.put(ele, getWord(ele));
+            favouriteDict.get(ele).setFavoured(true);
         }
-
         this.wordList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.wordList.getItems().addAll(favouriteDict.keySet());
     }

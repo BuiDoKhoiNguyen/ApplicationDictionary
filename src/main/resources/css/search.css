@@ -27,6 +27,12 @@
     -fx-background-color: white;
 }
 
+/*.button-delete:hover {
+    width: 30px;
+    length: 30px;
+    -fx-graphic: url('../img/icons8-remove.gif') 0 0;
+} TODO: add gif*/
+
 .text-field {
 
 }

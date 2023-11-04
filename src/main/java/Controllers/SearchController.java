@@ -50,7 +50,6 @@ public class SearchController extends TaskControllers implements Initializable {
                 dictionary.get(ele).setFavoured(true);
             }
         }
-
         this.wordList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.wordList.getItems().addAll(dictionary.keySet());
     }

@@ -14,27 +14,32 @@
 <AnchorPane prefHeight="570.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FavouriteController">
    <children>
       <TextField fx:id="searchField" layoutX="14.0" layoutY="57.0" onKeyTyped="#searchWord" prefHeight="50.0" prefWidth="240.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@../css/search.css" />
-      <Label fx:id="searchLabel" layoutY="124.0" prefHeight="60.0" prefWidth="125.0" text=" Search" textFill="WHITE">
+      <Label fx:id="searchLabel" layoutY="125.0" prefHeight="60.0" prefWidth="125.0" text=" Search" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="translateLabel" layoutY="184.0" prefHeight="60.0" prefWidth="125.0" text=" Translate" textFill="WHITE">
+      <Label fx:id="translateLabel" layoutY="185.0" prefHeight="60.0" prefWidth="125.0" text=" Translate" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="favouriteLabel" alignment="CENTER" layoutY="244.0" prefHeight="60.0" prefWidth="125.0" text="Favourite" textFill="#ffae42">
+      <Label fx:id="favouriteLabel" alignment="CENTER" layoutY="245.0" prefHeight="60.0" prefWidth="125.0" text="Favourite" textFill="#ffae42">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="editLabel" layoutY="304.0" prefHeight="60.0" prefWidth="125.0" text=" Edit" textFill="WHITE">
+      <Label fx:id="editLabel" layoutY="305.0" prefHeight="60.0" prefWidth="125.0" text=" Edit" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label fx:id="gameLabel" layoutY="364.0" prefHeight="60.0" prefWidth="125.0" text=" Game" textFill="WHITE">
+      <Label fx:id="gameLabel" layoutY="365.0" prefHeight="60.0" prefWidth="125.0" text=" Game" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="logoutLabel" layoutY="510.0" prefHeight="60.0" prefWidth="125.0" text=" Log Out" textFill="RED">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
