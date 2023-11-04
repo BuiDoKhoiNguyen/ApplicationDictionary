@@ -43,6 +43,7 @@ public class TaskControllers extends Controllers {
         bindLabel(favouriteLabel, favouriteButton);
         bindLabel(editLabel, saveButton);
         bindLabel(gameLabel, gameButton);
+        bindLabel(logoutLabel, logoutButton);
     }
 
     public void loadController(SearchController searchController,

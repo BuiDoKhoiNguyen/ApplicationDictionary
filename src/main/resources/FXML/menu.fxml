@@ -43,7 +43,7 @@
                      </font>
                   </Button>
                   <Button id="playGame" fx:id="gameButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" />
-                  <Button mnemonicParsing="false" prefHeight="86.0" prefWidth="66.0" style="-fx-background-color: Transparent;" />
+                  <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="66.0" style="-fx-background-color: Transparent;" />
                   <Button id="logout" fx:id="logoutButton" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="60.0" prefWidth="145.0" />
                </children>
                <opaqueInsets>
