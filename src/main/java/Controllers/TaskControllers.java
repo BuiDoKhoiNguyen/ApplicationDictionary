@@ -28,20 +28,28 @@ public class TaskControllers extends Controllers {
         );
     }
 
-    public void load(Button searchButton, Button translateButton,
-                     Button favouriteButton, Button editButton,
+    public void loadButton(Button searchButton, Button translateButton,
+                     Button favouriteButton, Button saveButton,
                      Button gameButton, Button logoutButton) {
         this.searchButton = searchButton;
         this.translateButton = translateButton;
         this.favouriteButton = favouriteButton;
-        this.editButton = editButton;
+        this.saveButton = saveButton;
         this.gameButton = gameButton;
         this.logoutButton = logoutButton;
 
         bindLabel(searchLabel, searchButton);
         bindLabel(translateLabel, translateButton);
         bindLabel(favouriteLabel, favouriteButton);
-        bindLabel(editLabel, editButton);
+        bindLabel(editLabel, saveButton);
         bindLabel(gameLabel, gameButton);
+    }
+
+    public void loadController(SearchController searchController,
+                               TranslateController translateController,
+                               FavouriteController favouriteController) {
+        this.searchController = searchController;
+        this.translateController = translateController;
+        this.favouriteController = favouriteController;
     }
 }

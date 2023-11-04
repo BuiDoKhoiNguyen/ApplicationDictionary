@@ -23,13 +23,7 @@ public class MenuController extends Controllers implements Initializable {
     private AnchorPane favouriteAP;
 
     @FXML
-    private SearchController searchController;
-    @FXML
-    private TranslateController translateController;
-    @FXML
-    private FavouriteController favouriteController;
-    @FXML
-    SceneController sceneController = new SceneController();
+    private SceneController sceneController = new SceneController();
 
     @FXML
     public void searchFunction() {
@@ -59,7 +53,7 @@ public class MenuController extends Controllers implements Initializable {
             throw new RuntimeException(e);
         }
         searchController = loader.getController();
-        searchController.load(this.searchButton, this.translateButton, this.favouriteButton, this.editButton, this.gameButton, this.logoutButton);
+        searchController.loadButton(this.searchButton, this.translateButton, this.favouriteButton, this.saveButton, this.gameButton, this.logoutButton);
 
         loader = new FXMLLoader(getClass().getResource("/FXML/translate.fxml"));
         try {
@@ -68,7 +62,7 @@ public class MenuController extends Controllers implements Initializable {
             throw new RuntimeException(e);
         }
         translateController = loader.getController();
-        translateController.load(this.searchButton, this.translateButton, this.favouriteButton, this.editButton, this.gameButton, this.logoutButton);
+        translateController.loadButton(this.searchButton, this.translateButton, this.favouriteButton, this.saveButton, this.gameButton, this.logoutButton);
 
         loader = new FXMLLoader(getClass().getResource("/FXML/favourite.fxml"));
         try {
@@ -77,7 +71,11 @@ public class MenuController extends Controllers implements Initializable {
             throw new RuntimeException(e);
         }
         favouriteController = loader.getController();
-        favouriteController.load(this.searchButton, this.translateButton, this.favouriteButton, this.editButton, this.gameButton, this.logoutButton);
+        favouriteController.loadButton(this.searchButton, this.translateButton, this.favouriteButton, this.saveButton, this.gameButton, this.logoutButton);
+
+        searchController.loadController(searchController, translateController, favouriteController);
+        translateController.loadController(searchController, translateController, favouriteController);
+        favouriteController.loadController(searchController, translateController, favouriteController);
 
         mainAP.getChildren().setAll(searchAP);
     }

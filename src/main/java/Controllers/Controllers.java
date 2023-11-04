@@ -9,11 +9,18 @@ public class Controllers {
     @FXML
     protected Button translateButton;
     @FXML
-    protected Button editButton;
+    protected Button saveButton;
     @FXML
     protected Button favouriteButton;
     @FXML
     protected Button gameButton;
     @FXML
     protected Button logoutButton;
+
+    @FXML
+    protected SearchController searchController;
+    @FXML
+    protected TranslateController translateController;
+    @FXML
+    protected FavouriteController favouriteController;
 }

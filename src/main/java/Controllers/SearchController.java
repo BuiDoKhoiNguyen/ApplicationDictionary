@@ -1,5 +1,10 @@
 package Controllers;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import Base.Dictionary;
 import Base.Word;
 import Base.NewDictionaryManagement;
@@ -8,21 +13,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ListView;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.SelectionMode;
 
 public class SearchController extends TaskControllers implements Initializable {
-    private final String EV_IN_PATH = "data/E_V.txt";
-    protected final String FAVOURITE_IN_PATH = "data/favourite.txt";
-
-    private Dictionary dictionary = new Dictionary(EV_IN_PATH);
-    protected List<String> favouriteList = new ArrayList<>();
+    private Dictionary dictionary = new Dictionary(Dictionary.EV_IN_PATH);
 
     private boolean isEditing = false;
 
@@ -37,15 +37,14 @@ public class SearchController extends TaskControllers implements Initializable {
     @FXML
     protected ToggleButton favourButton;
     @FXML
-    protected ToggleButton editingButton;
+    protected ToggleButton editButton;
     @FXML
     private Button deleteButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        NewDictionaryManagement.loadDataFromHTMLFile(dictionary, EV_IN_PATH);
-
-        NewDictionaryManagement.loadOnlyWordTarget(favouriteList, FAVOURITE_IN_PATH);
+        List<String> favouriteList = new ArrayList<>();
+        NewDictionaryManagement.loadOnlyWordTarget(favouriteList, Dictionary.FAVOURITE_IN_PATH);
         for (String ele : favouriteList) {
             if (dictionary.containsKey(ele)) {
                 dictionary.get(ele).setFavoured(true);
@@ -78,28 +77,28 @@ public class SearchController extends TaskControllers implements Initializable {
 
     @FXML
     public void favouriteWord() {
-        String targetWord = searchField.getText();
-        if (targetWord.isEmpty()) {
+        String wordTarget = searchField.getText();
+        if (wordTarget.isEmpty()) {
             favourButton.setSelected(false);
             return;
         }
-        Word selectedWord = dictionary.get(targetWord);
+        Word selectedWord = dictionary.get(wordTarget);
         if (selectedWord.isFavoured()) {
             favourButton.setSelected(false);
             selectedWord.setFavoured(false);
-//            favouriteWords.removeAll(targetWord); TODO
+            favouriteController.removeFromSearch(wordTarget);
             return;
         }
         favourButton.setSelected(true);
         selectedWord.setFavoured(true);
-//        favouriteWords.add(targetWord);   TODO
+        favouriteController.addFromSearch(wordTarget);
     }
 
     @FXML
     public void editWord() {
         String targetWord = searchField.getText();
         if (targetWord.isEmpty()) {
-            editingButton.setSelected(false);
+            editButton.setSelected(false);
             return;
         }
         if (isEditing) {
@@ -117,14 +116,14 @@ public class SearchController extends TaskControllers implements Initializable {
 
     @FXML
     public void deleteWord() {
-        String targetWord = searchField.getText();
-//        favouriteWords.removeAll(targetWord); TODO
-        dictionary.remove(targetWord);
-        wordList.getItems().remove(targetWord);
+        String wordTarget = searchField.getText();
+        favouriteController.removeFromSearch(wordTarget);
+        dictionary.remove(wordTarget);
+        wordList.getItems().remove(wordTarget);
         selectWord();
     }
 
-    public Dictionary getDictionary() {
-        return this.dictionary;
+    protected Word getWord(String wordTarget) {
+        return this.dictionary.get(wordTarget);
     }
 }
