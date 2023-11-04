@@ -352,7 +352,7 @@ public class GameController implements Initializable {
             });
         }
         else{
-            String tmp = "         Opps, try again bruh";
+            String tmp = "       Opps, try again bruh";
             tmp+="\n";
             tmp+="                 ";
             tmp+="("+correctAnswer+"/"+totalQuestion+")";
@@ -435,7 +435,7 @@ public class GameController implements Initializable {
         ImageView imageView = new ImageView(myImage3);
         myAnchor.getChildren().add(imageView);
         imageView.toBack();
-        webView.getStyleClass().add("webView");
+        //webView.getStyleClass().add("webView");
         progressBar.getStyleClass().add("progress-bar");
             togButton.getStyleClass().add("buttonAudio");
             quiz(new ActionEvent());
