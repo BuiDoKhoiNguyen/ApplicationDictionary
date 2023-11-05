@@ -15,7 +15,7 @@ public class LauncherPreloader extends Preloader {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.preloaderStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/InitPreLoader.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/FXML/Preloader.fxml"));
         Scene scene = new Scene(root);
 
         scene.setFill(Color.TRANSPARENT);
@@ -25,7 +25,7 @@ public class LauncherPreloader extends Preloader {
         primaryStage.show();
     }
 
-    /** Hide plash screen. */
+    /**  Close plash screen. */
     @Override
     public void handleStateChangeNotification(StateChangeNotification info) {
         if (info.getType() == StateChangeNotification.Type.BEFORE_START) {

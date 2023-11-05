@@ -24,6 +24,8 @@ import javafx.scene.control.SelectionMode;
 public class SearchController extends TaskControllers implements Initializable {
     private Dictionary dictionary = new Dictionary(Dictionary.EV_IN_PATH);
 
+    private  VoiceController voiceController = new VoiceController();
+
     private boolean isEditing = false;
 
     @FXML
@@ -40,6 +42,8 @@ public class SearchController extends TaskControllers implements Initializable {
     protected ToggleButton editButton;
     @FXML
     private Button deleteButton;
+    @FXML
+    private Button speakUS,speakUK;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -124,5 +128,19 @@ public class SearchController extends TaskControllers implements Initializable {
 
     protected Word getWord(String wordTarget) {
         return this.dictionary.get(wordTarget);
+    }
+
+    public void speak(String language) {
+        VoiceController.language = language;
+        VoiceController.speakWord(searchField.getText());
+    }
+    @FXML
+    public void speakUSButtonOnAction(ActionEvent e) {
+        speak("en-us");
+    }
+
+    @FXML
+    public void speakUKButtonOnAction(ActionEvent e) {
+        speak("en-gb");
     }
 }
