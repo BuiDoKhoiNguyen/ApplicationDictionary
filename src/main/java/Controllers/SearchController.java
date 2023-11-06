@@ -11,20 +11,18 @@ import Base.NewDictionaryManagement;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.SelectionMode;
 
 public class SearchController extends TaskControllers implements Initializable {
     private Dictionary dictionary = new Dictionary(Dictionary.EV_IN_PATH);
 
-    private  VoiceController voiceController = new VoiceController();
+    protected  VoiceController voiceController = new VoiceController();
 
     private boolean isEditing = false;
 
@@ -42,8 +40,6 @@ public class SearchController extends TaskControllers implements Initializable {
     protected ToggleButton editButton;
     @FXML
     private Button deleteButton;
-    @FXML
-    private Button speakUS,speakUK;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,6 +50,8 @@ public class SearchController extends TaskControllers implements Initializable {
                 dictionary.get(ele).setFavoured(true);
             }
         }
+        this.wordList.setEditable(true);
+        this.wordList.setCellFactory(TextFieldListCell.forListView());
         this.wordList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.wordList.getItems().addAll(dictionary.keySet());
     }
@@ -98,22 +96,41 @@ public class SearchController extends TaskControllers implements Initializable {
     }
 
     @FXML
-    public void editWord() {
-        String targetWord = searchField.getText();
-        if (targetWord.isEmpty()) {
+    public void editWordTarget(ListView.EditEvent<String> event) {
+        String oldWordTarget = searchField.getText();
+        String newWordTarget = event.getNewValue();
+        String wordExplain = dictionary.get(oldWordTarget).getWordExplain();
+        dictionary.remove(oldWordTarget);
+        dictionary.put(newWordTarget, new Word(newWordTarget, wordExplain));
+        if (favouriteController.removeFromSearch(oldWordTarget)) {
+            dictionary.get(newWordTarget).setFavoured(true);
+            favouriteController.addFromSearch(newWordTarget);
+        }
+
+        ObservableList<String> matchingWords = FXCollections.observableArrayList();
+        matchingWords.addAll(dictionary.keySet());
+        wordList.setItems(matchingWords);
+        resetSelection();
+    }
+
+    @FXML
+    public void editWordExplain() {
+        String wordTarget = searchField.getText();
+        if (wordTarget.isEmpty()) {
             editButton.setSelected(false);
             return;
         }
         if (isEditing) {
-            dictionary.editWord(targetWord, editField.getHtmlText());
             isEditing = false;
             editField.setVisible(false);
+            dictionary.editWord(wordTarget, editField.getHtmlText());
+            favouriteController.editFromSearch(wordTarget);
             definitionView.getEngine().loadContent(editField.getHtmlText(), "text/html");
             return;
         }
         isEditing = true;
         editField.setVisible(true);
-        String wordExplain = dictionary.get(targetWord).getWordExplain();
+        String wordExplain = dictionary.get(wordTarget).getWordExplain();
         editField.setHtmlText(wordExplain);
     }
 
@@ -123,24 +140,32 @@ public class SearchController extends TaskControllers implements Initializable {
         favouriteController.removeFromSearch(wordTarget);
         dictionary.remove(wordTarget);
         wordList.getItems().remove(wordTarget);
-        selectWord();
+        resetSelection();
+    }
+
+    public void resetSelection() {
+        wordList.getSelectionModel().clearSelection();
+        searchField.setText("");
+        definitionView.getEngine().loadContent("");
+        favourButton.setSelected(false);
     }
 
     protected Word getWord(String wordTarget) {
         return this.dictionary.get(wordTarget);
     }
 
-    public void speak(String language) {
+    private void speak(String language) {
         VoiceController.language = language;
         VoiceController.speakWord(searchField.getText());
     }
+
     @FXML
-    public void speakUSButtonOnAction(ActionEvent e) {
+    private void speakUSButtonOnAction(ActionEvent e) {
         speak("en-us");
     }
 
     @FXML
-    public void speakUKButtonOnAction(ActionEvent e) {
+    private void speakUKButtonOnAction(ActionEvent e) {
         speak("en-gb");
     }
 }

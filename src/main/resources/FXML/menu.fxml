@@ -12,7 +12,7 @@
    <children>
       <AnchorPane prefHeight="570.0" prefWidth="55.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="570.0" prefWidth="55.0" styleClass="vbox" stylesheets="@../CSS/menu.css">
+            <VBox alignment="TOP_CENTER" prefHeight="570.0" prefWidth="55.0" styleClass="vbox" stylesheets="@../css/menu.css">
                <children>
                   <ImageView cache="true" fitHeight="64.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -22,29 +22,29 @@
                         <Insets bottom="30.0" top="30.0" />
                      </VBox.margin>
                   </ImageView>
-                  <Button id="search" fx:id="searchButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#searchFunction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
+                  <Button id="search" fx:id="searchButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#searchFunction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../css/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="translate" fx:id="translateButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#translateFunction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
+                  <Button id="translate" fx:id="translateButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#translateFunction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../css/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="editWord" fx:id="editButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
+                  <Button id="favourite" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#favouriteFunction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../css/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="favourite" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
+                  <Button id="editWord" fx:id="saveButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../css/menu.css" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button id="playGame" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" />
-                  <Button mnemonicParsing="false" prefHeight="86.0" prefWidth="66.0" style="-fx-background-color: Transparent;" />
-                  <Button id="logout" fx:id="logoutButton" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" />
+                  <Button id="playGame" fx:id="gameButton" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" />
+                  <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="66.0" style="-fx-background-color: Transparent;" />
+                  <Button id="logout" fx:id="logoutButton" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="60.0" prefWidth="145.0" />
                </children>
                <opaqueInsets>
                   <Insets />

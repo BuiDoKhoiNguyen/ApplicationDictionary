@@ -21,16 +21,14 @@ public class TaskControllers extends Controllers {
     private void bindLabel(Label label, Button button) {
         label.visibleProperty().bind(button.hoverProperty());
         label.backgroundProperty().bind(button.backgroundProperty());
-        button.hoverProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    label.toFront();
-                }
-        );
+        button.hoverProperty().addListener((observable, oldValue, newValue) -> {
+            label.toFront();
+        });
     }
 
     public void loadButton(Button searchButton, Button translateButton,
-                     Button favouriteButton, Button saveButton,
-                     Button gameButton, Button logoutButton) {
+                           Button favouriteButton, Button saveButton,
+                           Button gameButton, Button logoutButton) {
         this.searchButton = searchButton;
         this.translateButton = translateButton;
         this.favouriteButton = favouriteButton;

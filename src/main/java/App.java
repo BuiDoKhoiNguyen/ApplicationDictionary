@@ -19,7 +19,7 @@ public class App extends Application {
 
             stage.setScene(scene);
             stage.show();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -30,7 +30,7 @@ public class App extends Application {
 
 }
 
-//import Controllers.InitPreloader;
+//import Controllers.PreloaderController;
 //import Controllers.LauncherPreloader;
 //import javafx.application.Application;
 //import javafx.stage.Stage;
@@ -38,9 +38,10 @@ public class App extends Application {
 //
 //public class App extends Application {
 //    public static Stage primaryStage = null;
+//
 //    @Override
 //    public void init() {
-//        InitPreloader init = new InitPreloader();
+//        PreloaderController init = new PreloaderController();
 //        init.checkFunctions();
 //    }
 //
@@ -51,7 +52,8 @@ public class App extends Application {
 //    }
 //
 //    public static void main(String[] args) {
-//        System.setProperty("javafx.preloader",  LauncherPreloader.class.getCanonicalName());
+//        System.setProperty("javafx.preloader", LauncherPreloader.class.getCanonicalName());
 //        launch(args);
 //    }
+//
 //}
