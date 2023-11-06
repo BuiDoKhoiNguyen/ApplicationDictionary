@@ -68,8 +68,8 @@ public class DictionaryCommandLine {
                         while(numWord-- > 0){
                             System.out.print("Enter word: ");
                             String wordTarget = sc.next();
-                            String wordExplain = TranslatorExample.googleTranslator(wordTarget);
-                            System.out.println(wordExplain);
+//                            String wordExplain = TranslatorExample.googleTranslator(wordTarget);
+//                            System.out.println(wordExplain);
                         }
                     } catch (Exception e){
                         System.out.print(e);

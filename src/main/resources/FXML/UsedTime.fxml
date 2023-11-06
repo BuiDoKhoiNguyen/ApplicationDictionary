@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane prefHeight="566.0" prefWidth="728.0" style="-fx-background-color: linear-gradient( to right top, #76d2fc,#3238a8);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProfileController">
+   <children>
+      <BarChart fx:id="barChart" layoutX="55.0" layoutY="75.0" prefHeight="416.0" prefWidth="634.0" styleClass="chart-bar" stylesheets="@../CSS/Profile.css" title="Time spent using the application">
+        <xAxis>
+          <CategoryAxis prefHeight="27.0" prefWidth="579.0" side="BOTTOM" styleClass="axis-label" stylesheets="@../CSS/Profile.css" tickLabelFill="WHITE" fx:id="x" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="y" side="LEFT" styleClass="axis-label" stylesheets="@../CSS/Profile.css" />
+        </yAxis>
+      </BarChart>
+      <Label fx:id="time" alignment="CENTER" layoutX="234.0" layoutY="28.0" prefHeight="18.0" prefWidth="234.0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>

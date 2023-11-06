@@ -34,5 +34,11 @@
 }
 
 #addPic {
-    -fx-graphic: url('../img/addpic.png');
+    -fx-graphic: url('../img/camera.png');
+    -fx-background-radius: 30;
+}
+
+#addPic:pressed{
+    -fx-background-color: linear-gradient( to right top, #76d2fc,#3238a8);
+    -fx-background-radius: 30;
 }

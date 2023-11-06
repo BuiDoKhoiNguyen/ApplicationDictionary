@@ -82,7 +82,6 @@ public class PreloaderController implements Initializable {
                         scene.setFill(Color.TRANSPARENT);
                         stage.initStyle(StageStyle.TRANSPARENT);
 
-
                         stage.show();
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();

@@ -5,46 +5,72 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuController">
+<AnchorPane fx:id="anchorPane" onMouseDragged="#paneDragged" onMousePressed="#panePressed" prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuController">
    <children>
+      <AnchorPane fx:id="mainAP" layoutX="64.0" prefHeight="570.0" prefWidth="735.0" />
       <AnchorPane prefHeight="570.0" prefWidth="55.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="570.0" prefWidth="55.0" styleClass="vbox" stylesheets="@../CSS/menu.css">
+            <VBox fx:id="vbox" alignment="TOP_CENTER" prefHeight="570.0" prefWidth="174.0" styleClass="vbox" stylesheets="@../CSS/menu.css">
                <children>
-                  <ImageView cache="true" fitHeight="64.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/dictionary.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="30.0" top="30.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <Button id="search" fx:id="searchButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#searchFunction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView cache="true" fitHeight="77.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/dictionary.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="15.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fitHeight="80.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="39.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/menu.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <Button id="profile" fx:id="profile" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#profileFunction" prefHeight="59.0" prefWidth="185.0" stylesheets="@../CSS/menu.css" text="Profile" textFill="WHITE">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button id="translate" fx:id="translateButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#translateFunction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
+                  <Button id="search" fx:id="searchButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#searchFunction" prefHeight="59.0" prefWidth="185.0" stylesheets="@../CSS/menu.css" text="Search" textFill="WHITE">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button id="editWord" fx:id="editButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
+                  <Button id="translate" fx:id="translateButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#translateFunction" prefHeight="59.0" prefWidth="185.0" stylesheets="@../CSS/menu.css" text="Translate" textFill="WHITE">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button id="favourite" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" textFill="WHITE">
+                  <Button id="editWord" fx:id="editButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="189.0" stylesheets="@../CSS/menu.css" text="Edit word" textFill="WHITE">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button id="playGame" mnemonicParsing="false" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" />
-                  <Button mnemonicParsing="false" prefHeight="86.0" prefWidth="66.0" style="-fx-background-color: Transparent;" />
-                  <Button id="logout" fx:id="logoutButton" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="60.0" prefWidth="145.0" stylesheets="@../CSS/menu.css" />
+                  <Button id="favourite" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="182.0" stylesheets="@../CSS/menu.css" text="Favourite" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button id="playGame" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="178.0" stylesheets="@../CSS/menu.css" text="Game" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
+                  <Button id="logout" fx:id="logoutButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="62.0" prefWidth="182.0" stylesheets="@../CSS/menu.css" text="Log out" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -52,6 +78,5 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="mainAP" layoutX="64.0" prefHeight="570.0" prefWidth="735.0" />
    </children>
 </AnchorPane>

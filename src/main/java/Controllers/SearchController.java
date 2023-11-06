@@ -10,13 +10,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static java.lang.System.exit;
 
 public class SearchController implements Initializable {
     private Dictionary dictionary = new Dictionary();
@@ -45,6 +47,8 @@ public class SearchController implements Initializable {
     private Button deleteButton;
     @FXML
     private Button speakUS,speakUK;
+    @FXML
+    private Button cancelButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -132,5 +136,11 @@ public class SearchController implements Initializable {
     @FXML
     public void speakUKButtonOnAction(ActionEvent e) {
         speak("en-gb");
+    }
+
+    public void cancelButtonOnAction(ActionEvent e) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+//        exit(0);
     }
 }
