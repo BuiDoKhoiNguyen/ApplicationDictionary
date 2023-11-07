@@ -29,24 +29,21 @@ public class SwitchGame implements Initializable {
     MediaPlayer mediaPlayer = new MediaPlayer(media);
     public void playGame(ActionEvent event) throws Exception {
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(1));
-        fadeOut.setNode(((javafx.scene.Node) event.getSource()).getScene().getRoot()); // Scene hiện tại
+        fadeOut.setNode(((javafx.scene.Node) event.getSource()).getScene().getRoot());
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
 
-        // Xử lý khi hoàn thành chuyển đổi
         fadeOut.setOnFinished(e -> {
             try {
-                // Tạo scene mới từ FXML
+
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/simpleGame.fxml"));
                 mediaPlayer.stop();
                 Parent scene2Parent = loader.load();
                 Scene scene2 = new Scene(scene2Parent);
 
-                // Lấy stage hiện tại và đặt scene mới
                 Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
                 window.setScene(scene2);
 
-                // Tạo FadeTransition mới cho scene mới (nếu muốn)
                 FadeTransition fadeIn = new FadeTransition(Duration.seconds(1));
                 fadeIn.setNode(scene2.getRoot()); // scene2 là Scene mới
                 fadeIn.setFromValue(0.0);
@@ -57,12 +54,15 @@ public class SwitchGame implements Initializable {
             }
         });
 
-        // Bắt đầu chuyển đổi
         fadeOut.play();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.seek(Duration.ZERO);
+            mediaPlayer.play();
+        });
         mediaPlayer.play();
         playButton.getStyleClass().add("buttonPlay");
 

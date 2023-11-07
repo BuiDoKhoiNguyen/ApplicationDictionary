@@ -1,9 +1,13 @@
 package Controllers;
 
 import javafx.animation.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,15 +16,18 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class controllTypeGame implements Initializable {
     @FXML
@@ -31,28 +38,200 @@ public class controllTypeGame implements Initializable {
     int x = 0;
 
     int t = 532;
-    int tmp = -1;
-    private static final int WINDOW_WIDTH = 750;
-    private static final int WINDOW_HEIGHT = 532;
-    private static final String[] WORDS = {"hello", "world", "javafx", "ztype"};
-    private static final int WORD_SPEED = 7000;
+    int tmp = 0;
 
-    private Random random;
-    private Timeline gameLoop;
+    int score = 0;
+    String mediaFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/cyber-war.mp3";
+
+    Media media = new Media(mediaFile);
+    MediaPlayer mediaPlayer = new MediaPlayer(media);
+    int WINDOW_WIDTH = 750;
+    int WINDOW_HEIGHT = 532;
+
+    String[] DATA ={
+            "able",
+            "about",
+            "above",
+            "abuse",
+            "accept",
+            "accident",
+            "accuse",
+            "across",
+            "actor",
+            "admit",
+            "adult",
+            "advise",
+            "affect",
+            "afraid",
+            "after",
+            "again",
+            "agree",
+            "agency",
+            "airport",
+            "album",
+            "alive",
+            "ally",
+            "alone",
+            "along",
+            "along",
+            "also",
+            "always",
+            "amend",
+            "amount",
+            "ancient",
+            "animal",
+            "anger",
+            "another",
+            "answer",
+            "appear",
+            "appoint",
+            "approve",
+            "area",
+            "argue",
+            "army",
+            "arrest",
+            "arrive",
+            "attack",
+            "autumn",
+            "atom",
+            "award",
+            "baby",
+            "bacteria",
+            "ball",
+            "base",
+            "battle",
+            "become",
+            "beauty",
+            "because",
+            "begin",
+            "behind",
+            "believe",
+            "below",
+            "best",
+            "betray",
+            "better",
+            "bill",
+            "bird",
+            "bite",
+            "black",
+            "blame",
+            "bleed",
+            "blind",
+            "block",
+            "blood",
+            "blow",
+            "boat",
+            "body",
+            "boil",
+            "bomb",
+            "bone",
+            "border",
+            "borrow",
+            "bottle",
+            "breathe",
+            "bridge",
+            "brief",
+            "budget",
+            "bullet",
+            "burst",
+            "bury",
+            "calm",
+            "call",
+            "camera",
+            "camp",
+            "cancel",
+            "cancer",
+            "capital",
+            "capture",
+            "career",
+            "careful",
+            "catch",
+            "cell",
+            "center",
+            "chance",
+            "charge",
+            "chase",
+            "cheat",
+            "chief",
+            "choose",
+            "circle",
+            "citizen",
+            "clash",
+            "climate",
+            "climb",
+            "cloth",
+            "coast",
+            "combine",
+            "command",
+            "common",
+    };
+    String[] WORDS = {"hello", "world", "javafx", "ztype"};
+    int WORD_SPEED = 7000;
+
+    //String explodeFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/explode.mp3";
+    //AudioClip explodeBoom = new AudioClip(explodeFile);
+
+    String explodeFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/medium-explosion.mp3";
+
+    Media me = new Media(explodeFile);
+    MediaPlayer explodeBoom = new MediaPlayer(me);
+
+
+    Random random,random2;
+    Timeline gameLoop;
 
     List<String> english = new ArrayList<>();
     List<Boolean> check = new ArrayList<>();
+
+    List<String> chk = new ArrayList<>();
+
+    //List<Text> update = new ArrayList<>();
+
+    Set<String> how = new LinkedHashSet<>();
     Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/blackSky.png"));
     Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/boom.png"));
+
+    Image myImage3 = new Image(getClass().getResourceAsStream("/sources_music_picture/label.png"));
+
     @FXML
-    ImageView tank;
+    Label scoreLabel,result,scLabel,bcLabel,scoreL,bScoreL,pLabel,lbsc;
+
+    @FXML
+    Button NBut,YBut;
 
     @FXML
     AnchorPane myAnchor;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        start();
+    }
+    public void start(){
+        mediaPlayer.seek(mediaPlayer.getStartTime());
+        scLabel.setVisible(false);
+        bcLabel.setVisible(false);
+        scoreL.setVisible(false);
+        bScoreL.setVisible(false);
+        pLabel.setVisible(false);
+        NBut.setVisible(false);
+        YBut.setVisible(false);
+
+        lbsc.setVisible(true);
+        scoreLabel.setVisible(true);
+        textField.setVisible(true);
+
+        scoreLabel.setText(""+score);
         random = new Random();
+        random2 = new Random();
+        List<String> Word = new ArrayList<>();
+        for(int i=0;i<DATA.length;i++){
+            Word.add(DATA[i]);
+        }
+        mediaPlayer.play();
+        mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.seek(Duration.ZERO);
+            mediaPlayer.play();
+        });
         ImageView imageView1 = new ImageView(myImage);
         imageView1.setFitWidth(WINDOW_WIDTH);
         imageView1.setFitHeight(WINDOW_HEIGHT);
@@ -76,20 +255,26 @@ public class controllTypeGame implements Initializable {
 
         timeline.play();
 
-
-
-
         gameLoop = new Timeline(new KeyFrame(Duration.millis(WORD_SPEED), event -> {
-            String word = WORDS[random.nextInt(WORDS.length)];
-            english.add(word);
+            //String word = WORDS[random.nextInt(WORDS.length)];
+            Collections.shuffle(Word);
+            english.add(Word.get(x));
+            int index = random2.nextInt(Word.get(x).length());
+            String tmp2 = Word.get(x);
+            String tmp3 = Character.toString(tmp2.charAt(index));
+            tmp2 = tmp2.replace(tmp2.charAt(index),'_');
+            chk.add(tmp3);
             check.add(true);
-            Text text = new Text(word);
+            Text text = new Text(tmp2);
+            how.add(tmp2);
+            System.out.println(how.size());
             text.setStyle("-fx-font-family: Arial; -fx-font-size: 14px; -fx-font-weight: bold; -fx-fill: white;");
             text.setTranslateY(-140);
             int randomNumber = random.nextInt(501) - 250;
             text.setTranslateX(randomNumber);
-            System.out.println(english.get(x));
-            System.out.println(x);
+            //System.out.println(chk.get(x));
+            //System.out.println(english.get(x));
+            //System.out.println(x);
             pane1.getChildren().add(text);
             textField.setOnKeyPressed(e -> {
                 if (e.getCode() == KeyCode.ENTER) {
@@ -110,8 +295,8 @@ public class controllTypeGame implements Initializable {
         //x++;
         double wordHeight = word.getBoundsInLocal().getHeight();
         double startY = -140;
-        double endY = 392;
-        Duration duration = Duration.seconds(25 * (endY - startY) / WINDOW_HEIGHT); // Tính thời gian dựa trên chiều cao của cửa sổ
+        double endY = 313;
+        Duration duration = Duration.seconds(10 * (endY - startY) / WINDOW_HEIGHT); // Tính thời gian dựa trên chiều cao của cửa sổ
 
         TranslateTransition transition = new TranslateTransition(duration, word);
         transition.setInterpolator(Interpolator.LINEAR);
@@ -119,32 +304,44 @@ public class controllTypeGame implements Initializable {
         transition.setToY(endY);
 
         transition.setOnFinished(event -> {
-            if(x>=1 && check.get(x-1)==false && tmp!=x){
+            /*if(x>=1 && check.get(x-1)==false && tmp!=x){
                 tmp=x;
             }
             else{
+                System.out.println("something");
                 x++;
+            }*/
+            if(how.contains(word.getText())){
+                System.out.println("something");
+                gameLoop.stop();
+                result();
             }
+            //System.out.println("abcd");
+            System.out.println(word.getText());
             word.setVisible(false);
         });
         transition.play();
     }
 
     public void checkAndRemoveString(String input) {
-        if (input.equals(english.get(x))) {
+        if(input.equals(chk.get(x))){
             Text textRemove =(Text)pane1.getChildren().get(x);
+            how.remove(textRemove.getText());
             check.set(x,false);
+            score++;
+            scoreLabel.setText(""+score);
+            textRemove.setText(english.get(x));
+
             x++;
-            //animateExplosion(textRemove);
             double t = (double) textRemove.getTranslateX();
             double z = (double) textRemove.getTranslateY();
             fire(t,z,textRemove);
-            //aimAndFire(x,y,textRemove);
             textField.clear();
         }
     }
     public void fire(double targetX, double targetY,Text text) {
         // Tạo hình ảnh tên lửa
+        //explodeBoom.seek(explodeBoom.getStartTime());
         Image missileImage = new Image("/sources_music_picture/bullet.png");
         ImageView bullet = new ImageView(missileImage);
 
@@ -160,51 +357,31 @@ public class controllTypeGame implements Initializable {
         // Tạo animation di chuyển tên lửa
         Duration duration = Duration.seconds(0.01);
         KeyFrame keyFrame = new KeyFrame(duration, event -> {
-            // Di chuyển viên đạn lên
-            bullet.setTranslateY(bullet.getTranslateY() - 1);
+            bullet.setTranslateY(bullet.getTranslateY() - 2);
 
-            // Kiểm tra va chạm viên đạn với chuỗi text
             if (bullet.getBoundsInParent().intersects(text.getBoundsInParent())) {
-                // Kích hoạt hiệu ứng nổ tại vị trí chuỗi text
-                // Xóa chuỗi text và tên lửa
                 Duration duration2 = Duration.millis(10);
                 KeyValue opacityValue = new KeyValue(text.opacityProperty(), 0);
                 KeyFrame keyFrame2 = new KeyFrame(duration2,opacityValue);
                 Timeline timeline = new Timeline(keyFrame2);
 
-                // Xóa từ sau khi hoàn thành hiệu ứng
                 timeline.setOnFinished(e -> {
 
                 });
 
                 timeline.play();
                 myAnchor.getChildren().removeAll(bullet);
-                explode(text); // Hàm hiệu ứng nổ
+                //MediaPlayer explodeBoom = new MediaPlayer(me);
+                //AudioClip explodeBoom = new AudioClip(explodeFile);
+                explodeBoom.seek(explodeBoom.getStartTime());
+                explodeBoom.play();
+                explode(text);
             }
         });
 
         Timeline missileTimeline = new Timeline(keyFrame);
-        missileTimeline.setCycleCount(Timeline.INDEFINITE); // Lặp vô hạn
+        missileTimeline.setCycleCount(Timeline.INDEFINITE);
         missileTimeline.play();
-    }
-    public void animateExplosion(Text text) {
-        //text.getStyleClass().add("text-explosion");
-        Duration duration = Duration.millis(1000);
-
-        KeyValue scaleXValue = new KeyValue(text.scaleXProperty(), 2);
-        KeyValue scaleYValue = new KeyValue(text.scaleYProperty(), 2);
-        KeyValue opacityValue = new KeyValue(text.opacityProperty(), 0);
-
-        KeyFrame keyFrame = new KeyFrame(duration, scaleXValue, scaleYValue, opacityValue);
-        Timeline timeline = new Timeline(keyFrame);
-
-        // Xóa từ sau khi hoàn thành hiệu ứng
-        timeline.setOnFinished(event -> {
-            //english.remove(text.getText());
-            //pane1.getChildren().remove(text);
-        });
-
-        timeline.play();
     }
     public void explode(Text text){
         String tmp = "/sources_music_picture/boom.png";
@@ -219,24 +396,22 @@ public class controllTypeGame implements Initializable {
         animationExplode.setLayoutY(text.getTranslateY()+115);
         myAnchor.getChildren().add(animationExplode);
 
-        // Tạo một Image từ file hình ảnh
         Image fullImage = new Image(getClass().getResource(tmp).toExternalForm());
 
         Timeline timeline = new Timeline();
         for (int i = 0; i < frameCount; i++) {
             final int frameIndex = i;
             KeyFrame keyFrame = new KeyFrame(
-                    Duration.millis( i*100), // Thời gian giữa mỗi frame (có thể điều chỉnh)
+                    Duration.millis( i*50),
                     event -> {
                         int x = frameIndex * frameWidth;
-                        int y = 0; // Vị trí y tại hàng đầu tiên của sprite sheet
+                        int y = 0;
                         if (frameIndex >= 4) {
-                            // Nếu frameIndex >= 4, sử dụng hàng thứ hai của sprite sheet
+
                             y = frameHeight;
                             x = (frameIndex - 4) * frameWidth;
                         }
 
-                        // Cắt phần cụ thể từ hình ảnh gốc
                         PixelReader pixelReader = fullImage.getPixelReader();
                         WritableImage frameImage = new WritableImage(pixelReader, x, y, frameWidth, frameHeight);
                         animationExplode.setImage(frameImage);
@@ -244,56 +419,96 @@ public class controllTypeGame implements Initializable {
             );
             timeline.getKeyFrames().add(keyFrame);
         }
-        timeline.setCycleCount(1); // Chạy một lần (hoặc chỉnh lại cho số lần cần)
+        timeline.setCycleCount(1);
         timeline.setOnFinished(event -> {
             myAnchor.getChildren().remove(animationExplode);
         });
         timeline.play();
     }
-    public void aimAndFire(double targetX, double targetY, Text text) {
-        // Tính góc xoay cần thiết để quay xe tăng về phía mục tiêu
-        double tankX = tank.getTranslateX() + tank.getBoundsInLocal().getWidth() / 2;
-        double tankY = tank.getTranslateY() + tank.getBoundsInLocal().getHeight() / 2;
-        double deltaX = targetX - tankX;
-        double deltaY = targetY - tankY;
-        double angle = Math.toDegrees(Math.atan2(deltaY, deltaX));
+    public void result(){
+        pane1.getChildren().clear();
+        english.clear();
+        chk.clear();
+        how.clear();
+        check.clear();
+        lbsc.setVisible(false);
+        scoreLabel.setVisible(false);
+        textField.setVisible(false);
 
-        // Quay xe tăng về góc này
-        tank.setRotate(angle);
+        scoreL.setText(""+score);
+        scLabel.setVisible(true);
+        bcLabel.setVisible(true);
+        scoreL.setVisible(true);
+        bScoreL.setVisible(true);
+        pLabel.setVisible(true);
+        NBut.setVisible(true);
+        YBut.setVisible(true);
+        textField.setVisible(false);
+        explode2();
+        x=0;
+        score=0;
+        YBut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                lbsc.setVisible(true);
+                scoreLabel.setVisible(true);
+                textField.setVisible(true);
 
-        // Tạo viên đạn và di chuyển nó từ nòng súng
-        ImageView bullet = new ImageView(new Image("/sources_music_picture/bullet.png"));
-        bullet.setTranslateX(tankX);
-        bullet.setTranslateY(tankY);
-        myAnchor.getChildren().add(bullet);
-
-        double distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-        double bulletSpeed = 1.0; // Tốc độ của viên đạn
-        double duration = distance / bulletSpeed;
-
-        // Di chuyển viên đạn đến mục tiêu và kiểm tra va chạm
-        TranslateTransition bulletTransition = new TranslateTransition(Duration.seconds(duration), bullet);
-        bulletTransition.setToX(targetX);
-        bulletTransition.setToY(targetY);
-
-        bulletTransition.setOnFinished(event -> {
-            myAnchor.getChildren().remove(bullet);
-            checkCollision(text, targetX, targetY); // Kiểm tra va chạm và thực hiện hiệu ứng nổ
+                scLabel.setVisible(false);
+                bcLabel.setVisible(false);
+                scoreL.setVisible(false);
+                bScoreL.setVisible(false);
+                pLabel.setVisible(false);
+                NBut.setVisible(false);
+                YBut.setVisible(false);
+                textField.setVisible(false);
+                start();
+            }
         });
 
-        bulletTransition.play();
     }
-    public void checkCollision(Text text, double targetX, double targetY) {
-        Bounds textBounds = text.getBoundsInParent();
-        double textX = textBounds.getMinX();
-        double textY = textBounds.getMinY();
-        double textWidth = textBounds.getWidth();
-        double textHeight = textBounds.getHeight();
+    public void explode2(){
+        String tmp = "/sources_music_picture/boom.png";
+        int frameCount = 8;
+        int frameWidth = (int) myImage2.getWidth() / 4;
+        int frameHeight = (int) myImage2.getHeight() / 2;
 
-        // Kiểm tra xem viên đạn (text) có va chạm với mục tiêu (targetX, targetY) không.
-        if (textX <= targetX && targetX <= textX + textWidth && textY <= targetY && targetY <= textY + textHeight) {
-            // Nếu có va chạm, thực hiện hiệu ứng nổ.
-            animateExplosion(text);
+        ImageView animationExplode = new ImageView();
+        animationExplode.setFitWidth(frameWidth);
+        animationExplode.setFitHeight(frameHeight);
+        animationExplode.setLayoutX(350);
+        animationExplode.setLayoutY(470);
+        myAnchor.getChildren().add(animationExplode);
+
+        Image fullImage = new Image(getClass().getResource(tmp).toExternalForm());
+
+        Timeline timeline = new Timeline();
+        for (int i = 0; i < frameCount; i++) {
+            final int frameIndex = i;
+            KeyFrame keyFrame = new KeyFrame(
+                    Duration.millis( i*50),
+                    event -> {
+                        int x = frameIndex * frameWidth;
+                        int y = 0;
+                        if (frameIndex >= 4) {
+
+                            y = frameHeight;
+                            x = (frameIndex - 4) * frameWidth;
+                        }
+
+                        PixelReader pixelReader = fullImage.getPixelReader();
+                        WritableImage frameImage = new WritableImage(pixelReader, x, y, frameWidth, frameHeight);
+                        animationExplode.setImage(frameImage);
+                    }
+            );
+            timeline.getKeyFrames().add(keyFrame);
         }
+        timeline.setCycleCount(1);
+        timeline.setOnFinished(event -> {
+            myAnchor.getChildren().remove(animationExplode);
+        });
+        timeline.play();
+        explodeBoom.seek(explodeBoom.getStartTime());
+        explodeBoom.play();
     }
 }

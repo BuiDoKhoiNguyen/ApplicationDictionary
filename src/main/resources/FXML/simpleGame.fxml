@@ -45,5 +45,6 @@
       <ToggleButton fx:id="togButton" layoutX="31.0" layoutY="10.0" mnemonicParsing="false" onAction="#changeOnOff" prefHeight="44.0" prefWidth="70.0" stylesheets="@../CSS/form.css" />
       <Button fx:id="yesButton" layoutX="251.0" layoutY="269.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="52.0" stylesheets="@../CSS/form.css" text="yes" />
       <Button fx:id="noButton" layoutX="442.0" layoutY="269.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="52.0" stylesheets="@../CSS/form.css" text="No" />
+      <Button fx:id="review" layoutX="347.0" layoutY="269.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="52.0" stylesheets="@../CSS/form.css" text="review" />
    </children>
 </AnchorPane>

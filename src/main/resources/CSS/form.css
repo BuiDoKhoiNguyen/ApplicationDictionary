@@ -1,3 +1,28 @@
+.reviewButton{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+.reviewButton: hover{
+-fx-font-veight: bold;
+    -fx-background-color: black;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-scale-x: 1.2;
+        -fx-scale-y: 1.2;
+        -fx-translate-x: -3;
+        -fx-translate-y: -1;
+}
+.reviewButton: pressed{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
 .yesButton{
 -fx-font-veight: bold;
     -fx-background-color: white;
@@ -51,24 +76,24 @@
 }
 
 .progress-bar {
-    -fx-background-radius: 10; /* Bo góc viền của ProgressBar */
-    -fx-background-insets: 0; /* Loại bỏ viền nội bộ */
+    -fx-background-radius: 10;
+    -fx-background-insets: 0;
     -fx-background-color: black;
     -fx-padding: 5;
 
 }
 
-/* Định dạng cho tiến trình */
+
 .progress-bar .bar {
-    -fx-background-color: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet); /* Sử dụng màu cầu vồng cho tiến trình */
-    -fx-background-radius: 5 ; /* Bo góc cho tiến trình */
-    -fx-background-insets: 0; /* Loại bỏ viền nội bộ */
+    -fx-background-color: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    -fx-background-radius: 5 ;
+    -fx-background-insets: 0;
 }
 
 
 .webView {
-     -fx-border-color: black; /* Màu đen cho viền */
-        -fx-border-width: 2px; /* Độ rộng của viền */
+     -fx-border-color: black;
+        -fx-border-width: 2px;
         -fx-background-radius: 10;
 }
 
@@ -186,8 +211,8 @@
 .label {
 -fx-background-insets: 0, 1, 1;
     -fx-background-radius: 5, 4, 3;
-    -fx-border-color: black; /* Màu đen cho viền */
-    -fx-border-width: 2px; /* Độ rộng của viền */
-    -fx-border-radius: 5px; /* Độ cong của viền (tuỳ chọn) */
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
 
 }
