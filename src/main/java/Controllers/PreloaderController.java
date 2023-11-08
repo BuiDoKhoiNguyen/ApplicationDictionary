@@ -35,7 +35,7 @@ public class PreloaderController implements Initializable {
             message[0] = "Checking menu controller";
             Platform.runLater(() -> lblLoadingg.setText(message[0]));
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 MenuController menuController = new MenuController();
                 System.out.println("Connect to menu,search and translate successfully!");
             } catch (InterruptedException e) {
@@ -47,7 +47,7 @@ public class PreloaderController implements Initializable {
             message[0] = "Checking database connection";
             Platform.runLater(() -> lblLoadingg.setText(message[0]));
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 DatabaseConnection connectionNow = new DatabaseConnection();
                 Connection connectDB = connectionNow.getConnection();
                 System.out.println("Connect to database successfully!");
@@ -60,7 +60,7 @@ public class PreloaderController implements Initializable {
             message[0] = "Checking data connection";
             Platform.runLater(() -> lblLoadingg.setText(message[0]));
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 DictionaryController dictionaryController = new DictionaryController();
                 System.out.println("Connect to dictionary data successfully!");
             } catch (InterruptedException e) {

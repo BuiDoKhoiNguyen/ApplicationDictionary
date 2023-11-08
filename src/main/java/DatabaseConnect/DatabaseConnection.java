@@ -3,9 +3,9 @@ package DatabaseConnect;
 import java.sql.Connection;
 import java.sql.DriverManager;
 public class DatabaseConnection {
-    public Connection databaseLink;
+    public static Connection databaseLink;
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         String databaseUser = "root";
         String databasePassword = "05122004";
         String url =  "jdbc:mysql://127.0.0.1:3306/user_account";

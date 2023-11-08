@@ -21,7 +21,7 @@ import java.util.*;
 
 public class ProfileController implements Initializable {
     @FXML
-    private BarChart<?, ?>  barChart;
+    private BarChart<?, ?> barChart;
     @FXML
     private CategoryAxis x;
     @FXML
@@ -33,14 +33,19 @@ public class ProfileController implements Initializable {
     @FXML
     private ImageView imgView;
 
-    private static final String FILE_NAME = "data/usedtime.txt";
-    private static Calendar calendar = Calendar.getInstance();
-    private static int currentWeek = calendar.get(Calendar.WEEK_OF_YEAR);
+    @FXML
+    private Label time;
+    private volatile boolean stop = false;
 
-    private Map<String, String> chartData = new HashMap<>();
+    private static int currtime = 0;
+
+    private static final String FILE_NAME = "data/usedtime.txt";
+
+    private Map<String, String> chartData;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        chartData = new HashMap<>();
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -54,15 +59,15 @@ public class ProfileController implements Initializable {
         timeDisplay();
         XYChart.Series set1 = new XYChart.Series<>();
         getTimeUsage();
-        set1.setName("Hours/Day");
+        set1.setName("Minute/Day");
 
-        set1.getData().add(new XYChart.Data("Monday", 4));
-        set1.getData().add(new XYChart.Data("Tuesday", 6));
-        set1.getData().add(new XYChart.Data("Wednesday", 1));
-        set1.getData().add(new XYChart.Data("Thursday", 2));
-        set1.getData().add(new XYChart.Data("Friday", 3));
-        set1.getData().add(new XYChart.Data("Saturday", 9));
-        set1.getData().add(new XYChart.Data("Sunday", 1));
+        set1.getData().add(new XYChart.Data("Monday", Double.parseDouble(chartData.get("Monday")) / 60.0));
+        set1.getData().add(new XYChart.Data("Tuesday", Double.parseDouble(chartData.get("Tuesday")) / 60.0));
+        set1.getData().add(new XYChart.Data("Wednesday", Double.parseDouble(chartData.get("Wednesday")) / 60.0));
+        set1.getData().add(new XYChart.Data("Thursday", Double.parseDouble(chartData.get("Thursday")) / 60.0));
+        set1.getData().add(new XYChart.Data("Friday", Double.parseDouble(chartData.get("Friday")) / 60.0));
+        set1.getData().add(new XYChart.Data("Saturday", Double.parseDouble(chartData.get("Saturday")) / 60.0));
+        set1.getData().add(new XYChart.Data("Sunday", Double.parseDouble(chartData.get("Sunday")) / 60.0));
         barChart.getData().addAll(set1);
         barChart.lookup(".chart-plot-background").setStyle("-fx-background-color: transparent");
     }
@@ -84,11 +89,45 @@ public class ProfileController implements Initializable {
         }
     }
 
-    public void recordAppUsage() {
+    public static void recordAppUsage() {
         try {
+            File file = new File(FILE_NAME);
+
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
+            String line;
+            StringBuilder fileContent = new StringBuilder();
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE");
+            String currentDay = dateFormat.format(new Date());
+
+            boolean dayFound = false;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(":");
+                if (parts.length == 2) {
+                    String day = parts[0].trim();
+                    int usage = Integer.parseInt(parts[1].trim());
+
+                    if (day.equals(currentDay)) {
+                        usage += getCurrtime();
+                        dayFound = true;
+                    }
+
+                    fileContent.append(day).append(": ").append(usage).append("\n");
+                }
+            }
+            reader.close();
+
+            if (!dayFound) {
+                fileContent.append(currentDay).append(": ").append(getCurrtime()).append("\n");
+            }
+
             BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME));
-            writer.write(getDayOfWeek() + ": " + getCurrtime());
-            writer.newLine();
+            writer.write(fileContent.toString());
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,20 +138,15 @@ public class ProfileController implements Initializable {
 
     }
 
-    @FXML
-    private Label time;
-    private volatile boolean stop = false;
-
-    private static int currtime = 0;
 
     public void timeDisplay() {
-        Thread thread = new Thread( () -> {
+        Thread thread = new Thread(() -> {
             SimpleDateFormat adf = new SimpleDateFormat("hh:mm:ss");
-            while(!stop) {
+            while (!stop) {
                 try {
                     Thread.sleep(1000);
-                } catch(Exception e) {
-                    System.out.println  (e);
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
                 final String timeNow = adf.format(new Date());
                 Platform.runLater(() -> {
@@ -123,29 +157,31 @@ public class ProfileController implements Initializable {
         thread.start();
     }
 
-    public int getCurrtime() {
+    public static int getCurrtime() {
         return currtime;
     }
 
-    public String getDayOfWeek() {
-        DayOfWeek dayOfWeek =  LocalDate.now().getDayOfWeek();
+    public static String getDayOfWeek() {
+        DayOfWeek dayOfWeek = LocalDate.now().getDayOfWeek();
         return dayOfWeek.toString();
     }
 
     @FXML
     void buttonAddPicOnAction(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open a file");
-        fileChooser.setInitialDirectory(new File("C:\\Users\\ASUS\\KhoiNguyen\\Máy tính"));
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("JPEG Image","*.jpg"),
-                new FileChooser.ExtensionFilter("PNG Image", "*.png"), new FileChooser.ExtensionFilter("All image files","*.jpg","*.png"));
+        fileChooser.setTitle("Choose file");
+        fileChooser.setInitialDirectory(new File("C:/Users/ASUS/KhoiNguyen"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All image files", "*.jpg", "*.png")
+        );
+
         Stage stage = (Stage) addPic.getScene().getWindow();
         File selectedFile = fileChooser.showOpenDialog(stage);
 
-        if(selectedFile != null){
-            Image image = new Image(selectedFile.getPath());
+        if (selectedFile != null) {
+            Image image = new Image(selectedFile.toURI().toString());
             imgView.setImage(image);
-        }else{
+        } else {
             System.out.println("No file has been selected");
         }
     }

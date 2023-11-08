@@ -34,11 +34,38 @@
 }
 
 #addPic {
-    -fx-graphic: url('../img/camera.png');
-    -fx-background-radius: 30;
+    -fx-graphic: url('../img/addpic.png');
+    -fx-background-color:null;
+    -fx-background-radius: 100;
 }
 
-#addPic:pressed{
+#addPic:hover{
     -fx-background-color: linear-gradient( to right top, #76d2fc,#3238a8);
-    -fx-background-radius: 30;
+    -fx-background-radius: 100;
 }
+
+.round-box {
+    -fx-background-radius: 100;
+    -fx-border-radius: 100;
+    -fx-border-width: 6;
+}
+
+.progress-indicator {
+    -fx-background-color: transparent; /* Đặt màu nền trong suốt */
+}
+
+.progress-indicator .track {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.progress-indicator .indicator {
+    -fx-stroke-width: 3;
+}
+
+
+.progress-indicator .percentage {
+    -fx-fill:null;
+}
+
+

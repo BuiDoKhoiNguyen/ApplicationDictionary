@@ -120,6 +120,7 @@ public class TranslateController implements Initializable {
     }
 
     public void cancelButtonOnAction(ActionEvent e) {
+        ProfileController.recordAppUsage();
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }

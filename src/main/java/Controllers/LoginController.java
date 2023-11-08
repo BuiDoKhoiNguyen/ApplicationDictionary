@@ -196,8 +196,7 @@ public class LoginController implements Initializable {
     }
 
     public boolean validateLogin() {
-        DatabaseConnection connectionNow = new DatabaseConnection();
-        Connection connectDB = connectionNow.getConnection();
+        Connection connectDB = DatabaseConnection.getConnection();
 
         String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
 
@@ -219,8 +218,7 @@ public class LoginController implements Initializable {
     }
 
     public boolean validateSignUp(String username, String password, String confirmPassword, String fName, String lName) {
-        DatabaseConnection connectionNow = new DatabaseConnection();
-        Connection connectDB = connectionNow.getConnection();
+        Connection connectDB = DatabaseConnection.getConnection();
 
         String verifySignUp = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
 

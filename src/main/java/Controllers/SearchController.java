@@ -139,6 +139,7 @@ public class SearchController implements Initializable {
     }
 
     public void cancelButtonOnAction(ActionEvent e) {
+        ProfileController.recordAppUsage();
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
 //        exit(0);
