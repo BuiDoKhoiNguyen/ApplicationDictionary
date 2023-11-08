@@ -13,11 +13,9 @@ import javafx.scene.media.MediaPlayer;
 
 
 public class VoiceController {
-    private static final String API_KEY = "ee1a861047db41e3aed6cca75554a826";
+    private static final String API_KEY = "fd66290e22a547e581b5a58119d07d54";
     private static final String AUDIO_PATH = "src/main/resources/Voice/audio.wav";
 
-    public static String voiceNameUS;
-    public static String voiceNameUK;
     public static String language = "en-gb";
     public static String Name = "Linda";
     public static double speed = 1;

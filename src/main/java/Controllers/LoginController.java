@@ -2,6 +2,7 @@ package Controllers;
 
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import org.controlsfx.control.Notifications;
 import DatabaseConnect.DatabaseConnection;
 import javafx.animation.TranslateTransition;
@@ -27,6 +28,7 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
+    /** Effects processing */
     @FXML
     private AnchorPane layer1, layer2, layer3;
     @FXML
@@ -145,7 +147,9 @@ public class LoginController implements Initializable {
         lname.setVisible(false);
     }
 
-    /*------------------------------------------------*/
+    /** ------------------------------------------------ */
+    /** Data processing */
+
     @FXML
     private Button cancelButton;
     @FXML
@@ -154,6 +158,8 @@ public class LoginController implements Initializable {
     private PasswordField passwordField1;
     @FXML
     private Button loginButton;
+    @FXML
+    private StackPane stackPane = new StackPane();
 
     SceneController sceneController = new SceneController();
 
@@ -164,11 +170,9 @@ public class LoginController implements Initializable {
                 sceneController.switchToMenu(e);
             } else {
                 errorNotification("Invalid login. Please try again!");
-//                loginMessageLabel.setText("Invalid login. Please try again!");
             }
         } else {
             errorNotification("Please enter your username and password");
-//            loginMessageLabel.setText("Please enter your username and password");
         }
     }
 
@@ -177,14 +181,12 @@ public class LoginController implements Initializable {
                 && fname.getText().isBlank() == false && lname.getText().isBlank() == false && confirmPassword.getText().isBlank() == false) {
             if (validateSignUp(usernameTextField2.getText(), passwordField2.getText(), confirmPassword.getText(), fname.getText(), lname.getText())) {
                 successNotification("Account successfully created! Please login to try app");
-//                createAccountMessageLabel.setText("Account successfully created! Please login to try app");
-            } else {
+            }
+            else {
                 errorNotification("Unable to register account. Please try again later!");
-//                createAccountMessageLabel.setText("Unable to register account. Please try again later!");
             }
         } else {
             errorNotification("Please enter your information!");
-//            loginMessageLabel.setText("Please enter your Information!");
         }
     }
 
@@ -194,8 +196,7 @@ public class LoginController implements Initializable {
     }
 
     public boolean validateLogin() {
-        DatabaseConnection connectionNow = new DatabaseConnection();
-        Connection connectDB = connectionNow.getConnection();
+        Connection connectDB = DatabaseConnection.getConnection();
 
         String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() + "'";
 
@@ -206,7 +207,6 @@ public class LoginController implements Initializable {
             while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
                     return true;
-//                    loginMessageLabel.setText("Welcome!");
                 } else {
                     return false;
                 }
@@ -218,8 +218,7 @@ public class LoginController implements Initializable {
     }
 
     public boolean validateSignUp(String username, String password, String confirmPassword, String fName, String lName) {
-        DatabaseConnection connectionNow = new DatabaseConnection();
-        Connection connectDB = connectionNow.getConnection();
+        Connection connectDB = DatabaseConnection.getConnection();
 
         String verifySignUp = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() + "'";
 
@@ -265,5 +264,22 @@ public class LoginController implements Initializable {
                 .hideAfter(Duration.seconds(5))
                 .position(Pos.TOP_RIGHT)
                 .show();
+    }
+
+    /** ------------------------------------------------ */
+    /** Dragged screen */
+    private double x = 0;
+    private double y = 0;
+    @FXML
+    public void paneDragged(MouseEvent e) {
+        Stage stage = (Stage) stackPane.getScene().getWindow();
+        stage.setY(e.getScreenY() - y);
+        stage.setX(e.getScreenX() - x);
+    }
+
+    @FXML
+    public void panePressed(MouseEvent e) {
+        x = e.getSceneX();
+        y = e.getSceneY();
     }
 }

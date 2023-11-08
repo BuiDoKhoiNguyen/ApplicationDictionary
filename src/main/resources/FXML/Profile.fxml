@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="735.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProfileController">
+   <right>
+      <AnchorPane prefHeight="181.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="411.0" prefWidth="735.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox layoutX="15.0" layoutY="38.0" prefHeight="151.0" prefWidth="147.0" style="-fx-border-color: #bfbfbf;">
+               <children>
+                  <Label alignment="BOTTOM_LEFT" prefHeight="133.0" prefWidth="142.0" style="-fx-text-fill: #10e457;" text="       Average time" textFill="#10e457">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="average" alignment="TOP_LEFT" prefHeight="88.0" prefWidth="142.0" text="     num">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets bottom="20.0" />
+                     </opaqueInsets>
+                  </Label>
+                  <Line endX="22.785785675048828" endY="0.6142349243164062" startX="145.5715789794922" startY="1.2284698486328125" stroke="#bfbfbf" strokeWidth="2.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin></Line>
+                  <Label fx:id="total" alignment="BOTTOM_LEFT" prefHeight="27.0" prefWidth="142.0" text="     num">
+                     <font>
+                        <Font name="Arial Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="TOP_LEFT" prefHeight="126.0" prefWidth="142.0" style="-fx-text-fill: #10e457;" text="      Toal time">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <opaqueInsets>
+                  <Insets top="60.0" />
+               </opaqueInsets>
+            </VBox>
+            <BarChart fx:id="barChart" layoutX="231.0" layoutY="46.0" prefHeight="323.0" prefWidth="496.0" style="-fx-background-color: rgba(0,162,211,0.3); -fx-background-radius: 30;" styleClass="chart-bar" stylesheets="@../CSS/Profile.css">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <Label layoutX="17.0" layoutY="14.0" prefHeight="18.0" prefWidth="142.0" style="-fx-text-fill: #2b49b3;" text="Usage report">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Label>
+            <VBox layoutX="7.0" layoutY="197.0" prefHeight="218.0" prefWidth="176.0" style="-fx-background-color: rgba(0,162,211,0.3); -fx-background-radius: 30;">
+               <children>
+                  <Label alignment="CENTER" prefHeight="33.0" prefWidth="209.0" style="-fx-background-color: #72D3FE; -fx-text-fill: #2b49b3; -fx-background-radius: 30;" text="Skill">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="143.0" prefWidth="144.0" style="-fx-border-color: #72D3FE;" styleClass="round-box" stylesheets="@../CSS/Profile.css">
+                     <children>
+                        <ProgressIndicator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="152.0" progress="0.67" styleClass="indicator" stylesheets="@../CSS/Profile.css">
+                           <HBox.margin>
+                              <Insets left="3.0" top="12.0" />
+                           </HBox.margin>
+                        </ProgressIndicator>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="10.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label layoutX="649.0" layoutY="23.0" prefHeight="19.0" prefWidth="72.0" style="-fx-text-fill: #2b49b3;" text="Time in use " textFill="#2b49b3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <BorderPane prefHeight="106.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <center>
+            <VBox prefHeight="138.0" prefWidth="690.0" style="-fx-background-color: #ffffff; -fx-border-color: #fbfbfb; -fx-background-radius: 0px 0px 30px 30px; -fx-border-radius: 0px 30px 30px 0px;" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="29.0" prefWidth="735.0">
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="26.0" prefWidth="122.0" style="-fx-text-fill: #3238a8;" text="Profile">
+                           <opaqueInsets>
+                              <Insets top="20.0" />
+                           </opaqueInsets>
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Line endX="-100.00048828125" endY="30.185760498046875" startX="-100.00047302246094" startY="51.57151794433594" stroke="#bfbfbf" strokeWidth="2.0">
+                           <HBox.margin>
+                              <Insets left="30.0" top="5.0" />
+                           </HBox.margin>
+                        </Line>
+                        <Label fx:id="hello" prefHeight="26.0" prefWidth="282.0" text="Hello">
+                           <HBox.margin>
+                              <Insets left="30.0" />
+                           </HBox.margin>
+                           <opaqueInsets>
+                              <Insets top="20.0" />
+                           </opaqueInsets>
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="time" alignment="TOP_RIGHT" prefHeight="16.0" prefWidth="232.0" style="-fx-text-fill: #2b49b3;" text="time">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+                  <HBox prefHeight="112.0" prefWidth="688.0">
+                     <children>
+                        <AnchorPane prefHeight="112.0" prefWidth="588.0">
+                           <children>
+                              <ImageView fx:id="imgView" fitHeight="93.0" fitWidth="102.0" layoutX="42.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" styleClass="imageview">
+                                 <image>
+                                    <Image url="@../img/user.png" />
+                                 </image>
+                              </ImageView>
+                              <Button id="addPic" fx:id="addPic" layoutX="35.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="25.0" minWidth="29.0" mnemonicParsing="false" onAction="#buttonAddPicOnAction" prefHeight="27.0" prefWidth="29.0" stylesheets="@../CSS/Profile.css">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </Button>
+                              <Label layoutX="161.0" layoutY="6.0" prefHeight="40.0" prefWidth="205.0" text="Label">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="161.0" layoutY="46.0" prefHeight="36.0" prefWidth="267.0" text="Label" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </center>
+   <left>
+      <AnchorPane prefHeight="181.0" prefWidth="22.0" BorderPane.alignment="CENTER" />
+   </left>
+</BorderPane>

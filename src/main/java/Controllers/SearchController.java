@@ -16,11 +16,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
+
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 public class SearchController extends TaskControllers implements Initializable {
     private Dictionary dictionary = new Dictionary(Dictionary.EV_IN_PATH);
+
 
     protected  VoiceController voiceController = new VoiceController();
 
@@ -40,6 +43,11 @@ public class SearchController extends TaskControllers implements Initializable {
     protected ToggleButton editButton;
     @FXML
     private Button deleteButton;
+
+    @FXML
+    private Button speakUS,speakUK;
+    @FXML
+    private Button cancelButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -167,5 +175,12 @@ public class SearchController extends TaskControllers implements Initializable {
     @FXML
     private void speakUKButtonOnAction(ActionEvent e) {
         speak("en-gb");
+    }
+
+    public void cancelButtonOnAction(ActionEvent e) {
+        ProfileController.recordAppUsage();
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+//        exit(0);
     }
 }

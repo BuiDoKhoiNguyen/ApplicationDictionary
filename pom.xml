@@ -101,7 +101,26 @@
             <artifactId>controlsfx</artifactId>
             <version>11.1.2</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.bytedeco/tesseract -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>tesseract</artifactId>
+            <version>4.1.0-1.5.2</version>
+        </dependency>
 
+        <!-- https://mvnrepository.com/artifact/net.sourceforge.tess4j/tess4j -->
+        <dependency>
+            <groupId>net.sourceforge.tess4j</groupId>
+            <artifactId>tess4j</artifactId>
+            <version>5.8.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-swing -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>22-ea+16</version>
+        </dependency>
 
     </dependencies>
 

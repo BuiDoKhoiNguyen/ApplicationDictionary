@@ -1,6 +1,10 @@
 .button-audio {
     -fx-graphic: url('../img/audio.png');
-    -fx-border-color: blue;
+    -fx-background-color: transparent;
+}
+
+.button-audio:selected {
+
 }
 
 .button-favourite {
