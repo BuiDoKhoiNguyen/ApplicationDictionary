@@ -4,8 +4,11 @@ import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,16 +25,17 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
 public class controllTypeGame implements Initializable {
     @FXML
-    StackPane pane1; // Đây là VBox hoặc StackPane chứa chuỗi văn bản
+    StackPane pane1;
 
     @FXML
     TextField textField;
@@ -166,7 +170,7 @@ public class controllTypeGame implements Initializable {
             "common",
     };
     String[] WORDS = {"hello", "world", "javafx", "ztype"};
-    int WORD_SPEED = 7000;
+    int WORD_SPEED = 5000;
 
     //String explodeFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/explode.mp3";
     //AudioClip explodeBoom = new AudioClip(explodeFile);
@@ -185,13 +189,11 @@ public class controllTypeGame implements Initializable {
 
     List<String> chk = new ArrayList<>();
 
-    //List<Text> update = new ArrayList<>();
-
     Set<String> how = new LinkedHashSet<>();
     Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/blackSky.png"));
     Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/boom.png"));
 
-    Image myImage3 = new Image(getClass().getResourceAsStream("/sources_music_picture/label.png"));
+    //Image myImage3 = new Image(getClass().getResourceAsStream("/sources_music_picture/label.png"));
 
     @FXML
     Label scoreLabel,result,scLabel,bcLabel,scoreL,bScoreL,pLabel,lbsc;
@@ -202,11 +204,22 @@ public class controllTypeGame implements Initializable {
     @FXML
     AnchorPane myAnchor;
 
+    int bestScore = 0;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         start();
     }
     public void start(){
+        readBestScore();
+        if(menuTypeGame.isAudi()==false){
+            mediaPlayer.setMute(true);
+            explodeBoom.setMute(true);
+        }
+        if(menuTypeGame.isAudi()==true){
+            mediaPlayer.setMute(false);
+            explodeBoom.setMute(false);
+        }
         mediaPlayer.seek(mediaPlayer.getStartTime());
         scLabel.setVisible(false);
         bcLabel.setVisible(false);
@@ -215,6 +228,7 @@ public class controllTypeGame implements Initializable {
         pLabel.setVisible(false);
         NBut.setVisible(false);
         YBut.setVisible(false);
+        result.setVisible(false);
 
         lbsc.setVisible(true);
         scoreLabel.setVisible(true);
@@ -251,7 +265,7 @@ public class controllTypeGame implements Initializable {
 
         Timeline timeline = new Timeline(startFrame, endFrame);
         timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.setRate(1.0); // Điều chỉnh tốc độ của hiệu ứng
+        timeline.setRate(1.0);
 
         timeline.play();
 
@@ -270,11 +284,8 @@ public class controllTypeGame implements Initializable {
             System.out.println(how.size());
             text.setStyle("-fx-font-family: Arial; -fx-font-size: 14px; -fx-font-weight: bold; -fx-fill: white;");
             text.setTranslateY(-140);
-            int randomNumber = random.nextInt(501) - 250;
+            int randomNumber = random.nextInt(651) - 325;
             text.setTranslateX(randomNumber);
-            //System.out.println(chk.get(x));
-            //System.out.println(english.get(x));
-            //System.out.println(x);
             pane1.getChildren().add(text);
             textField.setOnKeyPressed(e -> {
                 if (e.getCode() == KeyCode.ENTER) {
@@ -291,12 +302,31 @@ public class controllTypeGame implements Initializable {
         gameLoop.play();
     }
 
+    public void readBestScore() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\src\\main\\resources\\sources_music_picture\\bestScore.txt"));
+            String line = reader.readLine();
+            reader.close();
+            bestScore = Integer.parseInt(line);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void writeBestScore(int bestScore) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\src\\main\\resources\\sources_music_picture\\bestScore.txt"));
+            writer.write(Integer.toString(bestScore));
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public void moveWordDown(Text word) {
         //x++;
         double wordHeight = word.getBoundsInLocal().getHeight();
         double startY = -140;
         double endY = 313;
-        Duration duration = Duration.seconds(10 * (endY - startY) / WINDOW_HEIGHT); // Tính thời gian dựa trên chiều cao của cửa sổ
+        Duration duration = Duration.seconds(10 * (endY - startY) / WINDOW_HEIGHT);
 
         TranslateTransition transition = new TranslateTransition(duration, word);
         transition.setInterpolator(Interpolator.LINEAR);
@@ -304,13 +334,6 @@ public class controllTypeGame implements Initializable {
         transition.setToY(endY);
 
         transition.setOnFinished(event -> {
-            /*if(x>=1 && check.get(x-1)==false && tmp!=x){
-                tmp=x;
-            }
-            else{
-                System.out.println("something");
-                x++;
-            }*/
             if(how.contains(word.getText())){
                 System.out.println("something");
                 gameLoop.stop();
@@ -340,21 +363,16 @@ public class controllTypeGame implements Initializable {
         }
     }
     public void fire(double targetX, double targetY,Text text) {
-        // Tạo hình ảnh tên lửa
-        //explodeBoom.seek(explodeBoom.getStartTime());
         Image missileImage = new Image("/sources_music_picture/bullet.png");
         ImageView bullet = new ImageView(missileImage);
 
         double startX = text.getTranslateX()+365;
         double startY = 532;
-        // Đặt tọa độ ban đầu của viên đạn
         bullet.setTranslateX(startX);
         bullet.setTranslateY(startY);
 
-        // Thêm viên đạn vào giao diện
         myAnchor.getChildren().add(bullet);
 
-        // Tạo animation di chuyển tên lửa
         Duration duration = Duration.seconds(0.01);
         KeyFrame keyFrame = new KeyFrame(duration, event -> {
             bullet.setTranslateY(bullet.getTranslateY() - 2);
@@ -434,8 +452,11 @@ public class controllTypeGame implements Initializable {
         lbsc.setVisible(false);
         scoreLabel.setVisible(false);
         textField.setVisible(false);
+        textField.setVisible(false);
 
         scoreL.setText(""+score);
+        if(score>bestScore) bestScore = score;
+        bScoreL.setText(""+bestScore);
         scLabel.setVisible(true);
         bcLabel.setVisible(true);
         scoreL.setVisible(true);
@@ -443,10 +464,13 @@ public class controllTypeGame implements Initializable {
         pLabel.setVisible(true);
         NBut.setVisible(true);
         YBut.setVisible(true);
-        textField.setVisible(false);
+        result.setVisible(true);
+        writeBestScore(bestScore);
+
         explode2();
         x=0;
         score=0;
+        bestScore=0;
         YBut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -462,7 +486,40 @@ public class controllTypeGame implements Initializable {
                 NBut.setVisible(false);
                 YBut.setVisible(false);
                 textField.setVisible(false);
+                result.setVisible(false);
                 start();
+            }
+        });
+        NBut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FadeTransition fadeOut = new FadeTransition(Duration.seconds(1));
+                fadeOut.setNode(((javafx.scene.Node) event.getSource()).getScene().getRoot());
+                fadeOut.setFromValue(1.0);
+                fadeOut.setToValue(0.0);
+
+                fadeOut.setOnFinished(e -> {
+                    try {
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/menuTypeG.fxml"));
+                        Parent scene2Parent = loader.load();
+                        Scene scene2 = new Scene(scene2Parent);
+
+                        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                        window.setScene(scene2);
+
+                        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1));
+                        fadeIn.setNode(scene2.getRoot());
+                        fadeIn.setFromValue(0.0);
+                        fadeIn.setToValue(1.0);
+                        fadeIn.play();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+
+                fadeOut.play();
+                mediaPlayer.stop();
             }
         });
 

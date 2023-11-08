@@ -28,7 +28,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="result" layoutX="213.0" layoutY="164.0" prefHeight="236.0" prefWidth="323.0" />
+      <Label fx:id="result" layoutX="213.0" layoutY="164.0" opacity="0.19" prefHeight="236.0" prefWidth="323.0" style="-fx-background-color: #00CCFF; -fx-border-color: black;" />
       <Label fx:id="scLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="170.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" text="SCORE" textAlignment="JUSTIFY">
          <font>
             <Font size="16.0" />
@@ -39,12 +39,12 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="scoreL" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="225.0" layoutY="228.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" textAlignment="RIGHT">
+      <Label fx:id="scoreL" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="228.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="bScoreL" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="424.0" layoutY="228.0" prefHeight="46.0" prefWidth="95.0" textAlignment="RIGHT">
+      <Label fx:id="bScoreL" alignment="CENTER" contentDisplay="CENTER" layoutX="424.0" layoutY="228.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
@@ -59,6 +59,6 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <Label fx:id="pLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="320.0" layoutY="299.0" prefHeight="18.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" text="Play again" textAlignment="CENTER" />
+      <Label fx:id="pLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="327.0" layoutY="301.0" prefHeight="18.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" text="Play again" textAlignment="CENTER" />
    </children>
 </AnchorPane>

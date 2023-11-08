@@ -45,7 +45,7 @@ public class SwitchGame implements Initializable {
                 window.setScene(scene2);
 
                 FadeTransition fadeIn = new FadeTransition(Duration.seconds(1));
-                fadeIn.setNode(scene2.getRoot()); // scene2 là Scene mới
+                fadeIn.setNode(scene2.getRoot());
                 fadeIn.setFromValue(0.0);
                 fadeIn.setToValue(1.0);
                 fadeIn.play();

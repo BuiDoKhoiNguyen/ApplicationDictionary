@@ -2,20 +2,21 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="532.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.menuTypeGame">
+<AnchorPane fx:id="myArchor" prefHeight="532.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.menuTypeGame">
    <children>
-      <Button layoutX="305.0" layoutY="266.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../CSS/typeGame.css" text="Play Game">
+      <Button fx:id="play" layoutX="305.0" layoutY="266.0" mnemonicParsing="false" onAction="#playG" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../CSS/typeGame.css" text="Play Game">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button layoutX="305.0" layoutY="327.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../CSS/typeGame.css" text="MUSIC: ON">
+      <Button fx:id="music" layoutX="305.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#changeMusic" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../CSS/typeGame.css">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
+      <StackPane fx:id="pane1" prefHeight="281.0" prefWidth="750.0" />
    </children>
 </AnchorPane>
