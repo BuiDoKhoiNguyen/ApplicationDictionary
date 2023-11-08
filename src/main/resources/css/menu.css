@@ -13,6 +13,12 @@
     -fx-background-color: #3238a8;
 }
 
+.button:focused {
+    -fx-background-color: #3238a8;
+    -fx-border-color: #34e5eb;
+    -fx-border-width: 0px 0px 0px 4px;
+}
+
 #search {
     -fx-graphic: url('../img/search.png');
 }
@@ -42,3 +48,10 @@
     -fx-max-height: 20px;
 }
 
+#usedTime {
+    -fx-graphic: url('../img/usedTime.png');
+}
+
+#profile {
+    -fx-graphic: url('../img/profile.png');
+}
