@@ -18,6 +18,6 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-        <ProgressBar layoutX="55.0" layoutY="268.0" prefHeight="13.0" prefWidth="350.0" stylesheets="@../CSS/Login.css" AnchorPane.topAnchor="268.0" />
+        <ProgressBar layoutX="55.0" layoutY="268.0" prefHeight="13.0" prefWidth="350.0" stylesheets="@../css/Login.css" AnchorPane.topAnchor="268.0" />
     </children>
 </AnchorPane>

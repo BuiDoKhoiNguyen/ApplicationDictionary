@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TranslateController implements Initializable {
+public class TranslateController extends TaskControllers implements Initializable {
     @FXML
     private TextField inputField;
     @FXML
@@ -85,31 +85,43 @@ public class TranslateController implements Initializable {
         languageFrom = "";
     }
 
-    public void setToEN() {
+    public void setToEN() throws IOException {
         refreshButtonTo();
         toEN.setSelected(true);
         languageTo = "en";
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
-    public void setToVN() {
+    public void setToVN() throws IOException {
         refreshButtonTo();
         toVN.setSelected(true);
         languageTo = "vi";
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
-    public void setToFR() {
+    public void setToFR() throws IOException {
         refreshButtonTo();
         toFR.setSelected(true);
         languageTo = "fr";
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
-    public void setToSimplifiedCN() {
+    public void setToSimplifiedCN() throws IOException {
         refreshButtonTo();
         toSimplifiedCN.setSelected(true);
         languageTo = "zh";
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
@@ -128,6 +140,10 @@ public class TranslateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setFromEN();
-        setToVN();
+        try {
+            setToVN();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
