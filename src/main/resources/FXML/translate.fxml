@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,57 +10,12 @@
 
 <AnchorPane prefHeight="570.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.TranslateController">
    <children>
-      <Label fx:id="searchLabel" contentDisplay="RIGHT" layoutY="125.0" prefHeight="60.0" prefWidth="125.0" text=" Search" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Label>
-      <Label fx:id="translateLabel" alignment="CENTER" layoutY="185.0" prefHeight="60.0" prefWidth="125.0" text="Translate" textFill="#ffae42">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Label>
-      <Label fx:id="favouriteLabel" layoutY="245.0" prefHeight="60.0" prefWidth="125.0" text=" Favourite" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Label>
-      <Label fx:id="editLabel" layoutY="305.0" prefHeight="60.0" prefWidth="125.0" text=" Edit" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Label>
-      <Label fx:id="gameLabel" layoutY="365.0" prefHeight="60.0" prefWidth="125.0" text=" Game" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Label>
-      <Label fx:id="logoutLabel" layoutY="510.0" prefHeight="60.0" prefWidth="125.0" text=" Log Out" textFill="RED">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
       <TextField fx:id="inputField" alignment="TOP_LEFT" layoutX="35.0" layoutY="66.0" onAction="#translate" prefHeight="200.0" prefWidth="650.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
       <WebView fx:id="translationField" fontScale="1.5" layoutX="35.0" layoutY="327.0" prefHeight="200.0" prefWidth="650.0" />
-      <HBox layoutX="34.0" layoutY="19.0" prefHeight="45.0" prefWidth="425.0">
+      <HBox layoutX="34.0" layoutY="20.0" prefHeight="45.0" prefWidth="425.0">
          <children>
             <ToggleButton fx:id="fromEN" mnemonicParsing="false" onMouseClicked="#setFromEN" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../css/translate.css" text="Anh">
                <font>
@@ -85,7 +39,7 @@
             </ToggleButton>
          </children>
       </HBox>
-      <HBox layoutX="34.0" layoutY="280.0" prefHeight="45.0" prefWidth="425.0">
+      <HBox layoutX="34.0" layoutY="281.0" prefHeight="45.0" prefWidth="425.0">
          <children>
             <ToggleButton fx:id="toVN" mnemonicParsing="false" onMouseClicked="#setToVN" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Việt">
                <font>
@@ -102,7 +56,7 @@
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="toSimplifiedCN" mnemonicParsing="false" onMouseClicked="#setToSimplifiedCN" prefHeight="46.0" prefWidth="172.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Trung (giản thể)">
+            <ToggleButton fx:id="toSimplifiedCN" mnemonicParsing="false" onMouseClicked="#setToSimplifiedCN" prefHeight="46.0" prefWidth="184.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Trung (giản thể)">
                <font>
                   <Font size="18.0" />
                </font>

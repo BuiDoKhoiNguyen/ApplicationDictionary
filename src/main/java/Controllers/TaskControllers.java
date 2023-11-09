@@ -2,51 +2,37 @@ package Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
-public class TaskControllers extends Controllers {
+public class TaskControllers {
     @FXML
-    protected Label searchLabel;
+    protected Button searchButton;
     @FXML
-    protected Label translateLabel;
+    protected Button translateButton;
     @FXML
-    protected Label favouriteLabel;
+    protected Button saveButton;
     @FXML
-    protected Label editLabel;
+    protected Button favouriteButton;
     @FXML
-    protected Label gameLabel;
+    protected Button gameButton;
     @FXML
-    protected Label logoutLabel;
+    protected Button logoutButton;
+    @FXML
+    protected Button cancelButton;
 
-    private void bindLabel(Label label, Button button) {
-        label.visibleProperty().bind(button.hoverProperty());
-        label.backgroundProperty().bind(button.backgroundProperty());
-        button.hoverProperty().addListener((observable, oldValue, newValue) -> {
-            label.toFront();
-        });
-    }
+    @FXML
+    protected ProfileController profileController;
+    @FXML
+    protected SearchController searchController;
+    @FXML
+    protected TranslateController translateController;
+    @FXML
+    protected FavouriteController favouriteController;
 
-    public void loadButton(Button searchButton, Button translateButton,
-                           Button favouriteButton, Button saveButton,
-                           Button gameButton, Button logoutButton) {
-        this.searchButton = searchButton;
-        this.translateButton = translateButton;
-        this.favouriteButton = favouriteButton;
-        this.saveButton = saveButton;
-        this.gameButton = gameButton;
-        this.logoutButton = logoutButton;
-
-        bindLabel(searchLabel, searchButton);
-        bindLabel(translateLabel, translateButton);
-        bindLabel(favouriteLabel, favouriteButton);
-        bindLabel(editLabel, saveButton);
-        bindLabel(gameLabel, gameButton);
-        bindLabel(logoutLabel, logoutButton);
-    }
-
-    public void loadController(SearchController searchController,
+    public void loadController(ProfileController profileController,
+                               SearchController searchController,
                                TranslateController translateController,
                                FavouriteController favouriteController) {
+        this.profileController = profileController;
         this.searchController = searchController;
         this.translateController = translateController;
         this.favouriteController = favouriteController;

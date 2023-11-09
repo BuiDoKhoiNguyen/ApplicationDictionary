@@ -5,7 +5,6 @@ import Base.TranslateAPI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.web.WebView;
@@ -38,8 +37,7 @@ public class TranslateController extends TaskControllers implements Initializabl
     private ToggleButton toFR;
     @FXML
     private ToggleButton toSimplifiedCN;
-    @FXML
-    private Button cancelButton;
+
     private String languageFrom;
     private String languageTo;
 
@@ -131,6 +129,7 @@ public class TranslateController extends TaskControllers implements Initializabl
         translationField.getEngine().loadContent(translatedText);
     }
 
+    @FXML
     public void cancelButtonOnAction(ActionEvent e) {
         ProfileController.recordAppUsage();
         Stage stage = (Stage) cancelButton.getScene().getWindow();

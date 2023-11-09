@@ -13,38 +13,6 @@
 
 <AnchorPane prefHeight="570.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FavouriteController">
    <children>
-      <TextField fx:id="searchField" layoutX="14.0" layoutY="57.0" onKeyTyped="#searchWord" prefHeight="50.0" prefWidth="240.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@../css/search.css" />
-      <Label fx:id="searchLabel" layoutY="125.0" prefHeight="60.0" prefWidth="125.0" text=" Search" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="translateLabel" layoutY="185.0" prefHeight="60.0" prefWidth="125.0" text=" Translate" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="favouriteLabel" alignment="CENTER" layoutY="245.0" prefHeight="60.0" prefWidth="125.0" text="Favourite" textFill="#ffae42">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="editLabel" layoutY="305.0" prefHeight="60.0" prefWidth="125.0" text=" Edit" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="gameLabel" layoutY="365.0" prefHeight="60.0" prefWidth="125.0" text=" Game" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Label fx:id="logoutLabel" layoutY="510.0" prefHeight="60.0" prefWidth="125.0" text=" Log Out" textFill="RED">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <ListView fx:id="wordList" layoutX="14.0" layoutY="123.0" onMouseClicked="#selectWord" prefHeight="415.0" prefWidth="240.0" />
       <AnchorPane layoutX="260.0" layoutY="15.0" prefHeight="523.0" prefWidth="436.0" style="-fx-background-color: #ffffff;">
          <children>
             <Label layoutX="13.0" layoutY="7.0" stylesheets="@../css/search.css" text="Nghĩa của từ">
@@ -64,5 +32,7 @@
             <Button layoutX="103.0" layoutY="74.0" mnemonicParsing="false" styleClass="button-audio" stylesheets="@../css/search.css" text="UK" />
          </children>
       </AnchorPane>
+      <TextField fx:id="searchField" layoutX="14.0" layoutY="57.0" onKeyTyped="#searchWord" prefHeight="50.0" prefWidth="240.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@../css/search.css" />
+      <ListView fx:id="wordList" layoutX="14.0" layoutY="123.0" onEditCommit="#editWordTarget" onMouseClicked="#selectWord" prefHeight="415.0" prefWidth="240.0" />
    </children>
 </AnchorPane>

@@ -57,7 +57,7 @@
                   <Insets top="60.0" />
                </opaqueInsets>
             </VBox>
-            <BarChart fx:id="barChart" layoutX="231.0" layoutY="46.0" prefHeight="323.0" prefWidth="496.0" style="-fx-background-color: rgba(0,162,211,0.3); -fx-background-radius: 30;" styleClass="chart-bar" stylesheets="@../CSS/Profile.css">
+            <BarChart fx:id="barChart" layoutX="231.0" layoutY="46.0" prefHeight="323.0" prefWidth="496.0" style="-fx-background-color: rgba(0,162,211,0.3); -fx-background-radius: 30;" styleClass="chart-bar" stylesheets="@../css/Profile.css">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -77,9 +77,9 @@
                         <Font name="Arial Bold" size="12.0" />
                      </font>
                   </Label>
-                  <HBox prefHeight="143.0" prefWidth="144.0" style="-fx-border-color: #72D3FE;" styleClass="round-box" stylesheets="@../CSS/Profile.css">
+                  <HBox prefHeight="143.0" prefWidth="144.0" style="-fx-border-color: #72D3FE;" styleClass="round-box" stylesheets="@../css/Profile.css">
                      <children>
-                        <ProgressIndicator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="152.0" progress="0.67" styleClass="indicator" stylesheets="@../CSS/Profile.css">
+                        <ProgressIndicator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="152.0" progress="0.67" styleClass="indicator" stylesheets="@../css/Profile.css">
                            <HBox.margin>
                               <Insets left="3.0" top="12.0" />
                            </HBox.margin>
@@ -152,7 +152,7 @@
                                     <Image url="@../img/user.png" />
                                  </image>
                               </ImageView>
-                              <Button id="addPic" fx:id="addPic" layoutX="35.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="25.0" minWidth="29.0" mnemonicParsing="false" onAction="#buttonAddPicOnAction" prefHeight="27.0" prefWidth="29.0" stylesheets="@../CSS/Profile.css">
+                              <Button id="addPic" fx:id="addPic" layoutX="35.0" layoutY="86.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="25.0" minWidth="29.0" mnemonicParsing="false" onAction="#buttonAddPicOnAction" prefHeight="27.0" prefWidth="29.0" stylesheets="@../css/Profile.css">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
