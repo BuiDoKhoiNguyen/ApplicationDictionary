@@ -7,10 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -21,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuController extends Controllers implements Initializable {
+public class MenuController implements Initializable {
     @FXML
     private AnchorPane mainAP;
     @FXML
@@ -29,7 +27,6 @@ public class MenuController extends Controllers implements Initializable {
     @FXML
     private AnchorPane translateAP;
     @FXML
-
     private AnchorPane usedTimeAP;
     @FXML
     private BorderPane profileAP;
@@ -61,18 +58,14 @@ public class MenuController extends Controllers implements Initializable {
         profileController = new ProfileController();
     }
 
-
     @FXML
     public void searchFunction() {
         mainAP.getChildren().setAll(searchAP);
     }
+
     @FXML
     public void translateFunction() {
         mainAP.getChildren().setAll(translateAP);
-    }
-    @FXML
-    public void favouriteFunction() {
-        mainAP.getChildren().setAll(favouriteAP);
     }
 
     @FXML
@@ -115,7 +108,6 @@ public class MenuController extends Controllers implements Initializable {
             throw new RuntimeException(e);
         }
         searchController = loader.getController();
-        searchController.loadButton(this.searchButton, this.translateButton, this.favouriteButton, this.saveButton, this.gameButton, this.logoutButton);
 
         loader = new FXMLLoader(getClass().getResource("/FXML/translate.fxml"));
         try {
@@ -124,20 +116,6 @@ public class MenuController extends Controllers implements Initializable {
             throw new RuntimeException(e);
         }
         translateController = loader.getController();
-        translateController.loadButton(this.searchButton, this.translateButton, this.favouriteButton, this.saveButton, this.gameButton, this.logoutButton);
-
-        loader = new FXMLLoader(getClass().getResource("/FXML/favourite.fxml"));
-        try {
-            favouriteAP = loader.load();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        favouriteController = loader.getController();
-        favouriteController.loadButton(this.searchButton, this.translateButton, this.favouriteButton, this.saveButton, this.gameButton, this.logoutButton);
-
-        searchController.loadController(searchController, translateController, favouriteController);
-        translateController.loadController(searchController, translateController, favouriteController);
-        favouriteController.loadController(searchController, translateController, favouriteController);
 
         loader = new FXMLLoader(getClass().getResource("/FXML/Profile.fxml"));
         try {
@@ -149,6 +127,7 @@ public class MenuController extends Controllers implements Initializable {
 
         mainAP.getChildren().setAll(searchAP);
     }
+
 
     private double x = 0;
     private double y = 0;
@@ -167,4 +146,3 @@ public class MenuController extends Controllers implements Initializable {
         y = e.getSceneY();
     }
 }
-

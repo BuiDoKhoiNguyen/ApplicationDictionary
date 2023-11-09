@@ -1,10 +1,8 @@
 
-
 //import Controllers.PreloaderController;
 //import Controllers.LauncherPreloader;
 //import javafx.application.Application;
 //import javafx.stage.Stage;
-
 //
 //
 //public class App extends Application {
@@ -22,13 +20,11 @@
 //    }
 //
 //    public static void main(String[] args) {
-
 //        System.setProperty("javafx.preloader",  LauncherPreloader.class.getCanonicalName());
-
 //        launch(args);
 //    }
 //
-
+//}
 
 
 import javafx.application.Application;
@@ -50,4 +46,3 @@ public class App extends Application {
         primaryStage.show();
     }
 }
-

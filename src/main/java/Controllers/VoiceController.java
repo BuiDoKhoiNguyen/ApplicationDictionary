@@ -45,6 +45,13 @@ public class VoiceController {
             e.printStackTrace();
         }
     }
+
+    public static void main(String[] args) throws Exception {
+        PlatformImpl.startup(() -> {
+            speakWord("fuck you");
+        });
+        //speakWord("idiot");
+    }
 }
 
 

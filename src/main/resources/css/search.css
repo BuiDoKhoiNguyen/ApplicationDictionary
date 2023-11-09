@@ -1,3 +1,7 @@
+/*.button-menu {*/
+/*    -fx-graphic: url('../img/menu.png');*/
+/*}*/
+
 .button-audio {
     -fx-graphic: url('../img/audio.png');
     -fx-background-color: transparent;
@@ -31,12 +35,6 @@
     -fx-graphic: url('../img/delete.png');
     -fx-background-color: white;
 }
-
-/*.button-delete:hover {
-    width: 30px;
-    length: 30px;
-    -fx-graphic: url('../img/icons8-remove.gif') 0 0;
-} TODO: add gif*/
 
 .text-field {
 
