@@ -1,35 +1,35 @@
 .button-from {
-    -fx-background-color: white;
+    -fx-text-fill: black;
 }
 
 .button-from:hover {
+    -fx-background-color: #76d2fc;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 18;
-    -fx-border-color: #76d2fc;
-    -fx-border-width: 0px 0px 3px 0px;
 }
 
 .button-from:selected {
+    -fx-background-color: #3238a8;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 18;
-    -fx-border-color: #76d2fc;
-    -fx-border-width: 0px 0px 3px 0px;
 }
 
 .button-to {
-    -fx-background-color: white;
+    -fx-text-fill: black;
 }
 
 .button-to:hover {
+    -fx-background-color: #3238a8;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 18;
-    -fx-border-color: #3238a8;
-    -fx-border-width: 0px 0px 3px 0px;
 }
 
 .button-to:selected {
+    -fx-background-color: #76d2fc;
+    -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 18;
-    -fx-border-color: #3238a8;
-    -fx-border-width: 0px 0px 3px 0px;
 }
