@@ -245,7 +245,7 @@ public class LoginController implements Initializable {
     }
 
     public void errorNotification(String text) {
-        Image image = new Image("/Image/icons8-x-48.png");
+        Image image = new Image("/img/icons8-x-48.png");
         Notifications.create()
                 .graphic(new ImageView(image))
                 .title("Error")
@@ -256,7 +256,7 @@ public class LoginController implements Initializable {
     }
 
     public void successNotification(String text) {
-        Image image = new Image("/Image/icons8-tick-48.png");
+        Image image = new Image("/img/icons8-tick-48.png");
         Notifications.create()
                 .graphic(new ImageView(image))
                 .title("Success")

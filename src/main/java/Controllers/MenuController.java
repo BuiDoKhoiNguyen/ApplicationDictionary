@@ -97,7 +97,7 @@ public class MenuController extends TaskControllers implements Initializable {
 
         Platform.runLater(() -> searchButton.requestFocus());
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Profile.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
         try {
             profileAP = loader.load();
         } catch (IOException e) {
@@ -105,7 +105,7 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         profileController = loader.getController();
 
-        loader = new FXMLLoader(getClass().getResource("/FXML/search.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/fxml/search.fxml"));
         try {
             searchAP = loader.load();
         } catch (IOException e) {
@@ -113,7 +113,7 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         searchController = loader.getController();
 
-        loader = new FXMLLoader(getClass().getResource("/FXML/translate.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/fxml/translate.fxml"));
         try {
             translateAP = loader.load();
         } catch (IOException e) {
@@ -121,7 +121,7 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         translateController = loader.getController();
 
-        loader = new FXMLLoader(getClass().getResource("/FXML/favourite.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/fxml/favourite.fxml"));
         try {
             favouriteAP = loader.load();
         } catch (IOException e) {

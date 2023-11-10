@@ -16,24 +16,23 @@
          </font></TextField>
       <WebView fx:id="translationField" fontScale="1.5" layoutX="35.0" layoutY="327.0" prefHeight="200.0" prefWidth="650.0" />
       <HBox layoutX="34.0" layoutY="20.0" prefHeight="45.0" prefWidth="425.0">
-      <HBox layoutX="34.0" layoutY="20.0" prefHeight="45.0" prefWidth="425.0">
          <children>
-            <ToggleButton fx:id="fromEN" mnemonicParsing="false" onMouseClicked="#setFromEN" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../CSS/translate.css" text="Anh">
+            <ToggleButton fx:id="fromEN" mnemonicParsing="false" onMouseClicked="#setFromEN" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../css/translate.css" text="Anh">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="fromVN" mnemonicParsing="false" onMouseClicked="#setFromVN" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../CSS/translate.css" text="Việt">
+            <ToggleButton fx:id="fromVN" mnemonicParsing="false" onMouseClicked="#setFromVN" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../css/translate.css" text="Việt">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="fromFR" mnemonicParsing="false" onMouseClicked="#setFromFR" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../CSS/translate.css" text="Pháp">
+            <ToggleButton fx:id="fromFR" mnemonicParsing="false" onMouseClicked="#setFromFR" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../css/translate.css" text="Pháp">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="fromAutoDetect" mnemonicParsing="false" onMouseClicked="#setFromAutoDetect" prefHeight="45.0" prefWidth="200.0" styleClass="button-from" stylesheets="@../CSS/translate.css" text="Phát hiện ngôn ngữ">
+            <ToggleButton fx:id="fromAutoDetect" mnemonicParsing="false" onMouseClicked="#setFromAutoDetect" prefHeight="45.0" prefWidth="200.0" styleClass="button-from" stylesheets="@../css/translate.css" text="Phát hiện ngôn ngữ">
                <font>
                   <Font size="18.0" />
                </font>
@@ -41,19 +40,18 @@
          </children>
       </HBox>
       <HBox layoutX="34.0" layoutY="281.0" prefHeight="45.0" prefWidth="425.0">
-      <HBox layoutX="34.0" layoutY="281.0" prefHeight="45.0" prefWidth="425.0">
          <children>
-            <ToggleButton fx:id="toVN" mnemonicParsing="false" onMouseClicked="#setToVN" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../CSS/translate.css" text="Việt">
+            <ToggleButton fx:id="toVN" mnemonicParsing="false" onMouseClicked="#setToVN" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Việt">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="toEN" mnemonicParsing="false" onMouseClicked="#setToEN" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../CSS/translate.css" text="Anh">
+            <ToggleButton fx:id="toEN" mnemonicParsing="false" onMouseClicked="#setToEN" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Anh">
                <font>
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="toFR" mnemonicParsing="false" onMouseClicked="#setToFR" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../CSS/translate.css" text="Pháp">
+            <ToggleButton fx:id="toFR" mnemonicParsing="false" onMouseClicked="#setToFR" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Pháp">
                <font>
                   <Font size="18.0" />
                </font>

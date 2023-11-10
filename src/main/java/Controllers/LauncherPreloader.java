@@ -15,7 +15,7 @@ public class LauncherPreloader extends Preloader {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.preloaderStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/Preloader.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/preloader.fxml"));
         Scene scene = new Scene(root);
 
         scene.setFill(Color.TRANSPARENT);

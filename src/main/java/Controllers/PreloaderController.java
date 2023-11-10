@@ -76,7 +76,7 @@ public class PreloaderController implements Initializable {
                     try {
                         Thread.sleep(500);
                         Stage stage = new Stage();
-                        Parent root = FXMLLoader.load(getClass().getResource("/FXML/Login.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
                         Scene scene = new Scene(root);
                         stage.setScene(scene);
                         scene.setFill(Color.TRANSPARENT);
