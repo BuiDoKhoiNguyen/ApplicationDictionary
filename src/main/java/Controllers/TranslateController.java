@@ -8,12 +8,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.TesseractException;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static java.lang.System.exit;
 
 public class TranslateController implements Initializable {
     @FXML
@@ -40,6 +52,9 @@ public class TranslateController implements Initializable {
     private ToggleButton toSimplifiedCN;
     @FXML
     private Button cancelButton;
+    @FXML
+    private Button scan;
+    private File selectedFile;
     private String languageFrom;
     private String languageTo;
 
@@ -113,8 +128,17 @@ public class TranslateController implements Initializable {
     }
 
     @FXML
-    public void translate() throws IOException {
+    public void translate() throws IOException, TesseractException {
         String inputText = inputField.getText();
+
+        if (inputText.isEmpty() && selectedFile != null) {
+            try {
+                inputText = ImageToText(selectedFile.getAbsolutePath());
+            } catch (TesseractException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
         String translatedText = TranslateAPI.googleTranslate(languageFrom, languageTo, inputText);
         translationField.getEngine().loadContent(translatedText);
     }
@@ -123,7 +147,53 @@ public class TranslateController implements Initializable {
         ProfileController.recordAppUsage();
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+        exit(0);
     }
+
+    @FXML
+    public void scanButtonOnAction(ActionEvent e) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose file");
+        fileChooser.setInitialDirectory(new File("C:/Users/ASUS/KhoiNguyen"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All image files", "*.jpg", "*.png")
+        );
+
+        Stage stage = (Stage) scan.getScene().getWindow();
+        selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            try {
+                String extractedText = ImageToText(selectedFile.getAbsolutePath());
+                inputField.setText(extractedText);
+
+                translate();
+            } catch (TesseractException ex) {
+                ex.printStackTrace();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        } else {
+            System.out.println("No file has been selected");
+        }
+    }
+
+
+
+    public static String ImageToText(String imagePath) throws TesseractException {
+        Tesseract tesseract = new Tesseract();
+        tesseract.setDatapath("lib\\Tess4J\\tessdata");
+        File imageFile = new File(imagePath);
+
+        if (imageFile.exists()) {
+            String text = tesseract.doOCR(imageFile);
+            return text;
+        } else {
+            System.err.println("Image file does not exist: " + imagePath);
+            return "";
+        }
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -33,3 +33,7 @@
     -fx-font-weight: bold;
     -fx-font-size: 18;
 }
+
+#scan {
+    -fx-graphic: url('../img/scan.png');
+}

@@ -1,5 +1,6 @@
 package Controllers;
 
+import Base.DictionaryController;
 import DatabaseConnect.DatabaseConnection;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -23,6 +24,8 @@ public class PreloaderController implements Initializable {
     public Label lblLoading;
     @FXML
     public static Label lblLoadingg;
+
+    public static Connection connectDB;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,7 +52,7 @@ public class PreloaderController implements Initializable {
             try {
                 Thread.sleep(1000);
                 DatabaseConnection connectionNow = new DatabaseConnection();
-                Connection connectDB = connectionNow.getConnection();
+                connectDB = connectionNow.getConnection();
                 System.out.println("Connect to database successfully!");
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -76,7 +79,7 @@ public class PreloaderController implements Initializable {
                     try {
                         Thread.sleep(500);
                         Stage stage = new Stage();
-                        Parent root = FXMLLoader.load(getClass().getResource("/FXML/Login.fxml"));
+                        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
                         Scene scene = new Scene(root);
                         stage.setScene(scene);
                         scene.setFill(Color.TRANSPARENT);

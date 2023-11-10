@@ -4,7 +4,6 @@ import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.Notifications;
-import DatabaseConnect.DatabaseConnection;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,23 +23,28 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+import static Controllers.PreloaderController.connectDB;
+
 public class LoginController implements Initializable {
-    /** Effects processing */
+    /**
+     * Effects processing
+     */
     @FXML
-    private AnchorPane layer1,layer2,layer3;
+    private AnchorPane layer1, layer2, layer3;
     @FXML
-    private Button signUp,signIn;
+    private Button signUp, signIn;
     @FXML
-    private Label l1,b1,b2,b3,b4,b5;
+    private Label l1, b1, b2, b3, b4, b5;
     @FXML
-    private ImageView i1,i2,i3;
+    private ImageView i1, i2, i3;
     @FXML
     private Button buttonSignUp, buttonSignIn;
     @FXML
-    private TextField usernameTextField2,passwordField2,confirmPassword,fname,lname;
+    private TextField usernameTextField2, passwordField2, confirmPassword, fname, lname;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -148,7 +152,9 @@ public class LoginController implements Initializable {
     }
 
     /** ------------------------------------------------ */
-    /** Data processing */
+    /**
+     * Data processing
+     */
 
     @FXML
     private Button cancelButton;
@@ -162,13 +168,16 @@ public class LoginController implements Initializable {
     private StackPane stackPane = new StackPane();
 
     SceneController sceneController = new SceneController();
+    public static String username;
+
     public void loginButtonOnAction(ActionEvent e) throws IOException {
-        if(usernameTextField1.getText().isBlank() == false && passwordField1.getText().isBlank() == false) {
-            if(validateLogin()) {
+        username = usernameTextField1.getText();
+        System.out.println(username);
+        if (usernameTextField1.getText().isBlank() == false && passwordField1.getText().isBlank() == false) {
+            if (validateLogin()) {
                 successNotification("Welcome to application!");
                 sceneController.switchToMenu(e);
-            }
-            else {
+            } else {
                 errorNotification("Invalid login. Please try again!");
             }
         } else {
@@ -177,12 +186,11 @@ public class LoginController implements Initializable {
     }
 
     public void createAccountButtonOnAction(ActionEvent e) throws IOException {
-        if(usernameTextField2.getText().isBlank() == false && passwordField2.getText().isBlank() == false
+        if (usernameTextField2.getText().isBlank() == false && passwordField2.getText().isBlank() == false
                 && fname.getText().isBlank() == false && lname.getText().isBlank() == false && confirmPassword.getText().isBlank() == false) {
-            if(validateSignUp(usernameTextField2.getText(), passwordField2.getText(), confirmPassword.getText(), fname.getText(), lname.getText())) {
+            if (validateSignUp(usernameTextField2.getText(), passwordField2.getText(), confirmPassword.getText(), fname.getText(), lname.getText())) {
                 successNotification("Account successfully created! Please login to try app");
-            }
-            else {
+            } else {
                 errorNotification("Unable to register account. Please try again later!");
             }
         } else {
@@ -196,15 +204,15 @@ public class LoginController implements Initializable {
     }
 
     public boolean validateLogin() {
-        Connection connectDB = DatabaseConnection.getConnection();
+//        Connection connectDB = DatabaseConnection.getConnection();
 
-        String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
+        String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() + "'";
 
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
 
-            while(queryResult.next()) {
+            while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
                     return true;
                 } else {
@@ -218,19 +226,19 @@ public class LoginController implements Initializable {
     }
 
     public boolean validateSignUp(String username, String password, String confirmPassword, String fName, String lName) {
-        Connection connectDB = DatabaseConnection.getConnection();
+//        Connection connectDB = DatabaseConnection.getConnection();
 
-        String verifySignUp = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
+        String verifySignUp = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() + "'";
 
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifySignUp);
 
-            while(queryResult.next()) {
+            while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1 && password.equals(confirmPassword)) {
                     return false;
                 } else {
-                    if(password.equals(confirmPassword)) {
+                    if (password.equals(confirmPassword)) {
                         String createAccount = "INSERT INTO UserAccounts (FirstName, LastName, Username, Password) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "')";
                         statement.executeUpdate(createAccount);
                         return true;
@@ -244,8 +252,28 @@ public class LoginController implements Initializable {
         return false;
     }
 
+
+    public static UserInfo getUserInfo() {
+        String query = "SELECT idUserAccounts, CONCAT(FirstName,' ', LastName) as FullName,profileImage FROM UserAccounts WHERE idUserAccounts = '" + username + "'";
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(query);
+            if (queryResult.next()) {
+                int userId = queryResult .getInt("IdUserAccounts");
+                String name = queryResult.getString("FullName");
+                byte[] profileImg = queryResult.getBytes("profileImage");
+                return new UserInfo(userId, name, username, profileImg);
+            } else {
+                System.out.println("Không tìm thấy người dùng !" );
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return null;
+    }
+
     public void errorNotification(String text) {
-        Image image = new Image("/Image/icons8-x-48.png");
+        Image image = new Image("/img/icons8-x-48.png");
         Notifications.create()
                 .graphic(new ImageView(image))
                 .title("Error")
@@ -256,7 +284,7 @@ public class LoginController implements Initializable {
     }
 
     public void successNotification(String text) {
-        Image image = new Image("/Image/icons8-tick-48.png");
+        Image image = new Image("/img/icons8-tick-48.png");
         Notifications.create()
                 .graphic(new ImageView(image))
                 .title("Success")
@@ -267,9 +295,12 @@ public class LoginController implements Initializable {
     }
 
     /** ------------------------------------------------ */
-    /** Dragged screen */
+    /**
+     * Dragged screen
+     */
     private double x = 0;
     private double y = 0;
+
     @FXML
     public void paneDragged(MouseEvent e) {
         Stage stage = (Stage) stackPane.getScene().getWindow();

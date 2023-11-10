@@ -14,10 +14,16 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
+
+import static Controllers.PreloaderController.connectDB;
 
 public class ProfileController implements Initializable {
     @FXML
@@ -34,7 +40,7 @@ public class ProfileController implements Initializable {
     private ImageView imgView;
 
     @FXML
-    private Label time;
+    private Label time,hello;
     private volatile boolean stop = false;
 
     private static int currtime = 0;
@@ -42,9 +48,12 @@ public class ProfileController implements Initializable {
     private static final String FILE_NAME = "data/usedtime.txt";
 
     private Map<String, String> chartData;
+    private int totalTime, averageTime;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+//        UserInfo user = getUserInfo();
+//        hello.setText("Hello " + user.getName());
         chartData = new HashMap<>();
 
         Timer timer = new Timer();
@@ -166,8 +175,9 @@ public class ProfileController implements Initializable {
         return dayOfWeek.toString();
     }
 
+
     @FXML
-    void buttonAddPicOnAction(ActionEvent e) {
+    public void buttonAddPicOnAction(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file");
         fileChooser.setInitialDirectory(new File("C:/Users/ASUS/KhoiNguyen"));
@@ -180,6 +190,7 @@ public class ProfileController implements Initializable {
 
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
+            System.out.println(selectedFile.toURI());
             imgView.setImage(image);
         } else {
             System.out.println("No file has been selected");

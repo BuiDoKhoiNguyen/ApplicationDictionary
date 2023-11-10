@@ -9,12 +9,12 @@
 
 <AnchorPane prefHeight="566.0" prefWidth="728.0" style="-fx-background-color: linear-gradient( to right top, #76d2fc,#3238a8);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProfileController">
    <children>
-      <BarChart fx:id="barChart" layoutX="55.0" layoutY="75.0" prefHeight="416.0" prefWidth="634.0" styleClass="chart-bar" stylesheets="@../CSS/Profile.css" title="Time spent using the application">
+      <BarChart fx:id="barChart" layoutX="55.0" layoutY="75.0" prefHeight="416.0" prefWidth="634.0" styleClass="chart-bar" stylesheets="@../css/profile.css" title="Time spent using the application">
         <xAxis>
-          <CategoryAxis prefHeight="27.0" prefWidth="579.0" side="BOTTOM" styleClass="axis-label" stylesheets="@../CSS/Profile.css" tickLabelFill="WHITE" fx:id="x" />
+          <CategoryAxis prefHeight="27.0" prefWidth="579.0" side="BOTTOM" styleClass="axis-label" stylesheets="@../css/profile.css" tickLabelFill="WHITE" fx:id="x" />
         </xAxis>
         <yAxis>
-          <NumberAxis fx:id="y" side="LEFT" styleClass="axis-label" stylesheets="@../CSS/Profile.css" />
+          <NumberAxis fx:id="y" side="LEFT" styleClass="axis-label" stylesheets="@../css/profile.css" />
         </yAxis>
       </BarChart>
       <Label fx:id="time" alignment="CENTER" layoutX="234.0" layoutY="28.0" prefHeight="18.0" prefWidth="234.0" textFill="WHITE">

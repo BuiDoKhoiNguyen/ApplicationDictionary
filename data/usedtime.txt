@@ -1,7 +1,7 @@
 Monday: 281
 Tuesday: 76
-Wednesday: 0
-Thursday: 0
-Friday: 0
+Wednesday: 266
+Thursday: 372
+Friday: 20
 Saturday: 0
 Sunday: 0

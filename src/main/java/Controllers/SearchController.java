@@ -142,6 +142,6 @@ public class SearchController implements Initializable {
         ProfileController.recordAppUsage();
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
-//        exit(0);
+        exit(0);
     }
 }

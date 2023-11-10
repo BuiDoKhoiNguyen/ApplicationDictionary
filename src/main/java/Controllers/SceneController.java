@@ -19,7 +19,7 @@ public class SceneController {
     private Scene scene;
 
     public void switchToMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/menu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/menu.fxml"));
 
 
         Node sourceNode = (Node) event.getSource();
@@ -46,7 +46,7 @@ public class SceneController {
 
     public void switchToLogin(ActionEvent event) throws IOException {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         Scene scene = new Scene(root);
 
         scene.setFill(Color.TRANSPARENT);
