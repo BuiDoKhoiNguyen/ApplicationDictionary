@@ -1,3 +1,9 @@
+
+.text_border {
+    -fx-border-color: black;
+    -fx-border-width: 2;
+}
+
 .text-explosion {
     -fx-font-size: 24px;
     -fx-effect: dropshadow(gaussian, red, 30, 0.5, 0, 0);

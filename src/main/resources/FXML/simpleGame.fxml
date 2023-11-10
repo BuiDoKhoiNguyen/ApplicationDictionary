@@ -45,6 +45,17 @@
       <ToggleButton fx:id="togButton" layoutX="31.0" layoutY="10.0" mnemonicParsing="false" onAction="#changeOnOff" prefHeight="44.0" prefWidth="70.0" stylesheets="@../CSS/form.css" />
       <Button fx:id="yesButton" layoutX="251.0" layoutY="269.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="52.0" stylesheets="@../CSS/form.css" text="yes" />
       <Button fx:id="noButton" layoutX="442.0" layoutY="269.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="52.0" stylesheets="@../CSS/form.css" text="No" />
-      <Button fx:id="review" layoutX="347.0" layoutY="269.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="52.0" stylesheets="@../CSS/form.css" text="review" />
+      <Button fx:id="review" layoutX="338.0" layoutY="268.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="70.0" styleClass="noButton" stylesheets="@../CSS/form.css" text="review" />
+      <Button fx:id="backResult" layoutX="645.0" layoutY="13.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="86.0" styleClass="yesButton" stylesheets="@../CSS/form.css" text="Back" />
+      <Button fx:id="Ques1" alignment="CENTER" contentDisplay="CENTER" layoutX="75.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../CSS/form.css" text="Ques1" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="Ques2" alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../CSS/form.css" text="Ques2" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="Ques3" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../CSS/form.css" text="Ques3" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="Ques4" alignment="CENTER" contentDisplay="CENTER" layoutX="255.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../CSS/form.css" text="Ques4" textFill="WHITE" />
+      <Button fx:id="Ques5" alignment="CENTER" contentDisplay="CENTER" layoutX="315.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../CSS/form.css" text="Ques5" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="Ques6" alignment="CENTER" contentDisplay="CENTER" layoutX="376.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../CSS/form.css" text="Ques6" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="Ques7" alignment="CENTER" contentDisplay="CENTER" layoutX="436.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../CSS/form.css" text="Ques7" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="Ques8" alignment="CENTER" contentDisplay="CENTER" layoutX="496.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../CSS/form.css" text="Ques8" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="Ques9" alignment="CENTER" contentDisplay="CENTER" layoutX="556.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../CSS/form.css" text="Ques9" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="Ques10" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../CSS/form.css" text="Ques10" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

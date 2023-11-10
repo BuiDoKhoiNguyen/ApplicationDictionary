@@ -36,18 +36,19 @@ import java.util.*;
 
 public class GameController implements Initializable {
     @FXML
-    private WebView webView;
+    WebView webView;
     @FXML
-    private Button ansA, ansB, ansC, ansD, playButton, yesButton, noButton,review;
+    Button ansA, ansB, ansC, ansD, playButton, yesButton, noButton, review, Ques1, Ques2, Ques3, Ques4, Ques5,
+            Ques6, Ques7, Ques8, Ques9, Ques10, backResult;
     @FXML
-    private Label question,resultTable;
+    private Label question, resultTable;
     @FXML
-    private ProgressBar progressBar;
+    ProgressBar progressBar;
 
     @FXML
-    private ToggleButton togButton;
+    ToggleButton togButton;
     @FXML
-    private AnchorPane myAnchor;
+    AnchorPane myAnchor;
 
     Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/audioOn.png"));
     Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/audioOff.png"));
@@ -63,23 +64,33 @@ public class GameController implements Initializable {
     private List<Word> listWord;
     int index = 0;
     int correctAnswer = 0;
-    int totalQuestion= 10;
+    int totalQuestion = 10;
     int seconds = 10;
     boolean Choice = false;
 
     String trueAns = "";
 
-    private Dictionary dictionary = new Dictionary();
+    Dictionary dictionary = new Dictionary();
     private static final String IN_PATH = "C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\data\\dictionaries.txt";
+
+    List<String> examE = new ArrayList<>();
+    List<String> ansE = new ArrayList<>();
+
+    List<Boolean> color = new ArrayList<>();
+
+    List<Integer> viTri = new ArrayList<>();
+
+    List<Button> all = new ArrayList<>();
+
+    int quesI = -1;
 
 
     public GameController() {
-        NewDictionaryManagement.loadFromFile(dictionary,IN_PATH);
+        NewDictionaryManagement.loadFromFile(dictionary, IN_PATH);
     }
 
 
-
-    public void quiz(ActionEvent event){
+    public void quiz(ActionEvent event) {
         listWord = new ArrayList<>(dictionary.values());
         changeOnOff();
         showQues();
@@ -87,7 +98,7 @@ public class GameController implements Initializable {
     }
 
 
-    public void down(){
+    public void down() {
         if (task != null && task.isRunning()) {
             task.cancel();
         }
@@ -96,7 +107,7 @@ public class GameController implements Initializable {
             @Override
             protected Void call() throws Exception {
                 for (int counter = 100; counter >= 0; counter--) {
-                    if (isCancelled() || Choice==true) {
+                    if (isCancelled() || Choice == true) {
                         break;
                     }
                     updateProgress(counter, 100);
@@ -118,15 +129,13 @@ public class GameController implements Initializable {
     }
 
 
-
-    public void showQues(){
-        if(index>=totalQuestion){
+    public void showQues() {
+        if (index >= totalQuestion) {
             result();
-        }
-        else{
-            question.setText("Question "+(index+1));
+        } else {
+            question.setText("Question " + (index + 1));
             Collections.shuffle(listWord);
-            List<Word> randomWords = listWord.subList(0,4);
+            List<Word> randomWords = listWord.subList(0, 4);
             int t = 0;
             ansA.setText(randomWords.get(t).getWordTarget());
             t++;
@@ -138,18 +147,20 @@ public class GameController implements Initializable {
             Random random = new Random();
             int randomIndex = random.nextInt(randomWords.size());
             String ques = randomWords.get(randomIndex).getWordExplain();
+            examE.add(ques);
             String tmp = randomWords.get(randomIndex).getWordTarget();
             ques = ques.replaceAll("/.*?/", "");
             ques = ques.replaceAll("'.*?/", "");
-            ques = ques.replaceAll(tmp,"...");
+            ques = ques.replaceAll(tmp, "...");
             webView.getEngine().loadContent(ques);
             trueAns = randomWords.get(randomIndex).getWordTarget();
+            ansE.add(trueAns);
             down();
         }
     }
 
 
-    public void handle (ActionEvent event){
+    public void handle(ActionEvent event) {
 
         ansA.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -158,10 +169,11 @@ public class GameController implements Initializable {
                 ansB.setDisable(true);
                 ansC.setDisable(true);
                 ansD.setDisable(true);
-                if(event.getSource()==ansA){
-                    if(ansA.getText()==trueAns){
+                if (event.getSource() == ansA) {
+                    if (ansA.getText() == trueAns) {
                         correctAnswer++;
-                    }
+                        color.add(true);
+                    } else color.add(false);
                 }
                 displayAnswer();
             }
@@ -173,10 +185,11 @@ public class GameController implements Initializable {
                 ansB.setDisable(true);
                 ansC.setDisable(true);
                 ansD.setDisable(true);
-                if(event.getSource()==ansB){
-                    if(ansB.getText()==trueAns){
+                if (event.getSource() == ansB) {
+                    if (ansB.getText() == trueAns) {
                         correctAnswer++;
-                    }
+                        color.add(true);
+                    } else color.add(false);
                 }
                 displayAnswer();
             }
@@ -188,10 +201,11 @@ public class GameController implements Initializable {
                 ansB.setDisable(true);
                 ansC.setDisable(true);
                 ansD.setDisable(true);
-                if(event.getSource()==ansC){
-                    if(ansC.getText()==trueAns){
+                if (event.getSource() == ansC) {
+                    if (ansC.getText() == trueAns) {
                         correctAnswer++;
-                    }
+                        color.add(true);
+                    } else color.add(false);
                 }
                 displayAnswer();
             }
@@ -203,17 +217,18 @@ public class GameController implements Initializable {
                 ansB.setDisable(true);
                 ansC.setDisable(true);
                 ansD.setDisable(true);
-                if(event.getSource()==ansD){
-                    if(ansD.getText()==trueAns){
+                if (event.getSource() == ansD) {
+                    if (ansD.getText() == trueAns) {
                         correctAnswer++;
-                    }
+                        color.add(true);
+                    } else color.add(false);
                 }
                 displayAnswer();
             }
         });
     }
 
-    public void displayAnswer(){
+    public void displayAnswer() {
         //timer.stop();
         progressBar.progressProperty().unbind();
         Choice = true;
@@ -227,18 +242,18 @@ public class GameController implements Initializable {
         ansC.setOpacity(1.0);
         ansD.setOpacity(1.0);
 
-        if(ansA.getText()!=trueAns){
+        if (ansA.getText() != trueAns) {
             ansA.setVisible(false);
-        }
-        if(ansB.getText()!=trueAns){
+        } else viTri.add(1);
+        if (ansB.getText() != trueAns) {
             ansB.setVisible(false);
-        }
-        if(ansC.getText()!=trueAns){
+        } else viTri.add(2);
+        if (ansC.getText() != trueAns) {
             ansC.setVisible(false);
-        }
-        if(ansD.getText()!=trueAns){
+        } else viTri.add(3);
+        if (ansD.getText() != trueAns) {
             ansD.setVisible(false);
-        }
+        } else viTri.add(4);
 
         Timeline pause = new Timeline(new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
             @Override
@@ -250,7 +265,7 @@ public class GameController implements Initializable {
                 ansD.setVisible(true);
 
                 Choice = false;
-                trueAns="";
+                trueAns = "";
                 ansA.setDisable(false);
                 ansB.setDisable(false);
                 ansC.setDisable(false);
@@ -262,7 +277,8 @@ public class GameController implements Initializable {
         pause.setCycleCount(1);
         pause.play();
     }
-    public void result(){
+
+    public void result() {
         ansA.setText("");
         ansB.setText("");
         ansC.setText("");
@@ -275,42 +291,41 @@ public class GameController implements Initializable {
         noButton.setVisible(true);
         yesButton.setVisible(true);
         resultTable.setVisible(true);
+        review.setVisible(true);
         resultTable.setTextFill(Color.WHITE);
         progressBar.setProgress(0.0);
-        if(correctAnswer>=5){
+        if (correctAnswer >= 5) {
             String tmp = "     So cool, well done bruh";
-            tmp+="\n";
-            tmp+="                   ";
-            tmp+="("+correctAnswer+"/"+totalQuestion+")";
-            tmp+="\n";
-            tmp+="    ";
-            tmp+="continue one more time";
-            tmp+="    ";
+            tmp += "\n";
+            tmp += "                   ";
+            tmp += "(" + correctAnswer + "/" + totalQuestion + ")";
+            tmp += "\n";
+            tmp += "    ";
+            tmp += "continue one more time";
+            tmp += "    ";
             resultTable.setText(tmp);
             noButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     FadeTransition fadeOut = new FadeTransition(Duration.seconds(1));
-                    fadeOut.setNode(((javafx.scene.Node) event.getSource()).getScene().getRoot()); // Scene hiện tại
+                    fadeOut.setNode(((javafx.scene.Node) event.getSource()).getScene().getRoot());
                     fadeOut.setFromValue(1.0);
                     fadeOut.setToValue(0.0);
 
-                    // Xử lý khi hoàn thành chuyển đổi
                     fadeOut.setOnFinished(e -> {
                         try {
-                            // Tạo scene mới từ FXML
+
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
                             mediaPlayer.stop();
                             Parent scene2Parent = loader.load();
                             Scene scene2 = new Scene(scene2Parent);
 
-                            // Lấy stage hiện tại và đặt scene mới
                             Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
                             window.setScene(scene2);
 
-                            // Tạo FadeTransition mới cho scene mới (nếu muốn)
+
                             FadeTransition fadeIn = new FadeTransition(Duration.seconds(1));
-                            fadeIn.setNode(scene2.getRoot()); // scene2 là Scene mới
+                            fadeIn.setNode(scene2.getRoot());
                             fadeIn.setFromValue(0.0);
                             fadeIn.setToValue(1.0);
                             fadeIn.play();
@@ -319,7 +334,6 @@ public class GameController implements Initializable {
                         }
                     });
 
-                    // Bắt đầu chuyển đổi
                     fadeOut.play();
                 }
             });
@@ -328,7 +342,7 @@ public class GameController implements Initializable {
                 public void handle(ActionEvent event) {
                     correctAnswer = 0;
                     progressBar.setProgress(1.0);
-                    trueAns="";
+                    trueAns = "";
                     index = 0;
                     noButton.setVisible(false);
                     yesButton.setVisible(false);
@@ -341,19 +355,366 @@ public class GameController implements Initializable {
 
                 }
             });
-            //review.setOnAction(new EventHandler<ActionEvent>() {
+            review.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    for (int i = 0; i < color.size(); i++) {
+                        if (color.get(i) == true) {
+                            all.get(i).setStyle("-fx-background-color:green;");
+                        } else all.get(i).setStyle("-fx-background-color:red;");
+                    }
+                    Ques1.getStyleClass().add("text_border");
+                    quesI = 1;
+                    webView.getEngine().loadContent(examE.get(0));
+                    if (viTri.get(0) == 1) {
+                        ansA.setText(ansE.get(0));
+                    }
+                    if (viTri.get(0) == 2) {
+                        ansB.setText(ansE.get(0));
+                    }
+                    if (viTri.get(0) == 3) {
+                        ansC.setText(ansE.get(0));
+                    }
+                    if (viTri.get(0) == 4) {
+                        ansD.setText(ansE.get(0));
+                    }
 
-            //});
-        }
-        else{
+                    backResult.setVisible(true);
+                    Ques1.setVisible(true);
+                    Ques2.setVisible(true);
+                    Ques3.setVisible(true);
+                    Ques4.setVisible(true);
+                    Ques5.setVisible(true);
+                    Ques6.setVisible(true);
+                    Ques7.setVisible(true);
+                    Ques8.setVisible(true);
+                    Ques9.setVisible(true);
+                    Ques10.setVisible(true);
+
+                    review.setVisible(false);
+                    noButton.setVisible(false);
+                    yesButton.setVisible(false);
+                    resultTable.setVisible(false);
+                    progressBar.setVisible(false);
+                    Ques1.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 1) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 1;
+                                webView.getEngine().loadContent(examE.get(0));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(0) == 1) {
+                                    ansA.setText(ansE.get(0));
+                                }
+                                if (viTri.get(0) == 2) {
+                                    ansB.setText(ansE.get(0));
+                                }
+                                if (viTri.get(0) == 3) {
+                                    ansC.setText(ansE.get(0));
+                                }
+                                if (viTri.get(0) == 4) {
+                                    ansD.setText(ansE.get(0));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques2.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 2) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 2;
+                                webView.getEngine().loadContent(examE.get(1));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(1) == 1) {
+                                    ansA.setText(ansE.get(1));
+                                }
+                                if (viTri.get(1) == 2) {
+                                    ansB.setText(ansE.get(1));
+                                }
+                                if (viTri.get(1) == 3) {
+                                    ansC.setText(ansE.get(1));
+                                }
+                                if (viTri.get(1) == 4) {
+                                    ansD.setText(ansE.get(1));
+                                }
+                            }
+
+                        }
+                    });
+
+                    Ques3.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 3) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 3;
+                                webView.getEngine().loadContent(examE.get(2));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(2) == 1) {
+                                    ansA.setText(ansE.get(2));
+                                }
+                                if (viTri.get(2) == 2) {
+                                    ansB.setText(ansE.get(2));
+                                }
+                                if (viTri.get(2) == 3) {
+                                    ansC.setText(ansE.get(2));
+                                }
+                                if (viTri.get(2) == 4) {
+                                    ansD.setText(ansE.get(2));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques4.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 4) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 4;
+                                webView.getEngine().loadContent(examE.get(3));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(3) == 1) {
+                                    ansA.setText(ansE.get(3));
+                                }
+                                if (viTri.get(3) == 2) {
+                                    ansB.setText(ansE.get(3));
+                                }
+                                if (viTri.get(3) == 3) {
+                                    ansC.setText(ansE.get(3));
+                                }
+                                if (viTri.get(3) == 4) {
+                                    ansD.setText(ansE.get(3));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques5.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 5) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 5;
+                                webView.getEngine().loadContent(examE.get(4));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(4) == 1) {
+                                    ansA.setText(ansE.get(4));
+                                }
+                                if (viTri.get(4) == 2) {
+                                    ansB.setText(ansE.get(4));
+                                }
+                                if (viTri.get(4) == 3) {
+                                    ansC.setText(ansE.get(4));
+                                }
+                                if (viTri.get(4) == 4) {
+                                    ansD.setText(ansE.get(4));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques6.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 6) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 6;
+                                webView.getEngine().loadContent(examE.get(5));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(5) == 1) {
+                                    ansA.setText(ansE.get(5));
+                                }
+                                if (viTri.get(5) == 2) {
+                                    ansB.setText(ansE.get(5));
+                                }
+                                if (viTri.get(5) == 3) {
+                                    ansC.setText(ansE.get(5));
+                                }
+                                if (viTri.get(5) == 4) {
+                                    ansD.setText(ansE.get(5));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques7.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 7) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 7;
+                                webView.getEngine().loadContent(examE.get(6));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(6) == 1) {
+                                    ansA.setText(ansE.get(6));
+                                }
+                                if (viTri.get(6) == 2) {
+                                    ansB.setText(ansE.get(6));
+                                }
+                                if (viTri.get(6) == 3) {
+                                    ansC.setText(ansE.get(6));
+                                }
+                                if (viTri.get(6) == 4) {
+                                    ansD.setText(ansE.get(6));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques8.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 8) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 8;
+                                webView.getEngine().loadContent(examE.get(7));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(7) == 1) {
+                                    ansA.setText(ansE.get(7));
+                                }
+                                if (viTri.get(7) == 2) {
+                                    ansB.setText(ansE.get(7));
+                                }
+                                if (viTri.get(7) == 3) {
+                                    ansC.setText(ansE.get(7));
+                                }
+                                if (viTri.get(7) == 4) {
+                                    ansD.setText(ansE.get(7));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques9.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 9) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 9;
+                                webView.getEngine().loadContent(examE.get(8));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(8) == 1) {
+                                    ansA.setText(ansE.get(8));
+                                }
+                                if (viTri.get(8) == 2) {
+                                    ansB.setText(ansE.get(8));
+                                }
+                                if (viTri.get(8) == 3) {
+                                    ansC.setText(ansE.get(8));
+                                }
+                                if (viTri.get(8) == 4) {
+                                    ansD.setText(ansE.get(8));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques10.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 10) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 10;
+                                webView.getEngine().loadContent(examE.get(9));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(9) == 1) {
+                                    ansA.setText(ansE.get(9));
+                                }
+                                if (viTri.get(9) == 2) {
+                                    ansB.setText(ansE.get(9));
+                                }
+                                if (viTri.get(9) == 3) {
+                                    ansC.setText(ansE.get(9));
+                                }
+                                if (viTri.get(9) == 4) {
+                                    ansD.setText(ansE.get(9));
+                                }
+                            }
+
+                        }
+                    });
+                    backResult.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            ansA.setText("");
+                            ansB.setText("");
+                            ansC.setText("");
+                            ansD.setText("");
+                            webView.getEngine().loadContent("");
+                            Ques1.setVisible(false);
+                            Ques2.setVisible(false);
+                            Ques3.setVisible(false);
+                            Ques4.setVisible(false);
+                            Ques5.setVisible(false);
+                            Ques6.setVisible(false);
+                            Ques7.setVisible(false);
+                            Ques8.setVisible(false);
+                            Ques9.setVisible(false);
+                            Ques10.setVisible(false);
+                            backResult.setVisible(false);
+
+                            noButton.setVisible(true);
+                            yesButton.setVisible(true);
+                            resultTable.setVisible(true);
+                            progressBar.setVisible(true);
+                            review.setVisible(true);
+                        }
+                    });
+                }
+            });
+        } else {
             String tmp = "       Opps, try again bruh";
-            tmp+="\n";
-            tmp+="                    ";
-            tmp+="("+correctAnswer+"/"+totalQuestion+")";
-            tmp+="\n";
-            tmp+="    ";
-            tmp+="continue one more time";
-            tmp+="    ";
+            tmp += "\n";
+            tmp += "                  ";
+            tmp += "(" + correctAnswer + "/" + totalQuestion + ")";
+            tmp += "\n";
+            tmp += "    ";
+            tmp += "continue one more time";
+            tmp += "    ";
             resultTable.setText(tmp);
             noButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -375,7 +736,7 @@ public class GameController implements Initializable {
                             window.setScene(scene2);
 
                             FadeTransition fadeIn = new FadeTransition(Duration.seconds(1));
-                            fadeIn.setNode(scene2.getRoot()); // scene2 là Scene mới
+                            fadeIn.setNode(scene2.getRoot());
                             fadeIn.setFromValue(0.0);
                             fadeIn.setToValue(1.0);
                             fadeIn.play();
@@ -392,7 +753,7 @@ public class GameController implements Initializable {
                 public void handle(ActionEvent event) {
                     correctAnswer = 0;
                     progressBar.setProgress(1.0);
-                    trueAns="";
+                    trueAns = "";
                     index = 0;
                     noButton.setVisible(false);
                     yesButton.setVisible(false);
@@ -404,10 +765,361 @@ public class GameController implements Initializable {
                     quiz(new ActionEvent());
                 }
             });
+            review.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    for (int i = 0; i < color.size(); i++) {
+                        if (color.get(i) == true) {
+                            all.get(i).setStyle("-fx-background-color:green;");
+                        } else all.get(i).setStyle("-fx-background-color:red;");
+                    }
+                    Ques1.getStyleClass().add("text_border");
+                    quesI = 1;
+                    webView.getEngine().loadContent(examE.get(0));
+                    if (viTri.get(0) == 1) {
+                        ansA.setText(ansE.get(0));
+                    }
+                    if (viTri.get(0) == 2) {
+                        ansB.setText(ansE.get(0));
+                    }
+                    if (viTri.get(0) == 3) {
+                        ansC.setText(ansE.get(0));
+                    }
+                    if (viTri.get(0) == 4) {
+                        ansD.setText(ansE.get(0));
+                    }
+
+                    backResult.setVisible(true);
+                    Ques1.setVisible(true);
+                    Ques2.setVisible(true);
+                    Ques3.setVisible(true);
+                    Ques4.setVisible(true);
+                    Ques5.setVisible(true);
+                    Ques6.setVisible(true);
+                    Ques7.setVisible(true);
+                    Ques8.setVisible(true);
+                    Ques9.setVisible(true);
+                    Ques10.setVisible(true);
+
+                    review.setVisible(false);
+                    noButton.setVisible(false);
+                    yesButton.setVisible(false);
+                    resultTable.setVisible(false);
+                    progressBar.setVisible(false);
+                    Ques1.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 1) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 1;
+                                webView.getEngine().loadContent(examE.get(0));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(0) == 1) {
+                                    ansA.setText(ansE.get(0));
+                                }
+                                if (viTri.get(0) == 2) {
+                                    ansB.setText(ansE.get(0));
+                                }
+                                if (viTri.get(0) == 3) {
+                                    ansC.setText(ansE.get(0));
+                                }
+                                if (viTri.get(0) == 4) {
+                                    ansD.setText(ansE.get(0));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques2.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 2) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 2;
+                                webView.getEngine().loadContent(examE.get(1));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(1) == 1) {
+                                    ansA.setText(ansE.get(1));
+                                }
+                                if (viTri.get(1) == 2) {
+                                    ansB.setText(ansE.get(1));
+                                }
+                                if (viTri.get(1) == 3) {
+                                    ansC.setText(ansE.get(1));
+                                }
+                                if (viTri.get(1) == 4) {
+                                    ansD.setText(ansE.get(1));
+                                }
+                            }
+
+                        }
+                    });
+
+                    Ques3.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 3) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 3;
+                                webView.getEngine().loadContent(examE.get(2));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(2) == 1) {
+                                    ansA.setText(ansE.get(2));
+                                }
+                                if (viTri.get(2) == 2) {
+                                    ansB.setText(ansE.get(2));
+                                }
+                                if (viTri.get(2) == 3) {
+                                    ansC.setText(ansE.get(2));
+                                }
+                                if (viTri.get(2) == 4) {
+                                    ansD.setText(ansE.get(2));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques4.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 4) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 4;
+                                webView.getEngine().loadContent(examE.get(3));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(3) == 1) {
+                                    ansA.setText(ansE.get(3));
+                                }
+                                if (viTri.get(3) == 2) {
+                                    ansB.setText(ansE.get(3));
+                                }
+                                if (viTri.get(3) == 3) {
+                                    ansC.setText(ansE.get(3));
+                                }
+                                if (viTri.get(3) == 4) {
+                                    ansD.setText(ansE.get(3));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques5.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 5) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 5;
+                                webView.getEngine().loadContent(examE.get(4));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(4) == 1) {
+                                    ansA.setText(ansE.get(4));
+                                }
+                                if (viTri.get(4) == 2) {
+                                    ansB.setText(ansE.get(4));
+                                }
+                                if (viTri.get(4) == 3) {
+                                    ansC.setText(ansE.get(4));
+                                }
+                                if (viTri.get(4) == 4) {
+                                    ansD.setText(ansE.get(4));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques6.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 6) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 6;
+                                webView.getEngine().loadContent(examE.get(5));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(5) == 1) {
+                                    ansA.setText(ansE.get(5));
+                                }
+                                if (viTri.get(5) == 2) {
+                                    ansB.setText(ansE.get(5));
+                                }
+                                if (viTri.get(5) == 3) {
+                                    ansC.setText(ansE.get(5));
+                                }
+                                if (viTri.get(5) == 4) {
+                                    ansD.setText(ansE.get(5));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques7.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 7) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 7;
+                                webView.getEngine().loadContent(examE.get(6));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(6) == 1) {
+                                    ansA.setText(ansE.get(6));
+                                }
+                                if (viTri.get(6) == 2) {
+                                    ansB.setText(ansE.get(6));
+                                }
+                                if (viTri.get(6) == 3) {
+                                    ansC.setText(ansE.get(6));
+                                }
+                                if (viTri.get(6) == 4) {
+                                    ansD.setText(ansE.get(6));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques8.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 8) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 8;
+                                webView.getEngine().loadContent(examE.get(7));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(7) == 1) {
+                                    ansA.setText(ansE.get(7));
+                                }
+                                if (viTri.get(7) == 2) {
+                                    ansB.setText(ansE.get(7));
+                                }
+                                if (viTri.get(7) == 3) {
+                                    ansC.setText(ansE.get(7));
+                                }
+                                if (viTri.get(7) == 4) {
+                                    ansD.setText(ansE.get(7));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques9.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 9) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 9;
+                                webView.getEngine().loadContent(examE.get(8));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(8) == 1) {
+                                    ansA.setText(ansE.get(8));
+                                }
+                                if (viTri.get(8) == 2) {
+                                    ansB.setText(ansE.get(8));
+                                }
+                                if (viTri.get(8) == 3) {
+                                    ansC.setText(ansE.get(8));
+                                }
+                                if (viTri.get(8) == 4) {
+                                    ansD.setText(ansE.get(8));
+                                }
+                            }
+
+                        }
+                    });
+                    Ques10.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            if (quesI != 10) {
+                                ansA.setText("");
+                                ansB.setText("");
+                                ansC.setText("");
+                                ansD.setText("");
+                                all.get(quesI - 1).getStyleClass().remove("text_border");
+                                quesI = 10;
+                                webView.getEngine().loadContent(examE.get(9));
+                                all.get(quesI - 1).getStyleClass().add("text_border");
+                                if (viTri.get(9) == 1) {
+                                    ansA.setText(ansE.get(9));
+                                }
+                                if (viTri.get(9) == 2) {
+                                    ansB.setText(ansE.get(9));
+                                }
+                                if (viTri.get(9) == 3) {
+                                    ansC.setText(ansE.get(9));
+                                }
+                                if (viTri.get(9) == 4) {
+                                    ansD.setText(ansE.get(9));
+                                }
+                            }
+
+                        }
+                    });
+                    backResult.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            ansA.setText("");
+                            ansB.setText("");
+                            ansC.setText("");
+                            ansD.setText("");
+                            webView.getEngine().loadContent("");
+                            Ques1.setVisible(false);
+                            Ques2.setVisible(false);
+                            Ques3.setVisible(false);
+                            Ques4.setVisible(false);
+                            Ques5.setVisible(false);
+                            Ques6.setVisible(false);
+                            Ques7.setVisible(false);
+                            Ques8.setVisible(false);
+                            Ques9.setVisible(false);
+                            Ques10.setVisible(false);
+                            backResult.setVisible(false);
+
+                            noButton.setVisible(true);
+                            yesButton.setVisible(true);
+                            resultTable.setVisible(true);
+                            progressBar.setVisible(true);
+                            review.setVisible(true);
+                        }
+                    });
+                }
+            });
         }
     }
 
-    public void changeOnOff(){
+    public void changeOnOff() {
         boolean isMuted = togButton.isSelected();
 
         mediaPlayer.setMute(isMuted);
@@ -421,24 +1133,45 @@ public class GameController implements Initializable {
         imageView.toBack();
         //webView.getStyleClass().add("webView");
         progressBar.getStyleClass().add("progress-bar");
-            togButton.getStyleClass().add("buttonAudio");
-            quiz(new ActionEvent());
-            resultTable.setVisible(false);
-            ansA.getStyleClass().add("button1");
-            ansB.getStyleClass().add("button2");
-            ansC.getStyleClass().add("button3");
-            ansD.getStyleClass().add("button4");
-            mediaPlayer.play();
+        togButton.getStyleClass().add("buttonAudio");
+        quiz(new ActionEvent());
+        resultTable.setVisible(false);
+        ansA.getStyleClass().add("button1");
+        ansB.getStyleClass().add("button2");
+        ansC.getStyleClass().add("button3");
+        ansD.getStyleClass().add("button4");
+        mediaPlayer.play();
         mediaPlayer.setOnEndOfMedia(() -> {
             mediaPlayer.seek(Duration.ZERO);
             mediaPlayer.play();
         });
-            noButton.getStyleClass().add("noButton");
-            yesButton.getStyleClass().add("yesButton");
-            review.getStyleClass().add("reviewButton");
-            review.setVisible(false);
-            noButton.setVisible(false);
-            yesButton.setVisible(false);
+        noButton.getStyleClass().add("noButton");
+        yesButton.getStyleClass().add("yesButton");
+        review.getStyleClass().add("reviewButton");
+        review.setVisible(false);
+        noButton.setVisible(false);
+        yesButton.setVisible(false);
+        backResult.setVisible(false);
+        Ques1.setVisible(false);
+        Ques2.setVisible(false);
+        Ques3.setVisible(false);
+        Ques4.setVisible(false);
+        Ques5.setVisible(false);
+        Ques6.setVisible(false);
+        Ques7.setVisible(false);
+        Ques8.setVisible(false);
+        Ques9.setVisible(false);
+        Ques10.setVisible(false);
+        all.add(Ques1);
+        all.add(Ques2);
+        all.add(Ques3);
+        all.add(Ques4);
+        all.add(Ques5);
+        all.add(Ques6);
+        all.add(Ques7);
+        all.add(Ques8);
+        all.add(Ques9);
+        all.add(Ques10);
 
     }
 }
