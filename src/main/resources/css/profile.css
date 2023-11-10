@@ -1,0 +1,73 @@
+
+.default-color0.chart-bar {
+    -fx-bar-fill: #3238a8;
+    -fx-background-radius: 5px 5px 0px 0px;
+}
+
+.chart-bar {
+    -fx-bar-fill: transparent;
+}
+
+.chart-category-axis {
+    -fx-label-font-size: 16px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
+
+.chart-number-axis {
+    -fx-label-font-size: 16px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffff;
+}
+
+.axis-label {
+    -fx-font-size: 20px;
+    -fx-text-fill: #ffff;
+}
+
+.chart-title {
+    -fx-font-family: "Arial";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ffff;
+}
+
+#addPic {
+    -fx-graphic: url('../img/addpic.png');
+    -fx-background-color:null;
+    -fx-background-radius: 100;
+}
+
+#addPic:hover{
+    -fx-background-color: linear-gradient( to right top, #76d2fc,#3238a8);
+    -fx-background-radius: 100;
+}
+
+.round-box {
+    -fx-background-radius: 100;
+    -fx-border-radius: 100;
+    -fx-border-width: 6;
+}
+
+.progress-indicator {
+    -fx-background-color: transparent; /* Đặt màu nền trong suốt */
+}
+
+.progress-indicator .track {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+.progress-indicator .indicator {
+    -fx-stroke-width: 3;
+}
+
+
+.progress-indicator .percentage {
+    -fx-fill:null;
+}
+
+
+
+
