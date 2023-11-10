@@ -1,10 +1,5 @@
 package Controllers;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import Base.Dictionary;
 import Base.Word;
 import Base.NewDictionaryManagement;
@@ -13,13 +8,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.Pane;
+
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -30,11 +21,11 @@ public class SearchController extends TaskControllers implements Initializable {
     protected boolean isEditing = false;
 
     @FXML
-    protected TextField searchField;
+    private TextField searchField;
     @FXML
-    protected ListView<String> wordList;
+    private ListView<String> wordList;
     @FXML
-    protected WebView definitionView;
+    private WebView definitionView;
     @FXML
     protected HTMLEditor editField;
     @FXML
@@ -42,7 +33,7 @@ public class SearchController extends TaskControllers implements Initializable {
     @FXML
     protected ToggleButton addButton;
     @FXML
-    protected ToggleButton favourButton;
+    private ToggleButton favouriteButton;
     @FXML
     protected ToggleButton editButton;
 
@@ -51,16 +42,19 @@ public class SearchController extends TaskControllers implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<String> favouriteList = new ArrayList<>();
-        NewDictionaryManagement.loadOnlyWordTarget(favouriteList, Dictionary.FAVOURITE_IN_PATH);
-        for (String ele : favouriteList) {
-            if (dictionary.containsKey(ele)) {
-                dictionary.get(ele).setFavoured(true);
-            }
-        }
-        this.wordList.setEditable(true);
-        this.wordList.setCellFactory(TextFieldListCell.forListView());
+        NewDictionaryManagement.loadDataFromHTMLFile(dictionary, EV_IN_PATH);
         this.wordList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        this.wordList.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        Word selectedWord = dictionary.get(newValue.trim());
+                        String wordExplain = selectedWord.getWordExplain();
+                        definitionView.getEngine().loadContent(wordExplain, "text/html");
+                        searchField.setText(selectedWord.getWordTarget());
+                        favouriteButton.setSelected(selectedWord.isFavoured());
+                    }
+                }
+        );
         this.wordList.getItems().addAll(dictionary.keySet());
         addField.visibleProperty().bind(addButton.selectedProperty());
         addButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -69,40 +63,49 @@ public class SearchController extends TaskControllers implements Initializable {
     }
 
     @FXML
-    public void searchWord() {
+    public void editWord() {
+        String targetWord = searchField.getText();
+        if (targetWord.isEmpty()) {
+            editButton.setSelected(false);
+            return;
+        }
+        if (isEditing) {
+            dictionary.editWord(targetWord, editField.getHtmlText());
+            isEditing = false;
+            editField.setVisible(false);
+            definitionView.getEngine().loadContent(editField.getHtmlText(), "text/html");
+            return;
+        }
+        isEditing = true;
+        editField.setVisible(true);
+        String wordExplain = dictionary.get(targetWord).getWordExplain();
+        editField.setHtmlText(wordExplain);
+    }
+
+    @FXML
+    public void searchWord(KeyEvent e) {
         String keyword = searchField.getText().toLowerCase();
+        System.out.println(keyword);
         ObservableList<String> matchingWords = FXCollections.observableArrayList();
         matchingWords.addAll(NewDictionaryManagement.partialSearch(dictionary, keyword).keySet());
         wordList.setItems(matchingWords);
     }
 
     @FXML
-    public void selectWord() {
-        String selectedWord = this.wordList.getSelectionModel().selectedItemProperty().getValue();
-        if (selectedWord != null) {
-            Word word = dictionary.get(selectedWord.trim());
-            String wordExplain = word.getWordExplain();
-            definitionView.getEngine().loadContent(wordExplain, "text/html");
-            searchField.setText(word.getWordTarget());
-            favourButton.setSelected(word.isFavoured());
-        }
-    }
-
-    @FXML
     public void favouriteWord() {
-        String wordTarget = searchField.getText();
-        if (wordTarget.isEmpty()) {
-            favourButton.setSelected(false);
+        String targetWord = searchField.getText();
+        if (targetWord.isEmpty()) {
+            favouriteButton.setSelected(false);
             return;
         }
-        Word selectedWord = dictionary.get(wordTarget);
+        Word selectedWord = dictionary.get(targetWord);
         if (selectedWord.isFavoured()) {
-            favourButton.setSelected(false);
+            favouriteButton.setSelected(false);
             selectedWord.setFavoured(false);
-            favouriteController.removeFromSearch(wordTarget);
+            favouriteWords.removeAll(targetWord);
             return;
         }
-        favourButton.setSelected(true);
+        favouriteButton.setSelected(true);
         selectedWord.setFavoured(true);
         favouriteController.addFromSearch(wordTarget);
     }
@@ -196,7 +199,6 @@ public class SearchController extends TaskControllers implements Initializable {
             VoiceController.speakWord(searchField.getText());
         }
     }
-
     @FXML
     private void speakUSButtonOnAction() {
         speak("en-us");

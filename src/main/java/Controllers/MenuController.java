@@ -7,10 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -58,6 +56,7 @@ public class MenuController extends TaskControllers implements Initializable {
     public void searchFunction() {
         mainAP.getChildren().setAll(searchAP);
     }
+
     @FXML
     public void translateFunction() {
         mainAP.getChildren().setAll(translateAP);
@@ -137,6 +136,7 @@ public class MenuController extends TaskControllers implements Initializable {
         mainAP.getChildren().setAll(searchAP);
     }
 
+
     private double x = 0;
     private double y = 0;
     @FXML
@@ -154,4 +154,3 @@ public class MenuController extends TaskControllers implements Initializable {
         y = e.getSceneY();
     }
 }
-
