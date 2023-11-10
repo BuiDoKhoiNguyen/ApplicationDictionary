@@ -16,6 +16,7 @@
          </font></TextField>
       <WebView fx:id="translationField" fontScale="1.5" layoutX="35.0" layoutY="327.0" prefHeight="200.0" prefWidth="650.0" />
       <HBox layoutX="34.0" layoutY="20.0" prefHeight="45.0" prefWidth="425.0">
+      <HBox layoutX="34.0" layoutY="20.0" prefHeight="45.0" prefWidth="425.0">
          <children>
             <ToggleButton fx:id="fromEN" mnemonicParsing="false" onMouseClicked="#setFromEN" prefHeight="45.0" prefWidth="75.0" styleClass="button-from" stylesheets="@../CSS/translate.css" text="Anh">
                <font>
@@ -40,6 +41,7 @@
          </children>
       </HBox>
       <HBox layoutX="34.0" layoutY="281.0" prefHeight="45.0" prefWidth="425.0">
+      <HBox layoutX="34.0" layoutY="281.0" prefHeight="45.0" prefWidth="425.0">
          <children>
             <ToggleButton fx:id="toVN" mnemonicParsing="false" onMouseClicked="#setToVN" prefHeight="45.0" prefWidth="75.0" styleClass="button-to" stylesheets="@../CSS/translate.css" text="Việt">
                <font>
@@ -56,7 +58,7 @@
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="toSimplifiedCN" mnemonicParsing="false" onMouseClicked="#setToSimplifiedCN" prefHeight="46.0" prefWidth="155.0" styleClass="button-to" stylesheets="@../CSS/translate.css" text="Trung (giản thể)">
+            <ToggleButton fx:id="toSimplifiedCN" mnemonicParsing="false" onMouseClicked="#setToSimplifiedCN" prefHeight="46.0" prefWidth="184.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Trung (giản thể)">
                <font>
                   <Font size="18.0" />
                </font>

@@ -24,7 +24,7 @@
                         <Font name="System Bold" size="27.0" />
                      </font>
                   </Label>
-                  <Button id="outline" fx:id="signUp" layoutX="133.0" layoutY="277.0" mnemonicParsing="false" onAction="#createAccountButtonOnAction" prefHeight="30.0" prefWidth="165.0" stylesheets="@../CSS/Login.css" text="Create your account" textFill="#fcfafa">
+                  <Button id="outline" fx:id="signUp" layoutX="133.0" layoutY="277.0" mnemonicParsing="false" onAction="#createAccountButtonOnAction" prefHeight="30.0" prefWidth="165.0" stylesheets="@../css/Login.css" text="Create your account" textFill="#fcfafa">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -34,18 +34,18 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <JFXTextField id="text-field" fx:id="fname" focusColor="#76d2fc" labelFloat="true" layoutX="38.0" layoutY="86.0" prefHeight="26.0" prefWidth="130.0" promptText="First name" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
-                  <JFXTextField id="text-field" fx:id="lname" focusColor="#76d2fc" labelFloat="true" layoutX="238.0" layoutY="86.0" prefHeight="26.0" prefWidth="139.0" promptText="Last name" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
-                  <JFXTextField id="text-field" fx:id="usernameTextField2" focusColor="#76d2fc" labelFloat="true" layoutX="132.0" layoutY="133.0" prefHeight="26.0" prefWidth="172.0" promptText="Username" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
-                  <JFXPasswordField id="text-field" fx:id="passwordField2" focusColor="#76d2fc" labelFloat="true" layoutX="132.0" layoutY="181.0" prefHeight="26.0" prefWidth="172.0" promptText="Password" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
-                  <JFXPasswordField id="text-field" fx:id="confirmPassword" focusColor="#76d2fc" labelFloat="true" layoutX="132.0" layoutY="230.0" prefHeight="26.0" prefWidth="172.0" promptText="Confirm password" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
+                  <JFXTextField id="text-field" fx:id="fname" focusColor="#76d2fc" labelFloat="true" layoutX="38.0" layoutY="86.0" prefHeight="26.0" prefWidth="130.0" promptText="First name" stylesheets="@../css/Login.css" unFocusColor="WHITE" />
+                  <JFXTextField id="text-field" fx:id="lname" focusColor="#76d2fc" labelFloat="true" layoutX="238.0" layoutY="86.0" prefHeight="26.0" prefWidth="139.0" promptText="Last name" stylesheets="@../css/Login.css" unFocusColor="WHITE" />
+                  <JFXTextField id="text-field" fx:id="usernameTextField2" focusColor="#76d2fc" labelFloat="true" layoutX="132.0" layoutY="133.0" prefHeight="26.0" prefWidth="172.0" promptText="Username" stylesheets="@../css/Login.css" unFocusColor="WHITE" />
+                  <JFXPasswordField id="text-field" fx:id="passwordField2" focusColor="#76d2fc" labelFloat="true" layoutX="132.0" layoutY="181.0" prefHeight="26.0" prefWidth="172.0" promptText="Password" stylesheets="@../css/Login.css" unFocusColor="WHITE" />
+                  <JFXPasswordField id="text-field" fx:id="confirmPassword" focusColor="#76d2fc" labelFloat="true" layoutX="132.0" layoutY="230.0" prefHeight="26.0" prefWidth="172.0" promptText="Confirm password" stylesheets="@../css/Login.css" unFocusColor="WHITE" />
                </children>
             </AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="layer2" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: rgba(255,255,255,0);">
          <children>
-            <AnchorPane prefHeight="500.0" prefWidth="370.0" style="-fx-background-radius: 25;" styleClass="colorBackground" stylesheets="@../CSS/Login.css">
+            <AnchorPane prefHeight="500.0" prefWidth="370.0" style="-fx-background-radius: 25;" styleClass="colorBackground" stylesheets="@../css/Login.css">
                <children>
                   <ImageView fitHeight="350.0" fitWidth="355.0" layoutX="7.0" layoutY="50.0" opacity="0.39" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -82,12 +82,12 @@
                      </effect>
                   </Label>
                   <Line endX="163.5999755859375" endY="-1.52587890625E-5" layoutX="150.0" layoutY="185.0" startX="-100.0" stroke="#fffefe" />
-                  <Button id="outline" fx:id="buttonSignUp" layoutX="94.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#buttonSignUpAction" prefHeight="30.0" prefWidth="180.0" style="-fx-border-color: #ffffff; -fx-text-fill: #ffffff;" stylesheets="@../CSS/Login.css" text="Create your account">
+                  <Button id="outline" fx:id="buttonSignUp" layoutX="94.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#buttonSignUpAction" prefHeight="30.0" prefWidth="180.0" style="-fx-border-color: #ffffff; -fx-text-fill: #ffffff;" stylesheets="@../css/Login.css" text="Create your account">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button id="outline" fx:id="buttonSignIn" layoutX="108.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#buttonSignInAction" prefHeight="30.0" prefWidth="151.0" style="-fx-border-color: #ffffff; -fx-text-fill: #ffffff;" stylesheets="@../CSS/Login.css" text="Sign in">
+                  <Button id="outline" fx:id="buttonSignIn" layoutX="108.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#buttonSignInAction" prefHeight="30.0" prefWidth="151.0" style="-fx-border-color: #ffffff; -fx-text-fill: #ffffff;" stylesheets="@../css/Login.css" text="Sign in">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -106,7 +106,7 @@
             </AnchorPane>
             <AnchorPane fx:id="layer3" layoutX="371.0" layoutY="75.0" prefHeight="330.0" prefWidth="430.0" style="-fx-background-color: rgba(255, 255, 255, 1);">
                <children>
-                  <Button id="outline" fx:id="signIn" layoutX="139.0" layoutY="244.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="30.0" prefWidth="165.0" stylesheets="@../CSS/Login.css" text="Sign in" textFill="#fcfafa">
+                  <Button id="outline" fx:id="signIn" layoutX="139.0" layoutY="244.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="30.0" prefWidth="165.0" stylesheets="@../css/Login.css" text="Sign in" textFill="#fcfafa">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -136,8 +136,8 @@
                         <Image url="@../Image/icons8-dictionary-64.png" />
                      </image>
                   </ImageView>
-                  <JFXTextField id="text-field" fx:id="usernameTextField1" focusColor="#76d2fc" labelFloat="true" layoutX="141.0" layoutY="134.0" prefHeight="26.0" prefWidth="172.0" promptText="Username" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
-                  <JFXPasswordField id="text-field" fx:id="passwordField1" focusColor="#76d2fc" labelFloat="true" layoutX="141.0" layoutY="180.0" prefHeight="26.0" prefWidth="172.0" promptText="Password" stylesheets="@../CSS/Login.css" unFocusColor="WHITE" />
+                  <JFXTextField id="text-field" fx:id="usernameTextField1" focusColor="#76d2fc" labelFloat="true" layoutX="141.0" layoutY="134.0" prefHeight="26.0" prefWidth="172.0" promptText="Username" stylesheets="@../css/Login.css" unFocusColor="WHITE" />
+                  <JFXPasswordField id="text-field" fx:id="passwordField1" focusColor="#76d2fc" labelFloat="true" layoutX="141.0" layoutY="180.0" prefHeight="26.0" prefWidth="172.0" promptText="Password" stylesheets="@../css/Login.css" unFocusColor="WHITE" />
                </children>
             </AnchorPane>
          </children>

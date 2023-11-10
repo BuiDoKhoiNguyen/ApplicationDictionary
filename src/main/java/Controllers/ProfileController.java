@@ -52,7 +52,7 @@ public class ProfileController implements Initializable {
             @Override
             public void run() {
                 currtime++;
-                System.out.println(currtime);
+//                System.out.println(currtime);
             }
         }, 1000, 1000);
 

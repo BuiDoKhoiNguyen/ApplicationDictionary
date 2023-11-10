@@ -21,10 +21,8 @@ public class SceneController {
     public void switchToMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/FXML/menu.fxml"));
 
-
         Node sourceNode = (Node) event.getSource();
         Scene sourceScene = sourceNode.getScene();
-
 
         FadeTransition fadeOut = new FadeTransition(Duration.millis(1000), sourceScene.getRoot());
         fadeOut.setFromValue(1.0);

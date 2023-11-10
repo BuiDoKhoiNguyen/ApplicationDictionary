@@ -42,7 +42,7 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXML/menu.fxml"));
-        primaryStage.setScene(new Scene(root,800, 600));
+        primaryStage.setScene(new Scene(root,800, 570));
         primaryStage.show();
     }
 }

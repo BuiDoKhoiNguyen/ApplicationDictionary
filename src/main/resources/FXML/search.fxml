@@ -8,14 +8,41 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
 <AnchorPane prefHeight="570.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.SearchController">
    <children>
-      <TextField fx:id="searchField" layoutX="14.0" layoutY="57.0" onKeyTyped="#searchWord" prefHeight="50.0" prefWidth="240.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@../CSS/search.css" />
-      <ListView fx:id="wordList" layoutX="14.0" layoutY="123.0" prefHeight="415.0" prefWidth="240.0" />
+      <Pane fx:id="addField" layoutX="102.0" layoutY="135.0" prefHeight="380.0" prefWidth="580.0" style="-fx-border-color: black; -fx-border-width: 5; -fx-background-color: white;" visible="false">
+         <children>
+            <Label layoutX="12.0" layoutY="5.0" prefHeight="44.0" prefWidth="124.0" text="Enter New Word">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <TextField layoutX="12.0" layoutY="42.0" prefHeight="32.0" prefWidth="556.0" styleClass="text-field" stylesheets="@../css/addWord.css" />
+            <Label layoutX="12.0" layoutY="73.0" prefHeight="44.0" prefWidth="124.0" text="Enter Definition">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="12.0" layoutY="118.0" prefHeight="200.0" prefWidth="556.0" />
+            <Button layoutX="115.0" layoutY="327.0" mnemonicParsing="false" onAction="#addWord" prefHeight="40.0" prefWidth="80.0" stylesheets="@../css/addWord.css" text="Confirm">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+            <Button layoutX="385.0" layoutY="327.0" mnemonicParsing="false" onAction="#cancelAdding" prefHeight="40.0" prefWidth="80.0" stylesheets="@../css/addWord.css" text="Cancel">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <TextField fx:id="searchField" layoutX="14.0" layoutY="57.0" onKeyTyped="#searchWord" prefHeight="50.0" prefWidth="240.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@../css/search.css" />
+      <ListView fx:id="wordList" layoutX="14.0" layoutY="123.0" onEditCommit="#editWordTarget" onMouseClicked="#selectWord" prefHeight="415.0" prefWidth="240.0" />
       <AnchorPane layoutX="260.0" layoutY="32.0" prefHeight="506.0" prefWidth="462.0" style="-fx-background-color: #ffffff;">
          <children>
             <Label layoutX="13.0" layoutY="7.0" stylesheets="@../CSS/search.css" text="Nghĩa của từ">
@@ -25,15 +52,16 @@
             </Label>
             <WebView fx:id="definitionView" layoutY="108.0" prefHeight="415.0" prefWidth="462.0" />
             <HTMLEditor fx:id="editField" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="108.0" prefHeight="415.0" prefWidth="462.0" visible="false" />
-            <HBox layoutX="312.0" layoutY="57.0" prefHeight="50.0" prefWidth="150.0">
+            <HBox layoutX="262.0" layoutY="57.0" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <ToggleButton fx:id="favouriteButton" mnemonicParsing="false" onMouseClicked="#favouriteWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-favourite" stylesheets="@../CSS/search.css" />
-                  <ToggleButton fx:id="editButton" mnemonicParsing="false" onMouseClicked="#editWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit" stylesheets="@../CSS/search.css" />
-                  <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-delete" stylesheets="@../CSS/search.css" />
+                  <ToggleButton fx:id="addButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" styleClass="button-add" stylesheets="@../css/search.css" />
+                  <ToggleButton fx:id="favourButton" mnemonicParsing="false" onMouseClicked="#favouriteWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-favourite" stylesheets="@../css/search.css" />
+                  <ToggleButton fx:id="editButton" mnemonicParsing="false" onMouseClicked="#editWordExplain" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit" stylesheets="@../css/search.css" />
+                  <Button fx:id="deleteButton" mnemonicParsing="false" onMouseClicked="#deleteWord" prefHeight="50.0" prefWidth="50.0" styleClass="button-delete" stylesheets="@../css/search.css" />
                </children>
             </HBox>
-            <JFXButton fx:id="speakUS" layoutX="30.0" layoutY="74.0" onAction="#speakUSButtonOnAction" styleClass="button-audio" stylesheets="@../CSS/search.css" text="US" />
-            <JFXButton fx:id="speakUK" layoutX="103.0" layoutY="74.0" onAction="#speakUKButtonOnAction" styleClass="button-audio" stylesheets="@../CSS/search.css" text="UK" />
+            <JFXButton fx:id="speakUS" layoutX="30.0" layoutY="74.0" onAction="#speakUSButtonOnAction" styleClass="button-audio" stylesheets="@../css/search.css" text="US" />
+            <JFXButton fx:id="speakUK" layoutX="103.0" layoutY="74.0" onAction="#speakUKButtonOnAction" styleClass="button-audio" stylesheets="@../css/search.css" text="UK" />
          </children>
       </AnchorPane>
       <Button fx:id="cancelButton" layoutX="717.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" style="-fx-background-color: transparent;" text="X">
