@@ -168,6 +168,336 @@ public class controllTypeGame implements Initializable {
             "combine",
             "command",
             "common",
+            "compare",
+            "complex",
+            "confirm",
+            "conflict",
+            "contact",
+            "control",
+            "crisis",
+            "crash",
+            "credit",
+            "crowd",
+            "custom",
+            "damage",
+            "danger",
+            "deaf",
+            "dabate",
+            "decide",
+            "debt",
+            "defeat",
+            "defend",
+            "define",
+            "demand",
+            "deny",
+            "desert",
+            "design",
+            "detail",
+            "device",
+            "direct",
+            "dirt",
+            "disaster",
+            "dismiss",
+            "dive",
+            "duty",
+            "earth",
+            "east",
+            "edge",
+            "effect",
+            "effort",
+            "elect",
+            "emotion",
+            "employ",
+            "empty",
+            "equal",
+            "escape",
+            "estimate",
+            "excuse",
+            "exist",
+            "expand",
+            "extreme",
+            "fact",
+            "fail",
+            "false",
+            "famous",
+            "father",
+            "fear",
+            "feed",
+            "female",
+            "fence",
+            "field",
+            "final",
+            "flag",
+            "flood",
+            "float",
+            "follow",
+            "force",
+            "forgive",
+            "former",
+            "fuel",
+            "forward",
+            "fruit",
+            "game",
+            "gift",
+            "general",
+            "glass",
+            "govern",
+            "gravity",
+            "grind",
+            "ground",
+            "guide",
+            "guilty",
+            "half",
+            "hang",
+            "harvest",
+            "heal",
+            "hero",
+            "history",
+            "hole",
+            "honor",
+            "horse",
+            "hostile",
+            "hotel",
+            "humor",
+            "hurt",
+            "idea",
+            "image",
+            "ignore",
+            "import",
+            "improve",
+            "include",
+            "industry",
+            "infect",
+            "inform",
+            "inject",
+            "injure",
+            "increase",
+            "insane",
+            "insect",
+            "insult",
+            "interest",
+            "invest",
+            "invite",
+            "island",
+            "issue",
+            "jewel",
+            "join",
+            "joke",
+            "jump",
+            "just",
+            "justice",
+            "kidnap",
+            "kind",
+            "knife",
+            "know",
+            "labor",
+            "lack",
+            "lake",
+            "laser",
+            "laugh",
+            "launch",
+            "lead",
+            "leak",
+            "legal",
+            "letter",
+            "life",
+            "level",
+            "limit",
+            "liquid",
+            "listen",
+            "loan",
+            "local",
+            "loyal",
+            "luck",
+            "machine",
+            "magnet",
+            "major",
+            "male",
+            "mark",
+            "mass",
+            "marry",
+            "mate",
+            "mayor",
+            "meat",
+            "meal",
+            "member",
+            "mental",
+            "metal",
+            "method",
+            "middle",
+            "minor",
+            "mineral",
+            "miss",
+            "model",
+            "money",
+            "month",
+            "moral",
+            "motion",
+            "move",
+            "murder",
+            "music",
+            "mystery",
+            "narrow",
+            "nation",
+            "native",
+            "navy",
+            "near",
+            "nerve",
+            "night",
+            "normal",
+            "note",
+            "nuclear",
+            "number",
+            "obey",
+            "object",
+            "ocean",
+            "occupy",
+            "offer",
+            "often",
+            "once",
+            "operate",
+            "oppose",
+            "order",
+            "other",
+            "over",
+            "pain",
+            "paper",
+            "parent",
+            "party",
+            "pass",
+            "past",
+            "path",
+            "peace",
+            "perfect",
+            "permit",
+            "picture",
+            "pilot",
+            "place",
+            "planet",
+            "plastic",
+            "plenty",
+            "poison",
+            "poor",
+            "position",
+            "power",
+            "pray",
+            "predict",
+            "press",
+            "prison",
+            "price",
+            "private",
+            "process",
+            "profit",
+            "prevent",
+            "project",
+            "propose",
+            "protect",
+            "publish",
+            "punish",
+            "push",
+            "pure",
+            "quality",
+            "quick",
+            "quiet",
+            "question",
+            "radar",
+            "rain",
+            "rare",
+            "reach",
+            "reason",
+            "recent",
+            "record",
+            "recover",
+            "refuse",
+            "reject",
+            "remain",
+            "remove",
+            "repeat",
+            "resist",
+            "rest",
+            "result",
+            "rich",
+            "risk",
+            "robot",
+            "rock",
+            "rocket",
+            "rope",
+            "round",
+            "rubber",
+            "ruin",
+            "safe",
+            "sailor",
+            "sand",
+            "same",
+            "school",
+            "seat",
+            "search",
+            "seed",
+            "self",
+            "sense",
+            "serious",
+            "several",
+            "shape",
+            "shake",
+            "sharp",
+            "short",
+            "shoe",
+            "ship",
+            "sick",
+            "side",
+            "sign",
+            "silver",
+            "similar",
+            "sink",
+            "skill",
+            "small",
+            "smooth",
+            "smash",
+            "soil",
+            "social",
+            "solid",
+            "sound",
+            "south",
+            "speech",
+            "spend",
+            "tank",
+            "target",
+            "teach",
+            "tell",
+            "tense",
+            "tear",
+            "thank",
+            "theater",
+            "thick",
+            "thing",
+            "third",
+            "threaten",
+            "tissue",
+            "together",
+            "tool",
+            "total",
+            "touch",
+            "toward",
+            "traffic",
+            "traval",
+            "treasure",
+            "treat",
+            "trick",
+            "trouble",
+            "turn",
+            "under",
+            "unite",
+            "urge",
+            "usual",
+            "valley",
+            "value",
+            "vehicle",
+            "victory",
+            "victim",
+            "virus",
+            "village",
+            "voice",
+            "visit"
     };
     String[] WORDS = {"hello", "world", "javafx", "ztype"};
     int WORD_SPEED = 5000;
@@ -179,6 +509,11 @@ public class controllTypeGame implements Initializable {
 
     Media me = new Media(explodeFile);
     MediaPlayer explodeBoom = new MediaPlayer(me);
+
+    String bulletJam = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/bulletS.mp3";
+
+    Media me2 = new Media(bulletJam);
+    MediaPlayer bulletJ = new MediaPlayer(me2);
 
 
     Random random,random2;
@@ -193,7 +528,6 @@ public class controllTypeGame implements Initializable {
     Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/blackSky.png"));
     Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/boom.png"));
 
-    //Image myImage3 = new Image(getClass().getResourceAsStream("/sources_music_picture/label.png"));
 
     @FXML
     Label scoreLabel,result,scLabel,bcLabel,scoreL,bScoreL,pLabel,lbsc;
@@ -215,10 +549,12 @@ public class controllTypeGame implements Initializable {
         if(menuTypeGame.isAudi()==false){
             mediaPlayer.setMute(true);
             explodeBoom.setMute(true);
+            bulletJ.setMute(true);
         }
         if(menuTypeGame.isAudi()==true){
             mediaPlayer.setMute(false);
             explodeBoom.setMute(false);
+            bulletJ.setMute(false);
         }
         mediaPlayer.seek(mediaPlayer.getStartTime());
         scLabel.setVisible(false);
@@ -270,7 +606,6 @@ public class controllTypeGame implements Initializable {
         timeline.play();
 
         gameLoop = new Timeline(new KeyFrame(Duration.millis(WORD_SPEED), event -> {
-            //String word = WORDS[random.nextInt(WORDS.length)];
             Collections.shuffle(Word);
             english.add(Word.get(x));
             int index = random2.nextInt(Word.get(x).length());
@@ -289,7 +624,8 @@ public class controllTypeGame implements Initializable {
             pane1.getChildren().add(text);
             textField.setOnKeyPressed(e -> {
                 if (e.getCode() == KeyCode.ENTER) {
-                    checkAndRemoveString(textField.getText());
+                    String tmp = textField.getText();
+                    checkAndRemoveString(tmp.toLowerCase());
                 }
             });
 
@@ -322,7 +658,6 @@ public class controllTypeGame implements Initializable {
         }
     }
     public void moveWordDown(Text word) {
-        //x++;
         double wordHeight = word.getBoundsInLocal().getHeight();
         double startY = -140;
         double endY = 313;
@@ -334,12 +669,10 @@ public class controllTypeGame implements Initializable {
         transition.setToY(endY);
 
         transition.setOnFinished(event -> {
-            if(how.contains(word.getText())){
-                System.out.println("something");
+            if(how.contains(word.getText()) || score == DATA.length){
                 gameLoop.stop();
                 result();
             }
-            //System.out.println("abcd");
             System.out.println(word.getText());
             word.setVisible(false);
         });
@@ -347,7 +680,11 @@ public class controllTypeGame implements Initializable {
     }
 
     public void checkAndRemoveString(String input) {
-        if(input.equals(chk.get(x))){
+        if(chk.size()==0 || x >= chk.size()){
+                bulletJ.seek(bulletJ.getStartTime());
+                bulletJ.play();
+        }
+        else if(input.equals(chk.get(x))){
             Text textRemove =(Text)pane1.getChildren().get(x);
             how.remove(textRemove.getText());
             check.set(x,false);
@@ -361,7 +698,12 @@ public class controllTypeGame implements Initializable {
             fire(t,z,textRemove);
             textField.clear();
         }
+        else {
+            bulletJ.seek(bulletJ.getStartTime());
+            bulletJ.play();
+        }
     }
+    //fire bullet
     public void fire(double targetX, double targetY,Text text) {
         Image missileImage = new Image("/sources_music_picture/bullet.png");
         ImageView bullet = new ImageView(missileImage);
@@ -389,8 +731,6 @@ public class controllTypeGame implements Initializable {
 
                 timeline.play();
                 myAnchor.getChildren().removeAll(bullet);
-                //MediaPlayer explodeBoom = new MediaPlayer(me);
-                //AudioClip explodeBoom = new AudioClip(explodeFile);
                 explodeBoom.seek(explodeBoom.getStartTime());
                 explodeBoom.play();
                 explode(text);
@@ -401,6 +741,7 @@ public class controllTypeGame implements Initializable {
         missileTimeline.setCycleCount(Timeline.INDEFINITE);
         missileTimeline.play();
     }
+    //explode in game
     public void explode(Text text){
         String tmp = "/sources_music_picture/boom.png";
         int frameCount = 8;
@@ -524,6 +865,7 @@ public class controllTypeGame implements Initializable {
         });
 
     }
+    //explode in menu type game
     public void explode2(){
         String tmp = "/sources_music_picture/boom.png";
         int frameCount = 8;

@@ -58,6 +58,8 @@ public class SwitchGame implements Initializable {
 
         fadeOut.play();
     }
+
+    //switch to main menu game
     public void backMenu(ActionEvent event) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/sameMenu.fxml"));
         Parent scene2Parent = loader.load();
@@ -65,6 +67,7 @@ public class SwitchGame implements Initializable {
 
         Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         window.setScene(scene2);
+        mediaPlayer.stop();
     }
 
     @Override

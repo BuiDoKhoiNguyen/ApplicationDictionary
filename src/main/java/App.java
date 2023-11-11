@@ -12,11 +12,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            //Parent root = FXMLLoader.load(getClass().getResource("FXML/menuTypeG.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("FXML/typeGame.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("FXML/openSimpleGame.fxml"));
             Parent root = FXMLLoader.load(getClass().getResource("FXML/sameMenu.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("FXML/Login.fxml"));
 
             Scene scene = new Scene(root);
 

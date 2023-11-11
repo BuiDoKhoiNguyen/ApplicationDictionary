@@ -31,6 +31,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -85,8 +88,41 @@ public class GameController implements Initializable {
     int quesI = -1;
 
 
+    public static void loadFromFile(Dictionary dictionary, String IN_PATH) {
+        try {
+            FileReader fileReader = new FileReader(IN_PATH);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String englishWord = bufferedReader.readLine();
+            englishWord = englishWord.replace("|", "");
+            String line = null;
+
+
+            while ((line = bufferedReader.readLine()) != null) {
+                Word word = new Word();
+                word.setWordTarget(englishWord.trim());
+                String meaning = line + "\n";
+                while ((line = bufferedReader.readLine()) != null) {
+                    if (!line.startsWith("|")) meaning += line + "\n";
+                    else {
+                        englishWord = line.replace("|", "");
+                        break;
+                    }
+                    word.setWordExplain(meaning.trim());
+                    dictionary.put(englishWord, word);
+                }
+            }
+            bufferedReader.close();
+            System.out.println("Loaded from file successfully");
+        } catch (IOException e) {
+            System.out.println("An error occur with file: " + e);
+        } catch (Exception e) {
+            System.out.println("Something went wrong: " + e);
+        }
+    }
+
     public GameController() {
-        NewDictionaryManagement.loadFromFile(dictionary, IN_PATH);
+        loadFromFile(dictionary, IN_PATH);
     }
 
 
@@ -97,7 +133,7 @@ public class GameController implements Initializable {
         handle(new ActionEvent());
     }
 
-
+    //task bar progress
     public void down() {
         if (task != null && task.isRunning()) {
             task.cancel();
@@ -129,6 +165,7 @@ public class GameController implements Initializable {
     }
 
 
+    //set up question and show res when enough question
     public void showQues() {
         if (index >= totalQuestion) {
             result();
@@ -148,7 +185,6 @@ public class GameController implements Initializable {
             int randomIndex = random.nextInt(randomWords.size());
             String ques = randomWords.get(randomIndex).getWordExplain();
             examE.add(ques);
-            System.out.println(examE.size());
             String tmp = randomWords.get(randomIndex).getWordTarget();
             ques = ques.replaceAll("/.*?/", "");
             ques = ques.replaceAll("'.*?/", "");
@@ -156,12 +192,11 @@ public class GameController implements Initializable {
             webView.getEngine().loadContent(ques);
             trueAns = randomWords.get(randomIndex).getWordTarget();
             ansE.add(trueAns);
-            System.out.println(ansE.size());
             down();
         }
     }
 
-
+    //handle event when you push 1 out of 4 button
     public void handle(ActionEvent event) {
 
         ansA.setOnAction(new EventHandler<ActionEvent>() {
@@ -296,6 +331,7 @@ public class GameController implements Initializable {
         review.setVisible(true);
         resultTable.setTextFill(Color.WHITE);
         progressBar.setProgress(0.0);
+        //if you right more than or equal 5
         if (correctAnswer >= 5) {
             String tmp = "     So cool, well done bruh";
             tmp += "\n";
@@ -306,6 +342,8 @@ public class GameController implements Initializable {
             tmp += "continue one more time";
             tmp += "    ";
             resultTable.setText(tmp);
+
+            //back to menu game choose
             noButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -344,6 +382,8 @@ public class GameController implements Initializable {
                     all.clear();
                 }
             });
+
+            //play again
             yesButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -368,14 +408,11 @@ public class GameController implements Initializable {
 
                 }
             });
+
+            //check ans
             review.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    System.out.println(color.size());
-                    System.out.println(viTri.size());
-                    System.out.println(all.size());
-                    System.out.println(examE.size());
-                    System.out.println(ansE.size());
                     for (int i = 0; i < color.size(); i++) {
                         if (color.get(i) == true) {
                             all.get(i).setStyle("-fx-background-color:green;");
@@ -695,6 +732,7 @@ public class GameController implements Initializable {
 
                         }
                     });
+                    // return to result table
                     backResult.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
@@ -724,7 +762,9 @@ public class GameController implements Initializable {
                     });
                 }
             });
-        } else {
+        }
+        // if your right ans less than 5
+        else {
             String tmp = "       Opps, try again bruh";
             tmp += "\n";
             tmp += "                  ";
@@ -798,11 +838,6 @@ public class GameController implements Initializable {
             review.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    System.out.println(color.size());
-                    System.out.println(viTri.size());
-                    System.out.println(all.size());
-                    System.out.println(examE.size());
-                    System.out.println(ansE.size());
                     for (int i = 0; i < color.size(); i++) {
                         if (color.get(i) == true) {
                             all.get(i).setStyle("-fx-background-color:green;");
@@ -1154,6 +1189,7 @@ public class GameController implements Initializable {
         }
     }
 
+    //change on/off music
     public void changeOnOff() {
         boolean isMuted = togButton.isSelected();
 
