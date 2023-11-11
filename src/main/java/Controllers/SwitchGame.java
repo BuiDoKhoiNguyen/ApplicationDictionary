@@ -24,7 +24,7 @@ public class SwitchGame implements Initializable {
     @FXML
     private Button playButton;
 
-    String mediaFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/good-night-160166.mp3";
+    String mediaFile = "/sources_music_picture/good-night-160166.mp3";
 
     Media media = new Media(mediaFile);
     MediaPlayer mediaPlayer = new MediaPlayer(media);

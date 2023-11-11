@@ -45,7 +45,7 @@ public class controllTypeGame implements Initializable {
     int tmp = 0;
 
     int score = 0;
-    String mediaFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/cyber-war.mp3";
+    String mediaFile = "/sources_music_picture/cyber-war.mp3";
 
     Media media = new Media(mediaFile);
     MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -505,12 +505,12 @@ public class controllTypeGame implements Initializable {
     //String explodeFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/explode.mp3";
     //AudioClip explodeBoom = new AudioClip(explodeFile);
 
-    String explodeFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/medium-explosion.mp3";
+    String explodeFile = "/sources_music_picture/medium-explosion.mp3";
 
     Media me = new Media(explodeFile);
     MediaPlayer explodeBoom = new MediaPlayer(me);
 
-    String bulletJam = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/bulletS.mp3";
+    String bulletJam = "/sources_music_picture/bulletS.mp3";
 
     Media me2 = new Media(bulletJam);
     MediaPlayer bulletJ = new MediaPlayer(me2);
