@@ -1,0 +1,40 @@
+.text-field {
+    -fx-border-color: grey;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-background-color: transparent;
+}
+
+.text-field:focused {
+    -fx-border-color: #76d2fc;
+    -fx-border-width: 0px 0px 3px 0px;
+    -fx-background-color: transparent;
+}
+
+.button {
+    -fx-background-color: white;
+    -fx-background-radius: 20px;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #76d2fc;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to right top, #76d2fc, #3238a8);
+    -fx-background-radius: 20px;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-text-fill: white;
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(to right top, #3238a8, #76d2fc);
+    -fx-background-radius: 20px;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: black;
+    -fx-text-fill: white;
+}

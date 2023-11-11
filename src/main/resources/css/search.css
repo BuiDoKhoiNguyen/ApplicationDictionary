@@ -1,9 +1,19 @@
-.button-menu {
-    -fx-graphic: url('../img/menu.png');
-}
+/*.button-menu {*/
+/*    -fx-graphic: url('../img/menu.png');*/
+/*}*/
 
 .button-audio {
     -fx-graphic: url('../img/audio.png');
+    -fx-background-color: transparent;
+}
+
+.button-audio:selected {
+
+}
+
+.button-add {
+    -fx-graphic: url('../img/plus.png');
+    -fx-background-color: white;
 }
 
 .button-favourite {
@@ -44,3 +54,4 @@
 .label {
     -fx-text-fill: linear-gradient(to right top, #76d2fc, #3238a8);
 }
+

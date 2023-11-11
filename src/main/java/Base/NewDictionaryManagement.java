@@ -1,6 +1,7 @@
 package Base;
 
 import java.io.*;
+import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 
@@ -22,6 +23,19 @@ public class NewDictionaryManagement {
             e.printStackTrace();
         }
     }
+
+    public static void loadOnlyWordTarget(List<String> list, String path) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(path));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                list.add(line);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static SortedMap<String, Word> partialSearch(Dictionary dictionary, String wordTarget) {
         if (!wordTarget.isEmpty()) {
