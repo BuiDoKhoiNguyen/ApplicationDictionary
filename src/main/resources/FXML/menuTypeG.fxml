@@ -18,5 +18,10 @@
          </font>
       </Button>
       <StackPane fx:id="pane1" prefHeight="281.0" prefWidth="750.0" />
+      <Button fx:id="back" layoutX="305.0" layoutY="388.0" mnemonicParsing="false" onAction="#switchMenu" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../CSS/typeGame.css" text="Back">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

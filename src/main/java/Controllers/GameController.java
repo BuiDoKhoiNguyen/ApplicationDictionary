@@ -106,13 +106,13 @@ public class GameController implements Initializable {
         Task<Void> newTask = new Task<>() {
             @Override
             protected Void call() throws Exception {
-                for (int counter = 100; counter >= 0; counter--) {
+                for (int counter = 200; counter >= 0; counter--) {
                     if (isCancelled() || Choice == true) {
                         break;
                     }
-                    updateProgress(counter, 100);
-                    Thread.sleep(50); // 50 milliseconds
-                    System.out.println(counter);
+                    updateProgress(counter, 200);
+                    Thread.sleep(50);
+                    //System.out.println(counter);
                     if (counter == 0) {
                         displayAnswer();
                     }
@@ -148,6 +148,7 @@ public class GameController implements Initializable {
             int randomIndex = random.nextInt(randomWords.size());
             String ques = randomWords.get(randomIndex).getWordExplain();
             examE.add(ques);
+            System.out.println(examE.size());
             String tmp = randomWords.get(randomIndex).getWordTarget();
             ques = ques.replaceAll("/.*?/", "");
             ques = ques.replaceAll("'.*?/", "");
@@ -155,6 +156,7 @@ public class GameController implements Initializable {
             webView.getEngine().loadContent(ques);
             trueAns = randomWords.get(randomIndex).getWordTarget();
             ansE.add(trueAns);
+            System.out.println(ansE.size());
             down();
         }
     }
@@ -335,11 +337,20 @@ public class GameController implements Initializable {
                     });
 
                     fadeOut.play();
+                    ansE.clear();
+                    examE.clear();
+                    viTri.clear();
+                    color.clear();
+                    all.clear();
                 }
             });
             yesButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    ansE.clear();
+                    examE.clear();
+                    viTri.clear();
+                    color.clear();
                     correctAnswer = 0;
                     progressBar.setProgress(1.0);
                     trueAns = "";
@@ -347,17 +358,24 @@ public class GameController implements Initializable {
                     noButton.setVisible(false);
                     yesButton.setVisible(false);
                     resultTable.setVisible(false);
+                    review.setVisible(false);
                     ansA.setDisable(false);
                     ansB.setDisable(false);
                     ansC.setDisable(false);
                     ansD.setDisable(false);
                     quiz(new ActionEvent());
 
+
                 }
             });
             review.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    System.out.println(color.size());
+                    System.out.println(viTri.size());
+                    System.out.println(all.size());
+                    System.out.println(examE.size());
+                    System.out.println(ansE.size());
                     for (int i = 0; i < color.size(); i++) {
                         if (color.get(i) == true) {
                             all.get(i).setStyle("-fx-background-color:green;");
@@ -746,11 +764,20 @@ public class GameController implements Initializable {
                     });
 
                     fadeOut.play();
+                    ansE.clear();
+                    examE.clear();
+                    viTri.clear();
+                    color.clear();
+                    all.clear();
                 }
             });
             yesButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    ansE.clear();
+                    examE.clear();
+                    viTri.clear();
+                    color.clear();
                     correctAnswer = 0;
                     progressBar.setProgress(1.0);
                     trueAns = "";
@@ -758,16 +785,24 @@ public class GameController implements Initializable {
                     noButton.setVisible(false);
                     yesButton.setVisible(false);
                     resultTable.setVisible(false);
+                    review.setVisible(false);
                     ansA.setDisable(false);
                     ansB.setDisable(false);
                     ansC.setDisable(false);
                     ansD.setDisable(false);
                     quiz(new ActionEvent());
+
+
                 }
             });
             review.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    System.out.println(color.size());
+                    System.out.println(viTri.size());
+                    System.out.println(all.size());
+                    System.out.println(examE.size());
+                    System.out.println(ansE.size());
                     for (int i = 0; i < color.size(); i++) {
                         if (color.get(i) == true) {
                             all.get(i).setStyle("-fx-background-color:green;");

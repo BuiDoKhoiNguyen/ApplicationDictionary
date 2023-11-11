@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -27,6 +28,7 @@ public class SwitchGame implements Initializable {
 
     Media media = new Media(mediaFile);
     MediaPlayer mediaPlayer = new MediaPlayer(media);
+
     public void playGame(ActionEvent event) throws Exception {
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(1));
         fadeOut.setNode(((javafx.scene.Node) event.getSource()).getScene().getRoot());
@@ -55,6 +57,14 @@ public class SwitchGame implements Initializable {
         });
 
         fadeOut.play();
+    }
+    public void backMenu(ActionEvent event) throws Exception{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/sameMenu.fxml"));
+        Parent scene2Parent = loader.load();
+        Scene scene2 = new Scene(scene2Parent);
+
+        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene2);
     }
 
     @Override
