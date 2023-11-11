@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MenuController implements Initializable {
+public class MenuController extends TaskControllers implements Initializable {
     @FXML
     private AnchorPane mainAP;
     @FXML
@@ -27,7 +27,7 @@ public class MenuController implements Initializable {
     @FXML
     private AnchorPane translateAP;
     @FXML
-    private AnchorPane usedTimeAP;
+    private AnchorPane favouriteAP;
     @FXML
     private BorderPane profileAP;
     @FXML
@@ -44,37 +44,32 @@ public class MenuController implements Initializable {
     private Button usedTime;
     @FXML
     private Button profile;
-    private SearchController searchController;
-    private TranslateController translateController;
+
     private SceneController sceneController;
-    private ProfileController profileController;
 
     @FXML
     private VBox vbox;
-    public MenuController() {
-        searchController = new SearchController();
-        translateController = new TranslateController();
-        sceneController = new SceneController();
-        profileController = new ProfileController();
-    }
 
     @FXML
     public void searchFunction() {
         mainAP.getChildren().setAll(searchAP);
     }
-
     @FXML
     public void translateFunction() {
         mainAP.getChildren().setAll(translateAP);
     }
-
+    @FXML
+    public void favouriteFunction() {
+        mainAP.getChildren().setAll(favouriteAP);
+    }
     @FXML
     public void profileFunction() {
         mainAP.getChildren().setAll(profileAP);
     }
 
-
     public void logoutButtonOnAction(ActionEvent event) throws IOException {
+        LoginController.isLogin = false;
+        ProfileController.currtime = 0;
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageToClose.close();
         sceneController.switchToLogin(event);
@@ -101,7 +96,15 @@ public class MenuController implements Initializable {
 
         Platform.runLater(() -> searchButton.requestFocus());
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/search.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
+        try {
+            profileAP = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        profileController = loader.getController();
+
+        loader = new FXMLLoader(getClass().getResource("/fxml/search.fxml"));
         try {
             searchAP = loader.load();
         } catch (IOException e) {
@@ -117,13 +120,17 @@ public class MenuController implements Initializable {
         }
         translateController = loader.getController();
 
-        loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/fxml/favourite.fxml"));
         try {
-            profileAP = loader.load();
+            favouriteAP = loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        profileController = loader.getController();
+        favouriteController = loader.getController();
+
+        searchController.loadController(profileController, searchController, translateController, favouriteController);
+        translateController.loadController(profileController, searchController, translateController, favouriteController);
+        favouriteController.loadController(profileController, searchController, translateController, favouriteController);
 
         mainAP.getChildren().setAll(searchAP);
     }

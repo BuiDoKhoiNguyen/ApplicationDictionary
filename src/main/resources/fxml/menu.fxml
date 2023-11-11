@@ -25,12 +25,12 @@
                      </HBox.margin>
                   </ImageView>
                   <ImageView fitHeight="80.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="39.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="42.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/menu.png" />
                      </image>
                      <HBox.margin>
-                        <Insets left="20.0" />
+                        <Insets left="20.0" top="5.0" />
                      </HBox.margin>
                   </ImageView>
                </children>
@@ -55,7 +55,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button id="favourite" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="182.0" stylesheets="@../css/menu.css" text="Favourite" textFill="WHITE">
+            <Button id="favourite" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#favouriteFunction" prefHeight="60.0" prefWidth="182.0" stylesheets="@../css/menu.css" text="Favourite" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

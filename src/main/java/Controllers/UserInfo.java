@@ -1,10 +1,16 @@
 package Controllers;
 
+import java.util.Arrays;
+
 public class UserInfo {
     private int userId;
     private String name;
     private String username;
     private byte[] profileImage;
+
+    public UserInfo() {
+        
+    }
 
     public UserInfo(int userId, String name, String username, byte[] profileImage) {
         this.userId = userId;
@@ -43,5 +49,13 @@ public class UserInfo {
 
     public void setProfileImage(byte[] profileImage) {
         this.profileImage = profileImage;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", username='" + username ;
     }
 }

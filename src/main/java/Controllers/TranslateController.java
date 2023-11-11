@@ -27,7 +27,8 @@ import java.util.ResourceBundle;
 
 import static java.lang.System.exit;
 
-public class TranslateController implements Initializable {
+
+public class TranslateController extends TaskControllers implements Initializable {
     @FXML
     private TextField inputField;
     @FXML
@@ -100,31 +101,43 @@ public class TranslateController implements Initializable {
         languageFrom = "";
     }
 
-    public void setToEN() {
+    public void setToEN() throws IOException, TesseractException {
         refreshButtonTo();
         toEN.setSelected(true);
         languageTo = "en";
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
-    public void setToVN() {
+    public void setToVN() throws IOException, TesseractException {
         refreshButtonTo();
         toVN.setSelected(true);
         languageTo = "vi";
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
-    public void setToFR() {
+    public void setToFR() throws IOException, TesseractException {
         refreshButtonTo();
         toFR.setSelected(true);
         languageTo = "fr";
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
-    public void setToSimplifiedCN() {
+    public void setToSimplifiedCN() throws IOException, TesseractException {
         refreshButtonTo();
         toSimplifiedCN.setSelected(true);
         languageTo = "zh";
+        if (!inputField.getText().isEmpty()) {
+            translate();
+        }
     }
 
     @FXML
@@ -143,6 +156,7 @@ public class TranslateController implements Initializable {
         translationField.getEngine().loadContent(translatedText);
     }
 
+    @FXML
     public void cancelButtonOnAction(ActionEvent e) {
         ProfileController.recordAppUsage();
         Stage stage = (Stage) cancelButton.getScene().getWindow();
@@ -198,6 +212,12 @@ public class TranslateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setFromEN();
-        setToVN();
+        try {
+            setToVN();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (TesseractException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

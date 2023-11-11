@@ -62,7 +62,7 @@
                   <Font size="18.0" />
                </font>
             </ToggleButton>
-            <ToggleButton fx:id="toSimplifiedCN" mnemonicParsing="false" onMouseClicked="#setToSimplifiedCN" prefHeight="46.0" prefWidth="155.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Trung (giản thể)">
+            <ToggleButton fx:id="toSimplifiedCN" mnemonicParsing="false" onMouseClicked="#setToSimplifiedCN" prefHeight="46.0" prefWidth="184.0" styleClass="button-to" stylesheets="@../css/translate.css" text="Trung (giản thể)">
                <font>
                   <Font size="18.0" />
                </font>
