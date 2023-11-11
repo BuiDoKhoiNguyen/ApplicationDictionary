@@ -1,15 +1,14 @@
 
-
+import Controllers.LoginController;
 import Controllers.PreloaderController;
 import Controllers.LauncherPreloader;
+import Controllers.ProfileController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 
-
 public class App extends Application {
     public static Stage primaryStage = null;
-
     @Override
     public void init() {
         PreloaderController init = new PreloaderController();
@@ -19,16 +18,16 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
         App.primaryStage = primaryStage;
-
     }
 
     public static void main(String[] args) {
-
-        System.setProperty("javafx.preloader", LauncherPreloader.class.getCanonicalName());
-
+        System.setProperty("javafx.preloader",  LauncherPreloader.class.getCanonicalName());
         launch(args);
     }
+
 }
+
+
 
 
 

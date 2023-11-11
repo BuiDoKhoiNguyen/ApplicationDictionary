@@ -29,8 +29,6 @@ public class MenuController extends TaskControllers implements Initializable {
     @FXML
     private AnchorPane favouriteAP;
     @FXML
-    private AnchorPane usedTimeAP;
-    @FXML
     private BorderPane profileAP;
     @FXML
     private Button searchButton;
@@ -56,7 +54,6 @@ public class MenuController extends TaskControllers implements Initializable {
     public void searchFunction() {
         mainAP.getChildren().setAll(searchAP);
     }
-
     @FXML
     public void translateFunction() {
         mainAP.getChildren().setAll(translateAP);
@@ -71,6 +68,8 @@ public class MenuController extends TaskControllers implements Initializable {
     }
 
     public void logoutButtonOnAction(ActionEvent event) throws IOException {
+        LoginController.isLogin = false;
+        ProfileController.currtime = 0;
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageToClose.close();
         sceneController.switchToLogin(event);

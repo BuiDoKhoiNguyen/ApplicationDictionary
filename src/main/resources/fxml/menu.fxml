@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="anchorPane" onMouseDragged="#paneDragged" onMousePressed="#panePressed" prefHeight="570.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuController">
    <children>
-      <AnchorPane fx:id="mainAP" layoutX="64.0" prefHeight="570.0" prefWidth="735.0" />
+      <AnchorPane fx:id="mainAP" layoutX="65.0" prefHeight="570.0" prefWidth="735.0" />
       <VBox fx:id="vbox" alignment="TOP_CENTER" prefHeight="570.0" prefWidth="174.0" styleClass="vbox" stylesheets="@../css/menu.css">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
@@ -25,12 +25,12 @@
                      </HBox.margin>
                   </ImageView>
                   <ImageView fitHeight="80.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fitHeight="39.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="42.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/menu.png" />
                      </image>
                      <HBox.margin>
-                        <Insets left="20.0" />
+                        <Insets left="20.0" top="5.0" />
                      </HBox.margin>
                   </ImageView>
                </children>
@@ -65,7 +65,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
+            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="174.0" style="-fx-background-color: transparent;" />
             <Button id="logout" fx:id="logoutButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="62.0" prefWidth="182.0" stylesheets="@../css/menu.css" text="Log out" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />

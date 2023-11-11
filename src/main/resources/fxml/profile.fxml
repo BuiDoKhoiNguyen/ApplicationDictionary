@@ -157,12 +157,12 @@
                                     <Insets />
                                  </opaqueInsets>
                               </Button>
-                              <Label layoutX="161.0" layoutY="6.0" prefHeight="40.0" prefWidth="205.0" text="Label">
+                              <Label fx:id="account" layoutX="155.0" layoutY="6.0" prefHeight="40.0" prefWidth="205.0" text="Label">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="161.0" layoutY="46.0" prefHeight="36.0" prefWidth="267.0" text="Label" />
+                              <Label fx:id="level" layoutX="155.0" layoutY="46.0" prefHeight="36.0" prefWidth="267.0" text="Label" />
                            </children>
                         </AnchorPane>
                      </children>

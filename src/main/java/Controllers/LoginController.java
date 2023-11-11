@@ -1,10 +1,10 @@
 package Controllers;
 
+import DatabaseConnect.DatabaseConnection;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import org.controlsfx.control.Notifications;
-import DatabaseConnect.DatabaseConnection;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,24 +24,32 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+import static Controllers.PreloaderController.connectDB;
+import static java.lang.System.exit;
+
 public class LoginController implements Initializable {
-    /** Effects processing */
+    /**
+     * Effects processing
+     */
     @FXML
-    private AnchorPane layer1,layer2,layer3;
+    private AnchorPane layer1, layer2, layer3;
     @FXML
-    private Button signUp,signIn;
+    private Button signUp, signIn;
     @FXML
-    private Label l1,b1,b2,b3,b4,b5;
+    private Label l1, b1, b2, b3, b4, b5;
     @FXML
-    private ImageView i1,i2,i3;
+    private ImageView i1, i2, i3;
     @FXML
     private Button buttonSignUp, buttonSignIn;
     @FXML
-    private TextField usernameTextField2,passwordField2,confirmPassword,fname,lname;
+    private TextField usernameTextField2, passwordField2, confirmPassword, fname, lname;
 
+    public static UserInfo user;
+    public static boolean isLogin = false;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buttonSignUp.setVisible(true);
@@ -148,7 +156,9 @@ public class LoginController implements Initializable {
     }
 
     /** ------------------------------------------------ */
-    /** Data processing */
+    /**
+     * Data processing
+     */
 
     @FXML
     private Button cancelButton;
@@ -162,13 +172,16 @@ public class LoginController implements Initializable {
     private StackPane stackPane = new StackPane();
 
     SceneController sceneController = new SceneController();
+
+
     public void loginButtonOnAction(ActionEvent e) throws IOException {
-        if(usernameTextField1.getText().isBlank() == false && passwordField1.getText().isBlank() == false) {
-            if(validateLogin()) {
+        if (usernameTextField1.getText().isBlank() == false && passwordField1.getText().isBlank() == false) {
+            if (DatabaseConnection.validateLogin(usernameTextField1.getText(),passwordField1.getText())) {
                 successNotification("Welcome to application!");
+                isLogin = true;
+                user = DatabaseConnection.getUserInfo(usernameTextField1.getText());
                 sceneController.switchToMenu(e);
-            }
-            else {
+            } else {
                 errorNotification("Invalid login. Please try again!");
             }
         } else {
@@ -177,12 +190,11 @@ public class LoginController implements Initializable {
     }
 
     public void createAccountButtonOnAction(ActionEvent e) throws IOException {
-        if(usernameTextField2.getText().isBlank() == false && passwordField2.getText().isBlank() == false
+        if (usernameTextField2.getText().isBlank() == false && passwordField2.getText().isBlank() == false
                 && fname.getText().isBlank() == false && lname.getText().isBlank() == false && confirmPassword.getText().isBlank() == false) {
-            if(validateSignUp(usernameTextField2.getText(), passwordField2.getText(), confirmPassword.getText(), fname.getText(), lname.getText())) {
+            if (DatabaseConnection.validateSignUp(usernameTextField2.getText(), passwordField2.getText(), confirmPassword.getText(), fname.getText(), lname.getText())) {
                 successNotification("Account successfully created! Please login to try app");
-            }
-            else {
+            } else {
                 errorNotification("Unable to register account. Please try again later!");
             }
         } else {
@@ -193,55 +205,7 @@ public class LoginController implements Initializable {
     public void cancelButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
-    }
-
-    public boolean validateLogin() {
-        Connection connectDB = DatabaseConnection.getConnection();
-
-        String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
-
-        try {
-            Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(verifyLogin);
-
-            while(queryResult.next()) {
-                if (queryResult.getInt(1) == 1) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean validateSignUp(String username, String password, String confirmPassword, String fName, String lName) {
-        Connection connectDB = DatabaseConnection.getConnection();
-
-        String verifySignUp = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
-
-        try {
-            Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(verifySignUp);
-
-            while(queryResult.next()) {
-                if (queryResult.getInt(1) == 1 && password.equals(confirmPassword)) {
-                    return false;
-                } else {
-                    if(password.equals(confirmPassword)) {
-                        String createAccount = "INSERT INTO UserAccounts (FirstName, LastName, Username, Password) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "')";
-                        statement.executeUpdate(createAccount);
-                        return true;
-                    }
-                }
-            }
-            connectDB.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+        exit(0);
     }
 
     public void errorNotification(String text) {
@@ -267,9 +231,12 @@ public class LoginController implements Initializable {
     }
 
     /** ------------------------------------------------ */
-    /** Dragged screen */
+    /**
+     * Dragged screen
+     */
     private double x = 0;
     private double y = 0;
+
     @FXML
     public void paneDragged(MouseEvent e) {
         Stage stage = (Stage) stackPane.getScene().getWindow();

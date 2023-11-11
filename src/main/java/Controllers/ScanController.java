@@ -21,16 +21,16 @@ import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SnippingController implements Initializable {
+public class ScanController implements Initializable {
     public static String ImageToText() throws TesseractException {
         Tesseract tesseract = new Tesseract();
-        tesseract.setDatapath("D:\\JavaProject\\DictionaryApplication\\lib\\Tess4J\\tessdata");
+        tesseract.setDatapath("lib\\Tess4J\\tessdata");
         String text = tesseract.doOCR(new File("D:\\test3.png"));
         return text;
     }
 
     @FXML
-    ImageView display,imageView;
+    ImageView display,imgView;
 
     @FXML
     public void takeScreenShot(ActionEvent event) {
@@ -57,12 +57,13 @@ public class SnippingController implements Initializable {
     public void handleDrop(DragEvent event)  {
         if(event.getDragboard().hasFiles() || event.getDragboard().hasImage()) {
             try {
-                imageView.setImage(new Image(new FileInputStream(event.getDragboard().getFiles().get(0))));
+                imgView.setImage(new Image(new FileInputStream(event.getDragboard().getFiles().get(0))));
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

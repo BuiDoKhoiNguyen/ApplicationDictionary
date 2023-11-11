@@ -22,8 +22,11 @@ import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import static Controllers.PreloaderController.dictionary;
+import static java.lang.System.exit;
+
 public class SearchController extends TaskControllers implements Initializable {
-    private Dictionary dictionary = new Dictionary(Dictionary.EV_IN_PATH);
+//    private Dictionary dictionary = new Dictionary(Dictionary.EV_IN_PATH);
 
     protected boolean isEditing = false;
 
@@ -190,7 +193,7 @@ public class SearchController extends TaskControllers implements Initializable {
     }
 
     protected Word getWord(String wordTarget) {
-        return this.dictionary.get(wordTarget);
+        return dictionary.get(wordTarget);
     }
 
     protected void editWordExplainFromFavourite(String wordTarget, String wordExplain) {
@@ -215,8 +218,10 @@ public class SearchController extends TaskControllers implements Initializable {
 
     public void cancelButtonOnAction() {
         ProfileController.recordAppUsage();
+        LoginController.isLogin = false;
+        ProfileController.currtime = 0;
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
-//        exit(0);
+        exit(0);
     }
 }

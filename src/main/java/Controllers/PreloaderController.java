@@ -1,5 +1,7 @@
 package Controllers;
 
+import Base.Dictionary;
+import Base.DictionaryController;
 import DatabaseConnect.DatabaseConnection;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -23,6 +25,8 @@ public class PreloaderController implements Initializable {
     public Label lblLoading;
     @FXML
     public static Label lblLoadingg;
+    public static Connection connectDB;
+    public static Dictionary dictionary;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,7 +53,7 @@ public class PreloaderController implements Initializable {
             try {
                 Thread.sleep(1000);
                 DatabaseConnection connectionNow = new DatabaseConnection();
-                Connection connectDB = connectionNow.getConnection();
+                connectDB = connectionNow.getConnection();
                 System.out.println("Connect to database successfully!");
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -61,7 +65,7 @@ public class PreloaderController implements Initializable {
             Platform.runLater(() -> lblLoadingg.setText(message[0]));
             try {
                 Thread.sleep(1000);
-                DictionaryController dictionaryController = new DictionaryController();
+                dictionary = new Dictionary(Dictionary.EV_IN_PATH);
                 System.out.println("Connect to dictionary data successfully!");
             } catch (InterruptedException e) {
                 e.printStackTrace();

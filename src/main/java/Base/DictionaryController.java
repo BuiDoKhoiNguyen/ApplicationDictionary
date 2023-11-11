@@ -1,4 +1,4 @@
-package Controllers;
+package Base;
 
 import Base.Dictionary;
 import Base.NewDictionaryManagement;
