@@ -74,7 +74,7 @@ public class GameController implements Initializable {
     String trueAns = "";
 
     Dictionary dictionary = new Dictionary();
-    private static final String IN_PATH = "C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\data\\dictionaries.txt";
+    private static final String IN_PATH = "data/dictionaries.txt";
 
     List<String> examE = new ArrayList<>();
     List<String> ansE = new ArrayList<>();
