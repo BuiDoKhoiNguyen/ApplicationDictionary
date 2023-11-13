@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,11 +18,8 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -46,9 +42,11 @@ public class controllTypeGame implements Initializable {
 
     int score = 0;
     String mediaFile = "/sources_music_picture/cyber-war.mp3";
+    URL resourceUrl = getClass().getResource(mediaFile);
+    String urlString = resourceUrl.toExternalForm();
+    private Media media = new Media(urlString);
+    private MediaPlayer mediaPlayer = new MediaPlayer(media);
 
-    Media media = new Media(mediaFile);
-    MediaPlayer mediaPlayer = new MediaPlayer(media);
     int WINDOW_WIDTH = 750;
     int WINDOW_HEIGHT = 532;
 
@@ -506,13 +504,14 @@ public class controllTypeGame implements Initializable {
     //AudioClip explodeBoom = new AudioClip(explodeFile);
 
     String explodeFile = "/sources_music_picture/medium-explosion.mp3";
-
-    Media me = new Media(explodeFile);
-    MediaPlayer explodeBoom = new MediaPlayer(me);
+    URL resourceUrl2 = getClass().getResource(explodeFile);
+    String urlString2 = resourceUrl2.toExternalForm();
+    private Media me = new Media(urlString2);
+    private MediaPlayer explodeBoom = new MediaPlayer(me);
 
     String bulletJam = "/sources_music_picture/bulletS.mp3";
-
-    Media me2 = new Media(bulletJam);
+    URL resourceUrl3 = getClass().getResource(bulletJam);
+    Media me2 = new Media(resourceUrl3.toExternalForm());
     MediaPlayer bulletJ = new MediaPlayer(me2);
 
 
@@ -640,7 +639,7 @@ public class controllTypeGame implements Initializable {
 
     public void readBestScore() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\src\\main\\resources\\sources_music_picture\\bestScore.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("data/bestScore.txt"));
             String line = reader.readLine();
             reader.close();
             bestScore = Integer.parseInt(line);
@@ -650,7 +649,7 @@ public class controllTypeGame implements Initializable {
     }
     public void writeBestScore(int bestScore) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\src\\main\\resources\\sources_music_picture\\bestScore.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("data/bestScore.txt"));
             writer.write(Integer.toString(bestScore));
             writer.close();
         } catch (IOException e) {

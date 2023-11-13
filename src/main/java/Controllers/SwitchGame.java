@@ -1,20 +1,17 @@
 package Controllers;
 
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.net.URL;
@@ -25,8 +22,8 @@ public class SwitchGame implements Initializable {
     private Button playButton;
 
     String mediaFile = "/sources_music_picture/good-night-160166.mp3";
-
-    Media media = new Media(mediaFile);
+    URL resourceUrl = getClass().getResource(mediaFile);
+    Media media = new Media(resourceUrl.toExternalForm());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
 
     public void playGame(ActionEvent event) throws Exception {
@@ -38,7 +35,7 @@ public class SwitchGame implements Initializable {
         fadeOut.setOnFinished(e -> {
             try {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/simpleGame.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/simpleGame.fxml"));
                 mediaPlayer.stop();
                 Parent scene2Parent = loader.load();
                 Scene scene2 = new Scene(scene2Parent);
@@ -61,13 +58,15 @@ public class SwitchGame implements Initializable {
 
     //switch to main menu game
     public void backMenu(ActionEvent event) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/sameMenu.fxml"));
-        Parent scene2Parent = loader.load();
-        Scene scene2 = new Scene(scene2Parent);
-
-        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene2);
-        mediaPlayer.stop();
+        SceneController.switchBack(event);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
+//
+//        Parent scene2Parent = loader.load();
+//        Scene scene2 = new Scene(scene2Parent);
+//
+//        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+//        window.setScene(scene2);
+//        mediaPlayer.stop();
     }
 
     @Override

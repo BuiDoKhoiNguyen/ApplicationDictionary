@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 public class connectionGandM implements Initializable {
 
@@ -22,11 +23,10 @@ public class connectionGandM implements Initializable {
     Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/universeHalf.jpg"));
 
     @FXML
-    AnchorPane acPane;
+    AnchorPane gameAP;
 
     @FXML
     Button chooseGame,TypeGame;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -34,26 +34,31 @@ public class connectionGandM implements Initializable {
         ImageView imageView2 = new ImageView(myImage2);
         imageView.setLayoutY(267);
         imageView2.setLayoutY(0);
-        acPane.getChildren().add(imageView);
-        acPane.getChildren().add(imageView2);
+        gameAP.getChildren().add(imageView);
+        gameAP.getChildren().add(imageView2);
         imageView.toBack();
         imageView2.toBack();
-
     }
-    public void switchType(ActionEvent event) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/menuTypeG.fxml"));
-        Parent scene2Parent = loader.load();
-        Scene scene2 = new Scene(scene2Parent);
 
-        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene2);
+    public void switchType(ActionEvent event) throws Exception {
+        SceneController.switchScene(event,"/fxml/menuTypeG.fxml");
+
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuTypeG.fxml"));
+//        Parent sceneParent = loader.load();
+//        screenStack.push(sceneParent);
+//        Scene scene = new Scene(sceneParent);
+//
+//        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+//        window.setScene(scene);
     }
+
     public void switchChoose(ActionEvent event) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
-        Parent scene2Parent = loader.load();
-        Scene scene2 = new Scene(scene2Parent);
-
-        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene2);
+        SceneController.switchScene(event,"/fxml/openSimpleGame");
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openSimpleGame.fxml"));
+//        Parent sceneParent = loader.load();
+//        Scene scene = new Scene(sceneParent);
+//
+//        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+//        window.setScene(scene);
     }
 }

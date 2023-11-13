@@ -4,6 +4,7 @@ import Controllers.UserInfo;
 
 import java.sql.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static Controllers.PreloaderController.connectDB;
@@ -64,13 +65,13 @@ public class DatabaseConnection {
                     return false;
                 } else {
                     if (password.equals(confirmPassword)) {
-                        String userAccountQuery = "INSERT INTO UserAccounts (FirstName, LastName, Username, Password) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "')";
-                        statement.executeUpdate(userAccountQuery);
+                        String initUser = "INSERT INTO UserAccounts (FirstName, LastName, Username, Password, profileImage) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "', null)";
+                        statement.executeUpdate(initUser);
                         int userId = getUserId(username);
-                        String appUsageQuery = "INSERT INTO appusage (UserID, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) VALUES ('" + userId + "',0,0,0,0,0,0,0)";
-                        statement.executeUpdate(appUsageQuery);
-                        String favouriteQuery = "INSERT INTO UserAccounts (FirstName, LastName, Username, Password) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "')";
-                        statement.executeUpdate(favouriteQuery);
+                        String initUsage = "INSERT INTO appusage (UserID, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) VALUES ('" + userId + "',0,0,0,0,0,0,0)";
+                        statement.executeUpdate(initUsage);
+//                        String initFavourite = "INSERT INTO favourite (UserID, WordTarget) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "')";
+//                        statement.executeUpdate(initFavourite);
                         //To do
                         return true;
                     }
@@ -104,11 +105,11 @@ public class DatabaseConnection {
     }
 
     public static int getUserId(String username) {
-        String query = "SELECT idUserAccounts FROM UserAccounts WHERE Username = " + username;
+        String query = "SELECT idUserAccounts FROM UserAccounts WHERE Username = '" + username +"'";
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(query);
-            if(queryResult.next()) {
+            if (queryResult.next()) {
                 return queryResult.getInt("idUserAccounts");
             }
         } catch (Exception e) {
@@ -156,7 +157,41 @@ public class DatabaseConnection {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return usageMap;
-}
+    }
+    public static void getFavouriteList(int userId, List<String> list) {
+        String query = "SELECT WordTarget FROM favourite WHERE UserId = " + userId;
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                list.add(resultSet.getString("WordTarget"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void addFavouriteWord(int userId, String wordTarget) {
+        String query = "INSERT INTO favourite(UserId,WordTarget) VALUES (" + userId + ",'" + wordTarget + "')";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeFavouriteWord(int userId, String wordTarget) {
+        String query = "DELETE FROM favourite WHERE UserID = "+ userId +" AND  WordTarget = '" + wordTarget + "'";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

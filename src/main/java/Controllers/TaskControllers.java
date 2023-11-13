@@ -27,14 +27,18 @@ public class  TaskControllers {
     protected TranslateController translateController;
     @FXML
     protected FavouriteController favouriteController;
+    @FXML
+    protected connectionGandM gameController;
 
     public void loadController(ProfileController profileController,
                                SearchController searchController,
                                TranslateController translateController,
-                               FavouriteController favouriteController) {
+                               FavouriteController favouriteController,
+                               connectionGandM gameController) {
         this.profileController = profileController;
         this.searchController = searchController;
         this.translateController = translateController;
         this.favouriteController = favouriteController;
+        this.gameController = gameController;
     }
 }

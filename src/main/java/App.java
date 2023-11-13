@@ -29,9 +29,6 @@ public class App extends Application {
 
 
 
-
-
-
 //import javafx.application.Application;
 //import javafx.fxml.FXMLLoader;
 //import javafx.scene.Parent;
@@ -46,7 +43,7 @@ public class App extends Application {
 //
 //    @Override
 //    public void start(Stage primaryStage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("FXML/menu.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("fxml/gameMenu.fxml"));
 //        primaryStage.setScene(new Scene(root,800, 600));
 //        primaryStage.show();
 //    }

@@ -18,47 +18,47 @@
             <Image url="@../sources_music_picture/warning.png" />
          </image>
       </ImageView>
-      <Label fx:id="lbsc" layoutX="5.0" layoutY="488.0" prefHeight="38.0" prefWidth="46.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" text="SCORE">
+      <Label fx:id="lbsc" layoutX="5.0" layoutY="488.0" prefHeight="38.0" prefWidth="46.0" styleClass="color_form" stylesheets="@../css/typeGame.css" text="SCORE">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="scoreLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="62.0" layoutY="488.0" prefHeight="38.0" prefWidth="80.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" text="Label">
+      <Label fx:id="scoreLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="62.0" layoutY="488.0" prefHeight="38.0" prefWidth="80.0" styleClass="color_form" stylesheets="@../css/typeGame.css" text="Label">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <Label fx:id="result" layoutX="213.0" layoutY="164.0" opacity="0.19" prefHeight="236.0" prefWidth="323.0" style="-fx-background-color: #00CCFF; -fx-border-color: black;" />
-      <Label fx:id="scLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="170.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" text="SCORE" textAlignment="JUSTIFY">
+      <Label fx:id="scLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="170.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../css/typeGame.css" text="SCORE" textAlignment="JUSTIFY">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="bcLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="424.0" layoutY="170.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" text="BEST SCORE" textAlignment="JUSTIFY">
+      <Label fx:id="bcLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="424.0" layoutY="170.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../css/typeGame.css" text="BEST SCORE" textAlignment="JUSTIFY">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="scoreL" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="228.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css">
+      <Label fx:id="scoreL" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="228.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../css/typeGame.css">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="bScoreL" alignment="CENTER" contentDisplay="CENTER" layoutX="424.0" layoutY="228.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" textAlignment="CENTER">
+      <Label fx:id="bScoreL" alignment="CENTER" contentDisplay="CENTER" layoutX="424.0" layoutY="228.0" prefHeight="46.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../css/typeGame.css" textAlignment="CENTER">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="NBut" layoutX="225.0" layoutY="333.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" styleClass="buttonPlay" stylesheets="@../CSS/typeGame.css" text="No">
+      <Button fx:id="NBut" layoutX="225.0" layoutY="333.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" styleClass="buttonPlay" stylesheets="@../css/typeGame.css" text="No">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Button fx:id="YBut" layoutX="424.0" layoutY="333.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" styleClass="buttonPlay" stylesheets="@../CSS/typeGame.css" text="Yes">
+      <Button fx:id="YBut" layoutX="424.0" layoutY="333.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" styleClass="buttonPlay" stylesheets="@../css/typeGame.css" text="Yes">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
-      <Label fx:id="pLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="327.0" layoutY="301.0" prefHeight="18.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../CSS/typeGame.css" text="Play again" textAlignment="CENTER" />
+      <Label fx:id="pLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="327.0" layoutY="301.0" prefHeight="18.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../css/typeGame.css" text="Play again" textAlignment="CENTER" />
    </children>
 </AnchorPane>

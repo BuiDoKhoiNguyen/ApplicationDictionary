@@ -11,7 +11,7 @@
          <image>
             <Image url="@../sources_music_picture/openGame.png" />
          </image></ImageView>
-      <Button fx:id="playButton" layoutX="324.0" layoutY="415.0" mnemonicParsing="false" onAction="#playGame" prefHeight="66.0" prefWidth="101.0" stylesheets="@../CSS/form.css" text="Play" />
-      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backMenu" prefHeight="55.0" prefWidth="86.0" styleClass="buttonPlay" stylesheets="@../CSS/form.css" text="Back" />
+      <Button fx:id="playButton" layoutX="324.0" layoutY="415.0" mnemonicParsing="false" onAction="#playGame" prefHeight="66.0" prefWidth="101.0" stylesheets="@../css/form.css" text="Play" />
+      <Button fx:id="back" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backMenu" prefHeight="55.0" prefWidth="86.0" styleClass="buttonPlay" stylesheets="@../css/form.css" text="Back" />
    </children>
 </AnchorPane>

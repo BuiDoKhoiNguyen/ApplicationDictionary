@@ -60,7 +60,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button id="playGame" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="178.0" stylesheets="@../css/menu.css" text="Game" textFill="WHITE">
+            <Button id="playGame" fx:id="gameButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#gameFunction" prefHeight="60.0" prefWidth="178.0" stylesheets="@../css/menu.css" text="Game" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

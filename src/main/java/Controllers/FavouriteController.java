@@ -9,6 +9,7 @@ import Base.Dictionary;
 import Base.Word;
 import Base.NewDictionaryManagement;
 
+import DatabaseConnect.DatabaseConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,7 +23,8 @@ public class FavouriteController extends SearchController implements Initializab
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         List<String> favouriteList = new ArrayList<>();
-        NewDictionaryManagement.loadOnlyWordTarget(favouriteList, Dictionary.FAVOURITE_IN_PATH);
+//        NewDictionaryManagement.loadOnlyWordTarget(favouriteList, Dictionary.FAVOURITE_IN_PATH);
+        DatabaseConnection.getFavouriteList(LoginController.user.getUserId(),favouriteList);
         for (String ele : favouriteList) {
             favouriteDict.put(ele, getWord(ele));
             favouriteDict.get(ele).setFavoured(true);
@@ -109,6 +111,7 @@ public class FavouriteController extends SearchController implements Initializab
     public boolean removeFromSearch(String wordTarget) {
         if (favouriteDict.containsKey(wordTarget)) {
             favouriteDict.remove(wordTarget);
+            DatabaseConnection.removeFavouriteWord(LoginController.user.getUserId(),wordTarget);
             reset();
             return true;
         }
@@ -118,6 +121,7 @@ public class FavouriteController extends SearchController implements Initializab
     public boolean addFromSearch(String wordTarget) {
         if (!favouriteDict.containsKey(wordTarget)) {
             favouriteDict.put(wordTarget, searchController.getWord(wordTarget));
+            DatabaseConnection.addFavouriteWord(LoginController.user.getUserId(), wordTarget);
             reset();
             return true;
         }

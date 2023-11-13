@@ -58,9 +58,10 @@ public class GameController implements Initializable {
 
     Image myImage3 = new Image(getClass().getResourceAsStream("/sources_music_picture/gameImage.png"));
 
-    String mediaFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/sleepy-cat-118974.mp3";
+    String mediaFile = "/sources_music_picture/sleepy-cat-118974.mp3";
 
-    Media media = new Media(mediaFile);
+    URL resourceUrl = getClass().getResource(mediaFile);
+    Media media = new Media(resourceUrl.toExternalForm());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
     private Task<Void> task;
 
@@ -355,7 +356,7 @@ public class GameController implements Initializable {
                     fadeOut.setOnFinished(e -> {
                         try {
 
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openSimpleGame.fxml"));
                             mediaPlayer.stop();
                             Parent scene2Parent = loader.load();
                             Scene scene2 = new Scene(scene2Parent);
@@ -785,7 +786,7 @@ public class GameController implements Initializable {
                     fadeOut.setOnFinished(e -> {
                         try {
 
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openSimpleGame.fxml"));
                             mediaPlayer.stop();
                             Parent scene2Parent = loader.load();
                             Scene scene2 = new Scene(scene2Parent);
