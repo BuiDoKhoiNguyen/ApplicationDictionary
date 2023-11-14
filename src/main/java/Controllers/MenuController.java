@@ -132,6 +132,7 @@ public class MenuController extends TaskControllers implements Initializable {
         searchController.loadController(profileController, searchController, translateController, favouriteController);
         translateController.loadController(profileController, searchController, translateController, favouriteController);
         favouriteController.loadController(profileController, searchController, translateController, favouriteController);
+        favouriteController.initFavouriteDict();
 
         mainAP.getChildren().setAll(searchAP);
     }

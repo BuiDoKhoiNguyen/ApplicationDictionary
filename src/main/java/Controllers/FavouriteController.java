@@ -9,50 +9,40 @@ import Base.Dictionary;
 import Base.Word;
 import Base.NewDictionaryManagement;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.cell.TextFieldListCell;
 
-public class FavouriteController extends SearchController implements Initializable {
+public class FavouriteController extends DictController implements Initializable {
     private Dictionary favouriteDict = new Dictionary();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<String> favouriteList = new ArrayList<>();
-        NewDictionaryManagement.loadOnlyWordTarget(favouriteList, Dictionary.FAVOURITE_IN_PATH);
-        for (String ele : favouriteList) {
-            favouriteDict.put(ele, getWord(ele));
-            favouriteDict.get(ele).setFavoured(true);
-        }
         this.wordList.setEditable(true);
         this.wordList.setCellFactory(TextFieldListCell.forListView());
         this.wordList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    }
+
+    public void initFavouriteDict() {
+        List<String> favouriteList = new ArrayList<>();
+        NewDictionaryManagement.loadOnlyWordTarget(favouriteList, Dictionary.FAVOURITE_IN_PATH);
+        for (String ele : favouriteList) {
+            favouriteDict.put(ele, searchController.getWord(ele));
+            favouriteDict.get(ele).setFavoured(true);
+        }
         this.wordList.getItems().addAll(favouriteDict.keySet());
     }
 
-    @Override
     @FXML
     public void searchWord() {
-        String keyword = searchField.getText().toLowerCase();
-        ObservableList<String> matchingWords = FXCollections.observableArrayList();
-        matchingWords.addAll(NewDictionaryManagement.partialSearch(favouriteDict, keyword).keySet());
-        wordList.setItems(matchingWords);
+        search(favouriteDict);
     }
 
-    @Override
     @FXML
     public void selectWord() {
-        String selectedWord = this.wordList.getSelectionModel().selectedItemProperty().getValue();
-        if (selectedWord != null) {
-            Word word = favouriteDict.get(selectedWord.trim());
-            String wordExplain = word.getWordExplain();
-            definitionView.getEngine().loadContent(wordExplain, "text/html");
-            searchField.setText(word.getWordTarget());
-            favourButton.setSelected(word.isFavoured());
-        }
+        select(favouriteDict);
     }
 
     @Override
@@ -73,6 +63,17 @@ public class FavouriteController extends SearchController implements Initializab
         System.out.println("Error: The word " + selectedWord + " is not in Favourite!");
     }
 
+    @FXML
+    public void editWordTarget(ListView.EditEvent<String> event) {
+        String oldWordTarget = searchField.getText();
+        String newWordTarget = event.getNewValue();
+        String wordExplain = favouriteDict.get(oldWordTarget).getWordExplain();
+        favouriteDict.remove(oldWordTarget);
+        favouriteDict.put(newWordTarget, new Word(newWordTarget, wordExplain));
+        searchController.editWordTarget(oldWordTarget, newWordTarget, wordExplain);
+        reset();
+    }
+
     @Override
     @FXML
     public void editWordExplain() {
@@ -87,23 +88,16 @@ public class FavouriteController extends SearchController implements Initializab
             favouriteDict.editWord(wordTarget, editField.getHtmlText());
             searchController.editWordExplainFromFavourite(wordTarget, editField.getHtmlText());
             definitionView.getEngine().loadContent(editField.getHtmlText(), "text/html");
-            return;
+        } else {
+            isEditing = true;
+            editField.setVisible(true);
+            editField.setHtmlText(favouriteDict.get(wordTarget).getWordExplain());
+            searchController.reset();
         }
-        isEditing = true;
-        editField.setVisible(true);
-        editField.setHtmlText(favouriteDict.get(wordTarget).getWordExplain());
-        searchController.reset();
     }
 
-    @Override
-    protected void reset() {
-        ObservableList<String> matchingWords = FXCollections.observableArrayList();
-        matchingWords.addAll(favouriteDict.keySet());
-        wordList.setItems(matchingWords);
-        wordList.getSelectionModel().clearSelection();
-        searchField.setText("");
-        definitionView.getEngine().loadContent("");
-        favourButton.setSelected(false);
+    public void reset() {
+        reset(favouriteDict);
     }
 
     public boolean removeFromSearch(String wordTarget) {
