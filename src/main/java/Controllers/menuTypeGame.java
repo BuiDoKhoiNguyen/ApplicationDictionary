@@ -176,7 +176,6 @@ public class menuTypeGame implements Initializable {
         transition2.setFromY(startY);
         transition2.setToY(endY2);
         transition2.setOnFinished(event -> {
-            System.out.println("something");
             fire(word.getTranslateX(),word.getTranslateY(),word);
         });
 
