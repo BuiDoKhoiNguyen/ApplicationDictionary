@@ -1,0 +1,223 @@
+.question-color{
+-fx-font-weight: bold;
+}
+
+
+.reviewButton{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+.reviewButton: hover{
+-fx-font-veight: bold;
+    -fx-background-color: black;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-scale-x: 1.2;
+        -fx-scale-y: 1.2;
+        -fx-translate-x: -3;
+        -fx-translate-y: -1;
+}
+.reviewButton: pressed{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+.yesButton{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+.yesButton: hover{
+-fx-font-veight: bold;
+    -fx-background-color: black;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-scale-x: 1.2;
+        -fx-scale-y: 1.2;
+        -fx-translate-x: -3;
+        -fx-translate-y: -1;
+}
+.yesButton: pressed{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+
+.noButton{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+.noButton: hover{
+-fx-font-veight: bold;
+    -fx-background-color: black;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+    -fx-scale-x: 1.2;
+        -fx-scale-y: 1.2;
+        -fx-translate-x: -3;
+        -fx-translate-y: -1;
+}
+.noButton: pressed{
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-font-size: 16;
+    -fx-text-fill: black;
+}
+
+.progress-bar {
+    -fx-background-radius: 10;
+    -fx-background-insets: 0;
+    -fx-background-color: black;
+    -fx-padding: 5;
+
+}
+
+
+.progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    -fx-background-radius: 5 ;
+    -fx-background-insets: 0;
+}
+
+
+.webView {
+     -fx-border-color: black;
+        -fx-border-width: 2px;
+        -fx-background-radius: 10;
+}
+
+.buttonPlay {
+    -fx-font-veight: bold;
+    -fx-background-color: #2196f3;
+    -fx-background-radius: 22;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+}
+.buttonPlay: hover {
+-fx-font-veight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 22;
+    -fx-font-size: 16;
+    -fx-text-fill: #2196f3;
+    -fx-border-color: #2196f3;
+    -fx-border-radius: 20;
+    -fx-border-vidth: 3;
+}
+.buttonPlay: pressed {
+    -fx-font-veight: bold;
+        -fx-background-color: white;
+        -fx-background-radius: 22;
+        -fx-font-size: 16;
+        -fx-text-fill: #2196f3;
+        -fx-border-color: #2196f3;
+        -fx-border-radius: 20;
+        -fx-border-vidth: 3;
+        -fx-rotate: 10;
+}
+
+.button1 {
+-fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5, 4, 3;
+    -fx-background-color: #FFCCFF;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-text-overrun: clip;
+    -fx-content-display: bottom;
+
+}
+.button1:hover {
+    -fx-background-color: #FF9999 ;
+}
+.button1:pressed{
+    -fx-background-color: #FFCCFF;
+}
+
+.button2 {
+-fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5, 4, 3;
+    -fx-background-color: #07f7f7 ;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-text-overrun: clip;
+    -fx-content-display: bottom;
+
+}
+.button2:hover {
+    -fx-background-color:  #239c9c ;
+}
+.button2:pressed{
+    -fx-background-color: #07f7f7;
+}
+
+.button3 {
+-fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5, 4, 3;
+    -fx-background-color: #00FF00 ;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-text-overrun: clip;
+    -fx-content-display: bottom;
+
+}
+.button3:hover {
+    -fx-background-color: #008800 ;
+}
+.button3:pressed{
+    -fx-background-color: #00FF00;
+}
+
+.button4 {
+-fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5, 4, 3;
+    -fx-background-color: #66CCCC ;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-text-overrun: clip;
+    -fx-content-display: bottom;
+
+}
+.button4:hover {
+    -fx-background-color: #00CCCC ;
+}
+.button4:pressed{
+    -fx-background-color: #66CCCC;
+}
+
+.buttonAudio{
+    -fx-graphic: url("/sources_music_picture/audioOn.png");
+     -fx-background-color: transparent;
+}
+.buttonAudio:selected{
+    -fx-graphic: url("/sources_music_picture/audioOff.png");
+    -fx-background-color: transparent;
+}
+
+
+.label {
+-fx-background-insets: 0, 1, 1;
+    -fx-background-radius: 5, 4, 3;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+
+}

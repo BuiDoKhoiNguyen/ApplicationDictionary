@@ -9,19 +9,46 @@ import Base.Dictionary;
 import Base.Word;
 import Base.NewDictionaryManagement;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
+
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.HTMLEditor;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-public class SearchController extends DictController implements Initializable {
-    public Dictionary dictionary = new Dictionary(Dictionary.EV_IN_PATH);
+import static Controllers.PreloaderController.dictionary;
+import static java.lang.System.exit;
+
+public class SearchController extends TaskControllers implements Initializable {
+//    private Dictionary dictionary = new Dictionary(Dictionary.EV_IN_PATH);
+
+    protected boolean isEditing = false;
 
     @FXML
+    protected TextField searchField;
+    @FXML
+    protected ListView<String> wordList;
+    @FXML
+    protected WebView definitionView;
+    @FXML
+    protected HTMLEditor editField;
+    @FXML
     private Pane addField;
+    @FXML
+    protected ToggleButton addButton;
+    @FXML
+    protected ToggleButton favourButton;
+    @FXML
+    protected ToggleButton editButton;
+
+    @FXML
+    private Button cancelButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -155,8 +182,10 @@ public class SearchController extends DictController implements Initializable {
 
     public void cancelButtonOnAction() {
         ProfileController.recordAppUsage();
+        LoginController.isLogin = false;
+        ProfileController.currtime = 0;
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
-//        exit(0);
+        exit(0);
     }
 }

@@ -1,5 +1,6 @@
 .vbox {
     -fx-background-color: linear-gradient(to bottom, #76d2fc, #3238a8);
+    -fx-background-radius: 0 30 30 0;
 }
 .button {
     -fx-background-color: transparent;

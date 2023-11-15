@@ -29,7 +29,7 @@ public class MenuController extends TaskControllers implements Initializable {
     @FXML
     private AnchorPane favouriteAP;
     @FXML
-    private AnchorPane usedTimeAP;
+    private AnchorPane gameAP;
     @FXML
     private BorderPane profileAP;
     @FXML
@@ -41,9 +41,9 @@ public class MenuController extends TaskControllers implements Initializable {
     @FXML
     private Button favouriteButton;
     @FXML
-    private Button logoutButton;
+    public Button gameButton;
     @FXML
-    private Button usedTime;
+    private Button logoutButton;
     @FXML
     private Button profile;
 
@@ -69,8 +69,12 @@ public class MenuController extends TaskControllers implements Initializable {
     public void profileFunction() {
         mainAP.getChildren().setAll(profileAP);
     }
+    @FXML
+    public void gameFunction() { mainAP.getChildren().setAll(gameAP); }
 
     public void logoutButtonOnAction(ActionEvent event) throws IOException {
+        LoginController.isLogin = false;
+        ProfileController.currtime = 0;
         Stage stageToClose = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stageToClose.close();
         sceneController.switchToLogin(event);
@@ -78,6 +82,8 @@ public class MenuController extends TaskControllers implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        sceneController = new SceneController();
+
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
         slide.setNode(vbox);
@@ -95,7 +101,11 @@ public class MenuController extends TaskControllers implements Initializable {
             slide.play();
         });
 
-        Platform.runLater(() -> searchButton.requestFocus());
+        Platform.runLater(() -> {
+            searchButton.requestFocus();
+            System.out.print("focus on search");
+        });
+
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
         try {
@@ -129,9 +139,24 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         favouriteController = loader.getController();
 
-        searchController.loadController(profileController, searchController, translateController, favouriteController);
-        translateController.loadController(profileController, searchController, translateController, favouriteController);
-        favouriteController.loadController(profileController, searchController, translateController, favouriteController);
+        loader = new FXMLLoader(getClass().getResource("/fxml/gameMenu.fxml"));
+//        try {
+//            Parent root = loader.load();
+//            SceneController.sceneStack.push(new Scene(root));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+        try {
+            gameAP = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        gameController = loader.getController();
+
+        searchController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+//        gameController.loadController(profileController, searchController, translateController, favouriteController,gameController);
         favouriteController.initFavouriteDict();
 
         mainAP.getChildren().setAll(searchAP);
