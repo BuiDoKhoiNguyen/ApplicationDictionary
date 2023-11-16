@@ -1,12 +1,12 @@
 package Controllers;
 
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,11 +19,8 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -45,10 +42,12 @@ public class controllTypeGame implements Initializable {
     int tmp = 0;
 
     int score = 0;
-    String mediaFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/cyber-war.mp3";
+    String mediaFile = "/sources_music_picture/cyber-war.mp3";
+    URL resourceUrl = getClass().getResource(mediaFile);
+    String urlString = resourceUrl.toExternalForm();
+    private Media media = new Media(urlString);
+    private MediaPlayer mediaPlayer = new MediaPlayer(media);
 
-    Media media = new Media(mediaFile);
-    MediaPlayer mediaPlayer = new MediaPlayer(media);
     int WINDOW_WIDTH = 750;
     int WINDOW_HEIGHT = 532;
 
@@ -505,14 +504,15 @@ public class controllTypeGame implements Initializable {
     //String explodeFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/explode.mp3";
     //AudioClip explodeBoom = new AudioClip(explodeFile);
 
-    String explodeFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/medium-explosion.mp3";
+    String explodeFile = "/sources_music_picture/medium-explosion.mp3";
+    URL resourceUrl2 = getClass().getResource(explodeFile);
+    String urlString2 = resourceUrl2.toExternalForm();
+    private Media me = new Media(urlString2);
+    private MediaPlayer explodeBoom = new MediaPlayer(me);
 
-    Media me = new Media(explodeFile);
-    MediaPlayer explodeBoom = new MediaPlayer(me);
-
-    String bulletJam = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/bulletS.mp3";
-
-    Media me2 = new Media(bulletJam);
+    String bulletJam = "/sources_music_picture/bulletS.mp3";
+    URL resourceUrl3 = getClass().getResource(bulletJam);
+    Media me2 = new Media(resourceUrl3.toExternalForm());
     MediaPlayer bulletJ = new MediaPlayer(me2);
 
 
@@ -533,18 +533,27 @@ public class controllTypeGame implements Initializable {
     Label scoreLabel,result,scLabel,bcLabel,scoreL,bScoreL,pLabel,lbsc;
 
     @FXML
-    Button NBut,YBut;
+    Button NBut,YBut,continueBut,pauseBut;
 
     @FXML
     AnchorPane myAnchor;
 
     int bestScore = 0;
 
+    boolean pause = false;
+
+    TranslateTransition transition;
+    Timeline missileTimeline;
+
+    Timeline timeline2;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         start();
     }
     public void start(){
+
+        continueBut.setVisible(false);
         readBestScore();
         if(menuTypeGame.isAudi()==false){
             mediaPlayer.setMute(true);
@@ -602,10 +611,69 @@ public class controllTypeGame implements Initializable {
         Timeline timeline = new Timeline(startFrame, endFrame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setRate(1.0);
-
         timeline.play();
+        /*pauseBut.setOnAction(event -> {
+            timeline.pause()
+        });
+        continueBut.setOnAction(event -> timeline.play());
+
+        if (!pause) {
+            System.out.println("play");
+            Platform.runLater(() -> timeline.play());
+        } else {
+            System.out.println("pause");
+            Platform.runLater(() -> timeline.pause());
+        }*/
+        pauseBut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("ok");
+                continueBut.setVisible(true);
+                pause = true;
+                mediaPlayer.stop();
+                bulletJ.setMute(true);
+                explodeBoom.setMute(true);
+                timeline.pause();
+                gameLoop.pause();
+                if(transition!=null){
+                    transition.pause();
+                }
+                textField.setDisable(true);
+                textField.setOpacity(1.0);
+                if(missileTimeline!=null){
+                    missileTimeline.pause();
+                }
+                if(timeline2!=null){
+                    timeline2.pause();
+                }
+                continueBut.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("yes");
+                        pause = false;
+                        continueBut.setVisible(false);
+                        mediaPlayer.play();
+                        bulletJ.setMute(false);
+                        explodeBoom.setMute(false);
+                        timeline.play();
+                        gameLoop.play();
+                        if(transition!=null){
+                            transition.play();
+                        }
+                        textField.setDisable(false);
+                        if(missileTimeline!=null){
+                            missileTimeline.play();
+                        }
+                        if(timeline2!=null){
+                            timeline2.play();
+                        }
+                    }
+                });
+            }
+        });
 
         gameLoop = new Timeline(new KeyFrame(Duration.millis(WORD_SPEED), event -> {
+            System.out.println(pause);
             Collections.shuffle(Word);
             english.add(Word.get(x));
             int index = random2.nextInt(Word.get(x).length());
@@ -634,13 +702,14 @@ public class controllTypeGame implements Initializable {
 
         }));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-
         gameLoop.play();
+
+
     }
 
     public void readBestScore() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\src\\main\\resources\\sources_music_picture\\bestScore.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("data/bestScore.txt"));
             String line = reader.readLine();
             reader.close();
             bestScore = Integer.parseInt(line);
@@ -650,7 +719,7 @@ public class controllTypeGame implements Initializable {
     }
     public void writeBestScore(int bestScore) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\src\\main\\resources\\sources_music_picture\\bestScore.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("data/bestScore.txt"));
             writer.write(Integer.toString(bestScore));
             writer.close();
         } catch (IOException e) {
@@ -663,7 +732,7 @@ public class controllTypeGame implements Initializable {
         double endY = 313;
         Duration duration = Duration.seconds(10 * (endY - startY) / WINDOW_HEIGHT);
 
-        TranslateTransition transition = new TranslateTransition(duration, word);
+        transition = new TranslateTransition(duration, word);
         transition.setInterpolator(Interpolator.LINEAR);
         transition.setFromY(startY);
         transition.setToY(endY);
@@ -677,6 +746,7 @@ public class controllTypeGame implements Initializable {
             word.setVisible(false);
         });
         transition.play();
+
     }
 
     public void checkAndRemoveString(String input) {
@@ -737,7 +807,7 @@ public class controllTypeGame implements Initializable {
             }
         });
 
-        Timeline missileTimeline = new Timeline(keyFrame);
+        missileTimeline = new Timeline(keyFrame);
         missileTimeline.setCycleCount(Timeline.INDEFINITE);
         missileTimeline.play();
     }
@@ -757,7 +827,7 @@ public class controllTypeGame implements Initializable {
 
         Image fullImage = new Image(getClass().getResource(tmp).toExternalForm());
 
-        Timeline timeline = new Timeline();
+        timeline2 = new Timeline();
         for (int i = 0; i < frameCount; i++) {
             final int frameIndex = i;
             KeyFrame keyFrame = new KeyFrame(
@@ -776,13 +846,13 @@ public class controllTypeGame implements Initializable {
                         animationExplode.setImage(frameImage);
                     }
             );
-            timeline.getKeyFrames().add(keyFrame);
+            timeline2.getKeyFrames().add(keyFrame);
         }
-        timeline.setCycleCount(1);
-        timeline.setOnFinished(event -> {
+        timeline2.setCycleCount(1);
+        timeline2.setOnFinished(event -> {
             myAnchor.getChildren().remove(animationExplode);
         });
-        timeline.play();
+        timeline2.play();
     }
     public void result(){
         pane1.getChildren().clear();
@@ -865,7 +935,7 @@ public class controllTypeGame implements Initializable {
         });
 
     }
-    //explode in menu type game
+    //explode in textField game
     public void explode2(){
         String tmp = "/sources_music_picture/boom.png";
         int frameCount = 8;

@@ -30,6 +30,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import DatabaseConnect.DatabaseConnection;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -49,7 +50,7 @@ public class GameController implements Initializable {
     ProgressBar progressBar;
 
     @FXML
-    ToggleButton togButton;
+    ToggleButton togButton,pauseCon;
     @FXML
     AnchorPane myAnchor;
 
@@ -58,9 +59,10 @@ public class GameController implements Initializable {
 
     Image myImage3 = new Image(getClass().getResourceAsStream("/sources_music_picture/gameImage.png"));
 
-    String mediaFile = "file:///C:/Users/User/IdeaProjects/BTLOOP/DictionaryApplication/src/main/resources/sources_music_picture/sleepy-cat-118974.mp3";
+    String mediaFile = "/sources_music_picture/sleepy-cat-118974.mp3";
 
-    Media media = new Media(mediaFile);
+    URL resourceUrl = getClass().getResource(mediaFile);
+    Media media = new Media(resourceUrl.toExternalForm());
     MediaPlayer mediaPlayer = new MediaPlayer(media);
     private Task<Void> task;
 
@@ -74,7 +76,7 @@ public class GameController implements Initializable {
     String trueAns = "";
 
     Dictionary dictionary = new Dictionary();
-    private static final String IN_PATH = "C:\\Users\\User\\IdeaProjects\\BTLOOP\\DictionaryApplication\\data\\dictionaries.txt";
+    private static final String IN_PATH = "data/dictionaries.txt";
 
     List<String> examE = new ArrayList<>();
     List<String> ansE = new ArrayList<>();
@@ -86,6 +88,9 @@ public class GameController implements Initializable {
     List<Button> all = new ArrayList<>();
 
     int quesI = -1;
+
+    boolean pause = false;
+    private final Object lock = new Object();
 
 
     public static void loadFromFile(Dictionary dictionary, String IN_PATH) {
@@ -129,6 +134,7 @@ public class GameController implements Initializable {
     public void quiz(ActionEvent event) {
         listWord = new ArrayList<>(dictionary.values());
         changeOnOff();
+        pauseContinue();
         showQues();
         handle(new ActionEvent());
     }
@@ -145,6 +151,11 @@ public class GameController implements Initializable {
                 for (int counter = 200; counter >= 0; counter--) {
                     if (isCancelled() || Choice == true) {
                         break;
+                    }
+                    synchronized (lock) {
+                        while (pause) {
+                            lock.wait();
+                        }
                     }
                     updateProgress(counter, 200);
                     Thread.sleep(50);
@@ -164,6 +175,29 @@ public class GameController implements Initializable {
         new Thread(newTask).start();
     }
 
+    public void pauseContinue(){
+        pause = pauseCon.isSelected();
+        if(pause){
+            ansA.setDisable(true);
+            ansB.setDisable(true);
+            ansC.setDisable(true);
+            ansD.setDisable(true);
+            ansA.setOpacity(1.0);
+            ansB.setOpacity(1.0);
+            ansC.setOpacity(1.0);
+            ansD.setOpacity(1.0);
+        }
+        System.out.println(pause);
+        if(pause == false){
+            ansA.setDisable(false);
+            ansB.setDisable(false);
+            ansC.setDisable(false);
+            ansD.setDisable(false);
+            synchronized (lock) {
+                lock.notify();
+            }
+        }
+    }
 
     //set up question and show res when enough question
     public void showQues() {
@@ -208,6 +242,7 @@ public class GameController implements Initializable {
                 ansD.setDisable(true);
                 if (event.getSource() == ansA) {
                     if (ansA.getText() == trueAns) {
+                        //DatabaseConnection.addQuestion(trueAns);
                         correctAnswer++;
                         color.add(true);
                     } else color.add(false);
@@ -224,6 +259,7 @@ public class GameController implements Initializable {
                 ansD.setDisable(true);
                 if (event.getSource() == ansB) {
                     if (ansB.getText() == trueAns) {
+                        //DatabaseConnection.addQuestion(trueAns);
                         correctAnswer++;
                         color.add(true);
                     } else color.add(false);
@@ -240,6 +276,7 @@ public class GameController implements Initializable {
                 ansD.setDisable(true);
                 if (event.getSource() == ansC) {
                     if (ansC.getText() == trueAns) {
+                        //DatabaseConnection.addQuestion(trueAns);
                         correctAnswer++;
                         color.add(true);
                     } else color.add(false);
@@ -256,6 +293,7 @@ public class GameController implements Initializable {
                 ansD.setDisable(true);
                 if (event.getSource() == ansD) {
                     if (ansD.getText() == trueAns) {
+                        //DatabaseConnection.addQuestion(trueAns);
                         correctAnswer++;
                         color.add(true);
                     } else color.add(false);
@@ -267,6 +305,8 @@ public class GameController implements Initializable {
 
     public void displayAnswer() {
         //timer.stop();
+        pauseCon.setDisable(true);
+        pauseCon.setOpacity(1.0);
         progressBar.progressProperty().unbind();
         Choice = true;
         ansA.setDisable(true);
@@ -295,7 +335,7 @@ public class GameController implements Initializable {
         Timeline pause = new Timeline(new KeyFrame(Duration.seconds(2), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                pauseCon.setDisable(false);
                 ansA.setVisible(true);
                 ansB.setVisible(true);
                 ansC.setVisible(true);
@@ -324,6 +364,7 @@ public class GameController implements Initializable {
         ansB.setDisable(true);
         ansC.setDisable(true);
         ansD.setDisable(true);
+        pauseCon.setDisable(true);
         webView.getEngine().loadContent("");
         noButton.setVisible(true);
         yesButton.setVisible(true);
@@ -355,7 +396,7 @@ public class GameController implements Initializable {
                     fadeOut.setOnFinished(e -> {
                         try {
 
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openSimpleGame.fxml"));
                             mediaPlayer.stop();
                             Parent scene2Parent = loader.load();
                             Scene scene2 = new Scene(scene2Parent);
@@ -403,6 +444,7 @@ public class GameController implements Initializable {
                     ansB.setDisable(false);
                     ansC.setDisable(false);
                     ansD.setDisable(false);
+                    pauseCon.setDisable(false);
                     quiz(new ActionEvent());
 
 
@@ -446,6 +488,7 @@ public class GameController implements Initializable {
                     Ques9.setVisible(true);
                     Ques10.setVisible(true);
 
+                    pauseCon.setVisible(false);
                     review.setVisible(false);
                     noButton.setVisible(false);
                     yesButton.setVisible(false);
@@ -758,6 +801,7 @@ public class GameController implements Initializable {
                             resultTable.setVisible(true);
                             progressBar.setVisible(true);
                             review.setVisible(true);
+                            pauseCon.setVisible(true);
                         }
                     });
                 }
@@ -785,7 +829,7 @@ public class GameController implements Initializable {
                     fadeOut.setOnFinished(e -> {
                         try {
 
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openSimpleGame.fxml"));
                             mediaPlayer.stop();
                             Parent scene2Parent = loader.load();
                             Scene scene2 = new Scene(scene2Parent);
@@ -830,6 +874,7 @@ public class GameController implements Initializable {
                     ansB.setDisable(false);
                     ansC.setDisable(false);
                     ansD.setDisable(false);
+                    pauseCon.setDisable(false);
                     quiz(new ActionEvent());
 
 
@@ -876,6 +921,7 @@ public class GameController implements Initializable {
                     yesButton.setVisible(false);
                     resultTable.setVisible(false);
                     progressBar.setVisible(false);
+                    pauseCon.setVisible(false);
                     Ques1.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
@@ -1182,6 +1228,7 @@ public class GameController implements Initializable {
                             resultTable.setVisible(true);
                             progressBar.setVisible(true);
                             review.setVisible(true);
+                            pauseCon.setVisible(true);
                         }
                     });
                 }

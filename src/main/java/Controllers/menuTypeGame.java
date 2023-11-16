@@ -2,7 +2,6 @@ package Controllers;
 
 import javafx.animation.*;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -21,7 +19,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.util.Collections;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -99,11 +96,12 @@ public class menuTypeGame implements Initializable {
     }
 
     public void switchMenu(ActionEvent event) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/sameMenu.fxml"));
+      //  SceneController.switchBack(event);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
         Parent scene2Parent = loader.load();
         Scene scene2 = new Scene(scene2Parent);
 
-        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+       Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         window.setScene(scene2);
     }
 

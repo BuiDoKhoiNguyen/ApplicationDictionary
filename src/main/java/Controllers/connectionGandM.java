@@ -21,6 +21,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Stack;
 
 public class connectionGandM implements Initializable {
 
@@ -29,11 +30,10 @@ public class connectionGandM implements Initializable {
     Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/universeHalf.jpg"));
 
     @FXML
-    AnchorPane acPane;
+    AnchorPane gameAP;
 
     @FXML
     Button chooseGame,TypeGame;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -41,30 +41,29 @@ public class connectionGandM implements Initializable {
         ImageView imageView2 = new ImageView(myImage2);
         imageView.setLayoutY(267);
         imageView2.setLayoutY(0);
-        acPane.getChildren().add(imageView);
-        acPane.getChildren().add(imageView2);
+        gameAP.getChildren().add(imageView);
+        gameAP.getChildren().add(imageView2);
         imageView.toBack();
         imageView2.toBack();
-
     }
     public void switchType(ActionEvent event) throws Exception{
-        Rectangle whitePane = new Rectangle(acPane.getWidth(), acPane.getHeight());
+        Rectangle whitePane = new Rectangle(gameAP.getWidth(), gameAP.getHeight());
         whitePane.setFill(Color.WHITE);
 
         // Tạo màn hình menu với nền đen (không hiển thị ban đầu)
         AnchorPane menuPane = new AnchorPane();
         menuPane.setStyle("-fx-background-color: black;");
-        menuPane.setPrefSize(acPane.getWidth(), acPane.getHeight());
+        menuPane.setPrefSize(gameAP.getWidth(), gameAP.getHeight());
         menuPane.setOpacity(0.0);
 
         // Tạo màn hình
         AnchorPane root = new AnchorPane(whitePane, menuPane);
-        root.setPrefSize(acPane.getWidth(), acPane.getHeight());
+        root.setPrefSize(gameAP.getWidth(), gameAP.getHeight());
         AnchorPane.setTopAnchor(root, 0.0);
         AnchorPane.setLeftAnchor(root, 0.0);
 
         // Thêm root vào anchorPane
-        acPane.getChildren().add(root);
+        gameAP.getChildren().add(root);
 
         // Thực hiện hiệu ứng chuyển từ trắng sang đen
         FillTransition fillTransition = new FillTransition(Duration.seconds(2), whitePane, Color.WHITE, Color.BLACK);
@@ -93,26 +92,26 @@ public class connectionGandM implements Initializable {
         // Tạo màn hình menu với nền đen (không hiển thị ban đầu)
         AnchorPane menuPane = new AnchorPane();
         menuPane.setStyle("-fx-background-color: black;");
-        menuPane.setPrefSize(acPane.getWidth(), 0); // Độ cao ban đầu là 0
+        menuPane.setPrefSize(gameAP.getWidth(), 0); // Độ cao ban đầu là 0
         menuPane.setOpacity(0.0);
 
         // Tạo màn hình ban đầu với nền trắng
-        Rectangle whitePane = new Rectangle(acPane.getWidth(), acPane.getHeight());
+        Rectangle whitePane = new Rectangle(gameAP.getWidth(), gameAP.getHeight());
         whitePane.setFill(Color.WHITE);
 
         // Tạo màn hình
         AnchorPane root = new AnchorPane(menuPane, whitePane);
-        root.setPrefSize(acPane.getWidth(), acPane.getHeight());
+        root.setPrefSize(gameAP.getWidth(), gameAP.getHeight());
         AnchorPane.setTopAnchor(menuPane, 0.0);
         AnchorPane.setTopAnchor(whitePane, 0.0);
         AnchorPane.setLeftAnchor(root, 0.0);
 
         // Thêm root vào anchorPane
-        acPane.getChildren().add(root);
+        gameAP.getChildren().add(root);
 
         // Thực hiện hiệu ứng chuyển từ trắng sang đen
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), menuPane);
-        translateTransition.setFromY(acPane.getHeight());
+        translateTransition.setFromY(gameAP.getHeight());
         translateTransition.setToY(0);
         translateTransition.setOnFinished(event2 -> {
             // Hiện menu
@@ -137,4 +136,12 @@ public class connectionGandM implements Initializable {
         });
         translateTransition.play();
     }
+
+    /*public void switchType(ActionEvent event) throws Exception {
+        SceneController.switchScene(event,"/fxml/menuTypeG.fxml");
+    }*/
+
+    /*public void switchChoose(ActionEvent event) throws Exception{
+        SceneController.switchScene(event,"/fxml/openSimpleGame");
+    }*/
 }

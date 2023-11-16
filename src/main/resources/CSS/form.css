@@ -212,6 +212,18 @@
     -fx-background-color: transparent;
 }
 
+.buttonPause{
+    -fx-graphic: url("/sources_music_picture/play.png");
+     -fx-background-color: transparent;
+}
+.buttonPause:selected{
+    -fx-graphic: url("/sources_music_picture/pause.png");
+    -fx-background-color: transparent;
+}
+.buttonPause2{
+    -fx-graphic: url("/sources_music_picture/play2.png");
+     -fx-background-color: transparent;
+}
 
 .label {
 -fx-background-insets: 0, 1, 1;

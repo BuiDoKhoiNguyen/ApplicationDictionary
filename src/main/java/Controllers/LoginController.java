@@ -1,9 +1,10 @@
 package Controllers;
 
+import DatabaseConnect.DatabaseConnection;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
+import javafx.scene.layout.StackPane;
 import org.controlsfx.control.Notifications;
-import DatabaseConnect.DatabaseConnection;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,27 +20,36 @@ import javafx.util.Duration;
 
 import javafx.scene.input.MouseEvent;
 
-import javax.management.Notification;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+import static Controllers.PreloaderController.connectDB;
+import static java.lang.System.exit;
+
 public class LoginController implements Initializable {
+    /**
+     * Effects processing
+     */
     @FXML
-    private AnchorPane layer1,layer2,layer3;
+    private AnchorPane layer1, layer2, layer3;
     @FXML
-    private Button signUp,signIn;
+    private Button signUp, signIn;
     @FXML
-    private Label l1,l2,l3,l4,l5,l6,b1,b2,b3,b4,b5;
+    private Label l1, b1, b2, b3, b4, b5;
     @FXML
-    private ImageView i1,i2,i3;
+    private ImageView i1, i2, i3;
     @FXML
     private Button buttonSignUp, buttonSignIn;
     @FXML
-    private TextField usernameTextField2,passwordField2,confirmPassword,fname,lname;
+    private TextField usernameTextField2, passwordField2, confirmPassword, fname, lname;
+
+    public static UserInfo user;
+    public static boolean isLogin = false;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         buttonSignUp.setVisible(true);
@@ -59,11 +69,6 @@ public class LoginController implements Initializable {
         passwordField1.setVisible(true);
 
         l1.setVisible(false);
-        l2.setVisible(false);
-        l3.setVisible(false);
-        l4.setVisible(false);
-        l5.setVisible(false);
-        l6.setVisible(false);
         usernameTextField2.setVisible(false);
         passwordField2.setVisible(false);
         confirmPassword.setVisible(false);
@@ -104,11 +109,6 @@ public class LoginController implements Initializable {
         passwordField1.setVisible(false);
 
         l1.setVisible(true);
-        l2.setVisible(true);
-        l3.setVisible(true);
-        l4.setVisible(true);
-        l5.setVisible(true);
-        l6.setVisible(true);
         usernameTextField2.setVisible(true);
         passwordField2.setVisible(true);
         confirmPassword.setVisible(true);
@@ -148,11 +148,6 @@ public class LoginController implements Initializable {
         passwordField1.setVisible(true);
 
         l1.setVisible(false);
-        l2.setVisible(false);
-        l3.setVisible(false);
-        l4.setVisible(false);
-        l5.setVisible(false);
-        l6.setVisible(false);
         usernameTextField2.setVisible(false);
         passwordField2.setVisible(false);
         confirmPassword.setVisible(false);
@@ -160,111 +155,61 @@ public class LoginController implements Initializable {
         lname.setVisible(false);
     }
 
-    /*------------------------------------------------*/
+    /** ------------------------------------------------ */
+    /**
+     * Data processing
+     */
+
     @FXML
     private Button cancelButton;
-    @FXML
-    private Label loginMessageLabel,createAccountMessageLabel;
     @FXML
     private TextField usernameTextField1;
     @FXML
     private PasswordField passwordField1;
     @FXML
     private Button loginButton;
+    @FXML
+    private StackPane stackPane = new StackPane();
 
     SceneController sceneController = new SceneController();
+
+
     public void loginButtonOnAction(ActionEvent e) throws IOException {
-        if(usernameTextField1.getText().isBlank() == false && passwordField1.getText().isBlank() == false) {
-            if(validateLogin()) {
+        if (usernameTextField1.getText().isBlank() == false && passwordField1.getText().isBlank() == false) {
+            if (DatabaseConnection.validateLogin(usernameTextField1.getText(),passwordField1.getText())) {
                 successNotification("Welcome to application!");
-                sceneController.switchToScene2(e);
-            }
-            else {
+                isLogin = true;
+                user = DatabaseConnection.getUserInfo(usernameTextField1.getText());
+                sceneController.switchToMenu(e);
+            } else {
                 errorNotification("Invalid login. Please try again!");
-//                loginMessageLabel.setText("Invalid login. Please try again!");
             }
         } else {
             errorNotification("Please enter your username and password");
-//            loginMessageLabel.setText("Please enter your username and password");
         }
     }
 
     public void createAccountButtonOnAction(ActionEvent e) throws IOException {
-        if(usernameTextField2.getText().isBlank() == false && passwordField2.getText().isBlank() == false
+        if (usernameTextField2.getText().isBlank() == false && passwordField2.getText().isBlank() == false
                 && fname.getText().isBlank() == false && lname.getText().isBlank() == false && confirmPassword.getText().isBlank() == false) {
-            if(validateSignUp(usernameTextField2.getText(), passwordField2.getText(), confirmPassword.getText(), fname.getText(), lname.getText())) {
+            if (DatabaseConnection.validateSignUp(usernameTextField2.getText(), passwordField2.getText(), confirmPassword.getText(), fname.getText(), lname.getText())) {
                 successNotification("Account successfully created! Please login to try app");
-//                createAccountMessageLabel.setText("Account successfully created! Please login to try app");
-            }
-            else {
+            } else {
                 errorNotification("Unable to register account. Please try again later!");
-//                createAccountMessageLabel.setText("Unable to register account. Please try again later!");
             }
         } else {
             errorNotification("Please enter your information!");
-//            loginMessageLabel.setText("Please enter your Information!");
         }
     }
 
     public void cancelButtonOnAction(ActionEvent e) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
-    }
-
-    public boolean validateLogin() {
-        DatabaseConnection connectionNow = new DatabaseConnection();
-        Connection connectDB = connectionNow.getConnection();
-
-        String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
-
-        try {
-            Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(verifyLogin);
-
-            while(queryResult.next()) {
-                if (queryResult.getInt(1) == 1) {
-                    return true;
-//                    loginMessageLabel.setText("Welcome!");
-                } else {
-                    return false;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public boolean validateSignUp(String username, String password, String confirmPassword, String fName, String lName) {
-        DatabaseConnection connectionNow = new DatabaseConnection();
-        Connection connectDB = connectionNow.getConnection();
-
-        String verifySignUp = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + usernameTextField1.getText() + "' AND password='" + passwordField1.getText() +"'";
-
-        try {
-            Statement statement = connectDB.createStatement();
-            ResultSet queryResult = statement.executeQuery(verifySignUp);
-
-            while(queryResult.next()) {
-                if (queryResult.getInt(1) == 1 && password.equals(confirmPassword)) {
-                    return false;
-                } else {
-                    if(password.equals(confirmPassword)) {
-                        String createAccount = "INSERT INTO UserAccounts (FirstName, LastName, Username, Password) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "')";
-                        statement.executeUpdate(createAccount);
-                        return true;
-                    }
-                }
-            }
-            connectDB.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+        exit(0);
     }
 
     public void errorNotification(String text) {
-        Image image = new Image("/Image/icons8-x-48.png");
+        Image image = new Image("/img/icons8-x-48.png");
         Notifications.create()
                 .graphic(new ImageView(image))
                 .title("Error")
@@ -275,7 +220,7 @@ public class LoginController implements Initializable {
     }
 
     public void successNotification(String text) {
-        Image image = new Image("/Image/icons8-tick-48.png");
+        Image image = new Image("/img/icons8-tick-48.png");
         Notifications.create()
                 .graphic(new ImageView(image))
                 .title("Success")
@@ -283,5 +228,25 @@ public class LoginController implements Initializable {
                 .hideAfter(Duration.seconds(5))
                 .position(Pos.TOP_RIGHT)
                 .show();
+    }
+
+    /** ------------------------------------------------ */
+    /**
+     * Dragged screen
+     */
+    private double x = 0;
+    private double y = 0;
+
+    @FXML
+    public void paneDragged(MouseEvent e) {
+        Stage stage = (Stage) stackPane.getScene().getWindow();
+        stage.setY(e.getScreenY() - y);
+        stage.setX(e.getScreenX() - x);
+    }
+
+    @FXML
+    public void panePressed(MouseEvent e) {
+        x = e.getSceneX();
+        y = e.getSceneY();
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="376.0" prefWidth="468.0" style="-fx-background-color: Transparent;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PreloaderController">
+    <children>
+      <ImageView fitHeight="290.0" fitWidth="350.0" layoutX="55.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/H3e9z0b.gif" />
+         </image>
+      </ImageView>
+        <Label fx:id="lblLoading" layoutX="63.0" layoutY="249.0" prefHeight="19.0" prefWidth="331.0" text="Loading..." textFill="WHITE" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="82.0">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+        <ProgressBar layoutX="55.0" layoutY="268.0" prefHeight="13.0" prefWidth="350.0" stylesheets="@../css/login.css" AnchorPane.topAnchor="268.0" />
+    </children>
+</AnchorPane>
