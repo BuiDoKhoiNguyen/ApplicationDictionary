@@ -30,7 +30,7 @@ public class connectionGandM implements Initializable {
     Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/universeHalf.jpg"));
 
     @FXML
-    AnchorPane gameAP;
+    public AnchorPane gameAP;
 
     @FXML
     Button chooseGame,TypeGame;
@@ -137,6 +137,9 @@ public class connectionGandM implements Initializable {
         translateTransition.play();
     }
 
+    public AnchorPane getGameAP(){
+        return gameAP;
+    }
     /*public void switchType(ActionEvent event) throws Exception {
         SceneController.switchScene(event,"/fxml/menuTypeG.fxml");
     }*/

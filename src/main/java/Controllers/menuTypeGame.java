@@ -21,7 +21,7 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
-
+import Controllers.MenuController;
 public class menuTypeGame implements Initializable {
 
     @FXML
@@ -97,6 +97,7 @@ public class menuTypeGame implements Initializable {
 
     public void switchMenu(ActionEvent event) throws Exception{
       //  SceneController.switchBack(event);
+        MenuController.switchG = true;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
         Parent scene2Parent = loader.load();
         Scene scene2 = new Scene(scene2Parent);

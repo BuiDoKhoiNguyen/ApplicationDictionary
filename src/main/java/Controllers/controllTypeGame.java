@@ -542,10 +542,10 @@ public class controllTypeGame implements Initializable {
 
     boolean pause = false;
 
-    TranslateTransition transition;
-    Timeline missileTimeline;
+    List<TranslateTransition> transitions = new ArrayList<>();
+    List<Timeline> missileTimelines = new ArrayList<>();
 
-    Timeline timeline2;
+    List<Timeline> timeline2s = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -612,18 +612,6 @@ public class controllTypeGame implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setRate(1.0);
         timeline.play();
-        /*pauseBut.setOnAction(event -> {
-            timeline.pause()
-        });
-        continueBut.setOnAction(event -> timeline.play());
-
-        if (!pause) {
-            System.out.println("play");
-            Platform.runLater(() -> timeline.play());
-        } else {
-            System.out.println("pause");
-            Platform.runLater(() -> timeline.pause());
-        }*/
         pauseBut.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -635,15 +623,15 @@ public class controllTypeGame implements Initializable {
                 explodeBoom.setMute(true);
                 timeline.pause();
                 gameLoop.pause();
-                if(transition!=null){
+                for (TranslateTransition transition : transitions) {
                     transition.pause();
                 }
                 textField.setDisable(true);
                 textField.setOpacity(1.0);
-                if(missileTimeline!=null){
+                for(Timeline missileTimeline : missileTimelines){
                     missileTimeline.pause();
                 }
-                if(timeline2!=null){
+                for(Timeline timeline2 : timeline2s){
                     timeline2.pause();
                 }
                 continueBut.setOnAction(new EventHandler<ActionEvent>() {
@@ -653,18 +641,21 @@ public class controllTypeGame implements Initializable {
                         pause = false;
                         continueBut.setVisible(false);
                         mediaPlayer.play();
-                        bulletJ.setMute(false);
-                        explodeBoom.setMute(false);
+                        if(menuTypeGame.isAudi()==true){
+                            bulletJ.setMute(false);
+                            explodeBoom.setMute(false);
+                        }
+
                         timeline.play();
                         gameLoop.play();
-                        if(transition!=null){
+                        for (TranslateTransition transition : transitions) {
                             transition.play();
                         }
                         textField.setDisable(false);
-                        if(missileTimeline!=null){
+                        for(Timeline missileTimeline : missileTimelines){
                             missileTimeline.play();
                         }
-                        if(timeline2!=null){
+                        for(Timeline timeline2 : timeline2s){
                             timeline2.play();
                         }
                     }
@@ -730,20 +721,22 @@ public class controllTypeGame implements Initializable {
         double wordHeight = word.getBoundsInLocal().getHeight();
         double startY = -140;
         double endY = 313;
-        Duration duration = Duration.seconds(10 * (endY - startY) / WINDOW_HEIGHT);
+        Duration duration = Duration.seconds(20 * (endY - startY) / WINDOW_HEIGHT);
 
-        transition = new TranslateTransition(duration, word);
+        TranslateTransition transition = new TranslateTransition(duration, word);
         transition.setInterpolator(Interpolator.LINEAR);
         transition.setFromY(startY);
         transition.setToY(endY);
-
+        transitions.add(transition);
         transition.setOnFinished(event -> {
             if(how.contains(word.getText()) || score == DATA.length){
+                transitions.clear();
                 gameLoop.stop();
                 result();
             }
             System.out.println(word.getText());
             word.setVisible(false);
+            transitions.remove(transition);
         });
         transition.play();
 
@@ -807,7 +800,11 @@ public class controllTypeGame implements Initializable {
             }
         });
 
-        missileTimeline = new Timeline(keyFrame);
+        Timeline missileTimeline = new Timeline(keyFrame);
+        missileTimelines.add(missileTimeline);
+        missileTimeline.setOnFinished(event -> {
+            missileTimelines.remove(missileTimeline);
+        });
         missileTimeline.setCycleCount(Timeline.INDEFINITE);
         missileTimeline.play();
     }
@@ -827,7 +824,7 @@ public class controllTypeGame implements Initializable {
 
         Image fullImage = new Image(getClass().getResource(tmp).toExternalForm());
 
-        timeline2 = new Timeline();
+        Timeline timeline2 = new Timeline();
         for (int i = 0; i < frameCount; i++) {
             final int frameIndex = i;
             KeyFrame keyFrame = new KeyFrame(
@@ -851,7 +848,9 @@ public class controllTypeGame implements Initializable {
         timeline2.setCycleCount(1);
         timeline2.setOnFinished(event -> {
             myAnchor.getChildren().remove(animationExplode);
+            timeline2s.remove(timeline2);
         });
+        timeline2s.add(timeline2);
         timeline2.play();
     }
     public void result(){
@@ -860,10 +859,13 @@ public class controllTypeGame implements Initializable {
         chk.clear();
         how.clear();
         check.clear();
+        missileTimelines.clear();
+        timeline2s.clear();
         lbsc.setVisible(false);
         scoreLabel.setVisible(false);
         textField.setVisible(false);
         textField.setVisible(false);
+        pauseBut.setDisable(true);
 
         scoreL.setText(""+score);
         if(score>bestScore) bestScore = score;
@@ -898,6 +900,7 @@ public class controllTypeGame implements Initializable {
                 YBut.setVisible(false);
                 textField.setVisible(false);
                 result.setVisible(false);
+                pauseBut.setDisable(false);
                 start();
             }
         });
@@ -931,6 +934,7 @@ public class controllTypeGame implements Initializable {
 
                 fadeOut.play();
                 mediaPlayer.stop();
+                pauseBut.setDisable(false);
             }
         });
 

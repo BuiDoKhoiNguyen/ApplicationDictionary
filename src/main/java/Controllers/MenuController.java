@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 public class MenuController extends TaskControllers implements Initializable {
     @FXML
-    private AnchorPane mainAP;
+    public AnchorPane mainAP;
     @FXML
     private AnchorPane searchAP;
     @FXML
@@ -53,6 +53,7 @@ public class MenuController extends TaskControllers implements Initializable {
 
     @FXML
     private VBox vbox;
+    public static boolean switchG = false;
     @FXML
     public void searchFunction() {
         mainAP.getChildren().setAll(searchAP);
@@ -157,7 +158,14 @@ public class MenuController extends TaskControllers implements Initializable {
         translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
         favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
 //        gameController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-        mainAP.getChildren().setAll(searchAP);
+        if(switchG == false){
+            mainAP.getChildren().setAll(searchAP);
+        }
+        else{
+            mainAP.getChildren().setAll(gameAP);
+            switchG = false;
+        }
+
     }
 
 
@@ -176,5 +184,8 @@ public class MenuController extends TaskControllers implements Initializable {
     public void panePressed(MouseEvent e) {
         x = e.getSceneX();
         y = e.getSceneY();
+    }
+    public static boolean getSwitch(){
+        return switchG;
     }
 }
