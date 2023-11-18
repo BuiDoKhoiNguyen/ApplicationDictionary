@@ -224,6 +224,9 @@
     -fx-graphic: url("/sources_music_picture/play2.png");
      -fx-background-color: transparent;
 }
+.outBut{
+    -fx-graphic: url("/sources_music_picture/backG.png");
+}
 
 .label {
 -fx-background-insets: 0, 1, 1;

@@ -1,4 +1,6 @@
 # *BaiTapLon*
+# Hello bro, welcome to our project about dictionary's app which you can learn new languages and play english game in a new way.
+***
 
 ## Table of content
 1. [Contribute](#Contribute)

@@ -46,18 +46,21 @@
 }
 
 .color_button {
+    -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-font-size: 20;
     -fx-background-color:transparent;
 }
 
 .color_button: hover {
+-fx-font-weight: bold;
     -fx-text-fill: #FF9933;
     -fx-font-size: 20;
 -fx-background-color:transparent;
 }
 
 .color_button: pressed {
+-fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-font-size: 20;
     -fx-background-color:transparent;

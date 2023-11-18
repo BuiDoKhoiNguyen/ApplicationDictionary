@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
-
+import Controllers.MenuController;
 public class connectionGandM implements Initializable {
 
     Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/aHalf.png"));
@@ -47,92 +47,77 @@ public class connectionGandM implements Initializable {
         imageView2.toBack();
     }
     public void switchType(ActionEvent event) throws Exception{
-        Rectangle whitePane = new Rectangle(gameAP.getWidth(), gameAP.getHeight());
+        Rectangle whitePane = new Rectangle(800, 570);
         whitePane.setFill(Color.WHITE);
 
-        // Tạo màn hình menu với nền đen (không hiển thị ban đầu)
-        AnchorPane menuPane = new AnchorPane();
-        menuPane.setStyle("-fx-background-color: black;");
-        menuPane.setPrefSize(gameAP.getWidth(), gameAP.getHeight());
-        menuPane.setOpacity(0.0);
+        AnchorPane root = new AnchorPane(whitePane);
+        root.setPrefSize(800, 570);
+        AnchorPane.setTopAnchor(whitePane, 0.0);
+        AnchorPane.setLeftAnchor(root, -50.0);
 
-        // Tạo màn hình
-        AnchorPane root = new AnchorPane(whitePane, menuPane);
-        root.setPrefSize(gameAP.getWidth(), gameAP.getHeight());
-        AnchorPane.setTopAnchor(root, 0.0);
-        AnchorPane.setLeftAnchor(root, 0.0);
-
-        // Thêm root vào anchorPane
         gameAP.getChildren().add(root);
 
-        // Thực hiện hiệu ứng chuyển từ trắng sang đen
-        FillTransition fillTransition = new FillTransition(Duration.seconds(2), whitePane, Color.WHITE, Color.BLACK);
-        fillTransition.setOnFinished(event2 -> {
-            // Sau khi kết thúc hiệu ứng chuyển màu, hiện menu
-            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), menuPane);
-            fadeTransition.setToValue(1.0);
-            fadeTransition.setOnFinished(fadeEvent -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/menuTypeG.fxml"));
-                    Parent scene2Parent = loader.load();
-                    Scene scene2 = new Scene(scene2Parent);
+        Image image = new Image("/sources_music_picture/black.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(800);
+        imageView.setFitHeight(570);
+        imageView.setTranslateY(gameAP.getHeight()+38);
+        root.getChildren().add(imageView);
 
-                    Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                    window.setScene(scene2);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-            fadeTransition.play();
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), imageView);
+        translateTransition.setFromY(gameAP.getHeight()+38);
+        translateTransition.setToY(0);
+        translateTransition.setOnFinished(event2 -> {
+            try {
+                root.getChildren().remove(imageView);
+                gameAP.getChildren().remove(root);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/menuTypeG.fxml"));
+                Parent scene2Parent = loader.load();
+                Scene scene2 = new Scene(scene2Parent);
+
+                Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                window.setScene(scene2);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
-        fillTransition.play();
+        translateTransition.play();
     }
 
     public void switchChoose(ActionEvent event) throws Exception {
-        // Tạo màn hình menu với nền đen (không hiển thị ban đầu)
-        AnchorPane menuPane = new AnchorPane();
-        menuPane.setStyle("-fx-background-color: black;");
-        menuPane.setPrefSize(gameAP.getWidth(), 0); // Độ cao ban đầu là 0
-        menuPane.setOpacity(0.0);
-
-        // Tạo màn hình ban đầu với nền trắng
-        Rectangle whitePane = new Rectangle(gameAP.getWidth(), gameAP.getHeight());
+        Rectangle whitePane = new Rectangle(800, 570);
         whitePane.setFill(Color.WHITE);
 
-        // Tạo màn hình
-        AnchorPane root = new AnchorPane(menuPane, whitePane);
-        root.setPrefSize(gameAP.getWidth(), gameAP.getHeight());
-        AnchorPane.setTopAnchor(menuPane, 0.0);
+        AnchorPane root = new AnchorPane(whitePane);
+        root.setPrefSize(800, 570);
         AnchorPane.setTopAnchor(whitePane, 0.0);
-        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, -50.0);
 
-        // Thêm root vào anchorPane
         gameAP.getChildren().add(root);
 
-        // Thực hiện hiệu ứng chuyển từ trắng sang đen
-        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), menuPane);
-        translateTransition.setFromY(gameAP.getHeight());
+        Image image = new Image("/sources_music_picture/black.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(800);
+        imageView.setFitHeight(570);
+        imageView.setTranslateY(gameAP.getHeight()+38);
+        root.getChildren().add(imageView);
+
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), imageView);
+        translateTransition.setFromY(gameAP.getHeight()+38);
         translateTransition.setToY(0);
         translateTransition.setOnFinished(event2 -> {
-            // Hiện menu
-            FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), menuPane);
-            fadeTransition.setToValue(1.0);
-            fadeTransition.setOnFinished(fadeEvent -> {
-                // Chuyển sang màn hình chính (openSimpleGame.fxml)
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
-                    Parent scene2Parent = loader.load();
-                    Scene scene2 = new Scene(scene2Parent);
+            try {
+                root.getChildren().remove(imageView);
+                gameAP.getChildren().remove(root);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
+                Parent scene2Parent = loader.load();
+                Scene scene2 = new Scene(scene2Parent);
 
-                    Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-                    window.setScene(scene2);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    System.out.println("something");
-                    // Xử lý hoặc hiển thị thông báo lỗi tùy thuộc vào yêu cầu của bạn
-                }
-            });
-            fadeTransition.play();
+                Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                window.setScene(scene2);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         translateTransition.play();
     }

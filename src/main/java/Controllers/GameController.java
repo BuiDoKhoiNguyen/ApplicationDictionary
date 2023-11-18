@@ -43,7 +43,7 @@ public class GameController implements Initializable {
     WebView webView;
     @FXML
     Button ansA, ansB, ansC, ansD, playButton, yesButton, noButton, review, Ques1, Ques2, Ques3, Ques4, Ques5,
-            Ques6, Ques7, Ques8, Ques9, Ques10, backResult;
+            Ques6, Ques7, Ques8, Ques9, Ques10, backResult, outGame;
     @FXML
     private Label question, resultTable;
     @FXML
@@ -134,6 +134,7 @@ public class GameController implements Initializable {
     public void quiz(ActionEvent event) {
         listWord = new ArrayList<>(dictionary.values());
         changeOnOff();
+        outGam();
         pauseContinue();
         showQues();
         handle(new ActionEvent());
@@ -175,6 +176,46 @@ public class GameController implements Initializable {
         new Thread(newTask).start();
     }
 
+    public void outGam(){
+        outGame.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FadeTransition fadeOut = new FadeTransition(Duration.seconds(1));
+                fadeOut.setNode(((javafx.scene.Node) event.getSource()).getScene().getRoot());
+                fadeOut.setFromValue(1.0);
+                fadeOut.setToValue(0.0);
+
+                fadeOut.setOnFinished(e -> {
+                    try {
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openSimpleGame.fxml"));
+                        mediaPlayer.stop();
+                        Parent scene2Parent = loader.load();
+                        Scene scene2 = new Scene(scene2Parent);
+
+                        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                        window.setScene(scene2);
+
+                        FadeTransition fadeIn = new FadeTransition(Duration.seconds(1));
+                        fadeIn.setNode(scene2.getRoot());
+                        fadeIn.setFromValue(0.0);
+                        fadeIn.setToValue(1.0);
+                        fadeIn.play();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+
+                fadeOut.play();
+                ansE.clear();
+                examE.clear();
+                viTri.clear();
+                color.clear();
+                all.clear();
+            }
+        });
+
+    }
     public void pauseContinue(){
         pause = pauseCon.isSelected();
         if(pause){
@@ -360,6 +401,7 @@ public class GameController implements Initializable {
         ansB.setText("");
         ansC.setText("");
         ansD.setText("");
+        outGame.setVisible(false);
         ansA.setDisable(true);
         ansB.setDisable(true);
         ansC.setDisable(true);

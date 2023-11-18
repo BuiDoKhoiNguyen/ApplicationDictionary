@@ -52,7 +52,7 @@ public class MenuController extends TaskControllers implements Initializable {
     private SceneController sceneController;
 
     @FXML
-    private VBox vbox;
+    public VBox vbox;
     public static boolean switchG = false;
     @FXML
     public void searchFunction() {
@@ -165,7 +165,6 @@ public class MenuController extends TaskControllers implements Initializable {
             mainAP.getChildren().setAll(gameAP);
             switchG = false;
         }
-
     }
 
 
