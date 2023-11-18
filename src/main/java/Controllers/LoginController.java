@@ -1,5 +1,6 @@
 package Controllers;
 
+import Base.UserInfo;
 import DatabaseConnect.DatabaseConnection;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -22,13 +23,9 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 
-import static Controllers.PreloaderController.connectDB;
+import static Controllers.PreloaderController.sceneController;
 import static java.lang.System.exit;
 
 public class LoginController implements Initializable {
@@ -171,7 +168,6 @@ public class LoginController implements Initializable {
     @FXML
     private StackPane stackPane = new StackPane();
 
-    SceneController sceneController = new SceneController();
 
 
     public void loginButtonOnAction(ActionEvent e) throws IOException {
