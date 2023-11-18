@@ -1,8 +1,5 @@
 
-import Controllers.LoginController;
-import Controllers.PreloaderController;
-import Controllers.LauncherPreloader;
-import Controllers.ProfileController;
+import Controllers.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

@@ -7,8 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -103,7 +101,6 @@ public class MenuController extends TaskControllers implements Initializable {
 
         Platform.runLater(() -> {
             searchButton.requestFocus();
-            System.out.print("focus on search");
         });
 
 
@@ -123,7 +120,7 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         searchController = loader.getController();
 
-        loader = new FXMLLoader(getClass().getResource("/fxml/translate.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/fxml/translate2.fxml"));
         try {
             translateAP = loader.load();
         } catch (IOException e) {
@@ -140,12 +137,6 @@ public class MenuController extends TaskControllers implements Initializable {
         favouriteController = loader.getController();
 
         loader = new FXMLLoader(getClass().getResource("/fxml/gameMenu.fxml"));
-//        try {
-//            Parent root = loader.load();
-//            SceneController.sceneStack.push(new Scene(root));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
         try {
             gameAP = loader.load();
         } catch (IOException e) {

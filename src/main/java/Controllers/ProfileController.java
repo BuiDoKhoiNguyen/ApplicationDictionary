@@ -8,22 +8,22 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.sql.rowset.serial.SerialBlob;
 import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.Date;
 
 import static Controllers.PreloaderController.connectDB;
 
@@ -40,14 +40,13 @@ public class ProfileController implements Initializable {
     private Button addPic;
     @FXML
     private ImageView imgView;
-
     @FXML
-    private Label time,hello,account,level;
+    private ProgressIndicator skill;
+    @FXML
+    private Label time,hello,account,level, average, total;
     private volatile boolean stop = false;
 
     public static int currtime = 0;
-
-    private static final String FILE_NAME = "data/usedtime.txt";
 
     private static Map<String, Integer> chartData;
     private int totalTime, averageTime;
@@ -56,7 +55,19 @@ public class ProfileController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         hello.setText("Welcome back " + LoginController.user.getName());
         account.setText("Account: " + LoginController.user.getUsername());
-        level.setText("Your level vocabulary:" /** To do */);
+        int temp = DatabaseConnection.countProblemSolved(LoginController.user.getUserId());
+        String tmp;
+        if(temp < 200) {
+            tmp = "fresher";
+        } else if (200<temp && temp<1000 ) {
+            tmp = "junior";
+        } else if (1000 < temp && temp < 5000) {
+            tmp = "senior";
+        } else tmp = "master";
+        level.setText("Your level vocabulary:  " + tmp);
+
+        skill.setProgress((double) DatabaseConnection.countProblemSolved(LoginController.user.getUserId())/1000);
+
         if (LoginController.user.getProfileImage() != null) {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(LoginController.user.getProfileImage());
             Image profileImage = new Image(byteArrayInputStream);
@@ -64,6 +75,12 @@ public class ProfileController implements Initializable {
         }
 
         chartData = DatabaseConnection.getTimeUsage(LoginController.user.getUserId());
+        chartData.forEach((key, value) -> {
+            totalTime += value;
+        });
+        averageTime = totalTime/7;
+        average.setText(String.valueOf(averageTime/60) + " minutes");
+        total.setText(String.valueOf(totalTime/60) + " minutes");
 
         Timer timer = new Timer();
         if(LoginController.isLogin) {
@@ -74,7 +91,6 @@ public class ProfileController implements Initializable {
                 }
             }, 1000, 1000);
         }
-
 
         timeDisplay();
         XYChart.Series set1 = new XYChart.Series<>();
@@ -139,12 +155,26 @@ public class ProfileController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(stage);
 
         if (selectedFile != null) {
-            Image image = new Image(selectedFile.toURI().toString());
-            imgView.setImage(image);
-            DatabaseConnection.updateProfilePicture(LoginController.user.getUserId(),selectedFile.getAbsolutePath().replace("\\","/"));
-            System.out.println("Successfully added photo from " + selectedFile.getAbsolutePath().replace("\\","/"));
+            try {
+                FileInputStream inputStream = new FileInputStream(selectedFile);
+                byte[] imageData = new byte[(int) selectedFile.length()];
+                inputStream.read(imageData);
+
+                Blob imageBlob = new SerialBlob(imageData);
+
+                DatabaseConnection.updateProfilePicture(LoginController.user.getUserId(), imageBlob);
+
+                Image image = new Image(selectedFile.toURI().toString());
+                imgView.setImage(image);
+
+                System.out.println("Successfully added photo from " + selectedFile.getAbsolutePath().replace("\\","/"));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                System.out.println("Failed to add photo");
+            }
         } else {
             System.out.println("No file has been selected");
         }
     }
+
 }
