@@ -236,3 +236,7 @@
     -fx-border-radius: 5px;
 
 }
+.text_border {
+    -fx-border-color: black;
+    -fx-border-width: 1;
+}

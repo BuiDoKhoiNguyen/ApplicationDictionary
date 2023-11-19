@@ -3,6 +3,7 @@ package Controllers;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -71,7 +72,31 @@ public class MenuController extends TaskControllers implements Initializable {
         mainAP.getChildren().setAll(profileAP);
     }
     @FXML
-    public void gameFunction() { mainAP.getChildren().setAll(gameAP); }
+    public void gameFunction() {
+        mainAP.getChildren().setAll(gameAP);
+        Button chooseGameButton = (Button) gameAP.lookup("#chooseGame");
+        chooseGameButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handleChooseGame();
+            }
+        });
+        Button typeGameButton = (Button) gameAP.lookup("#TypeGame");
+        typeGameButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handleTypeGame();
+            }
+        });
+    }
+    private void handleChooseGame() {
+        vbox.setDisable(true);
+    }
+
+    private void handleTypeGame() {
+        vbox.setVisible(true);
+    }
+
 
     public void logoutButtonOnAction(ActionEvent event) throws IOException {
         LoginController.isLogin = false;
@@ -165,6 +190,20 @@ public class MenuController extends TaskControllers implements Initializable {
             mainAP.getChildren().setAll(gameAP);
             switchG = false;
         }
+        Button chooseGameButton = (Button) gameAP.lookup("#chooseGame");
+        chooseGameButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handleChooseGame();
+            }
+        });
+        Button typeGameButton = (Button) gameAP.lookup("#TypeGame");
+        typeGameButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handleTypeGame();
+            }
+        });
     }
 
 
