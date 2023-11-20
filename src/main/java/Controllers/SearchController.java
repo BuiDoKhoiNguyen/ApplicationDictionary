@@ -23,16 +23,11 @@ import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-import javax.swing.plaf.synth.SynthTextAreaUI;
-import javax.xml.crypto.Data;
-
 import static Controllers.PreloaderController.dailyWord;
 import static Controllers.PreloaderController.dictionary;
 import static java.lang.System.exit;
 
 public class SearchController extends TaskControllers implements Initializable {
-//    private Dictionary dictionary = new Dictionary(Dictionary.EV_IN_PATH);
-
     protected boolean isEditing = false;
 
     @FXML

@@ -45,7 +45,7 @@ public class MenuController extends TaskControllers implements Initializable {
     @FXML
     private Button logoutButton;
     @FXML
-    private Button profile;
+    private Button profileButton;
 
     private SceneController sceneController;
 
@@ -54,6 +54,9 @@ public class MenuController extends TaskControllers implements Initializable {
     @FXML
     public void searchFunction() {
         mainAP.getChildren().setAll(searchAP);
+        searchAP.applyCss();
+        searchAP.layout();
+        searchButton.requestFocus();
     }
     @FXML
     public void translateFunction() {
@@ -103,7 +106,6 @@ public class MenuController extends TaskControllers implements Initializable {
             searchButton.requestFocus();
         });
 
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
         try {
             profileAP = loader.load();
@@ -144,9 +146,9 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         gameController = loader.getController();
 
-        searchController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-        translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-        favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+//        searchController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+//        translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+//        favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
 //        gameController.loadController(profileController, searchController, translateController, favouriteController,gameController);
         mainAP.getChildren().setAll(searchAP);
     }

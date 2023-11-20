@@ -1,6 +1,7 @@
 package Controllers;
 
 import API.ImageToTextAPI;
+import API.SpeechToTextAPI;
 import API.TextToSpeechAPI;
 import API.TranslateAPI;
 import javafx.event.ActionEvent;
@@ -13,11 +14,14 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.sourceforge.tess4j.TesseractException;
 
+import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+
+import static API.SpeechToTextAPI.RECORD_PATH;
 
 public class TranslateController2 extends TaskControllers implements Initializable {
 
@@ -41,8 +45,10 @@ public class TranslateController2 extends TaskControllers implements Initializab
     @FXML
     private Button toVie, toEng, toKor, toFr, toChina;
     @FXML
-    private Button scan;
+    private Button scan,mic;
     private File selectedFile;
+    private boolean isRecording = false;
+    private TargetDataLine line;
 
     public void resetStyleLangFrom() {
         fromAutoDetect.getStyleClass().removeAll("active");
@@ -229,6 +235,56 @@ public class TranslateController2 extends TaskControllers implements Initializab
         }
     }
 
+    @FXML
+    private void toggleRecording(ActionEvent e) {
+        if (isRecording) {
+            startRecording();
+            mic.getStyleClass().add("recording");
+        } else {
+            stopRecording();
+            mic.getStyleClass().remove("recording");
+        }
+        isRecording = !isRecording;
+    }
+
+    private void startRecording() {
+        try {
+            AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100, 16, 2, 4, 44100, false);
+            DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
+
+            if (!AudioSystem.isLineSupported(info)) {
+                System.out.println("Microphone is not supported");
+                return;
+            }
+
+            line = (TargetDataLine) AudioSystem.getLine(info);
+            line.open(format);
+            line.start();
+
+            System.out.println("Recording...");
+            new Thread(() -> {
+                AudioInputStream audioStream = new AudioInputStream(line);
+                File outputFile = new File(RECORD_PATH);
+                try {
+                    AudioSystem.write(audioStream, AudioFileFormat.Type.WAVE, outputFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void stopRecording() {
+        if (line != null) {
+            line.stop();
+            line.close();
+            System.out.println("Recording stopped");
+        }
+        area1.setText(SpeechToTextAPI.speechToTextAPI());
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -23,7 +23,7 @@
     -fx-font-size: 16;
     -fx-text-fill: white;
 }
-.buttonPlay: hover {
+.buttonPlay:hover {
 -fx-font-veight: bold;
     -fx-background-color: white;
     -fx-background-radius: 16;
@@ -33,7 +33,7 @@
     -fx-border-radius: 20;
     -fx-border-vidth: 3;
 }
-.buttonPlay: pressed {
+.buttonPlay:pressed {
     -fx-font-veight: bold;
         -fx-background-color: white;
         -fx-background-radius: 16;
@@ -51,13 +51,13 @@
     -fx-background-color:transparent;
 }
 
-.color_button: hover {
+.color_button:hover {
     -fx-text-fill: #FF9933;
     -fx-font-size: 20;
 -fx-background-color:transparent;
 }
 
-.color_button: pressed {
+.color_button:pressed {
     -fx-text-fill: white;
     -fx-font-size: 20;
     -fx-background-color:transparent;

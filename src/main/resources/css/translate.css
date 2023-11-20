@@ -124,6 +124,7 @@
 .text-area {
     -fx-background-insets: 0;
     -fx-background-color: white;
+    -fx-background-radius: 0 0 30 30;
 }
 
 .text-area .content {
@@ -140,6 +141,25 @@
     -fx-graphic: url('../img/scan.png');
     -fx-background-color: transparent;
 }
+
 #scan:hover {
+    -fx-background-color: #3238a8;
+}
+
+.mic {
+    -fx-graphic: url('../img/mic.png');
+    -fx-background-color: transparent;
+}
+
+.mic:hover {
+    -fx-background-color: #3238a8;
+}
+
+.recording {
+    -fx-graphic: url('../img/recording.png');
+    -fx-background-color: transparent;
+}
+
+.recording:hover {
     -fx-background-color: #3238a8;
 }
