@@ -49,10 +49,6 @@
     -fx-max-height: 20px;
 }
 
-#usedTime {
-    -fx-graphic: url('../img/usedTime.png');
-}
-
 #profile {
     -fx-graphic: url('../img/profile.png');
 }

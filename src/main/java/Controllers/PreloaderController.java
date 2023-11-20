@@ -71,7 +71,7 @@ public class PreloaderController implements Initializable {
             try {
                 Thread.sleep(1000);
                 dictionary = new Dictionary(Dictionary.EV_IN_PATH);
-                System.out.println("Connect to dictionary data successfully!" + dictionary.size());
+                System.out.println("Connect to dictionary data successfully!");
                 DailyVocab.getDailyWords(dailyWord);
             } catch (InterruptedException e) {
                 e.printStackTrace();

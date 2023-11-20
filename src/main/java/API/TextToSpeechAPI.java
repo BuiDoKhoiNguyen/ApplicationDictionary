@@ -13,7 +13,7 @@ import javafx.scene.media.MediaPlayer;
 
 public class TextToSpeechAPI {
     private static final String API_KEY = "fd66290e22a547e581b5a58119d07d54";
-    private static final String AUDIO_PATH = "src/main/resources/Voice/audio.wav";
+    private static final String AUDIO_PATH = "src/main/resources/voice/audio.wav";
 
     public static String language = "en-gb";
     public static String Name = "Linda";
