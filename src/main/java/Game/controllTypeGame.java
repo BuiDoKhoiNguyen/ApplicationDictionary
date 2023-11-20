@@ -11,6 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
@@ -198,6 +201,10 @@ public class controllTypeGame implements Initializable {
             "dismiss",
             "dive",
             "duty",
+            "dodge",
+            "dark",
+            "doom",
+            "element",
             "earth",
             "east",
             "edge",
@@ -214,6 +221,10 @@ public class controllTypeGame implements Initializable {
             "exist",
             "expand",
             "extreme",
+            "else",
+            "enemy",
+            "future",
+            "friend",
             "fact",
             "fail",
             "false",
@@ -258,6 +269,7 @@ public class controllTypeGame implements Initializable {
             "hotel",
             "humor",
             "hurt",
+            "human",
             "idea",
             "image",
             "ignore",
@@ -284,10 +296,14 @@ public class controllTypeGame implements Initializable {
             "jump",
             "just",
             "justice",
+            "june",
+            "july",
             "kidnap",
             "kind",
             "knife",
             "know",
+            "kiss",
+            "kiosk",
             "labor",
             "lack",
             "lake",
@@ -335,6 +351,9 @@ public class controllTypeGame implements Initializable {
             "murder",
             "music",
             "mystery",
+            "monday",
+            "mouse",
+            "music",
             "narrow",
             "nation",
             "native",
@@ -495,7 +514,47 @@ public class controllTypeGame implements Initializable {
             "virus",
             "village",
             "voice",
-            "visit"
+            "visit",
+            "volcano",
+            "vote",
+            "vice",
+            "very",
+            "wage",
+            "wall",
+            "walk",
+            "warm",
+            "warn",
+            "wash",
+            "waste",
+            "water",
+            "watch",
+            "wave",
+            "wealth",
+            "weather",
+            "welcome",
+            "wear",
+            "west",
+            "wheel",
+            "while",
+            "when",
+            "wife",
+            "willing",
+            "window",
+            "wire",
+            "wise",
+            "woman",
+            "witness",
+            "wonder",
+            "wood",
+            "world",
+            "worse",
+            "wreck",
+            "write",
+            "wrong",
+            "year",
+            "yellow",
+            "young",
+            "zero"
     };
     String[] WORDS = {"hello", "world", "javafx", "ztype"};
     int WORD_SPEED = 5000;
@@ -532,28 +591,40 @@ public class controllTypeGame implements Initializable {
     Label scoreLabel,result,scLabel,bcLabel,scoreL,bScoreL,pLabel,lbsc;
 
     @FXML
-    Button NBut,YBut;
+    Button NBut,YBut,continueBut,pauseBut,backGame,musicBut;
 
     @FXML
     AnchorPane myAnchor;
 
     int bestScore = 0;
 
+    boolean pause = false;
+
+    List<TranslateTransition> transitions = new ArrayList<>();
+    List<Timeline> missileTimelines = new ArrayList<>();
+
+    List<Timeline> timeline2s = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         start();
     }
     public void start(){
+        continueBut.setVisible(false);
+        musicBut.setVisible(false);
+        backGame.setVisible(false);
         readBestScore();
         if(menuTypeGame.isAudi()==false){
             mediaPlayer.setMute(true);
             explodeBoom.setMute(true);
             bulletJ.setMute(true);
+            musicBut.setText("MUSIC: OFF");
         }
         if(menuTypeGame.isAudi()==true){
             mediaPlayer.setMute(false);
             explodeBoom.setMute(false);
             bulletJ.setMute(false);
+            musicBut.setText("MUSIC: ON");
         }
         mediaPlayer.seek(mediaPlayer.getStartTime());
         scLabel.setVisible(false);
@@ -601,10 +672,142 @@ public class controllTypeGame implements Initializable {
         Timeline timeline = new Timeline(startFrame, endFrame);
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.setRate(1.0);
-
         timeline.play();
+        pauseBut.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("ok");
+                //myAnchor.setOpacity(0.2);
+                ColorAdjust colorAdjust = new ColorAdjust();
+                colorAdjust.setInput(new ColorAdjust(0, 0, -0.7, 0));
+
+                // Kết hợp hiệu ứng ColorAdjust với BlendMode.DARKEN
+                Blend blend = new Blend();
+                blend.setMode(BlendMode.DARKEN);
+                blend.setTopInput(colorAdjust);
+                for (javafx.scene.Node child : myAnchor.getChildren()) {
+                    if (child != continueBut && child != musicBut && child != backGame) {
+                        child.setEffect(blend);
+                    }
+                }
+                continueBut.setVisible(true);
+                backGame.setVisible(true);
+                musicBut.setVisible(true);
+                pause = true;
+                mediaPlayer.pause();
+                if(bulletJ.getStatus() == MediaPlayer.Status.PLAYING){
+                    bulletJ.pause();
+                }
+                if(explodeBoom.getStatus() == MediaPlayer.Status.PLAYING) {
+                    explodeBoom.pause();
+                }
+                timeline.pause();
+                gameLoop.pause();
+                for (TranslateTransition transition : transitions) {
+                    transition.pause();
+                }
+                textField.setDisable(true);
+                textField.setOpacity(1.0);
+                for(Timeline missileTimeline : missileTimelines){
+                    missileTimeline.pause();
+                }
+                for(Timeline timeline2 : timeline2s){
+                    timeline2.pause();
+                }
+                continueBut.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        System.out.println("yes");
+                        //myAnchor.setOpacity(1.0);
+
+                        //myAnchor.setEffect(null);
+                        for (javafx.scene.Node child : myAnchor.getChildren()) {
+                            if (child != continueBut && child != musicBut && child != backGame) {
+                                child.setEffect(null);
+                            }
+                        }
+                        pause = false;
+                        continueBut.setVisible(false);
+                        musicBut.setVisible(false);
+                        backGame.setVisible(false);
+                        mediaPlayer.play();
+                        if(bulletJ.getStatus() == MediaPlayer.Status.PAUSED){
+                            bulletJ.play();
+                        }
+                        if(explodeBoom.getStatus() == MediaPlayer.Status.PLAYING) {
+                            explodeBoom.play();
+                        }
+                        timeline.play();
+                        gameLoop.play();
+                        for (TranslateTransition transition : transitions) {
+                            transition.play();
+                        }
+                        textField.setDisable(false);
+                        for(Timeline missileTimeline : missileTimelines){
+                            missileTimeline.play();
+                        }
+                        for(Timeline timeline2 : timeline2s){
+                            timeline2.play();
+                        }
+                    }
+                });
+                musicBut.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        if(menuTypeGame.isAudi()==true){
+                            menuTypeGame.audi = false;
+                            mediaPlayer.setMute(true);
+                            explodeBoom.setMute(true);
+                            bulletJ.setMute(true);
+                            musicBut.setText("MUSIC: OFF");
+                        }
+                        else{
+                            menuTypeGame.audi = true;
+                            mediaPlayer.setMute(false);
+                            explodeBoom.setMute(false);
+                            bulletJ.setMute(false);
+                            musicBut.setText("MUSIC: ON");
+                        }
+                    }
+                });
+                backGame.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        FadeTransition fadeOut = new FadeTransition(Duration.seconds(1));
+                        fadeOut.setNode(((javafx.scene.Node) event.getSource()).getScene().getRoot());
+                        fadeOut.setFromValue(1.0);
+                        fadeOut.setToValue(0.0);
+
+                        fadeOut.setOnFinished(e -> {
+                            try {
+
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuTypeG.fxml"));
+                                Parent scene2Parent = loader.load();
+                                Scene scene2 = new Scene(scene2Parent);
+
+                                Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+                                window.setScene(scene2);
+
+                                FadeTransition fadeIn = new FadeTransition(Duration.seconds(1));
+                                fadeIn.setNode(scene2.getRoot());
+                                fadeIn.setFromValue(0.0);
+                                fadeIn.setToValue(1.0);
+                                fadeIn.play();
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                        });
+
+                        fadeOut.play();
+                        mediaPlayer.stop();
+                        pauseBut.setDisable(false);
+                    }
+                });
+            }
+        });
 
         gameLoop = new Timeline(new KeyFrame(Duration.millis(WORD_SPEED), event -> {
+            System.out.println(pause);
             Collections.shuffle(Word);
             english.add(Word.get(x));
             int index = random2.nextInt(Word.get(x).length());
@@ -633,8 +836,9 @@ public class controllTypeGame implements Initializable {
 
         }));
         gameLoop.setCycleCount(Timeline.INDEFINITE);
-
         gameLoop.play();
+
+
     }
 
     public void readBestScore() {
@@ -666,16 +870,19 @@ public class controllTypeGame implements Initializable {
         transition.setInterpolator(Interpolator.LINEAR);
         transition.setFromY(startY);
         transition.setToY(endY);
-
+        transitions.add(transition);
         transition.setOnFinished(event -> {
             if(how.contains(word.getText()) || score == DATA.length){
+                transitions.clear();
                 gameLoop.stop();
                 result();
             }
             System.out.println(word.getText());
             word.setVisible(false);
+            transitions.remove(transition);
         });
         transition.play();
+
     }
 
     public void checkAndRemoveString(String input) {
@@ -737,6 +944,10 @@ public class controllTypeGame implements Initializable {
         });
 
         Timeline missileTimeline = new Timeline(keyFrame);
+        missileTimelines.add(missileTimeline);
+        missileTimeline.setOnFinished(event -> {
+            missileTimelines.remove(missileTimeline);
+        });
         missileTimeline.setCycleCount(Timeline.INDEFINITE);
         missileTimeline.play();
     }
@@ -756,7 +967,7 @@ public class controllTypeGame implements Initializable {
 
         Image fullImage = new Image(getClass().getResource(tmp).toExternalForm());
 
-        Timeline timeline = new Timeline();
+        Timeline timeline2 = new Timeline();
         for (int i = 0; i < frameCount; i++) {
             final int frameIndex = i;
             KeyFrame keyFrame = new KeyFrame(
@@ -775,13 +986,15 @@ public class controllTypeGame implements Initializable {
                         animationExplode.setImage(frameImage);
                     }
             );
-            timeline.getKeyFrames().add(keyFrame);
+            timeline2.getKeyFrames().add(keyFrame);
         }
-        timeline.setCycleCount(1);
-        timeline.setOnFinished(event -> {
+        timeline2.setCycleCount(1);
+        timeline2.setOnFinished(event -> {
             myAnchor.getChildren().remove(animationExplode);
+            timeline2s.remove(timeline2);
         });
-        timeline.play();
+        timeline2s.add(timeline2);
+        timeline2.play();
     }
     public void result(){
         pane1.getChildren().clear();
@@ -789,10 +1002,13 @@ public class controllTypeGame implements Initializable {
         chk.clear();
         how.clear();
         check.clear();
+        missileTimelines.clear();
+        timeline2s.clear();
         lbsc.setVisible(false);
         scoreLabel.setVisible(false);
         textField.setVisible(false);
         textField.setVisible(false);
+        pauseBut.setDisable(true);
 
         scoreL.setText(""+score);
         if(score>bestScore) bestScore = score;
@@ -827,6 +1043,7 @@ public class controllTypeGame implements Initializable {
                 YBut.setVisible(false);
                 textField.setVisible(false);
                 result.setVisible(false);
+                pauseBut.setDisable(false);
                 start();
             }
         });
@@ -841,7 +1058,7 @@ public class controllTypeGame implements Initializable {
                 fadeOut.setOnFinished(e -> {
                     try {
 
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/menuTypeG.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuTypeG.fxml"));
                         Parent scene2Parent = loader.load();
                         Scene scene2 = new Scene(scene2Parent);
 
@@ -860,11 +1077,12 @@ public class controllTypeGame implements Initializable {
 
                 fadeOut.play();
                 mediaPlayer.stop();
+                pauseBut.setDisable(false);
             }
         });
 
     }
-    //explode in menu type game
+    //explode in textField game
     public void explode2(){
         String tmp = "/sources_music_picture/boom.png";
         int frameCount = 8;
@@ -909,4 +1127,5 @@ public class controllTypeGame implements Initializable {
         explodeBoom.seek(explodeBoom.getStartTime());
         explodeBoom.play();
     }
+
 }

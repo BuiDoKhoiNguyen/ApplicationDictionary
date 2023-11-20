@@ -3,6 +3,7 @@ package Controllers;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class MenuController extends TaskControllers implements Initializable {
     @FXML
-    private AnchorPane mainAP;
+    public AnchorPane mainAP;
     @FXML
     private AnchorPane searchAP;
     @FXML
@@ -50,7 +51,8 @@ public class MenuController extends TaskControllers implements Initializable {
     private SceneController sceneController;
 
     @FXML
-    private VBox vbox;
+    public VBox vbox;
+    public static boolean switchG = false;
     @FXML
     public void searchFunction() {
         mainAP.getChildren().setAll(searchAP);
@@ -71,7 +73,31 @@ public class MenuController extends TaskControllers implements Initializable {
         mainAP.getChildren().setAll(profileAP);
     }
     @FXML
-    public void gameFunction() { mainAP.getChildren().setAll(gameAP); }
+    public void gameFunction() {
+        mainAP.getChildren().setAll(gameAP);
+        Button chooseGameButton = (Button) gameAP.lookup("#chooseGame");
+        chooseGameButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handleChooseGame();
+            }
+        });
+        Button typeGameButton = (Button) gameAP.lookup("#TypeGame");
+        typeGameButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handleTypeGame();
+            }
+        });
+    }
+    private void handleChooseGame() {
+        vbox.setDisable(true);
+    }
+
+    private void handleTypeGame() {
+        vbox.setDisable(true);
+    }
+
 
     public void logoutButtonOnAction(ActionEvent event) throws IOException {
         LoginController.isLogin = false;
@@ -150,7 +176,31 @@ public class MenuController extends TaskControllers implements Initializable {
 //        translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
 //        favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
 //        gameController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-        mainAP.getChildren().setAll(searchAP);
+        if(switchG == false){
+            mainAP.getChildren().setAll(searchAP);
+        }
+        else{
+            mainAP.getChildren().setAll(gameAP);
+            Platform.runLater(() -> {
+                gameButton.fire();
+                gameButton.requestFocus();
+            });
+            switchG = false;
+        }
+        Button chooseGameButton = (Button) gameAP.lookup("#chooseGame");
+        chooseGameButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handleChooseGame();
+            }
+        });
+        Button typeGameButton = (Button) gameAP.lookup("#TypeGame");
+        typeGameButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handleTypeGame();
+            }
+        });
     }
 
 
@@ -169,5 +219,8 @@ public class MenuController extends TaskControllers implements Initializable {
     public void panePressed(MouseEvent e) {
         x = e.getSceneX();
         y = e.getSceneY();
+    }
+    public static boolean getSwitch(){
+        return switchG;
     }
 }

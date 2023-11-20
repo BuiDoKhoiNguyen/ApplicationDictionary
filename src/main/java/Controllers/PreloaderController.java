@@ -1,7 +1,6 @@
 package Controllers;
 
 import Base.Dictionary;
-import Base.Word;
 import DatabaseConnect.DatabaseConnection;
 import Game.DailyVocab;
 import javafx.application.Platform;

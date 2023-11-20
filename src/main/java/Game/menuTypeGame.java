@@ -23,6 +23,7 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 import static Controllers.PreloaderController.sceneController;
+import Controllers.MenuController;
 
 public class menuTypeGame implements Initializable {
 
@@ -66,7 +67,7 @@ public class menuTypeGame implements Initializable {
         fadeOut.setOnFinished(e -> {
             try {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/typeGame.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/typeGame.fxml"));
                 Parent scene2Parent = loader.load();
                 Scene scene2 = new Scene(scene2Parent);
 
@@ -98,7 +99,7 @@ public class menuTypeGame implements Initializable {
     }
 
     public void switchMenu(ActionEvent event) throws Exception{
-//        sceneController.switchBack(event);
+        MenuController.switchG = true;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
         Parent scene2Parent = loader.load();
         Scene scene2 = new Scene(scene2Parent);
@@ -176,7 +177,6 @@ public class menuTypeGame implements Initializable {
         transition2.setFromY(startY);
         transition2.setToY(endY2);
         transition2.setOnFinished(event -> {
-            System.out.println("something");
             fire(word.getTranslateX(),word.getTranslateY(),word);
         });
 

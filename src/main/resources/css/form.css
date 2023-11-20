@@ -212,6 +212,21 @@
     -fx-background-color: transparent;
 }
 
+.buttonPause{
+    -fx-graphic: url("/sources_music_picture/play.png");
+     -fx-background-color: transparent;
+}
+.buttonPause:selected{
+    -fx-graphic: url("/sources_music_picture/pause.png");
+    -fx-background-color: transparent;
+}
+.buttonPause2{
+    -fx-graphic: url("/sources_music_picture/play2.png");
+     -fx-background-color: transparent;
+}
+.outBut{
+    -fx-graphic: url("/sources_music_picture/backG.png");
+}
 
 .label {
 -fx-background-insets: 0, 1, 1;
@@ -220,4 +235,8 @@
     -fx-border-width: 2px;
     -fx-border-radius: 5px;
 
+}
+.text_border {
+    -fx-border-color: black;
+    -fx-border-width: 1;
 }
