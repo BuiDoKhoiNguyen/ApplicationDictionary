@@ -14,17 +14,14 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
-import Controllers.MenuController;
+
 public class menuTypeGame implements Initializable {
 
     @FXML
@@ -67,7 +64,7 @@ public class menuTypeGame implements Initializable {
         fadeOut.setOnFinished(e -> {
             try {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/typeGame.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/typeGame.fxml"));
                 Parent scene2Parent = loader.load();
                 Scene scene2 = new Scene(scene2Parent);
 
@@ -101,7 +98,7 @@ public class menuTypeGame implements Initializable {
     public void switchMenu(ActionEvent event) throws Exception{
       //  SceneController.switchBack(event);
         MenuController.switchG = true;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menu.fxml"));
         Parent scene2Parent = loader.load();
         Scene scene2 = new Scene(scene2Parent);
 

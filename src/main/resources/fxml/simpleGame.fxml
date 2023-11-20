@@ -57,7 +57,7 @@
       <Button fx:id="Ques8" alignment="CENTER" contentDisplay="CENTER" layoutX="496.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../css/form.css" text="Ques8" textAlignment="CENTER" textFill="WHITE" />
       <Button fx:id="Ques9" alignment="CENTER" contentDisplay="CENTER" layoutX="556.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../css/form.css" text="Ques9" textAlignment="CENTER" textFill="WHITE" />
       <Button fx:id="Ques10" alignment="CENTER" contentDisplay="CENTER" layoutX="616.0" layoutY="74.0" mnemonicParsing="false" prefWidth="60.0" styleClass="question-color" stylesheets="@../css/form.css" text="Ques10" textAlignment="CENTER" textFill="WHITE" />
-      <ToggleButton fx:id="pauseCon" layoutX="574.0" layoutY="10.0" mnemonicParsing="false" onAction="#pauseContinue" prefHeight="50.0" prefWidth="50.0" styleClass="buttonPause" stylesheets="@../CSS/form.css" />
-      <Button fx:id="outGame" layoutX="651.0" layoutY="10.0" mnemonicParsing="false" onAction="#outGam" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="outBut" stylesheets="@../CSS/form.css" />
+      <ToggleButton fx:id="pauseCon" layoutX="574.0" layoutY="10.0" mnemonicParsing="false" onAction="#pauseContinue" prefHeight="50.0" prefWidth="50.0" styleClass="buttonPause" stylesheets="@../css/form.css" />
+      <Button fx:id="outGame" layoutX="651.0" layoutY="10.0" mnemonicParsing="false" onAction="#outGam" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;" styleClass="outBut" stylesheets="@../css/form.css" />
    </children>
 </AnchorPane>

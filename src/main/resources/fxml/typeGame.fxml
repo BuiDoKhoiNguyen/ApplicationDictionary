@@ -60,13 +60,13 @@
          </font>
       </Button>
       <Label fx:id="pLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="327.0" layoutY="301.0" prefHeight="18.0" prefWidth="95.0" styleClass="color_form" stylesheets="@../css/typeGame.css" text="Play again" textAlignment="CENTER" />
-      <Button fx:id="pauseBut" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" opacity="0.2" prefHeight="50.0" prefWidth="50.0" styleClass="buttonPause2" stylesheets="@../CSS/form.css" />
-      <Button fx:id="continueBut" layoutX="304.0" layoutY="256.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../CSS/typeGame.css" text="CONTINUE">
+      <Button fx:id="pauseBut" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" opacity="0.2" prefHeight="50.0" prefWidth="50.0" styleClass="buttonPause2" stylesheets="@../css/form.css" />
+      <Button fx:id="continueBut" layoutX="304.0" layoutY="256.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../css/typeGame.css" text="CONTINUE">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="backGame" layoutX="304.0" layoutY="320.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../CSS/typeGame.css" text="MENU" />
-      <Button fx:id="musicBut" layoutX="304.0" layoutY="192.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../CSS/typeGame.css" />
+      <Button fx:id="backGame" layoutX="304.0" layoutY="320.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../css/typeGame.css" text="MENU" />
+      <Button fx:id="musicBut" layoutX="304.0" layoutY="192.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../css/typeGame.css" />
    </children>
 </AnchorPane>

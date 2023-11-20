@@ -1,7 +1,5 @@
 package Controllers;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.FillTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,8 +19,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Stack;
-import Controllers.MenuController;
+
 public class connectionGandM implements Initializable {
 
     Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/aHalf.png"));
@@ -71,7 +68,7 @@ public class connectionGandM implements Initializable {
             try {
                 root.getChildren().remove(imageView);
                 gameAP.getChildren().remove(root);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/menuTypeG.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuTypeG.fxml"));
                 Parent scene2Parent = loader.load();
                 Scene scene2 = new Scene(scene2Parent);
 
@@ -109,7 +106,7 @@ public class connectionGandM implements Initializable {
             try {
                 root.getChildren().remove(imageView);
                 gameAP.getChildren().remove(root);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/openSimpleGame.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/openSimpleGame.fxml"));
                 Parent scene2Parent = loader.load();
                 Scene scene2 = new Scene(scene2Parent);
 

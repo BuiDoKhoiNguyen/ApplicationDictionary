@@ -1,7 +1,6 @@
 package Controllers;
 
 import Base.Dictionary;
-import Base.DictionaryController;
 import DatabaseConnect.DatabaseConnection;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

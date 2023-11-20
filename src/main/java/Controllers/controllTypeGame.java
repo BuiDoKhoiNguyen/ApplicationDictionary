@@ -1,7 +1,6 @@
 package Controllers;
 
 import javafx.animation.*;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -782,7 +781,7 @@ public class controllTypeGame implements Initializable {
                         fadeOut.setOnFinished(e -> {
                             try {
 
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/menuTypeG.fxml"));
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuTypeG.fxml"));
                                 Parent scene2Parent = loader.load();
                                 Scene scene2 = new Scene(scene2Parent);
 
@@ -1059,7 +1058,7 @@ public class controllTypeGame implements Initializable {
                 fadeOut.setOnFinished(e -> {
                     try {
 
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/menuTypeG.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuTypeG.fxml"));
                         Parent scene2Parent = loader.load();
                         Scene scene2 = new Scene(scene2Parent);
 

@@ -1,15 +1,12 @@
 package Controllers;
 
 import Base.Dictionary;
-import Base.NewDictionaryManagement;
 import Base.Word;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.animation.KeyFrame;
@@ -28,9 +25,7 @@ import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import DatabaseConnect.DatabaseConnection;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
