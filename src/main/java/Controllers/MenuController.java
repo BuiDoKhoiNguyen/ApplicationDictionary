@@ -94,7 +94,7 @@ public class MenuController extends TaskControllers implements Initializable {
     }
 
     private void handleTypeGame() {
-        vbox.setVisible(true);
+        vbox.setDisable(true);
     }
 
 
@@ -188,6 +188,10 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         else{
             mainAP.getChildren().setAll(gameAP);
+            Platform.runLater(() -> {
+                gameButton.fire();
+                gameButton.requestFocus();
+            });
             switchG = false;
         }
         Button chooseGameButton = (Button) gameAP.lookup("#chooseGame");
