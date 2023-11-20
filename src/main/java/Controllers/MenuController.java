@@ -46,7 +46,7 @@ public class MenuController extends TaskControllers implements Initializable {
     @FXML
     private Button logoutButton;
     @FXML
-    private Button profile;
+    private Button profileButton;
 
     private SceneController sceneController;
 
@@ -56,6 +56,9 @@ public class MenuController extends TaskControllers implements Initializable {
     @FXML
     public void searchFunction() {
         mainAP.getChildren().setAll(searchAP);
+        searchAP.applyCss();
+        searchAP.layout();
+        searchButton.requestFocus();
     }
     @FXML
     public void translateFunction() {
@@ -127,9 +130,7 @@ public class MenuController extends TaskControllers implements Initializable {
 
         Platform.runLater(() -> {
             searchButton.requestFocus();
-            System.out.print("focus on search");
         });
-
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/profile.fxml"));
         try {
@@ -147,7 +148,7 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         searchController = loader.getController();
 
-        loader = new FXMLLoader(getClass().getResource("/fxml/translate.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/fxml/translate2.fxml"));
         try {
             translateAP = loader.load();
         } catch (IOException e) {
@@ -164,12 +165,6 @@ public class MenuController extends TaskControllers implements Initializable {
         favouriteController = loader.getController();
 
         loader = new FXMLLoader(getClass().getResource("/fxml/gameMenu.fxml"));
-//        try {
-//            Parent root = loader.load();
-//            SceneController.sceneStack.push(new Scene(root));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
         try {
             gameAP = loader.load();
         } catch (IOException e) {
@@ -177,9 +172,9 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         gameController = loader.getController();
 
-        searchController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-        translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-        favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+//        searchController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+//        translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+//        favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
 //        gameController.loadController(profileController, searchController, translateController, favouriteController,gameController);
         if(switchG == false){
             mainAP.getChildren().setAll(searchAP);

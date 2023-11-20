@@ -1,11 +1,22 @@
 package DatabaseConnect;
 
-import Controllers.UserInfo;
+import Base.UserInfo;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.net.URL;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static Controllers.PreloaderController.connectDB;
 
@@ -14,21 +25,6 @@ public class DatabaseConnection {
 
     public static int userId;
 
-    /*public static Connection getConnection() {
-        String databaseUser = "root";
-        String databasePassword = "123456";
-            String url = "jdbc:mysql://127.0.0.1:3306/user_account";
-
-        try {
-            System.out.println("Connecting to database :" + url);
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            databaseLink = DriverManager.getConnection(url, databaseUser, databasePassword);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return databaseLink;
-    }*/
     public static Connection getConnection() {
         String databaseUser = "sql12662361";
         String databasePassword = "RKMWwvNPNS";
@@ -133,11 +129,15 @@ public class DatabaseConnection {
         return 0;
     }
 
-    public static void updateProfilePicture(int userId, String path) {
-        String query = "UPDATE useraccounts set profileImage = LOAD_FILE('" + path + "') WHERE idUserAccounts = " + userId;
+
+    public static void updateProfilePicture(int userId, Blob blob) {
+        String query = "UPDATE useraccounts SET profileImage = ? WHERE idUserAccounts = ?";
         try {
-            Statement statement = connectDB.createStatement();
-            statement.executeUpdate(query);
+            PreparedStatement statement = connectDB.prepareStatement(query);
+            statement.setBlob(1, blob);
+            statement.setInt(2, userId);
+
+            statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -209,56 +209,123 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
     }
-    public static void addQuestion(String answer) {
-        try {
-            // Kết nối đến cơ sở dữ liệu
-            Connection connection = getConnection();
 
-            // Kiểm tra xem câu hỏi đã tồn tại trong cơ sở dữ liệu chưa
-            if (!questionExists(answer, connection)) {
-                // Nếu câu hỏi chưa tồn tại, thêm vào cơ sở dữ liệu
-                String sql = "INSERT INTO game (ProblemSolved) VALUES (?)";
-                try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                    preparedStatement.setString(1, answer);
-                    preparedStatement.executeUpdate();
-                    System.out.println("Question added to the database.");
-                }
+    public static void updateProblemSolved(int userId, String word) {
+        String query = "INSERT INTO game(UserId, ProblemSolved) VALUES( " + userId + ",'" + word +"')";
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int countProblemSolved(int userId) {
+        String query = "SELECT COUNT(DISTINCT ProblemSolved) as count FROM game WHERE UserId = " + userId + " ORDER BY UserId";
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) return resultSet.getInt("count");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static TreeMap<String,String> getListEditWord(int userId) {
+        TreeMap<String,String> list = new TreeMap<>();
+        String query = "SELECT NewWordTarget,NewWordExplain FROM editword WHERE UserId = " + userId;
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                String newWordTarget = resultSet.getString("NewWordTarget");
+                String newWordExplain = resultSet.getString("NewWordExplain");
+                list.put(newWordTarget,newWordExplain);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static void addEditWord(int userId, String oldWordTarget,String oldWordExplain, String newWordTarget,String newWordExplain) {
+        String query1 = "SELECT COUNT(OldWordTarget) as count FROM editword WHERE UserId = "+ userId +"  AND OldWordTarget = '" + oldWordTarget + "' GROUP BY UserId";
+        System.out.println(oldWordExplain);
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query1);
+            if (!resultSet.next()) {
+                String query = "INSERT INTO editword(UserId, OldWordTarget, OldWordExplain, NewWordTarget, NewWordExplain) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement preparedStatement = connectDB.prepareStatement(query);
+                preparedStatement.setInt(1, userId);
+                preparedStatement.setString(2, oldWordTarget);
+                preparedStatement.setString(3, oldWordExplain);
+                preparedStatement.setString(4, newWordTarget);
+                preparedStatement.setString(5, newWordExplain);
+
+                preparedStatement.executeUpdate();
             } else {
-                System.out.println("Question already exists in the database.");
+                String query3 = "UPDATE editword SET NewWordTarget = '" + newWordTarget + "', NewWordExplain = '" + newWordExplain + "' WHERE UserId = " + userId;
+                statement.executeUpdate(query3);
             }
-
-            connection.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static boolean questionExists(String answer, Connection connection) throws SQLException {
-        String sql = "SELECT * FROM game WHERE ProblemSolved = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, answer);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
-        }
-    }
-    public static int getAns(){
-        int count = 0;
+    public static void updateDeleteWord(int userId, String word) {
+        String query = "INSERT INTO deleteword(UserId,Word) VALUES (" + userId + ",'" + word + "')";
+
         try {
-            Connection connection = getConnection();
-
-            String sql = "SELECT COUNT(*) AS count FROM ProblemSolved";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                ResultSet resultSet = preparedStatement.executeQuery();
-
-                if (resultSet.next()) {
-                    count = resultSet.getInt("count");
-                }
-            }
-            connection.close();
-        } catch (SQLException e) {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return count;
     }
 
+    public static List<String> getDeleteWord(int userId) {
+        List<String> list = new ArrayList<>();
+        String query = "SELECT Word FROM deleteword WHERE UserId = " + userId;
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                list.add(resultSet.getString("Word"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static void updateAddWord(int userId,String wordTarget, String wordExplain) {
+        String query = "INSERT INTO addword(UserId,WordTarget,WordExplain) VALUES (" + userId + ",'" + wordTarget + "','" + wordExplain +"')";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static TreeMap<String,String> getAddWord(int userId) {
+        TreeMap<String,String> list = new TreeMap<>();
+        String query = "SELECT WordTarget, WordExplain FROM addword WHERE UserId = " + userId;
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                String temp1 = resultSet.getString("WordTarget");
+                String temp2 = resultSet.getString("WordExplain");
+                list.put(temp1, temp2);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

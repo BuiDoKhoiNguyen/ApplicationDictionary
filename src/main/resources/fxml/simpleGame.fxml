@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane fx:id="myAnchor" prefHeight="532.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.GameController">
+<AnchorPane fx:id="myAnchor" prefHeight="532.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.GameController">
    <children>
       <WebView fx:id="webView" layoutX="14.0" layoutY="128.0" prefHeight="200.0" prefWidth="718.0" stylesheets="@../css/form.css" />
       <HBox layoutY="385.0" prefHeight="134.0" prefWidth="750.0">

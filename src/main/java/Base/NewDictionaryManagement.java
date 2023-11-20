@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.SortedMap;
 
 public class NewDictionaryManagement {
-    private static final String SPLITTING_PATTERN = "<html>";
+    public static final String SPLITTING_PATTERN = "<html>";
 
     public static void loadDataFromHTMLFile(Dictionary dictionary, String path) {
         try {

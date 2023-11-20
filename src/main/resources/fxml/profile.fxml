@@ -30,13 +30,16 @@
                         <Font name="Arial Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="average" alignment="TOP_LEFT" prefHeight="88.0" prefWidth="142.0" text="     num">
+                  <Label fx:id="average" alignment="TOP_LEFT" prefHeight="88.0" prefWidth="120.0" text="     num">
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
                      <opaqueInsets>
                         <Insets bottom="20.0" />
                      </opaqueInsets>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
                   </Label>
                   <Line endX="22.785785675048828" endY="0.6142349243164062" startX="145.5715789794922" startY="1.2284698486328125" stroke="#bfbfbf" strokeWidth="2.0">
                      <VBox.margin>
@@ -46,6 +49,9 @@
                      <font>
                         <Font name="Arial Bold" size="16.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
                   </Label>
                   <Label alignment="TOP_LEFT" prefHeight="126.0" prefWidth="142.0" style="-fx-text-fill: #10e457;" text="      Toal time">
                      <font>
@@ -57,7 +63,7 @@
                   <Insets top="60.0" />
                </opaqueInsets>
             </VBox>
-            <BarChart fx:id="barChart" layoutX="231.0" layoutY="46.0" prefHeight="323.0" prefWidth="496.0" style="-fx-background-color: rgba(0,162,211,0.3); -fx-background-radius: 30;" styleClass="chart-bar" stylesheets="@../css/profile.css">
+            <BarChart fx:id="barChart" layoutX="239.0" layoutY="46.0" prefHeight="323.0" prefWidth="496.0" style="-fx-background-color: rgba(0,162,211,0.3); -fx-background-radius: 30;" styleClass="chart-bar" stylesheets="@../css/profile.css">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -79,7 +85,7 @@
                   </Label>
                   <HBox prefHeight="143.0" prefWidth="144.0" style="-fx-border-color: #72D3FE;" styleClass="round-box" stylesheets="@../css/profile.css">
                      <children>
-                        <ProgressIndicator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="152.0" progress="0.67" styleClass="indicator" stylesheets="@../css/profile.css">
+                        <ProgressIndicator fx:id="skill" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="148.0" prefWidth="152.0" progress="0.67" styleClass="indicator" stylesheets="@../css/profile.css">
                            <HBox.margin>
                               <Insets left="3.0" top="12.0" />
                            </HBox.margin>

@@ -51,7 +51,7 @@
 }
 
 .progress-indicator {
-    -fx-background-color: transparent; /* Đặt màu nền trong suốt */
+    -fx-background-color: transparent;
 }
 
 .progress-indicator .track {
