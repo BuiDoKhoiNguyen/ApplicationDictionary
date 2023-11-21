@@ -1,5 +1,5 @@
 # *BaiTapLon*
-# Hello bro, welcome to our project about dictionary's app which you can learn new languages and play english game in a new way.
+> Hello bro, welcome to our project about dictionary's app which you can learn new languages and play english game in a new way.
 ***
 
 ## Table of content
@@ -17,10 +17,14 @@
 2. ### Introduce 
    Welcome to our innovative Dictionary Application, where learning English becomes an engaging and interactive experience. We've designed a feature-packed app that not only serves as your go-to dictionary but also adds an element of fun to your language learning journey.
 3. ### Applied_technology
+<<<<<<< HEAD
    Our project utilizes Java, JavaFX, and SceneBuilder to create a feature-rich dictionary application. By seamlessly integrating with a database server, employing multithreading in programming, and leveraging Google's API for paragraph translation, we've crafted a robust platform that enhances the language learning experience.
+=======
+   Our project utilizes Java, JavaFX, and SceneBuilder to create a feature-rich dictionary application. By `seamlessly integrating with a database server`, `employing multithreading in programming`, and `leveraging Google's and OpenAI API for paragraph translation`, we've crafted a robust platform that enhances the language learning experience.
+>>>>>>> 9560c073cf600773201942645b671666da583d35
 
 4. ### Feature
-   Outline about my project, it has some funtions like: search word, add favourite word, watch your profile, translate paragraph, make your own account, play and learn word from our game and so on.I don't want to reveal all the functional details, just trying to discover our dictionary app, and hope you have enjoyable time with it. Here is demo about our project:
+   Outline about my project, it has some funtions like: `search word`, `add favourite word`, `watch your profile`, `translate paragraph`, `make your own account`, `translaste image to text`, `translate record to text`, `play and learn word` from our game and so on.I don't want to reveal all the functional details, just trying to discover our dictionary app, and hope you have enjoyable time with it. Here is demo about our project:
 
    ![login](./src/main/resources/sources_music_picture/login.gif)
 
@@ -33,4 +37,4 @@
    I think that is enough for you to run our project perfectly. Hope you try to install and enjoy, experience, learn new things. If you are new to programming and looking for resources on large projects, you can refer to our source.
 
 ***
-# All the aspects I've mentioned above provide a comprehensive overview of our team's project. We hope to instill enthusiasm and passion for programming in young minds. Please give us a star, it is a great motivation for us. Thank you all <3 <3 <3.
+All the aspects I've mentioned above provide a comprehensive overview of our team's project. We hope to instill enthusiasm and passion for programming in young minds. Please give us `STAR`, it is a great motivation for us. Thank you all <3 <3 <3.
