@@ -16,7 +16,12 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static Controllers.PreloaderController.connectDB;
 
@@ -327,5 +332,31 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public static void startWeeklyReset(int userId) {
+        String query = "SELECT DayOfMonday FROM appusage WHERE UserId = " + userId;
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if(resultSet.next()) {
+                java.sql.Date day = (resultSet.getDate("DayOfMonday"));
+//                System.out.println(day.toString());
+
+                Calendar calendar = Calendar.getInstance();
+                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+                if (dayOfWeek == Calendar.MONDAY) {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String formattedDate = dateFormat.format(calendar.getTime());
+                    System.out.println("Reset Time");
+                    if(!day.toString().equals(formattedDate)) {
+                        statement.executeUpdate("UPDATE appusage SET Monday = 0, Tuesday = 0, Wednesday = 0, Thurday = 0, Friday = 0, Saturday = 0, Sunday = 0, DayOfMonday = '" + formattedDate + "' WHERE UserId = " + userId);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -11,7 +11,7 @@
     -fx-fill: white;
 }
 
-.color_form{
+.color_form {
     -fx-font-weight: bold;
     -fx-text-fill: #00CCFF;
 }
@@ -23,8 +23,9 @@
     -fx-font-size: 16;
     -fx-text-fill: white;
 }
+
 .buttonPlay:hover {
--fx-font-veight: bold;
+    -fx-font-veight: bold;
     -fx-background-color: white;
     -fx-background-radius: 16;
     -fx-font-size: 16;
@@ -33,35 +34,36 @@
     -fx-border-radius: 20;
     -fx-border-vidth: 3;
 }
+
 .buttonPlay:pressed {
     -fx-font-veight: bold;
-        -fx-background-color: white;
-        -fx-background-radius: 16;
-        -fx-font-size: 16;
-        -fx-text-fill: #2196f3;
-        -fx-border-color: #2196f3;
-        -fx-border-radius: 20;
-        -fx-border-vidth: 3;
-        -fx-rotate: 10;
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-font-size: 16;
+    -fx-text-fill: #2196f3;
+    -fx-border-color: #2196f3;
+    -fx-border-radius: 20;
+    -fx-border-vidth: 3;
+    -fx-rotate: 10;
 }
 
 .color_button {
     -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-font-size: 20;
-    -fx-background-color:transparent;
+    -fx-background-color: transparent;
 }
 
-.color_button: hover {
--fx-font-weight: bold;
+.color_button:hover {
+    -fx-font-weight: bold;
     -fx-text-fill: #FF9933;
     -fx-font-size: 20;
--fx-background-color:transparent;
+    -fx-background-color: transparent;
 }
 
-.color_button: pressed {
--fx-font-weight: bold;
+.color_button:pressed {
+    -fx-font-weight: bold;
     -fx-text-fill: white;
     -fx-font-size: 20;
-    -fx-background-color:transparent;
+    -fx-background-color: transparent;
 }

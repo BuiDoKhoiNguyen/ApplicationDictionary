@@ -11,9 +11,9 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="chooseGame" layoutX="317.0" layoutY="401.0" mnemonicParsing="false" onAction="#switchChoose" prefHeight="66.0" prefWidth="115.0" styleClass="buttonPlay" stylesheets="@../css/form.css" text="ChooseGame">
+      <Button fx:id="chooseGame" layoutX="282.0" layoutY="387.0" mnemonicParsing="false" onAction="#switchChoose" prefHeight="66.0" prefWidth="186.0" styleClass="buttonPlay" stylesheets="@../css/form.css" text="ChooseGame">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Button>
    </children>

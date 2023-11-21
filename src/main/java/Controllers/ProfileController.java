@@ -53,8 +53,9 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        hello.setText("Welcome back " + LoginController.user.getName());
-        account.setText("Account: " + LoginController.user.getUsername());
+        DatabaseConnection.startWeeklyReset(LoginController.user.getUserId());
+        hello.setText(LoginController.user.getName());
+        account.setText(LoginController.user.getUsername());
         int temp = DatabaseConnection.countProblemSolved(LoginController.user.getUserId());
         String tmp;
         if(temp < 200) {
@@ -64,7 +65,7 @@ public class ProfileController implements Initializable {
         } else if (1000 < temp && temp < 5000) {
             tmp = "senior";
         } else tmp = "master";
-        level.setText("Your level vocabulary:  " + tmp);
+        level.setText(tmp);
 
         skill.setProgress((double) DatabaseConnection.countProblemSolved(LoginController.user.getUserId())/1000);
 
