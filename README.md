@@ -17,11 +17,7 @@
 2. ### Introduce 
    Welcome to our innovative Dictionary Application, where learning English becomes an engaging and interactive experience. We've designed a feature-packed app that not only serves as your go-to dictionary but also adds an element of fun to your language learning journey.
 3. ### Applied_technology
-<<<<<<< HEAD
-   Our project utilizes Java, JavaFX, and SceneBuilder to create a feature-rich dictionary application. By seamlessly integrating with a database server, employing multithreading in programming, and leveraging Google's API for paragraph translation, we've crafted a robust platform that enhances the language learning experience.
-=======
    Our project utilizes Java, JavaFX, and SceneBuilder to create a feature-rich dictionary application. By `seamlessly integrating with a database server`, `employing multithreading in programming`, and `leveraging Google's and OpenAI API for paragraph translation`, we've crafted a robust platform that enhances the language learning experience.
->>>>>>> 9560c073cf600773201942645b671666da583d35
 
 4. ### Feature
    Outline about my project, it has some funtions like: `search word`, `add favourite word`, `watch your profile`, `translate paragraph`, `make your own account`, `translaste image to text`, `translate record to text`, `play and learn word` from our game and so on.I don't want to reveal all the functional details, just trying to discover our dictionary app, and hope you have enjoyable time with it. Here is demo about our project:
