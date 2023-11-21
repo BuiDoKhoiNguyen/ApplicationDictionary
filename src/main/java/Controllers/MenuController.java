@@ -172,9 +172,9 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         gameController = loader.getController();
 
-//        searchController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-//        translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-//        favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        searchController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
 //        gameController.loadController(profileController, searchController, translateController, favouriteController,gameController);
         if(switchG == false){
             mainAP.getChildren().setAll(searchAP);

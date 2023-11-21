@@ -158,12 +158,12 @@ public class SearchController extends TaskControllers implements Initializable {
     @FXML
     public void editWordExplain() {
         String wordTarget = searchField.getText();
-        String oldWordExplain = dictionary.get(wordTarget).getWordExplain();
-        System.out.println(oldWordExplain);
         if (wordTarget.isEmpty()) {
             editButton.setSelected(false);
             return;
         }
+        String oldWordExplain = dictionary.get(wordTarget).getWordExplain();
+        System.out.println(oldWordExplain);
         if (isEditing) {
             isEditing = false;
             editField.setVisible(false);

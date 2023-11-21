@@ -34,7 +34,7 @@
                         <Button alignment="CENTER" ellipsisString="" mnemonicParsing="false" onAction="#translate" prefHeight="37.0" prefWidth="123.0" styleClass="button-translate-submit" text=" Dịch" />
                     </children>
                 </HBox>
-            <Button id="scan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="48.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="48.0" stylesheets="@../css/translate.css" />
+            <Button id="scan" fx:id="scan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="48.0" mnemonicParsing="false" onAction="#scanButtonOnAction" prefHeight="37.0" prefWidth="48.0" stylesheets="@../css/translate.css" />
             <Button fx:id="mic" mnemonicParsing="false" onAction="#toggleRecording" prefHeight="37.0" prefWidth="48.0" styleClass="mic" />
             </children>
         </HBox>
