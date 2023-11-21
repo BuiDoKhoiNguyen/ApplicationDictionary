@@ -28,8 +28,8 @@
                   <ToggleButton fx:id="editingButton" mnemonicParsing="false" onMouseClicked="#editWordExplain" prefHeight="50.0" prefWidth="50.0" styleClass="button-edit" stylesheets="@../css/search.css" />
                </children>
             </HBox>
-            <Button layoutX="30.0" layoutY="74.0" mnemonicParsing="false" styleClass="button-audio" stylesheets="@../css/search.css" text="US" />
-            <Button layoutX="103.0" layoutY="74.0" mnemonicParsing="false" styleClass="button-audio" stylesheets="@../css/search.css" text="UK" />
+            <Button layoutX="30.0" layoutY="74.0" mnemonicParsing="false" onAction="#speakUS" styleClass="button-audio" stylesheets="@../css/search.css" text="US" />
+            <Button layoutX="103.0" layoutY="74.0" mnemonicParsing="false" onAction="#speakUK" styleClass="button-audio" stylesheets="@../css/search.css" text="UK" />
          </children>
       </AnchorPane>
       <TextField fx:id="searchField" layoutX="14.0" layoutY="57.0" onKeyTyped="#searchWord" prefHeight="50.0" prefWidth="240.0" promptText="Enter Word..." styleClass="text-field" stylesheets="@../css/search.css" />

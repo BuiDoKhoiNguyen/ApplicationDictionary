@@ -27,7 +27,7 @@ import java.util.Date;
 
 import static Controllers.PreloaderController.connectDB;
 
-public class ProfileController implements Initializable {
+public class ProfileController extends TaskControllers implements Initializable {
     @FXML
     private BarChart<?, ?> barChart;
     @FXML
@@ -177,5 +177,4 @@ public class ProfileController implements Initializable {
             System.out.println("No file has been selected");
         }
     }
-
 }
