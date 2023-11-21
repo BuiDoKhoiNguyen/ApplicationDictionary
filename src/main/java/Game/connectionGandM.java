@@ -1,5 +1,6 @@
 package Game;
 
+import Controllers.TaskControllers;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,17 +23,17 @@ import java.util.ResourceBundle;
 
 import static Controllers.PreloaderController.sceneController;
 
-public class connectionGandM implements Initializable {
+public class connectionGandM extends TaskControllers implements Initializable {
 
-    Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/aHalf.png"));
+    private Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/aHalf.png"));
 
-    Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/universeHalf.jpg"));
-
-    @FXML
-    public AnchorPane gameAP;
+    private Image myImage2 = new Image(getClass().getResourceAsStream("/sources_music_picture/universeHalf.jpg"));
 
     @FXML
-    Button chooseGame,TypeGame;
+    private AnchorPane gameAP;
+
+    @FXML
+    private Button chooseGame,TypeGame;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,6 +46,7 @@ public class connectionGandM implements Initializable {
         imageView.toBack();
         imageView2.toBack();
     }
+
     public void switchType(ActionEvent event) throws Exception{
         Rectangle whitePane = new Rectangle(800, 570);
         whitePane.setFill(Color.WHITE);
@@ -123,11 +125,4 @@ public class connectionGandM implements Initializable {
     public AnchorPane getGameAP(){
         return gameAP;
     }
-    /*public void switchType(ActionEvent event) throws Exception {
-        SceneController.switchScene(event,"/fxml/menuTypeG.fxml");
-    }*/
-
-    /*public void switchChoose(ActionEvent event) throws Exception{
-        SceneController.switchScene(event,"/fxml/openSimpleGame");
-    }*/
 }

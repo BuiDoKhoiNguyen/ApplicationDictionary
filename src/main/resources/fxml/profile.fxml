@@ -18,7 +18,14 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="735.0" style="-fx-background-color: #f3f3f3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ProfileController">
    <right>
-      <AnchorPane prefHeight="181.0" prefWidth="23.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="159.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="cancelButton" layoutX="1.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" style="-fx-background-color: transparent;" text="X">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
    </right>
    <bottom>
       <AnchorPane prefHeight="411.0" prefWidth="735.0" BorderPane.alignment="CENTER">
@@ -63,7 +70,7 @@
                   <Insets top="60.0" />
                </opaqueInsets>
             </VBox>
-            <BarChart fx:id="barChart" layoutX="239.0" layoutY="46.0" prefHeight="323.0" prefWidth="496.0" style="-fx-background-color: rgba(0,162,211,0.3); -fx-background-radius: 30;" styleClass="chart-bar" stylesheets="@../css/profile.css">
+            <BarChart fx:id="barChart" layoutX="231.0" layoutY="46.0" prefHeight="346.0" prefWidth="489.0" style="-fx-background-color: rgba(0,162,211,0.3); -fx-background-radius: 30;" styleClass="chart-bar" stylesheets="@../css/profile.css">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -111,7 +118,7 @@
    <center>
       <BorderPane prefHeight="106.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <center>
-            <VBox prefHeight="138.0" prefWidth="690.0" style="-fx-background-color: #ffffff; -fx-border-color: #fbfbfb; -fx-background-radius: 0px 0px 30px 30px; -fx-border-radius: 0px 30px 30px 0px;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="159.0" prefWidth="698.0" style="-fx-background-color: #ffffff; -fx-border-color: #fbfbfb; -fx-background-radius: 0px 0px 30px 30px; -fx-border-radius: 0px 30px 30px 0px;" BorderPane.alignment="CENTER">
                <children>
                   <HBox prefHeight="29.0" prefWidth="735.0">
                      <children>
@@ -147,7 +154,7 @@
                               <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="time" alignment="TOP_RIGHT" prefHeight="16.0" prefWidth="107.0" style="-fx-text-fill: #2b49b3;" text="time">
+                        <Label fx:id="time" alignment="TOP_RIGHT" prefHeight="32.0" prefWidth="107.0" style="-fx-text-fill: #2b49b3;" text="time">
                            <font>
                               <Font name="System Bold" size="11.0" />
                            </font>
@@ -171,12 +178,12 @@
                                     <Insets />
                                  </opaqueInsets>
                               </Button>
-                              <Label fx:id="account" layoutX="286.0" layoutY="14.0" prefHeight="40.0" prefWidth="99.0" text="Label">
+                              <Label fx:id="account" layoutX="286.0" layoutY="14.0" prefHeight="40.0" prefWidth="99.0" text="Label" textFill="#00d0eb">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="level" layoutX="285.0" layoutY="57.0" prefHeight="36.0" prefWidth="201.0" text="Label">
+                              <Label fx:id="level" layoutX="285.0" layoutY="57.0" prefHeight="36.0" prefWidth="201.0" text="Label" textFill="#00d0eb">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font></Label>
@@ -185,9 +192,9 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="220.0" layoutY="20.0" prefHeight="28.0" prefWidth="60.0" text="Account:">
+                              <Label layoutX="226.0" layoutY="20.0" prefHeight="28.0" prefWidth="60.0" text="Account:">
                                  <font>
-                                    <Font size="15.0" />
+                                    <Font size="13.0" />
                                  </font>
                               </Label>
                            </children>

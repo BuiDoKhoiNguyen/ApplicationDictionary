@@ -10,7 +10,6 @@ import java.io.FileOutputStream;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-
 public class TextToSpeechAPI {
     private static final String API_KEY = "fd66290e22a547e581b5a58119d07d54";
     private static final String AUDIO_PATH = "src/main/resources/voice/audio.wav";
@@ -26,7 +25,6 @@ public class TextToSpeechAPI {
         params.setLanguage(language);
         params.setVoice(Name);
         params.setRate((int) Math.round(-2.9936 * speed * speed + 15.2942 * speed - 12.7612));
-
 
         try {
             byte[] voice = tts.speech(params);

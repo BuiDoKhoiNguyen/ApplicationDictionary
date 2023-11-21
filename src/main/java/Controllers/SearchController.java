@@ -1,23 +1,16 @@
 package Controllers;
 
-
 import java.net.URL;
 import java.util.*;
 
 import API.TextToSpeechAPI;
-import Base.Dictionary;
 import Base.Word;
-import Base.NewDictionaryManagement;
 
 import DatabaseConnect.DatabaseConnection;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
-
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
@@ -27,31 +20,35 @@ import static Controllers.PreloaderController.dailyWord;
 import static Controllers.PreloaderController.dictionary;
 import static java.lang.System.exit;
 
-public class SearchController extends TaskControllers implements Initializable {
+public class SearchController extends DictionaryController implements Initializable {
     protected boolean isEditing = false;
 
     @FXML
-    protected TextField searchField;
+    private TextField searchField;
     @FXML
-    protected ListView<String> wordList, dailyWordList;
+    private ListView<String> dailyWordList;
     @FXML
-    protected WebView definitionView;
+    private WebView definitionView;
     @FXML
-    protected HTMLEditor editField;
+    private HTMLEditor editField;
     @FXML
     private Pane addField;
     @FXML
-    protected ToggleButton addButton;
+    private ToggleButton addButton;
     @FXML
-    protected ToggleButton favourButton;
+    private ToggleButton favourButton;
     @FXML
-    protected ToggleButton editButton;
-
-    @FXML
-    private Button cancelButton;
+    private ToggleButton editButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        List<String> favouriteList = new ArrayList<>();
+        DatabaseConnection.getFavouriteList(LoginController.user.getUserId(),favouriteList);
+        for (String ele : favouriteList) {
+            if (dictionary.containsKey(ele)) {
+                dictionary.get(ele).setFavoured(true);
+            }
+        }
         TreeMap<String, String> listAddWord = DatabaseConnection.getAddWord(LoginController.user.getUserId());
         for (Map.Entry<String, String> entry : listAddWord.entrySet()) {
             dictionary.put(entry.getKey(), new Word(entry.getKey(), entry.getValue()));
@@ -79,45 +76,18 @@ public class SearchController extends TaskControllers implements Initializable {
 
     @FXML
     public void searchWord() {
-        String keyword = searchField.getText().toLowerCase();
-        ObservableList<String> matchingWords = FXCollections.observableArrayList();
-        matchingWords.addAll(NewDictionaryManagement.partialSearch(dictionary, keyword).keySet());
-        wordList.setItems(matchingWords);
-    }
-
-    @FXML
-    public void searchWord(KeyEvent e) {
-        String keyword = searchField.getText().toLowerCase();
-//        System.out.println(keyword);
-        ObservableList<String> matchingWords = FXCollections.observableArrayList();
-        matchingWords.addAll(NewDictionaryManagement.partialSearch(dictionary, keyword).keySet());
-        wordList.setItems(matchingWords);
+        search(dictionary);
     }
 
     @FXML
     public void selectWord() {
-        String selectedWord = this.wordList.getSelectionModel().selectedItemProperty().getValue();
-        if (selectedWord != null) {
-            Word word = dictionary.get(selectedWord.trim());
-            String wordExplain = word.getWordExplain();
-            definitionView.getEngine().loadContent(wordExplain, "text/html");
-            searchField.setText(word.getWordTarget());
-            favourButton.setSelected(word.isFavoured());
-        }
+        select(dictionary, wordList);
     }
 
     @FXML
     public void selectWord2() {
-        String selectedWord = this.dailyWordList.getSelectionModel().selectedItemProperty().getValue();
-        if (selectedWord != null) {
-            Word word = dictionary.get(selectedWord.trim());
-            String wordExplain = word.getWordExplain();
-            definitionView.getEngine().loadContent(wordExplain, "text/html");
-            searchField.setText(word.getWordTarget());
-            favourButton.setSelected(word.isFavoured());
-        }
+        select(dictionary, dailyWordList);
     }
-
 
     @FXML
     public void favouriteWord() {
@@ -131,11 +101,11 @@ public class SearchController extends TaskControllers implements Initializable {
             favourButton.setSelected(false);
             selectedWord.setFavoured(false);
             favouriteController.removeFromSearch(wordTarget);
-            return;
+        } else {
+            favourButton.setSelected(true);
+            selectedWord.setFavoured(true);
+            favouriteController.addFromSearch(wordTarget);
         }
-        favourButton.setSelected(true);
-        selectedWord.setFavoured(true);
-        favouriteController.addFromSearch(wordTarget);
     }
 
     @FXML
@@ -143,9 +113,9 @@ public class SearchController extends TaskControllers implements Initializable {
         String oldWordTarget = searchField.getText();
         String newWordTarget = event.getNewValue();
         String wordExplain = dictionary.get(oldWordTarget).getWordExplain();
+        editWordTarget(oldWordTarget, newWordTarget, wordExplain);
         dictionary.remove(oldWordTarget);
         dictionary.put(newWordTarget, new Word(newWordTarget, wordExplain));
-//        System.out.println(wordExplain);
         DatabaseConnection.addEditWord(LoginController.user.getUserId(),oldWordTarget, wordExplain, newWordTarget, wordExplain);
         DatabaseConnection.updateDeleteWord(LoginController.user.getUserId(), oldWordTarget);
         if (favouriteController.removeFromSearch(oldWordTarget)) {
@@ -155,6 +125,7 @@ public class SearchController extends TaskControllers implements Initializable {
         reset();
     }
 
+    @Override
     @FXML
     public void editWordExplain() {
         String wordTarget = searchField.getText();
@@ -172,12 +143,12 @@ public class SearchController extends TaskControllers implements Initializable {
             System.out.println("edit: " + editField.getHtmlText());
             DatabaseConnection.addEditWord(LoginController.user.getUserId(), wordTarget, oldWordExplain, wordTarget, editField.getHtmlText());
             definitionView.getEngine().loadContent(editField.getHtmlText(), "text/html");
-            return;
+        } else {
+            isEditing = true;
+            editField.setVisible(true);
+            editField.setHtmlText(oldWordExplain);
+            favouriteController.reset();
         }
-        isEditing = true;
-        editField.setVisible(true);
-        editField.setHtmlText(dictionary.get(wordTarget).getWordExplain());
-        favouriteController.reset();
     }
 
     @FXML
@@ -212,46 +183,20 @@ public class SearchController extends TaskControllers implements Initializable {
         reset();
     }
 
-    protected void reset() {
-        ObservableList<String> matchingWords = FXCollections.observableArrayList();
-        matchingWords.addAll(dictionary.keySet());
-        wordList.setItems(matchingWords);
-        wordList.getSelectionModel().clearSelection();
-        searchField.setText("");
-        definitionView.getEngine().loadContent("");
-        favourButton.setSelected(false);
+    public void reset() {
+        reset(dictionary);
     }
 
-    protected Word getWord(String wordTarget) {
+    public Word getWord(String wordTarget) {
         return dictionary.get(wordTarget);
     }
 
-    protected void editWordExplainFromFavourite(String wordTarget, String wordExplain) {
+    public void editWordTarget(String oldWordTarget, String newWordTarget, String wordExplain) {
+        dictionary.remove(oldWordTarget);
+        dictionary.put(newWordTarget, new Word(newWordTarget, wordExplain));
+    }
+
+    public void editWordExplainFromFavourite(String wordTarget, String wordExplain) {
         dictionary.editWord(wordTarget, wordExplain);
-    }
-
-    private void speak(String language) {
-        if (!searchField.getText().isEmpty()) {
-            TextToSpeechAPI.language = language;
-            TextToSpeechAPI.speakWord(searchField.getText());
-        }
-    }
-    @FXML
-    private void speakUSButtonOnAction() {
-        speak("en-us");
-    }
-
-    @FXML
-    private void speakUKButtonOnAction() {
-        speak("en-gb");
-    }
-
-    public void cancelButtonOnAction() {
-        ProfileController.recordAppUsage();
-        LoginController.isLogin = false;
-        ProfileController.currtime = 0;
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-        exit(0);
     }
 }
