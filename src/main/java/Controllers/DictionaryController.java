@@ -13,7 +13,9 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
 
-public abstract class DictController extends TaskControllers {
+public abstract class DictionaryController extends TaskControllers {
+    public static final String EV_IN_PATH = "data/E_V.txt";
+
     protected boolean isEditing = false;
 
     @FXML
@@ -24,8 +26,6 @@ public abstract class DictController extends TaskControllers {
     protected WebView definitionView;
     @FXML
     protected HTMLEditor editField;
-    @FXML
-    protected ToggleButton addButton;
     @FXML
     protected ToggleButton favourButton;
     @FXML
@@ -67,12 +67,12 @@ public abstract class DictController extends TaskControllers {
     }
 
     @FXML
-    public void speakUSButtonOnAction() {
+    public void speakUS() {
         speak("en-us");
     }
 
     @FXML
-    public void speakUKButtonOnAction() {
+    public void speakUK() {
         speak("en-gb");
     }
 

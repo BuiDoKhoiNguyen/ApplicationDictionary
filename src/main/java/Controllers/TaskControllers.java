@@ -5,21 +5,6 @@ import javafx.scene.control.Button;
 
 public class  TaskControllers {
     @FXML
-    protected Button searchButton;
-    @FXML
-    protected Button translateButton;
-    @FXML
-    protected Button saveButton;
-    @FXML
-    protected Button favouriteButton;
-    @FXML
-    protected Button gameButton;
-    @FXML
-    protected Button logoutButton;
-    @FXML
-    protected Button cancelButton;
-
-    @FXML
     protected ProfileController profileController;
     @FXML
     protected SearchController searchController;

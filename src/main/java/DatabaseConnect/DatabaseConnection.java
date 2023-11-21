@@ -15,9 +15,9 @@ public class DatabaseConnection {
     public static int userId;
 
     public static Connection getConnection() {
-        String databaseUser = "root";
-        String databasePassword = "05122004";
-        String url = "jdbc:mysql://127.0.0.1:3306/user_account";
+        String databaseUser = "sql12662361";
+        String databasePassword = "RKMWwvNPNS";
+        String url = "jdbc:mysql://sql12.freesqldatabase.com/sql12662361";
 
         try {
             System.out.println("Connecting to database :" + url);
@@ -32,7 +32,7 @@ public class DatabaseConnection {
 
     public static boolean validateLogin(String username, String password) {
 //        Connection connectDB = DatabaseConnection.getConnection();
-        String verifyLogin = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + username + "' AND password='" + password + "'";
+        String verifyLogin = "SELECT COUNT(1) FROM useraccounts WHERE username='" + username + "' AND password='" + password + "'";
 
         try {
             Statement statement = connectDB.createStatement();
@@ -54,7 +54,7 @@ public class DatabaseConnection {
     public static boolean validateSignUp(String username, String password, String confirmPassword, String fName, String lName) {
 //        Connection connectDB = DatabaseConnection.getConnection();
 
-        String verifySignUp = "SELECT COUNT(1) FROM UserAccounts WHERE username='" + username + "' AND password='" + password + "'";
+        String verifySignUp = "SELECT COUNT(1) FROM useraccounts WHERE username='" + username + "' AND password='" + password + "'";
 
         try {
             Statement statement = connectDB.createStatement();
@@ -65,7 +65,7 @@ public class DatabaseConnection {
                     return false;
                 } else {
                     if (password.equals(confirmPassword)) {
-                        String initUser = "INSERT INTO UserAccounts (FirstName, LastName, Username, Password, profileImage) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "', null)";
+                        String initUser = "INSERT INTO useraccounts (FirstName, LastName, Username, Password, profileImage) VALUES ('" + fName + "', '" + lName + "', '" + username + "', '" + password + "', null)";
                         statement.executeUpdate(initUser);
                         int userId = getUserId(username);
                         String initUsage = "INSERT INTO appusage (UserID, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday) VALUES ('" + userId + "',0,0,0,0,0,0,0)";
@@ -84,13 +84,13 @@ public class DatabaseConnection {
     }
 
     public static UserInfo getUserInfo(String username) {
-        String query = "SELECT idUserAccounts, CONCAT(FirstName,' ', LastName) as FullName, profileImage " +
-                "FROM UserAccounts WHERE username = '" + username + "'";
+        String query = "SELECT iduseraccounts, CONCAT(FirstName,' ', LastName) as FullName, profileImage " +
+                "FROM useraccounts WHERE username = '" + username + "'";
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(query);
             if (queryResult.next()) {
-                userId = queryResult.getInt("IdUserAccounts");
+                userId = queryResult.getInt("Iduseraccounts");
                 String name = queryResult.getString("FullName");
                 byte[] profileImg = queryResult.getBytes("profileImage");
 //                String usageTime = queryResult.getString("Time");
@@ -105,12 +105,12 @@ public class DatabaseConnection {
     }
 
     public static int getUserId(String username) {
-        String query = "SELECT idUserAccounts FROM UserAccounts WHERE Username = '" + username +"'";
+        String query = "SELECT iduseraccounts FROM useraccounts WHERE Username = '" + username +"'";
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(query);
             if (queryResult.next()) {
-                return queryResult.getInt("idUserAccounts");
+                return queryResult.getInt("iduseraccounts");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +119,7 @@ public class DatabaseConnection {
     }
 
     public static void updateProfilePicture(int userId, String path) {
-        String query = "UPDATE UserAccounts set profileImage = LOAD_FILE('" + path + "') WHERE idUserAccounts = " + userId;
+        String query = "UPDATE useraccounts set profileImage = LOAD_FILE('" + path + "') WHERE iduseraccounts = " + userId;
         try {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(query);

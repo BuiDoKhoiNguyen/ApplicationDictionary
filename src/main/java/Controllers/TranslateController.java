@@ -192,8 +192,6 @@ public class TranslateController extends TaskControllers implements Initializabl
         }
     }
 
-
-
     public static String ImageToText(String imagePath) throws TesseractException {
         Tesseract tesseract = new Tesseract();
         tesseract.setDatapath("lib\\Tess4J\\tessdata");
@@ -207,8 +205,6 @@ public class TranslateController extends TaskControllers implements Initializabl
             return "";
         }
     }
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setFromEN();

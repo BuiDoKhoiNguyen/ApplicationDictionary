@@ -5,18 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import Base.Dictionary;
 import Base.Word;
-import Base.NewDictionaryManagement;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import DatabaseConnect.DatabaseConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
-
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
@@ -25,27 +20,25 @@ import javafx.stage.Stage;
 import static Controllers.PreloaderController.dictionary;
 import static java.lang.System.exit;
 
-public class SearchController extends TaskControllers implements Initializable {
-//    private Dictionary dictionary = new Dictionary(Dictionary.EV_IN_PATH);
-
+public class SearchController extends DictionaryController implements Initializable {
     protected boolean isEditing = false;
 
     @FXML
-    protected TextField searchField;
+    private TextField searchField;
     @FXML
-    protected ListView<String> wordList;
+    private ListView<String> wordList;
     @FXML
-    protected WebView definitionView;
+    private WebView definitionView;
     @FXML
-    protected HTMLEditor editField;
+    private HTMLEditor editField;
     @FXML
     private Pane addField;
     @FXML
-    protected ToggleButton addButton;
+    private ToggleButton addButton;
     @FXML
-    protected ToggleButton favourButton;
+    private ToggleButton favourButton;
     @FXML
-    protected ToggleButton editButton;
+    private ToggleButton editButton;
 
     @FXML
     private Button cancelButton;
@@ -53,7 +46,7 @@ public class SearchController extends TaskControllers implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<String> favouriteList = new ArrayList<>();
-        NewDictionaryManagement.loadOnlyWordTarget(favouriteList, Dictionary.FAVOURITE_IN_PATH);
+        DatabaseConnection.getFavouriteList(LoginController.user.getUserId(),favouriteList);
         for (String ele : favouriteList) {
             if (dictionary.containsKey(ele)) {
                 dictionary.get(ele).setFavoured(true);
@@ -168,7 +161,7 @@ public class SearchController extends TaskControllers implements Initializable {
     }
 
     public Word getWord(String wordTarget) {
-        return this.dictionary.get(wordTarget);
+        return dictionary.get(wordTarget);
     }
 
     public void editWordTarget(String oldWordTarget, String newWordTarget, String wordExplain) {

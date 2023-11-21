@@ -140,12 +140,6 @@ public class MenuController extends TaskControllers implements Initializable {
         favouriteController = loader.getController();
 
         loader = new FXMLLoader(getClass().getResource("/fxml/gameMenu.fxml"));
-//        try {
-//            Parent root = loader.load();
-//            SceneController.sceneStack.push(new Scene(root));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
         try {
             gameAP = loader.load();
         } catch (IOException e) {

@@ -1,7 +1,6 @@
 package Controllers;
 
 import Base.Dictionary;
-import Base.DictionaryController;
 import DatabaseConnect.DatabaseConnection;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -65,7 +64,7 @@ public class PreloaderController implements Initializable {
             Platform.runLater(() -> lblLoadingg.setText(message[0]));
             try {
                 Thread.sleep(1000);
-                dictionary = new Dictionary(Dictionary.EV_IN_PATH);
+                dictionary = new Dictionary(DictionaryController.EV_IN_PATH);
                 System.out.println("Connect to dictionary data successfully!");
             } catch (InterruptedException e) {
                 e.printStackTrace();

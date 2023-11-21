@@ -7,15 +7,15 @@ import java.util.ResourceBundle;
 
 import Base.Dictionary;
 import Base.Word;
-import Base.NewDictionaryManagement;
 
+import DatabaseConnect.DatabaseConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.cell.TextFieldListCell;
 
-public class FavouriteController extends DictController implements Initializable {
+public class FavouriteController extends DictionaryController implements Initializable {
     private Dictionary favouriteDict = new Dictionary();
 
     @Override
@@ -27,7 +27,7 @@ public class FavouriteController extends DictController implements Initializable
 
     public void initFavouriteDict() {
         List<String> favouriteList = new ArrayList<>();
-        NewDictionaryManagement.loadOnlyWordTarget(favouriteList, Dictionary.FAVOURITE_IN_PATH);
+        DatabaseConnection.getFavouriteList(LoginController.user.getUserId(),favouriteList);
         for (String ele : favouriteList) {
             favouriteDict.put(ele, searchController.getWord(ele));
             favouriteDict.get(ele).setFavoured(true);

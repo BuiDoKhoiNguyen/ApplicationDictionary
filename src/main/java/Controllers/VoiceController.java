@@ -28,7 +28,6 @@ public class VoiceController {
         params.setVoice(Name);
         params.setRate((int) Math.round(-2.9936 * speed * speed + 15.2942 * speed - 12.7612));
 
-
         try {
             byte[] voice = tts.speech(params);
             FileOutputStream fos = new FileOutputStream(AUDIO_PATH);
