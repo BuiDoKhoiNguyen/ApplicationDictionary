@@ -15,6 +15,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.cell.TextFieldListCell;
 
+import static Controllers.PreloaderController.dictionary;
+
 public class FavouriteController extends DictionaryController implements Initializable {
     private Dictionary favouriteDict = new Dictionary();
 
@@ -29,7 +31,7 @@ public class FavouriteController extends DictionaryController implements Initial
         List<String> favouriteList = new ArrayList<>();
         DatabaseConnection.getFavouriteList(LoginController.user.getUserId(),favouriteList);
         for (String ele : favouriteList) {
-            favouriteDict.put(ele, searchController.getWord(ele));
+            favouriteDict.put(ele, dictionary.get(ele));
             favouriteDict.get(ele).setFavoured(true);
         }
         this.wordList.getItems().addAll(favouriteDict.keySet());
@@ -42,7 +44,7 @@ public class FavouriteController extends DictionaryController implements Initial
 
     @FXML
     public void selectWord() {
-        select(favouriteDict);
+        select(favouriteDict, wordList);
     }
 
     @Override

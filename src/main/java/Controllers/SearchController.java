@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.*;
 
 import API.TextToSpeechAPI;
-
 import Base.Word;
 
 import DatabaseConnect.DatabaseConnection;
@@ -40,9 +39,6 @@ public class SearchController extends DictionaryController implements Initializa
     private ToggleButton favourButton;
     @FXML
     private ToggleButton editButton;
-
-    @FXML
-    private Button cancelButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -91,14 +87,6 @@ public class SearchController extends DictionaryController implements Initializa
     @FXML
     public void selectWord2() {
         select(dictionary, dailyWordList);
-//        String selectedWord = this.dailyWordList.getSelectionModel().selectedItemProperty().getValue();
-//        if (selectedWord != null) {
-//            Word word = dictionary.get(selectedWord.trim());
-//            String wordExplain = word.getWordExplain();
-//            definitionView.getEngine().loadContent(wordExplain, "text/html");
-//            searchField.setText(word.getWordTarget());
-//            favourButton.setSelected(word.isFavoured());
-//        }
     }
 
     @FXML
@@ -210,30 +198,5 @@ public class SearchController extends DictionaryController implements Initializa
 
     public void editWordExplainFromFavourite(String wordTarget, String wordExplain) {
         dictionary.editWord(wordTarget, wordExplain);
-    }
-
-    private void speak(String language) {
-        if (!searchField.getText().isEmpty()) {
-            TextToSpeechAPI.language = language;
-            TextToSpeechAPI.speakWord(searchField.getText());
-        }
-    }
-    @FXML
-    private void speakUSButtonOnAction() {
-        speak("en-us");
-    }
-
-    @FXML
-    private void speakUKButtonOnAction() {
-        speak("en-gb");
-    }
-
-    public void cancelButtonOnAction() {
-        ProfileController.recordAppUsage();
-        LoginController.isLogin = false;
-        ProfileController.currtime = 0;
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-        exit(0);
     }
 }

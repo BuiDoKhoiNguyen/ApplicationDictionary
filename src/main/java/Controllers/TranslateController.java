@@ -48,10 +48,10 @@ public class TranslateController extends TaskControllers implements Initializabl
     private ToggleButton toFR;
     @FXML
     private ToggleButton toSimplifiedCN;
-    @FXML
-    private Button cancelButton;
+
     @FXML
     private Button scan;
+
     private File selectedFile;
     private String languageFrom;
     private String languageTo;
@@ -151,14 +151,6 @@ public class TranslateController extends TaskControllers implements Initializabl
         }
         String translatedText = TranslateAPI.googleTranslate(languageFrom, languageTo, inputText);
         translationField.getEngine().loadContent(translatedText);
-    }
-
-    @FXML
-    public void cancelButtonOnAction(ActionEvent e) {
-        ProfileController.recordAppUsage();
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-        exit(0);
     }
 
     @FXML

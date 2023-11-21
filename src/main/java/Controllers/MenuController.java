@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class MenuController extends TaskControllers implements Initializable {
     @FXML
-    public AnchorPane mainAP;
+    private AnchorPane mainAP;
     @FXML
     private AnchorPane searchAP;
     @FXML
@@ -42,7 +42,7 @@ public class MenuController extends TaskControllers implements Initializable {
     @FXML
     private Button favouriteButton;
     @FXML
-    public Button gameButton;
+    private Button gameButton;
     @FXML
     private Button logoutButton;
     @FXML
@@ -177,7 +177,7 @@ public class MenuController extends TaskControllers implements Initializable {
         searchController.loadController(profileController, searchController, translateController, favouriteController,gameController);
         translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
         favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-//        gameController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        gameController.loadController(profileController, searchController, translateController, favouriteController,gameController);
         favouriteController.initFavouriteDict();
 
         mainAP.getChildren().setAll(searchAP);

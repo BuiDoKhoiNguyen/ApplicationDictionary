@@ -1,5 +1,6 @@
 package Controllers;
 
+import API.TextToSpeechAPI;
 import Base.Dictionary;
 import Base.NewDictionaryManagement;
 import Base.Word;
@@ -38,8 +39,8 @@ public abstract class DictionaryController extends TaskControllers {
         wordList.setItems(matchingWords);
     }
 
-    public void select(Dictionary dict) {
-        String selectedWord = this.wordList.getSelectionModel().selectedItemProperty().getValue();
+    public void select(Dictionary dict, ListView<String> listView) {
+        String selectedWord = listView.getSelectionModel().selectedItemProperty().getValue();
         if (selectedWord != null) {
             Word word = dict.get(selectedWord.trim());
             String wordExplain = word.getWordExplain();
@@ -61,8 +62,8 @@ public abstract class DictionaryController extends TaskControllers {
 
     private void speak(String language) {
         if (!searchField.getText().isEmpty()) {
-            VoiceController.language = language;
-            VoiceController.speakWord(searchField.getText());
+            TextToSpeechAPI.language = language;
+            TextToSpeechAPI.speakWord(searchField.getText());
         }
     }
 
