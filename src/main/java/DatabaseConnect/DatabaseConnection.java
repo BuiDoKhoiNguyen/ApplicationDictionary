@@ -1,11 +1,27 @@
 package DatabaseConnect;
 
-import Controllers.UserInfo;
+import Base.UserInfo;
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.net.URL;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static Controllers.PreloaderController.connectDB;
 
@@ -84,13 +100,13 @@ public class DatabaseConnection {
     }
 
     public static UserInfo getUserInfo(String username) {
-        String query = "SELECT iduseraccounts, CONCAT(FirstName,' ', LastName) as FullName, profileImage " +
+        String query = "SELECT idUserAccounts, CONCAT(FirstName,' ', LastName) as FullName, profileImage " +
                 "FROM useraccounts WHERE username = '" + username + "'";
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(query);
             if (queryResult.next()) {
-                userId = queryResult.getInt("Iduseraccounts");
+                userId = queryResult.getInt("IdUserAccounts");
                 String name = queryResult.getString("FullName");
                 byte[] profileImg = queryResult.getBytes("profileImage");
 //                String usageTime = queryResult.getString("Time");
@@ -105,12 +121,12 @@ public class DatabaseConnection {
     }
 
     public static int getUserId(String username) {
-        String query = "SELECT iduseraccounts FROM useraccounts WHERE Username = '" + username +"'";
+        String query = "SELECT idUserAccounts FROM useraccounts WHERE Username = '" + username +"'";
         try {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(query);
             if (queryResult.next()) {
-                return queryResult.getInt("iduseraccounts");
+                return queryResult.getInt("idUserAccounts");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,11 +134,15 @@ public class DatabaseConnection {
         return 0;
     }
 
-    public static void updateProfilePicture(int userId, String path) {
-        String query = "UPDATE useraccounts set profileImage = LOAD_FILE('" + path + "') WHERE iduseraccounts = " + userId;
+
+    public static void updateProfilePicture(int userId, Blob blob) {
+        String query = "UPDATE useraccounts SET profileImage = ? WHERE idUserAccounts = ?";
         try {
-            Statement statement = connectDB.createStatement();
-            statement.executeUpdate(query);
+            PreparedStatement statement = connectDB.prepareStatement(query);
+            statement.setBlob(1, blob);
+            statement.setInt(2, userId);
+
+            statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -190,6 +210,151 @@ public class DatabaseConnection {
         try {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateProblemSolved(int userId, String word) {
+        String query = "INSERT INTO game(UserId, ProblemSolved) VALUES( " + userId + ",'" + word +"')";
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int countProblemSolved(int userId) {
+        String query = "SELECT COUNT(DISTINCT ProblemSolved) as count FROM game WHERE UserId = " + userId + " ORDER BY UserId";
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if (resultSet.next()) return resultSet.getInt("count");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static TreeMap<String,String> getListEditWord(int userId) {
+        TreeMap<String,String> list = new TreeMap<>();
+        String query = "SELECT NewWordTarget,NewWordExplain FROM editword WHERE UserId = " + userId;
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                String newWordTarget = resultSet.getString("NewWordTarget");
+                String newWordExplain = resultSet.getString("NewWordExplain");
+                list.put(newWordTarget,newWordExplain);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static void addEditWord(int userId, String oldWordTarget,String oldWordExplain, String newWordTarget,String newWordExplain) {
+        String query1 = "SELECT COUNT(OldWordTarget) as count FROM editword WHERE UserId = "+ userId +"  AND OldWordTarget = '" + oldWordTarget + "' GROUP BY UserId";
+        System.out.println(oldWordExplain);
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query1);
+            if (!resultSet.next()) {
+                String query = "INSERT INTO editword(UserId, OldWordTarget, OldWordExplain, NewWordTarget, NewWordExplain) VALUES (?, ?, ?, ?, ?)";
+                PreparedStatement preparedStatement = connectDB.prepareStatement(query);
+                preparedStatement.setInt(1, userId);
+                preparedStatement.setString(2, oldWordTarget);
+                preparedStatement.setString(3, oldWordExplain);
+                preparedStatement.setString(4, newWordTarget);
+                preparedStatement.setString(5, newWordExplain);
+
+                preparedStatement.executeUpdate();
+            } else {
+                String query3 = "UPDATE editword SET NewWordTarget = '" + newWordTarget + "', NewWordExplain = '" + newWordExplain + "' WHERE UserId = " + userId;
+                statement.executeUpdate(query3);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateDeleteWord(int userId, String word) {
+        String query = "INSERT INTO deleteword(UserId,Word) VALUES (" + userId + ",'" + word + "')";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<String> getDeleteWord(int userId) {
+        List<String> list = new ArrayList<>();
+        String query = "SELECT Word FROM deleteword WHERE UserId = " + userId;
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                list.add(resultSet.getString("Word"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static void updateAddWord(int userId,String wordTarget, String wordExplain) {
+        String query = "INSERT INTO addword(UserId,WordTarget,WordExplain) VALUES (" + userId + ",'" + wordTarget + "','" + wordExplain +"')";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static TreeMap<String,String> getAddWord(int userId) {
+        TreeMap<String,String> list = new TreeMap<>();
+        String query = "SELECT WordTarget, WordExplain FROM addword WHERE UserId = " + userId;
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                String temp1 = resultSet.getString("WordTarget");
+                String temp2 = resultSet.getString("WordExplain");
+                list.put(temp1, temp2);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static void startWeeklyReset(int userId) {
+        String query = "SELECT DayOfMonday FROM appusage WHERE UserId = " + userId;
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if(resultSet.next()) {
+                java.sql.Date day = (resultSet.getDate("DayOfMonday"));
+//                System.out.println(day.toString());
+
+                Calendar calendar = Calendar.getInstance();
+                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+                if (dayOfWeek == Calendar.MONDAY) {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String formattedDate = dateFormat.format(calendar.getTime());
+                    System.out.println("Reset Time");
+                    if(!day.toString().equals(formattedDate)) {
+                        statement.executeUpdate("UPDATE appusage SET Monday = 0, Tuesday = 0, Wednesday = 0, Thurday = 0, Friday = 0, Saturday = 0, Sunday = 0, DayOfMonday = '" + formattedDate + "' WHERE UserId = " + userId);
+                    }
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

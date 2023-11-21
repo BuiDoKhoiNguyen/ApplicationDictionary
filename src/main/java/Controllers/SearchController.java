@@ -1,9 +1,9 @@
 package Controllers;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+
+import API.TextToSpeechAPI;
 
 import Base.Word;
 
@@ -17,6 +17,7 @@ import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import static Controllers.PreloaderController.dailyWord;
 import static Controllers.PreloaderController.dictionary;
 import static java.lang.System.exit;
 
@@ -26,7 +27,7 @@ public class SearchController extends DictionaryController implements Initializa
     @FXML
     private TextField searchField;
     @FXML
-    private ListView<String> wordList;
+    private ListView<String> dailyWordList;
     @FXML
     private WebView definitionView;
     @FXML
@@ -52,9 +53,25 @@ public class SearchController extends DictionaryController implements Initializa
                 dictionary.get(ele).setFavoured(true);
             }
         }
+        TreeMap<String, String> listAddWord = DatabaseConnection.getAddWord(LoginController.user.getUserId());
+        for (Map.Entry<String, String> entry : listAddWord.entrySet()) {
+            dictionary.put(entry.getKey(), new Word(entry.getKey(), entry.getValue()));
+        }
+        TreeMap<String, String> listEditWord = DatabaseConnection.getListEditWord(LoginController.user.getUserId());
+        for (Map.Entry<String, String> entry : listEditWord.entrySet()) {
+            dictionary.put(entry.getKey(), new Word(entry.getKey(), entry.getValue()));
+        }
+        List<String> listDeleteWord = DatabaseConnection.getDeleteWord(LoginController.user.getUserId());
+        for(String x:listDeleteWord) {
+            dictionary.remove(x);
+        }
         this.wordList.setEditable(true);
         this.wordList.setCellFactory(TextFieldListCell.forListView());
         this.wordList.getItems().addAll(dictionary.keySet());
+        this.dailyWordList.setEditable(true);
+        this.dailyWordList.setCellFactory(TextFieldListCell.forListView());
+        this.dailyWordList.getItems().addAll(dailyWord.keySet());
+
         addField.visibleProperty().bind(addButton.selectedProperty());
         addButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
             addField.toFront();
@@ -68,10 +85,22 @@ public class SearchController extends DictionaryController implements Initializa
 
     @FXML
     public void selectWord() {
-        select(dictionary);
+        select(dictionary, wordList);
     }
 
-    @Override
+    @FXML
+    public void selectWord2() {
+        select(dictionary, dailyWordList);
+//        String selectedWord = this.dailyWordList.getSelectionModel().selectedItemProperty().getValue();
+//        if (selectedWord != null) {
+//            Word word = dictionary.get(selectedWord.trim());
+//            String wordExplain = word.getWordExplain();
+//            definitionView.getEngine().loadContent(wordExplain, "text/html");
+//            searchField.setText(word.getWordTarget());
+//            favourButton.setSelected(word.isFavoured());
+//        }
+    }
+
     @FXML
     public void favouriteWord() {
         String wordTarget = searchField.getText();
@@ -97,6 +126,10 @@ public class SearchController extends DictionaryController implements Initializa
         String newWordTarget = event.getNewValue();
         String wordExplain = dictionary.get(oldWordTarget).getWordExplain();
         editWordTarget(oldWordTarget, newWordTarget, wordExplain);
+        dictionary.remove(oldWordTarget);
+        dictionary.put(newWordTarget, new Word(newWordTarget, wordExplain));
+        DatabaseConnection.addEditWord(LoginController.user.getUserId(),oldWordTarget, wordExplain, newWordTarget, wordExplain);
+        DatabaseConnection.updateDeleteWord(LoginController.user.getUserId(), oldWordTarget);
         if (favouriteController.removeFromSearch(oldWordTarget)) {
             dictionary.get(newWordTarget).setFavoured(true);
             favouriteController.addFromSearch(newWordTarget);
@@ -112,16 +145,20 @@ public class SearchController extends DictionaryController implements Initializa
             editButton.setSelected(false);
             return;
         }
+        String oldWordExplain = dictionary.get(wordTarget).getWordExplain();
+        System.out.println(oldWordExplain);
         if (isEditing) {
             isEditing = false;
             editField.setVisible(false);
             dictionary.editWord(wordTarget, editField.getHtmlText());
             favouriteController.editFromSearch(wordTarget);
+            System.out.println("edit: " + editField.getHtmlText());
+            DatabaseConnection.addEditWord(LoginController.user.getUserId(), wordTarget, oldWordExplain, wordTarget, editField.getHtmlText());
             definitionView.getEngine().loadContent(editField.getHtmlText(), "text/html");
         } else {
             isEditing = true;
             editField.setVisible(true);
-            editField.setHtmlText(dictionary.get(wordTarget).getWordExplain());
+            editField.setHtmlText(oldWordExplain);
             favouriteController.reset();
         }
     }
@@ -131,6 +168,7 @@ public class SearchController extends DictionaryController implements Initializa
         String wordTarget = searchField.getText();
         favouriteController.removeFromSearch(wordTarget);
         dictionary.remove(wordTarget);
+        DatabaseConnection.updateDeleteWord(LoginController.user.getUserId(), wordTarget);
         wordList.getItems().remove(wordTarget);
         reset();
     }
@@ -143,6 +181,7 @@ public class SearchController extends DictionaryController implements Initializa
         String wordExplain = addDefField.getHtmlText();
         if (!wordTarget.isEmpty() && !wordExplain.isEmpty()) {
             dictionary.put(wordTarget, new Word(wordTarget, wordExplain));
+            DatabaseConnection.updateAddWord(LoginController.user.getUserId(), wordTarget, wordExplain);
         }
         addTextField.setText("");
         addDefField.setHtmlText("");
@@ -171,6 +210,22 @@ public class SearchController extends DictionaryController implements Initializa
 
     public void editWordExplainFromFavourite(String wordTarget, String wordExplain) {
         dictionary.editWord(wordTarget, wordExplain);
+    }
+
+    private void speak(String language) {
+        if (!searchField.getText().isEmpty()) {
+            TextToSpeechAPI.language = language;
+            TextToSpeechAPI.speakWord(searchField.getText());
+        }
+    }
+    @FXML
+    private void speakUSButtonOnAction() {
+        speak("en-us");
+    }
+
+    @FXML
+    private void speakUKButtonOnAction() {
+        speak("en-gb");
     }
 
     public void cancelButtonOnAction() {

@@ -35,7 +35,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Button id="profile" fx:id="profile" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#profileFunction" prefHeight="59.0" prefWidth="185.0" stylesheets="@../css/menu.css" text="Profile" textFill="WHITE">
+            <Button id="profile" fx:id="profileButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#profileFunction" prefHeight="59.0" prefWidth="185.0" stylesheets="@../css/menu.css" text="Profile" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -50,11 +50,6 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button id="editWord" fx:id="editButton" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="189.0" stylesheets="@../css/menu.css" text="Edit word" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
             <Button id="favourite" fx:id="favouriteButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#favouriteFunction" prefHeight="60.0" prefWidth="182.0" stylesheets="@../css/menu.css" text="Favourite" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -65,7 +60,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="54.0" prefWidth="174.0" style="-fx-background-color: transparent;" />
+            <Button mnemonicParsing="false" prefHeight="151.0" prefWidth="174.0" style="-fx-background-color: transparent;" />
             <Button id="logout" fx:id="logoutButton" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="62.0" prefWidth="182.0" stylesheets="@../css/menu.css" text="Log out" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />

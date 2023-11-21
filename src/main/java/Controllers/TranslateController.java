@@ -1,17 +1,16 @@
 package Controllers;
 
-import Base.TranslateAPI;
+import API.ImageToTextAPI;
+import API.TranslateAPI;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -19,8 +18,6 @@ import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -146,7 +143,7 @@ public class TranslateController extends TaskControllers implements Initializabl
 
         if (inputText.isEmpty() && selectedFile != null) {
             try {
-                inputText = ImageToText(selectedFile.getAbsolutePath());
+                inputText = ImageToTextAPI.ImageToText(selectedFile.getAbsolutePath());
             } catch (TesseractException e) {
                 e.printStackTrace();
                 return;
@@ -168,7 +165,7 @@ public class TranslateController extends TaskControllers implements Initializabl
     public void scanButtonOnAction(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file");
-        fileChooser.setInitialDirectory(new File("C:/Users/ASUS/KhoiNguyen"));
+        fileChooser.setInitialDirectory(new File("D:/"));
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("All image files", "*.jpg", "*.png")
         );
@@ -178,7 +175,8 @@ public class TranslateController extends TaskControllers implements Initializabl
 
         if (selectedFile != null) {
             try {
-                String extractedText = ImageToText(selectedFile.getAbsolutePath());
+                String extractedText = ImageToTextAPI.ImageToText(selectedFile.getAbsolutePath());
+                System.out.println(extractedText);
                 inputField.setText(extractedText);
 
                 translate();
@@ -205,6 +203,7 @@ public class TranslateController extends TaskControllers implements Initializabl
             return "";
         }
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setFromEN();

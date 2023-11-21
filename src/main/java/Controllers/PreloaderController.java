@@ -2,6 +2,7 @@ package Controllers;
 
 import Base.Dictionary;
 import DatabaseConnect.DatabaseConnection;
+import Game.DailyVocab;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class PreloaderController implements Initializable {
@@ -26,9 +28,12 @@ public class PreloaderController implements Initializable {
     public static Label lblLoadingg;
     public static Connection connectDB;
     public static Dictionary dictionary;
+    public static Dictionary dailyWord = new Dictionary();
+    public static SceneController sceneController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        sceneController = new SceneController();
         lblLoadingg=lblLoading;
     }
 
@@ -66,6 +71,7 @@ public class PreloaderController implements Initializable {
                 Thread.sleep(1000);
                 dictionary = new Dictionary(DictionaryController.EV_IN_PATH);
                 System.out.println("Connect to dictionary data successfully!");
+                DailyVocab.getDailyWords(dailyWord);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

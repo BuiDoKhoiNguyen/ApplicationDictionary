@@ -2,7 +2,6 @@ package Controllers;
 
 
 import java.io.IOException;
-import java.util.Stack;
 
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -15,7 +14,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-public class SceneController {
+public class SceneController{
     private Stage stage;
     private Scene scene;
 
@@ -38,6 +37,7 @@ public class SceneController {
             fadeIn.play();
 
             stage.setScene(scene);
+            stage.show();
         });
 
         fadeOut.play();
@@ -53,24 +53,6 @@ public class SceneController {
 
         stage.setScene(scene);
         stage.show();
-    }
-
-    public static Stack<Scene> sceneStack = new Stack<>();
-
-    public static void switchBack(ActionEvent event) throws Exception {
-        Scene previousScene = sceneStack.pop();
-        if (previousScene != null) {
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            window.setScene(previousScene);
-        }
-    }
-
-    public static void switchScene(ActionEvent event, String fxmlPath) throws IOException {
-        Parent root = FXMLLoader.load(SceneController.class.getResource(fxmlPath));
-        sceneStack.push(new Scene(root));
-
-        Stage window = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        window.setScene(sceneStack.peek());
     }
 
 }

@@ -1,5 +1,6 @@
 package Controllers;
 
+import Game.connectionGandM;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -9,7 +10,7 @@ public class  TaskControllers {
     @FXML
     protected SearchController searchController;
     @FXML
-    protected TranslateController translateController;
+    protected TranslateController2 translateController;
     @FXML
     protected FavouriteController favouriteController;
     @FXML
@@ -17,7 +18,7 @@ public class  TaskControllers {
 
     public void loadController(ProfileController profileController,
                                SearchController searchController,
-                               TranslateController translateController,
+                               TranslateController2 translateController,
                                FavouriteController favouriteController,
                                connectionGandM gameController) {
         this.profileController = profileController;
