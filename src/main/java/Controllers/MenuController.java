@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class MenuController extends TaskControllers implements Initializable {
     @FXML
-    public AnchorPane mainAP;
+    private AnchorPane mainAP;
     @FXML
     private AnchorPane searchAP;
     @FXML
@@ -42,7 +42,7 @@ public class MenuController extends TaskControllers implements Initializable {
     @FXML
     private Button favouriteButton;
     @FXML
-    public Button gameButton;
+    private Button gameButton;
     @FXML
     private Button logoutButton;
     @FXML
@@ -51,8 +51,10 @@ public class MenuController extends TaskControllers implements Initializable {
     private SceneController sceneController;
 
     @FXML
-    public VBox vbox;
+    private VBox vbox;
+
     public static boolean switchG = false;
+
     @FXML
     public void searchFunction() {
         mainAP.getChildren().setAll(searchAP);
@@ -60,6 +62,7 @@ public class MenuController extends TaskControllers implements Initializable {
         searchAP.layout();
         searchButton.requestFocus();
     }
+
     @FXML
     public void translateFunction() {
         mainAP.getChildren().setAll(translateAP);
@@ -99,7 +102,6 @@ public class MenuController extends TaskControllers implements Initializable {
     private void handleTypeGame() {
         vbox.setDisable(true);
     }
-
 
     public void logoutButtonOnAction(ActionEvent event) throws IOException {
         LoginController.isLogin = false;
@@ -174,10 +176,14 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         gameController = loader.getController();
 
-//        searchController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-//        translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-//        favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
-//        gameController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        searchController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        translateController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        favouriteController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        gameController.loadController(profileController, searchController, translateController, favouriteController,gameController);
+        favouriteController.initFavouriteDict();
+
+        mainAP.getChildren().setAll(searchAP);
+
         if(switchG == false){
             mainAP.getChildren().setAll(searchAP);
         }
@@ -207,7 +213,6 @@ public class MenuController extends TaskControllers implements Initializable {
         });
     }
 
-
     private double x = 0;
     private double y = 0;
     @FXML
@@ -224,6 +229,7 @@ public class MenuController extends TaskControllers implements Initializable {
         x = e.getSceneX();
         y = e.getSceneY();
     }
+
     public static boolean getSwitch(){
         return switchG;
     }

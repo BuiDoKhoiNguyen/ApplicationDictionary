@@ -3,23 +3,11 @@ package Controllers;
 import Game.connectionGandM;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
-public class  TaskControllers {
-    @FXML
-    protected Button searchButton;
-    @FXML
-    protected Button translateButton;
-    @FXML
-    protected Button saveButton;
-    @FXML
-    protected Button favouriteButton;
-    @FXML
-    protected Button gameButton;
-    @FXML
-    protected Button logoutButton;
-    @FXML
-    protected Button cancelButton;
+import static java.lang.System.exit;
 
+public abstract class TaskControllers {
     @FXML
     protected ProfileController profileController;
     @FXML
@@ -30,6 +18,8 @@ public class  TaskControllers {
     protected FavouriteController favouriteController;
     @FXML
     protected connectionGandM gameController;
+    @FXML
+    protected Button cancelButton;
 
     public void loadController(ProfileController profileController,
                                SearchController searchController,
@@ -41,5 +31,14 @@ public class  TaskControllers {
         this.translateController = translateController;
         this.favouriteController = favouriteController;
         this.gameController = gameController;
+    }
+
+    public void cancelButtonOnAction() {
+        ProfileController.recordAppUsage();
+        LoginController.isLogin = false;
+        ProfileController.currtime = 0;
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+        exit(0);
     }
 }

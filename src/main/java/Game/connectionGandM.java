@@ -1,5 +1,6 @@
 package Game;
 
+import Controllers.TaskControllers;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +23,7 @@ import java.util.ResourceBundle;
 
 import static Controllers.PreloaderController.sceneController;
 
-public class connectionGandM implements Initializable {
+public class connectionGandM extends TaskControllers implements Initializable {
 
     Image myImage = new Image(getClass().getResourceAsStream("/sources_music_picture/aHalf.png"));
 

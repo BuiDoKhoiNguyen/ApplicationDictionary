@@ -48,10 +48,10 @@ public class TranslateController extends TaskControllers implements Initializabl
     private ToggleButton toFR;
     @FXML
     private ToggleButton toSimplifiedCN;
-    @FXML
-    private Button cancelButton;
+
     @FXML
     private Button scan;
+
     private File selectedFile;
     private String languageFrom;
     private String languageTo;
@@ -154,14 +154,6 @@ public class TranslateController extends TaskControllers implements Initializabl
     }
 
     @FXML
-    public void cancelButtonOnAction(ActionEvent e) {
-        ProfileController.recordAppUsage();
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-        exit(0);
-    }
-
-    @FXML
     public void scanButtonOnAction(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose file");
@@ -190,6 +182,19 @@ public class TranslateController extends TaskControllers implements Initializabl
         }
     }
 
+    public static String ImageToText(String imagePath) throws TesseractException {
+        Tesseract tesseract = new Tesseract();
+        tesseract.setDatapath("lib\\Tess4J\\tessdata");
+        File imageFile = new File(imagePath);
+
+        if (imageFile.exists()) {
+            String text = tesseract.doOCR(imageFile);
+            return text;
+        } else {
+            System.err.println("Image file does not exist: " + imagePath);
+            return "";
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
