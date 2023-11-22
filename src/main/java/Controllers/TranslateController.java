@@ -237,7 +237,7 @@ public class TranslateController extends TaskControllers implements Initializabl
 
     @FXML
     public void toggleRecording(ActionEvent e) throws IOException {
-        if (isRecording) {
+        if (!isRecording) {
             startRecording();
             mic.getStyleClass().add("recording");
         } else {

@@ -118,7 +118,7 @@ public class MenuController extends TaskControllers implements Initializable {
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.4));
         slide.setNode(vbox);
-        vbox.setTranslateX(-135);
+        vbox.setTranslateX(-120);
         vbox.setOnMouseEntered(event -> {
             if (event.getSceneX() >= 0 && event.getSceneX() <= 174) {
                 slide.setToX(0);
@@ -128,7 +128,7 @@ public class MenuController extends TaskControllers implements Initializable {
 
         vbox.setOnMouseExited(event -> {
             slide.stop();
-            slide.setToX(-135);
+            slide.setToX(-120);
             slide.play();
         });
 

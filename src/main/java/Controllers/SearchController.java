@@ -14,11 +14,9 @@ import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
 
 import static Controllers.PreloaderController.dailyWord;
 import static Controllers.PreloaderController.dictionary;
-import static java.lang.System.exit;
 
 public class SearchController extends DictionaryController implements Initializable {
     protected boolean isEditing = false;

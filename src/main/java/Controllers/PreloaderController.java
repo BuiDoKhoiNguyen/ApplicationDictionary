@@ -43,7 +43,7 @@ public class PreloaderController implements Initializable {
             message[0] = "Checking menu controller";
             Platform.runLater(() -> lblLoadingg.setText(message[0]));
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
                 MenuController menuController = new MenuController();
                 System.out.println("Connect to menu,search and translate successfully!");
             } catch (InterruptedException e) {
