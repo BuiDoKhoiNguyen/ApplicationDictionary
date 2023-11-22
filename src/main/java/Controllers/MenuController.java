@@ -152,7 +152,7 @@ public class MenuController extends TaskControllers implements Initializable {
         }
         searchController = loader.getController();
 
-        loader = new FXMLLoader(getClass().getResource("/fxml/translate2.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/fxml/translate.fxml"));
         try {
             translateAP = loader.load();
         } catch (IOException e) {

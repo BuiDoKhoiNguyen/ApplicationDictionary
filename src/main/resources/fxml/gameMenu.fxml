@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane fx:id="gameAP" prefHeight="570.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.connectionGandM">
    <children>
       <Button fx:id="TypeGame" layoutX="305.0" layoutY="141.0" mnemonicParsing="false" onAction="#switchType" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../css/typeGame.css" text="TypeGame">
@@ -14,6 +15,11 @@
       <Button fx:id="chooseGame" layoutX="282.0" layoutY="387.0" mnemonicParsing="false" onAction="#switchChoose" prefHeight="66.0" prefWidth="186.0" styleClass="buttonPlay" stylesheets="@../css/form.css" text="ChooseGame">
          <font>
             <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="cancelButton" layoutX="717.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" style="-fx-background-color: transparent;" text="X">
+         <font>
+            <Font name="System Bold" size="12.0" />
          </font>
       </Button>
    </children>

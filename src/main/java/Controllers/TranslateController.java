@@ -1,156 +1,209 @@
 package Controllers;
 
 import API.ImageToTextAPI;
+import API.SpeechToTextAPI;
+import API.TextToSpeechAPI;
 import API.TranslateAPI;
-
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
+import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static java.lang.System.exit;
-
+import static API.SpeechToTextAPI.RECORD_PATH;
 
 public class TranslateController extends TaskControllers implements Initializable {
-    @FXML
-    private TextField inputField;
-    @FXML
-    private WebView translationField;
+
+    String languageFrom = "";
+    String languageTo = "vi";
+    String nameFrom;
+    String speakFrom;
+    String nameTo;
+    String speakTo;
 
     @FXML
-    private ToggleButton fromEN;
+    private TextArea area1;
     @FXML
-    private ToggleButton fromVN;
+    private TextField area2;
     @FXML
-    private ToggleButton fromFR;
+    private TextField text1;
     @FXML
-    private ToggleButton fromAutoDetect;
-
+    private TextField text2;
     @FXML
-    private ToggleButton toVN;
+    private Button fromAutoDetect, fromEng, fromVie, fromKor, fromFr;
     @FXML
-    private ToggleButton toEN;
+    private Button toVie, toEng, toKor, toFr, toChina;
     @FXML
-    private ToggleButton toFR;
-    @FXML
-    private ToggleButton toSimplifiedCN;
-
-    @FXML
-    private Button scan;
-
+    private Button scan,mic;
     private File selectedFile;
-    private String languageFrom;
-    private String languageTo;
+    private boolean isRecording = false;
+    private TargetDataLine line;
 
-    private void refreshButtonFrom() {
-        fromEN.setSelected(false);
-        fromVN.setSelected(false);
-        fromFR.setSelected(false);
-        fromAutoDetect.setSelected(false);
+    public void resetStyleLangFrom() {
+        fromAutoDetect.getStyleClass().removeAll("active");
+        fromEng.getStyleClass().removeAll("active");
+        fromVie.getStyleClass().removeAll("active");
+        fromKor.getStyleClass().removeAll("active");
+        fromFr.getStyleClass().removeAll("active");
     }
 
-    private void refreshButtonTo() {
-        toEN.setSelected(false);
-        toVN.setSelected(false);
-        toFR.setSelected(false);
-        toSimplifiedCN.setSelected(false);
-    }
-
-    @FXML
-    public void setFromEN() {
-        refreshButtonFrom();
-        fromEN.setSelected(true);
-        languageFrom = "en";
-    }
-
-    @FXML
-    public void setFromVN() {
-        refreshButtonFrom();
-        fromVN.setSelected(true);
-        languageFrom = "vi";
-    }
-
-    @FXML
-    public void setFromFR() {
-        refreshButtonFrom();
-        fromFR.setSelected(true);
-        languageFrom = "fr";
-    }
-
-    @FXML
-    public void setFromAutoDetect() {
-        refreshButtonFrom();
-        fromAutoDetect.setSelected(true);
+    public void fromDetect() {
+        resetStyleLangFrom();
+        fromAutoDetect.getStyleClass().add("active");
         languageFrom = "";
-    }
-
-    public void setToEN() throws IOException, TesseractException {
-        refreshButtonTo();
-        toEN.setSelected(true);
-        languageTo = "en";
-        if (!inputField.getText().isEmpty()) {
-            translate();
-        }
+        text1.setText("Phát hiện n.ngữ");
+        nameFrom = "Linda";
+        speakFrom = "en-gb";
     }
 
     @FXML
-    public void setToVN() throws IOException, TesseractException {
-        refreshButtonTo();
-        toVN.setSelected(true);
+    void fromEng() {
+        resetStyleLangFrom();
+        fromEng.getStyleClass().add("active");
+        languageFrom = "en";
+        text1.setText("Tiếng Anh");
+        nameFrom = "Linda";
+        speakFrom = "en-gb";
+    }
+
+    @FXML
+    void fromVie() {
+        resetStyleLangFrom();
+        fromVie.getStyleClass().add("active");
+        text1.setText("Tiếng Việt");
+        languageFrom = "vi";
+        nameFrom = "Chi";
+        speakFrom = "vi-vn";
+    }
+
+    @FXML
+    void fromKor() {
+        resetStyleLangFrom();
+        fromKor.getStyleClass().add("active");
+        text1.setText("Tiếng Hàn");
+        languageFrom = "ko";
+        nameFrom = "Nari";
+        speakFrom = "ko-kr";
+    }
+
+    @FXML
+    void fromFr() {
+        resetStyleLangFrom();
+        fromFr.getStyleClass().add("active");
+        text1.setText("Tiếng Pháp");
+        languageFrom = "fr";
+        nameFrom = "Bette";
+        speakFrom = "fr-fr";
+    }
+
+
+    public void resetStyleLangTo() {
+        toVie.getStyleClass().removeAll("active");
+        toEng.getStyleClass().removeAll("active");
+        toKor.getStyleClass().removeAll("active");
+        toFr.getStyleClass().removeAll("active");
+        toChina.getStyleClass().removeAll("active");
+    }
+
+    @FXML
+    void toVie() throws IOException {
+        resetStyleLangTo();
+        toVie.getStyleClass().add("active");
+        text2.setText("Tiếng Việt");
         languageTo = "vi";
-        if (!inputField.getText().isEmpty()) {
-            translate();
+        nameTo = "Chi";
+        speakTo = "vi-vn";
+        if (!Objects.equals(area1.getText(), "")) {
+            area2.setText(TranslateAPI.googleTranslate(languageFrom, languageTo, area1.getText()));
         }
     }
 
     @FXML
-    public void setToFR() throws IOException, TesseractException {
-        refreshButtonTo();
-        toFR.setSelected(true);
+    void toEng() throws IOException {
+        resetStyleLangTo();
+        toEng.getStyleClass().add("active");
+        text2.setText("Tiếng Anh");
+        languageTo = "en";
+        nameTo = "Linda";
+        speakTo = "en-gb";
+        if (!Objects.equals(area1.getText(), "")) {
+            area2.setText(TranslateAPI.googleTranslate(languageFrom, languageTo, area1.getText()));
+        }
+    }
+
+    @FXML
+    void toKor() throws IOException {
+        resetStyleLangTo();
+        toKor.getStyleClass().add("active");
+        text2.setText("Tiếng Hàn");
+        languageTo = "ko";
+        nameTo = "Nari";
+        speakTo = "ko-kr";
+        if (!Objects.equals(area1.getText(), "")) {
+            area2.setText(TranslateAPI.googleTranslate(languageFrom, languageTo, area1.getText()));
+        }
+    }
+
+    @FXML
+    void toFr() throws IOException {
+        resetStyleLangTo();
+        toFr.getStyleClass().add("active");
+        text2.setText("Tiếng Pháp");
         languageTo = "fr";
-        if (!inputField.getText().isEmpty()) {
-            translate();
+        nameTo = "Bette";
+        speakTo = "fr-fr";
+        if (!Objects.equals(area1.getText(), "")) {
+            area2.setText(TranslateAPI.googleTranslate(languageFrom, languageTo, area1.getText()));
         }
     }
 
     @FXML
-    public void setToSimplifiedCN() throws IOException, TesseractException {
-        refreshButtonTo();
-        toSimplifiedCN.setSelected(true);
+    void toChina() throws IOException {
+        resetStyleLangTo();
+        toChina.getStyleClass().add("active");
         languageTo = "zh";
-        if (!inputField.getText().isEmpty()) {
-            translate();
+        text2.setText("Tiếng Trung");
+        nameTo = "Luli";
+        speakTo = "zh-cn";
+        if (!Objects.equals(area1.getText(), "")) {
+            area2.setText(TranslateAPI.googleTranslate(languageFrom, languageTo, area1.getText()));
         }
     }
 
     @FXML
-    public void translate() throws IOException, TesseractException {
-        String inputText = inputField.getText();
-
-        if (inputText.isEmpty() && selectedFile != null) {
-            try {
-                inputText = ImageToTextAPI.ImageToText(selectedFile.getAbsolutePath());
-            } catch (TesseractException e) {
-                e.printStackTrace();
-                return;
-            }
+    void translate() throws IOException {
+        if (!Objects.equals(area1.getText(), "")) {
+            area2.setText(TranslateAPI.googleTranslate(languageFrom, languageTo, area1.getText()));
         }
-        String translatedText = TranslateAPI.googleTranslate(languageFrom, languageTo, inputText);
-        translationField.getEngine().loadContent(translatedText);
+    }
+
+    @FXML
+    void speak1() throws Exception {
+        TextToSpeechAPI.Name = nameFrom;
+        TextToSpeechAPI.language = speakFrom;
+        if (!Objects.equals(area1.getText(), "")) {
+            TextToSpeechAPI.speakWord(area1.getText());
+        }
+    }
+
+    @FXML
+    void speak2() throws Exception {
+        TextToSpeechAPI.Name = nameTo;
+        TextToSpeechAPI.language = speakTo;
+        if (!Objects.equals(area2.getText(), "")) {
+            TextToSpeechAPI.speakWord(area2.getText());
+        }
     }
 
     @FXML
@@ -169,7 +222,7 @@ public class TranslateController extends TaskControllers implements Initializabl
             try {
                 String extractedText = ImageToTextAPI.ImageToText(selectedFile.getAbsolutePath());
                 System.out.println(extractedText);
-                inputField.setText(extractedText);
+                area1.setText(extractedText);
 
                 translate();
             } catch (TesseractException ex) {
@@ -182,29 +235,73 @@ public class TranslateController extends TaskControllers implements Initializabl
         }
     }
 
-    public static String ImageToText(String imagePath) throws TesseractException {
-        Tesseract tesseract = new Tesseract();
-        tesseract.setDatapath("lib\\Tess4J\\tessdata");
-        File imageFile = new File(imagePath);
-
-        if (imageFile.exists()) {
-            String text = tesseract.doOCR(imageFile);
-            return text;
+    @FXML
+    public void toggleRecording(ActionEvent e) throws IOException {
+        if (isRecording) {
+            startRecording();
+            mic.getStyleClass().add("recording");
         } else {
-            System.err.println("Image file does not exist: " + imagePath);
-            return "";
+            stopRecording();
+            mic.getStyleClass().remove("recording");
         }
+        isRecording = !isRecording;
+    }
+
+    public void startRecording() {
+        try {
+            AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100, 16, 2, 4, 44100, false);
+            DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
+
+            if (!AudioSystem.isLineSupported(info)) {
+                System.out.println("Microphone is not supported");
+                return;
+            }
+
+            line = (TargetDataLine) AudioSystem.getLine(info);
+            line.open(format);
+            line.start();
+
+            System.out.println("Recording...");
+            new Thread(() -> {
+                AudioInputStream audioStream = new AudioInputStream(line);
+                File outputFile = new File(RECORD_PATH);
+                try {
+                    AudioSystem.write(audioStream, AudioFileFormat.Type.WAVE, outputFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void stopRecording() throws IOException {
+        if (line != null) {
+            line.stop();
+            line.close();
+            System.out.println("Recording stopped");
+        }
+        area1.setText(SpeechToTextAPI.speechToTextAPI());
+        translate();
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        setFromEN();
-        try {
-            setToVN();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (TesseractException e) {
-            throw new RuntimeException(e);
-        }
+    public void initialize(URL location, ResourceBundle resources) {
+        fromAutoDetect.getStyleClass().add("active");
+        toVie.getStyleClass().add("active");
+
+        text1.setText("Phát hiện n.ngữ");
+        area1.setText("");
+        nameFrom = "Linda";
+        speakFrom = "en-gb";
+        languageFrom = "";
+
+        text2.setText("Tiếng Việt");
+        nameTo = "Chi";
+        speakTo = "vi-vn";
+        languageTo = "vi";
     }
+
 }
