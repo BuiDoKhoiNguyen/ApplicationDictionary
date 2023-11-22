@@ -77,6 +77,8 @@ public class MenuController extends TaskControllers implements Initializable {
     }
     @FXML
     public void gameFunction() {
+        AnchorPane.setTopAnchor(gameAP,0.0);
+        AnchorPane.setLeftAnchor(gameAP,0.0);
         mainAP.getChildren().setAll(gameAP);
         Button chooseGameButton = (Button) gameAP.lookup("#chooseGame");
         chooseGameButton.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
@@ -186,6 +188,8 @@ public class MenuController extends TaskControllers implements Initializable {
             mainAP.getChildren().setAll(searchAP);
         }
         else{
+            AnchorPane.setTopAnchor(gameAP,0.0);
+            AnchorPane.setLeftAnchor(gameAP,0.0);
             mainAP.getChildren().setAll(gameAP);
             Platform.runLater(() -> {
                 gameButton.fire();

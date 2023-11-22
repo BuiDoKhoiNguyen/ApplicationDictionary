@@ -4,7 +4,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="gameAP" prefHeight="532.0" prefWidth="735.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.connectionGandM">
+
+<AnchorPane fx:id="gameAP" prefHeight="570.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.connectionGandM">
    <children>
       <Button fx:id="TypeGame" layoutX="305.0" layoutY="141.0" mnemonicParsing="false" onAction="#switchType" prefHeight="51.0" prefWidth="140.0" styleClass="color_button" stylesheets="@../css/typeGame.css" text="TypeGame">
          <font>

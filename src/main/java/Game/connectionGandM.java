@@ -39,7 +39,7 @@ public class connectionGandM extends TaskControllers implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ImageView imageView = new ImageView(myImage);
         ImageView imageView2 = new ImageView(myImage2);
-        imageView.setLayoutY(267);
+        imageView.setLayoutY(286);
         imageView2.setLayoutY(0);
         gameAP.getChildren().add(imageView);
         gameAP.getChildren().add(imageView2);
