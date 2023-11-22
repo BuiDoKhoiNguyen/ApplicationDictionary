@@ -44,7 +44,8 @@ element of fun to your language learning journey.
 1. `seamlessly integrating with a database server`.
 2. `employing multithreading in programming`.
 3. `leveraging Google's and OpenAI API for paragraph translation`.
-
+4. `use jfoenix to improve the user interface`.
+5. `maven framwork`.
 
 we've crafted a robust platform that enhances the language learning experience.
 
@@ -79,6 +80,7 @@ I don't want to reveal all the functional details, just trying to discover our d
    3. And add extra library 
 
    ![img_1.png](./src/main/resources/sources_music_picture/img_1.png)
+
    4. Run and have fun with our project.
 
    I think that is enough for you to run our project perfectly. Hope you try to install and enjoy, experience, learn new things. If you are new to programming and looking for resources on large projects, you can refer to our source.
