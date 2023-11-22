@@ -50,6 +50,10 @@ public class TranslateController extends TaskControllers implements Initializabl
     private boolean isRecording = false;
     private TargetDataLine line;
 
+    public static TargetDataLine line2;
+
+    public static boolean checkWord = false;
+
     public void resetStyleLangFrom() {
         fromAutoDetect.getStyleClass().removeAll("active");
         fromEng.getStyleClass().removeAll("active");
@@ -285,6 +289,83 @@ public class TranslateController extends TaskControllers implements Initializabl
         }
         area1.setText(SpeechToTextAPI.speechToTextAPI());
         translate();
+    }
+    public static void startRecording2(String check) {
+        try {
+            AudioFormat format = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, 44100, 16, 2, 4, 44100, false);
+            DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
+
+            if (!AudioSystem.isLineSupported(info)) {
+                System.out.println("Microphone is not supported");
+                return;
+            }
+
+            line2 = (TargetDataLine) AudioSystem.getLine(info);
+            line2.open(format);
+            line2.start();
+
+            /*System.out.println("Recording...");
+            new Thread(() -> {
+                AudioInputStream audioStream = new AudioInputStream(line2);
+                File outputFile = new File(RECORD_PATH);
+                try {
+                    // Thêm kiểm tra từ trước khi ghi âm
+                    String spokenWord = SpeechToTextAPI.speechToTextAPI(); // Giả sử có hàm nhận diện giọng nói
+                    System.out.println(spokenWord);
+                    AudioSystem.write(audioStream, AudioFileFormat.Type.WAVE, outputFile);
+                    if (spokenWord.equals(check) && spokenWord.length()>=check.length()) {
+
+                        checkWord = true;
+                        System.out.println(spokenWord);
+                        stopRecording2();
+                    }
+                    else if(spokenWord.length()>=check.length()){
+                        stopRecording2();
+                    }
+                    //stopRecording2();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }*/
+            System.out.println("Recording...");
+            new Thread(() -> {
+                AudioInputStream audioStream = new AudioInputStream(line2);
+                File outputFile = new File(RECORD_PATH);
+                try {
+                    AudioSystem.write(audioStream, AudioFileFormat.Type.WAVE, outputFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
+        String spokenWord = SpeechToTextAPI.speechToTextAPI();
+        if (spokenWord.equals(check) && spokenWord.length()>=check.length()) {
+
+            checkWord = true;
+            System.out.println(spokenWord);
+            stopRecording2();
+        }
+        else if(spokenWord.length()>=check.length()){
+            stopRecording2();
+        }
+
+
+    }
+
+    public static void stopRecording2() {
+        if (line2 != null) {
+            line2.stop();
+            line2.close();
+            System.out.println("Recording stopped");
+            //startRecording2(check2);
+        }
     }
 
     @Override

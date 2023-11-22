@@ -26,6 +26,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import Controllers.TranslateController;
 
 
 import java.io.*;
@@ -830,6 +831,7 @@ public class controllTypeGame implements Initializable {
                     checkAndRemoveString(tmp.toLowerCase());
                 }
             });
+            //checkAndRemove2();
 
             moveWordDown(text);
 
@@ -907,6 +909,25 @@ public class controllTypeGame implements Initializable {
         else {
             bulletJ.seek(bulletJ.getStartTime());
             bulletJ.play();
+        }
+        //TranslateController.startRecording2(english.get(x));
+    }
+    public void checkAndRemove2(){
+        TranslateController.startRecording2(english.get(x));
+        if(TranslateController.checkWord == true){
+            Text textRemove =(Text)pane1.getChildren().get(x);
+            how.remove(textRemove.getText());
+            check.set(x,false);
+            score++;
+            scoreLabel.setText(""+score);
+            textRemove.setText(english.get(x));
+
+            x++;
+            double t = (double) textRemove.getTranslateX();
+            double z = (double) textRemove.getTranslateY();
+            fire(t,z,textRemove);
+            textField.clear();
+            TranslateController.checkWord = false;
         }
     }
     //fire bullet
