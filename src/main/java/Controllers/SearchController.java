@@ -134,13 +134,13 @@ public class SearchController extends DictionaryController implements Initializa
             return;
         }
         String oldWordExplain = dictionary.get(wordTarget).getWordExplain();
-        System.out.println(oldWordExplain);
+//        System.out.println(oldWordExplain);
         if (isEditing) {
             isEditing = false;
             editField.setVisible(false);
             dictionary.editWord(wordTarget, editField.getHtmlText());
             favouriteController.editFromSearch(wordTarget);
-            System.out.println("edit: " + editField.getHtmlText());
+//            System.out.println("edit: " + editField.getHtmlText());
             DatabaseConnection.addEditWord(LoginController.user.getUserId(), wordTarget, oldWordExplain, wordTarget, editField.getHtmlText());
             definitionView.getEngine().loadContent(editField.getHtmlText(), "text/html");
         } else {

@@ -105,6 +105,7 @@ public class FavouriteController extends DictionaryController implements Initial
     public boolean removeFromSearch(String wordTarget) {
         if (favouriteDict.containsKey(wordTarget)) {
             favouriteDict.remove(wordTarget);
+            DatabaseConnection.removeFavouriteWord(LoginController.user.getUserId(),wordTarget);
             reset();
             return true;
         }
@@ -114,6 +115,7 @@ public class FavouriteController extends DictionaryController implements Initial
     public boolean addFromSearch(String wordTarget) {
         if (!favouriteDict.containsKey(wordTarget)) {
             favouriteDict.put(wordTarget, searchController.getWord(wordTarget));
+            DatabaseConnection.addFavouriteWord(LoginController.user.getUserId(), wordTarget);
             reset();
             return true;
         }
