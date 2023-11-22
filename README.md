@@ -9,9 +9,9 @@
 4. [Applied_technology](#Applied_technology)
 5. [Feature](#Feature)
 6. [How_to_install](#How_to_install)
-7. [Future improvements](#Future improvements)
+7. [Future_improvements](#Future_improvements)
 8. [Notes](#Notes)
-9. [Last Words](#Last Words)
+9. [Last_Words](#Last_Words)
 ***
 
 ### Content
@@ -59,8 +59,8 @@ we've crafted a robust platform that enhances the language learning experience.
 3. `watch your profile`.
 4. `translate paragraph`.
 5. `make your own account`.
-6. `translaste image to text`.
-7. `translate record to text`.
+6. `translaste image`.
+7. `translate pronounce`.
 8. `play and learn word`.
 9. `Daily word`.
 
@@ -82,7 +82,7 @@ I don't want to reveal all the functional details, just trying to discover our d
    3. Run and have fun with our project.
 
    I think that is enough for you to run our project perfectly. Hope you try to install and enjoy, experience, learn new things. If you are new to programming and looking for resources on large projects, you can refer to our source.
-### Future improvements
+### Future_improvements
 ***
 1. Add more complex and interesting game.
 2. Fix any bug if our project have.
@@ -93,7 +93,7 @@ I don't want to reveal all the functional details, just trying to discover our d
 ***
 The application is written for educational purposes.
 
-### Last Words
+### Last_Words
 ***
 All the aspects I've mentioned above provide a comprehensive
 overview of our team's project. We hope to instill 
